@@ -1,0 +1,338 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Menu Aplikasi</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #0f0c29, #302b63, #24243e);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+            position: relative;
+        }
+
+        /* Efek bintang */
+        body::before {
+            content: '';
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(white, rgba(255,255,255,.2) 2px, transparent 3px);
+            background-size: 50px 50px;
+            pointer-events: none;
+            opacity: 0.3;
+        }
+
+        .container {
+            background: rgba(30, 30, 46, 0.95);
+            backdrop-filter: blur(10px);
+            border-radius: 30px;
+            box-shadow: 0 25px 50px rgba(0,0,0,0.5), 0 0 0 1px rgba(255,255,255,0.1);
+            padding: 50px 40px;
+            max-width: 600px;
+            width: 100%;
+            text-align: center;
+            animation: fadeInUp 0.6s ease-out;
+            position: relative;
+            z-index: 1;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        h1 {
+            color: #fff;
+            margin-bottom: 10px;
+            font-size: 32px;
+            font-weight: 700;
+            background: linear-gradient(135deg, #fff, #a78bfa);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .subtitle {
+            color: #a0a0b0;
+            margin-bottom: 40px;
+            font-size: 14px;
+            letter-spacing: 0.5px;
+        }
+
+        .apps-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 25px;
+            margin-bottom: 30px;
+        }
+
+        .app-card {
+            background: linear-gradient(135deg, rgba(255,255,255,0.1), rgba(255,255,255,0.05));
+            border-radius: 20px;
+            padding: 30px 20px;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            border: 1px solid rgba(255,255,255,0.1);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .app-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.1), transparent);
+            transition: left 0.5s ease;
+        }
+
+        .app-card:hover::before {
+            left: 100%;
+        }
+
+        .app-card:hover {
+            transform: translateY(-10px);
+            border-color: rgba(167, 139, 250, 0.5);
+            box-shadow: 0 15px 35px rgba(0,0,0,0.3);
+        }
+
+        .app-icon {
+            font-size: 64px;
+            margin-bottom: 20px;
+            filter: drop-shadow(0 5px 15px rgba(0,0,0,0.3));
+        }
+
+        .app-name {
+            font-size: 24px;
+            font-weight: bold;
+            color: #fff;
+            margin-bottom: 10px;
+        }
+
+        .app-description {
+            color: #c0c0d0;
+            font-size: 13px;
+            margin-bottom: 20px;
+            line-height: 1.5;
+        }
+
+        .url-path {
+            background: rgba(0,0,0,0.5);
+            padding: 8px 12px;
+            border-radius: 10px;
+            font-size: 12px;
+            color: #a78bfa;
+            font-family: 'Courier New', monospace;
+            word-break: break-all;
+            border: 1px solid rgba(167, 139, 250, 0.3);
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 12px;
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            margin-top: 15px;
+            transition: all 0.3s ease;
+            width: 100%;
+            letter-spacing: 0.5px;
+        }
+
+        .btn-primary:hover {
+            transform: scale(1.05);
+            box-shadow: 0 5px 20px rgba(102, 126, 234, 0.4);
+        }
+
+        .info-panel {
+            background: rgba(0,0,0,0.3);
+            border-radius: 15px;
+            padding: 15px;
+            margin-top: 20px;
+            border: 1px solid rgba(255,255,255,0.1);
+        }
+
+        .host-info {
+            color: #a0a0b0;
+            font-size: 13px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+
+        .host-info span {
+            color: #a78bfa;
+            font-weight: bold;
+            font-family: monospace;
+            background: rgba(0,0,0,0.5);
+            padding: 4px 8px;
+            border-radius: 6px;
+        }
+
+        .badge {
+            display: inline-block;
+            background: rgba(167, 139, 250, 0.2);
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 11px;
+            color: #a78bfa;
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🚀 Menu Aplikasi</h1>
+        <div class="subtitle">Pilih aplikasi yang ingin dijalankan</div>
+
+        <div class="apps-grid">
+            <!-- Tombol 1 -->
+            <div class="app-card" data-url="/webapp/myapp/index.html">
+                <div class="app-icon">📱</div>
+                <div class="app-name">MyApp</div>
+                <div class="app-description">Aplikasi utama dengan berbagai fitur canggih dan performa tinggi</div>
+                <div class="url-path">/webapp/myapp/index.html</div>
+                <button class="btn-primary">Buka Aplikasi →</button>
+            </div>
+
+            <!-- Tombol 2 -->
+            <div class="app-card" data-url="/webapp/myapp2/index.html">
+                <div class="app-icon">🎨</div>
+                <div class="app-name">MyApp 2</div>
+                <div class="app-description">Aplikasi kedua dengan desain modern dan fitur inovatif</div>
+                <div class="url-path">/webapp/myapp2/index.html</div>
+                <button class="btn-primary">Buka Aplikasi →</button>
+            </div>
+        </div>
+
+        <div class="info-panel">
+            <div class="host-info">
+                🌐 Hostname saat ini: 
+                <span id="hostnameDisplay">memuat...</span>
+            </div>
+            <div class="host-info" style="margin-top: 8px;">
+                📍 Akan mengarah ke: 
+                <span id="fullUrlPreview">memuat...</span>
+            </div>
+            <div class="badge">
+                ⚡ Klik tombol atau card untuk mengakses aplikasi
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Mendapatkan informasi hostname saat ini
+        const currentProtocol = window.location.protocol;
+        const currentHostname = window.location.hostname;
+        const currentPort = window.location.port;
+        
+        // Membangun base URL
+        let baseUrl = `${currentProtocol}//${currentHostname}`;
+        if (currentPort) {
+            baseUrl += `:${currentPort}`;
+        }
+
+        // Menampilkan hostname
+        let hostnameDisplay = currentHostname;
+        if (currentPort) {
+            hostnameDisplay += `:${currentPort}`;
+        }
+        document.getElementById('hostnameDisplay').textContent = hostnameDisplay;
+
+        // Fungsi untuk redirect ke URL tertentu
+        function redirectTo(urlPath) {
+            const fullUrl = baseUrl + urlPath;
+            console.log(`Mengarahkan ke: ${fullUrl}`);
+            
+            // Animasi transisi sebelum redirect
+            document.body.style.opacity = '0';
+            document.body.style.transition = 'opacity 0.3s ease';
+            
+            setTimeout(() => {
+                window.location.href = fullUrl;
+            }, 200);
+        }
+
+        // Fungsi untuk update preview URL
+        function updateUrlPreview(urlPath) {
+            const fullUrl = baseUrl + urlPath;
+            document.getElementById('fullUrlPreview').innerHTML = fullUrl;
+        }
+
+        // Event listeners untuk kedua tombol/card
+        const cards = document.querySelectorAll('.app-card');
+        
+        cards.forEach(card => {
+            const urlPath = card.getAttribute('data-url');
+            
+            // Preview URL saat hover
+            card.addEventListener('mouseenter', () => {
+                updateUrlPreview(urlPath);
+            });
+            
+            // Klik pada card (selain tombol)
+            card.addEventListener('click', (e) => {
+                // Cegah jika yang diklik adalah tombol (akan di-handle terpisah)
+                if (!e.target.classList.contains('btn-primary')) {
+                    redirectTo(urlPath);
+                }
+            });
+            
+            // Klik pada tombol di dalam card
+            const button = card.querySelector('.btn-primary');
+            button.addEventListener('click', (e) => {
+                e.stopPropagation(); // Mencegah event bubbling
+                redirectTo(urlPath);
+            });
+        });
+
+        // Preview default untuk MyApp
+        updateUrlPreview('/webapp/myapp/index.html');
+
+        // Logging untuk debugging
+        console.log('=== Informasi Environment ===');
+        console.log('Protocol:', currentProtocol);
+        console.log('Hostname:', currentHostname);
+        console.log('Port:', currentPort || 'default');
+        console.log('Base URL:', baseUrl);
+        console.log('===============================');
+        
+        // Efek tambahan: animasi glow pada card saat dimuat
+        setTimeout(() => {
+            cards.forEach((card, index) => {
+                setTimeout(() => {
+                    card.style.transform = 'scale(1.02)';
+                    setTimeout(() => {
+                        card.style.transform = '';
+                    }, 300);
+                }, index * 100);
+            });
+        }, 500);
+    </script>
+</body>
+</html>
