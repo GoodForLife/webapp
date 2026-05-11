@@ -4,10 +4,39 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Prediksi Togel — Mistik + Top Rumus + Analisa Jambal + Chart Frekuensi + HK/SGP/SDY</title>
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+  <!-- Menggunakan CDN alternatif yang lebih stabil -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" />
   <!-- Chart.js CDN -->
   <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
-  <style>:root{--ht-bg:#0d1117;--ht-card:#161b22;--ht-border:#30363d;--ht-match:#3fb950;--ht-nomatch:#f85149;--ht-muted:#8b949e}body{background:var(--ht-bg);color:#e6edf3;min-height:100vh}.ht-card{background:var(--ht-card);border:1px solid var(--ht-border);border-radius:.5rem}.ht-digit{max-width:3.25rem;text-align:center;font-weight:600;font-size:1.1rem}.ht-line-header{font-size:.75rem;text-transform:uppercase;letter-spacing:.06em;color:var(--ht-muted)}.form-control:focus{border-color:#58a6ff;box-shadow:0 0 0 .2rem rgb(88 166 255 / .25)}.form-select:focus{border-color:#58a6ff;box-shadow:0 0 0 .2rem rgb(88 166 255 / .25)}.ht-fetch-status{min-height:1.25rem;font-size:.8rem}.reco-block{background:rgb(48 54 61 / .3);border-radius:.5rem;padding:.75rem 1rem;transition:background 0.1s ease}.copy-btn-sm{min-width:75px;transition:all 0.15s}.copy-btn-sm:active{transform:scale(.96)}#lineCountBadge{font-size:.75rem;padding:.35rem .65rem;vertical-align:middle}.strong-number{font-family:monospace;font-size:1.8rem;font-weight:700;background:#0d1117;padding:.2rem .8rem;border-radius:.75rem;display:inline-block}.ups-note{font-size:.7rem;border-left:2px solid #f0883e;padding-left:.6rem}.freq-badge{font-size:.75rem;background:#21262d;padding:.2rem .5rem;border-radius:1rem;margin:.1rem;display:inline-block}.big-digit-code{font-family:monospace;font-size:1.5rem;font-weight:700;letter-spacing:.08em;background:#0d1117;padding:.2rem 1rem;border-radius:.75rem;display:inline-block}.ht-transition{font-size:.85rem;border-left:3px solid var(--ht-border);padding-left:.75rem;margin-bottom:1rem}.small-code{font-family:monospace;font-size:1.2rem;background:#0d1117;padding:.15rem .5rem;border-radius:.4rem;display:inline-block}.stat-bar{background:#21262d;border-radius:.5rem;padding:.3rem .6rem;margin-bottom:.4rem}.jambal-digit{font-family:monospace;font-size:1.4rem;font-weight:700;background:#0d1117;padding:.1rem .8rem;border-radius:.5rem;display:inline-block}
+  <style>
+    :root{--ht-bg:#0d1117;--ht-card:#161b22;--ht-border:#30363d;--ht-match:#3fb950;--ht-nomatch:#f85149;--ht-muted:#8b949e}
+    body{background:var(--ht-bg);color:#e6edf3;min-height:100vh}
+    .ht-card{background:var(--ht-card);border:1px solid var(--ht-border);border-radius:.5rem}
+    .ht-digit{max-width:3.25rem;text-align:center;font-weight:600;font-size:1.1rem}
+    .ht-line-header{font-size:.75rem;text-transform:uppercase;letter-spacing:.06em;color:var(--ht-muted)}
+    .form-control:focus{border-color:#58a6ff;box-shadow:0 0 0 .2rem rgb(88 166 255 / .25)}
+    .form-select:focus{border-color:#58a6ff;box-shadow:0 0 0 .2rem rgb(88 166 255 / .25)}
+    .ht-fetch-status{min-height:1.25rem;font-size:.8rem}
+    .reco-block{background:rgb(48 54 61 / .3);border-radius:.5rem;padding:.75rem 1rem;transition:background 0.1s ease}
+    .copy-btn-sm{min-width:75px;transition:all 0.15s}
+    .copy-btn-sm:active{transform:scale(.96)}
+    #lineCountBadge{font-size:.75rem;padding:.35rem .65rem;vertical-align:middle}
+    .strong-number{font-family:monospace;font-size:1.8rem;font-weight:700;background:#0d1117;padding:.2rem .8rem;border-radius:.75rem;display:inline-block}
+    .ups-note{font-size:.7rem;border-left:2px solid #f0883e;padding-left:.6rem}
+    .freq-badge{font-size:.75rem;background:#21262d;padding:.2rem .5rem;border-radius:1rem;margin:.1rem;display:inline-block}
+    .big-digit-code{font-family:monospace;font-size:1.5rem;font-weight:700;letter-spacing:.08em;background:#0d1117;padding:.2rem 1rem;border-radius:.75rem;display:inline-block}
+    .ht-transition{font-size:.85rem;border-left:3px solid var(--ht-border);padding-left:.75rem;margin-bottom:1rem}
+    .small-code{font-family:monospace;font-size:1.2rem;background:#0d1117;padding:.15rem .5rem;border-radius:.4rem;display:inline-block}
+    .stat-bar{background:#21262d;border-radius:.5rem;padding:.3rem .6rem;margin-bottom:.4rem}
+    .jambal-digit{font-family:monospace;font-size:1.4rem;font-weight:700;background:#0d1117;padding:.1rem .8rem;border-radius:.5rem;display:inline-block}
+    .btn-sm{padding:.25rem .5rem;font-size:.875rem}
+    .btn-outline-secondary{color:#8b949e;border-color:#30363d}
+    .btn-outline-secondary:hover{color:#fff;background-color:#30363d}
+    .form-select{background-color:#0d1117;color:#e6edf3;border-color:#30363d}
+    .form-control{background-color:#0d1117;color:#e6edf3;border-color:#30363d}
+    .table-dark{background-color:#161b22;color:#e6edf3}
+    .table-bordered{border-color:#30363d}
+    .text-secondary{color:#8b949e !important}
   </style>
 </head>
 <body>
@@ -188,8 +217,10 @@
     </footer>
   </div>
 
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"></script>
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous"></script>
+  <!-- Menggunakan jQuery dan Bootstrap dari CDN yang lebih stabil -->
+  <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+  
   <script>
 (function () {
   'use strict';
@@ -225,7 +256,6 @@
     
     try {
       // Gunakan proxy CORS untuk menghindari CORS error
-      // Karena direct fetch akan kena CORS, kita gunakan cors proxy
       var proxyUrl = "https://api.allorigins.win/raw?url=" + encodeURIComponent(url);
       
       var response = await fetch(proxyUrl, {
@@ -781,7 +811,7 @@
   function syncHitungUlangButton() { $('#btnCalc').prop('disabled', !resultsUnlocked); }
   function focusNextDigit($c) { var $all=$('#linesContainer .ht-digit'), idx=$all.index($c); if(idx>=0 && idx<$all.length-1) requestAnimationFrame(()=>{ $all.eq(idx+1).trigger('focus').get(0).select(); }); }
 
-  $(function(){
+  $(document).ready(function(){
     for(var i=0;i<3;i++) addLine();
     renumberLines(); updateLineCount();
     $('#btnAddLine').on('click',function(){ addLine(); if(resultsUnlocked) runCalc(); });
