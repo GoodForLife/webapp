@@ -3,353 +3,79 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
-  <title>Detektor Angka: Duplikat & Unik | Auto tanpa delimiter</title>
-  <!-- Bootstrap 5 (Dark mode friendly) -->
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
-  <!-- jQuery -->
-  <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+  <title>Detektor Angka: Duplikat & Unik | No Extra Spaces</title>
   <style>
-    body {
-      background-color: #0a0c10 !important;
-      color: #f0f3f8 !important;
-      font-family: 'Segoe UI', system-ui, -apple-system, 'Roboto', sans-serif;
-    }
-    .card.bg-dark-custom {
-      background-color: #1e1f24 !important;
-      border: 1px solid #2c2f36 !important;
-      border-radius: 1.25rem;
-    }
-    .card-header {
-      background-color: rgba(0, 0, 0, 0.3) !important;
-      border-bottom: 1px solid #2c2f36 !important;
-      font-weight: 600;
-    }
-    .form-control.bg-dark-input {
-      background-color: #141518 !important;
-      border: 1px solid #2c2f36 !important;
-      color: #ffffff !important;
-    }
-    .form-control.bg-dark-input:focus {
-      border-color: #6c8eff !important;
-      box-shadow: 0 0 0 0.2rem rgba(108, 142, 255, 0.25);
-    }
-    .btn-outline-light-custom {
-      border: 1px solid #4a4f5e;
-      color: #e9ecef;
-      transition: 0.2s;
-    }
-    .btn-outline-light-custom:hover {
-      background-color: #2c3038;
-      border-color: #8f9bb3;
-    }
-    .btn-copy {
-      background-color: #2c2f36;
-      border: none;
-      color: #cfd9f0;
-      padding: 0.3rem 0.9rem;
-      font-size: 0.85rem;
-      border-radius: 2rem;
-    }
-    .btn-copy:hover {
-      background-color: #4a6eff;
-      color: white;
-    }
-    .output-box {
-      background: #101215;
-      border-radius: 1rem;
-      padding: 1rem;
-      min-height: 85px;
-      font-family: 'Monaco', 'Menlo', monospace;
-      font-size: 1rem;
-      word-break: break-word;
-      border: 1px solid #2b2e36;
-      line-height: 1.5;
-    }
-    .badge-stats {
-      background: #252a33;
-      color: #bbd4ff;
-    }
-    .feedback-toast {
-      position: fixed;
-      bottom: 20px;
-      left: 50%;
-      transform: translateX(-50%);
-      background-color: #28a745;
-      color: white;
-      padding: 8px 20px;
-      border-radius: 40px;
-      font-size: 0.85rem;
-      z-index: 1090;
-      opacity: 0;
-      transition: opacity 0.2s;
-      pointer-events: none;
-    }
-    .btn-generate {
-      background: linear-gradient(95deg, #2c3e7a, #1e2b4f);
-      border: none;
-      font-weight: 600;
-    }
-    .btn-generate:hover {
-      background: linear-gradient(95deg, #3e5a9c, #2a3c64);
-    }
-    footer {
-      font-size: 0.75rem;
-      opacity: 0.7;
-    }
+ * {margin: 0;padding: 0;box-sizing: border-box;}body {background: linear-gradient(135deg, #0a0e1a 0%, #0f1322 100%);color: #eef2ff;font-family: system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif;min-height: 100vh;padding: 1.5rem;}.container {max-width: 1280px;margin: 0 auto;}.header {text-align: center;margin-bottom: 2rem;}.header h1 {font-size: 2rem;font-weight: 700;background: linear-gradient(120deg, #c0e0ff, #8aafff);background-clip: text;-webkit-background-clip: text;color: transparent;letter-spacing: -0.3px;}.header .sub {color: #8b95b5;margin-top: 0.5rem;font-size: 0.9rem;}.card {background: #121624;border-radius: 1.5rem;border: 1px solid #232836;overflow: hidden;transition: box-shadow 0.2s ease;}.card-header {background: rgba(0, 0, 0, 0.35);padding: 1rem 1.25rem;border-bottom: 1px solid #232836;font-weight: 600;display: flex;justify-content: space-between;align-items: center;flex-wrap: wrap;gap: 0.5rem;}.card-body {padding: 1.5rem;}.input-group {display: flex;flex-wrap: wrap;gap: 0.75rem;margin-bottom: 1rem;}.input-field {flex: 1;background: #0c0f17;border: 1px solid #2a2f3c;color: #ffffff;padding: 0.85rem 1rem;border-radius: 1rem;font-size: 1rem;font-family: 'SF Mono', 'Fira Code', monospace;transition: all 0.2s;}.input-field:focus {outline: none;border-color: #5d7eff;box-shadow: 0 0 0 3px rgba(93, 126, 255, 0.2);}.btn {border: none;padding: 0.75rem 1.5rem;border-radius: 2rem;font-weight: 600;font-size: 0.9rem;cursor: pointer;transition: all 0.2s ease;background: #252b38;color: #e2e8ff;}.btn-primary {background: linear-gradient(100deg, #2c3e7a, #1e2b55);color: white;}.btn-primary:hover {background: linear-gradient(100deg, #3e5a9c, #2a3c6e);transform: translateY(-1px);}.btn-outline {background: #1e222e;border: 1px solid #353d4e;}.btn-outline:hover {background: #2a2f40;border-color: #5d7eff;}.btn-sm {padding: 0.4rem 1rem;font-size: 0.8rem;border-radius: 2rem;background: #252b38;}.btn-sm:hover {background: #3a4055;}.output-box {background: #090c12;border-radius: 1rem;padding: 1.25rem;min-height: 100px;font-family: 'SF Mono', 'Menlo', 'Cascadia Code', monospace;font-size: 1rem;word-break: break-word;border: 1px solid #262c38;line-height: 1.6;color: #d6e3ff;white-space: normal;}.output-box span, .output-box div {display: inline;}.badge-stats {background: #1a1f2a;color: #9cb2ff;padding: 0.3rem 0.9rem;border-radius: 2rem;font-size: 0.75rem;font-weight: 500;}.row {display: flex;flex-wrap: wrap;gap: 1.5rem;margin-top: 0.5rem;}.col {flex: 1;min-width: 280px;}footer {text-align: center;margin-top: 3rem;padding-top: 1.5rem;border-top: 1px solid #232836;font-size: 0.75rem;color: #6f78a0;}.feedback-toast {position: fixed;bottom: 24px;left: 50%;transform: translateX(-50%);background: #1f2937;backdrop-filter: blur(8px);background-color: #1e2a3a;color: white;padding: 0.65rem 1.5rem;border-radius: 3rem;font-size: 0.85rem;font-weight: 500;z-index: 1100;opacity: 0;transition: opacity 0.2s ease;pointer-events: none;box-shadow: 0 8px 20px rgba(0,0,0,0.3);border: 1px solid #3a4258;}.text-muted {color: #7c85a6;}.helper-text {font-size: 0.8rem;background: #0f131d;padding: 0.6rem 1rem;border-radius: 1rem;color: #9aa3c2;margin-top: 0.5rem;}@media (max-width: 720px) {body {padding: 1rem;}.btn {padding: 0.6rem 1rem;}.input-group {flex-direction: column;}.card-header {flex-direction: column;align-items: flex-start;}}
   </style>
 </head>
-<body class="bg-dark text-white">
-
-  <div class="container py-4 py-md-5">
-    <div class="text-center mb-4">
-      <h1 class="display-6 fw-semibold">
-        🔢 Detektor <span class="text-info">Duplikat & Unik</span>
-      </h1>
-      <p class="text-secondary-emphasis">Input angka bebas (tanpa delimiter otomatis per digit) — support spasi, koma, atau langsung digabung</p>
-    </div>
-
-    <!-- Input Card -->
-    <div class="card bg-dark-custom mb-4 shadow-sm">
-      <div class="card-body p-4">
-        <label class="form-label fw-semibold mb-2">📥 Masukkan deretan angka</label>
-        <div class="input-group mb-3">
-          <input type="text" class="form-control bg-dark-input" id="angkaInput" placeholder="Contoh: 1223444  atau  1,2,3,2,4  atau  12 7 8 12 9" value="1223444">
-          <button class="btn btn-outline-light-custom" type="button" id="pasteBtn">📋 Tempel</button>
-          <button class="btn btn-primary btn-generate" type="button" id="generateBtn">✨ Generate</button>
-        </div>
-        <div class="form-text text-secondary-emphasis">
-          ✅ <strong>Tanpa delimiter otomatis</strong> — "123112" akan dianggap sebagai angka 1,2,3,1,1,2.<br>
-          ✅ Bisa juga pakai spasi, koma, atau campuran. Hanya angka yang diproses.
-        </div>
-      </div>
-    </div>
-
-    <!-- Output Dua Kolom -->
-    <div class="row g-4">
-      <!-- OUTPUT 1 : Duplikat (frekuensi >=2) -->
-      <div class="col-12 col-lg-6">
-        <div class="card bg-dark-custom h-100">
-          <div class="card-header d-flex justify-content-between align-items-center">
-            <span>⚠️ <strong>Angka Duplikat</strong> (muncul ≥ 2 kali)</span>
-            <button id="copyDuplicateBtn" class="btn btn-copy btn-sm">📋 Copy</button>
-          </div>
-          <div class="card-body">
-            <div id="duplicateOutput" class="output-box">—</div>
-            <div class="mt-2 text-end">
-              <small class="badge badge-stats" id="duplicateCountBadge">Jumlah: 0</small>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <!-- OUTPUT 2 : Unik (frekuensi == 1) -->
-      <div class="col-12 col-lg-6">
-        <div class="card bg-dark-custom h-100">
-          <div class="card-header d-flex justify-content-between align-items-center">
-            <span>✨ <strong>Angka Unik</strong> (muncul hanya 1x)</span>
-            <button id="copyUniqueBtn" class="btn btn-copy btn-sm">📋 Copy</button>
-          </div>
-          <div class="card-body">
-            <div id="uniqueOutput" class="output-box">—</div>
-            <div class="mt-2 text-end">
-              <small class="badge badge-stats" id="uniqueCountBadge">Jumlah: 0</small>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <footer class="text-center mt-5 pt-3 border-top border-secondary">
-      <p class="small">✨ Output ditampilkan <strong>tanpa delimiter</strong> (hanya spasi antar angka). Tombol copy akan menyalin angka dengan spasi.</p>
-    </footer>
+<body>
+<div class="container">
+  <!-- Header -->
+  <div class="header">
+    <h1>🔢 Detektor <span style="color:#7c9eff;">Duplikat & Unik</span></h1>
+    <div class="sub">Output tanpa spasi tambahan (rapi & bersih)</div>
   </div>
 
-  <div id="copyFeedback" class="feedback-toast">✅ Tersalin!</div>
+  <!-- Input Card -->
+  <div class="card" style="margin-bottom: 1.8rem;">
+    <div class="card-body">
+      <label style="font-weight: 600; margin-bottom: 0.5rem; display: block;">📥 Masukkan deretan angka</label>
+      <div class="input-group">
+        <input type="text" class="input-field" id="angkaInput" placeholder="Contoh: 1223444  atau  1,2,3,2,4  atau  12 7 8 12 9" value="1223444">
+        <button class="btn btn-outline" id="pasteBtn" type="button">📋 Tempel</button>
+        <button class="btn btn-primary" id="generateBtn" type="button">✨ Generate</button>
+      </div>
+      <div class="helper-text">
+        ✅ <strong>Tanpa delimiter otomatis</strong> — "123112" → digit [1,2,3,1,1,2] <br>
+        ✅ Output angka dipisah spasi tunggal, tanpa spasi di awal/akhir
+      </div>
+    </div>
+  </div>
 
-  <script>
-    $(document).ready(function() {
-      // Fungsi untuk menampilkan pesan sementara
-      function showFeedback(msg) {
-        let $fb = $('#copyFeedback');
-        $fb.text(msg || '✅ Tersalin!');
-        $fb.css('opacity', '1');
-        setTimeout(() => $fb.css('opacity', '0'), 1500);
-      }
+  <!-- Dua kolom output -->
+  <div class="row">
+    <!-- kolom duplikat -->
+    <div class="col">
+      <div class="card" style="height: 100%;">
+        <div class="card-header">
+          <span>⚠️ <strong>Angka Duplikat</strong> (muncul ≥ 2 kali)</span>
+          <button id="copyDuplicateBtn" class="btn btn-sm">📋 Copy</button>
+        </div>
+        <div class="card-body">
+          <div id="duplicateOutput" class="output-box">—</div>
+          <div style="margin-top: 0.9rem; text-align: right;">
+            <span class="badge-stats" id="duplicateCountBadge">Jumlah: 0</span>
+          </div>
+        </div>
+      </div>
+    </div>
 
-      // --- Cerdas ekstraksi angka: jika tidak ada delimiter (spasi/koma/titik koma/tab), maka pecah per digit.
-      // Jika ada delimiter, ekstrak angka utuh (dua digit atau lebih). Ini memenuhi kebutuhan "tanpa delimiter otomatis"
-      function extractNumbersSmart(raw) {
-        raw = raw.trim();
-        if (raw === "") return [];
-        
-        // Cek apakah teks mengandung karakter pemisah umum: spasi, koma, titik koma, tab, newline
-        // Jika tidak ada satupun delimiter, kita asumsikan user menulis angka tanpa pemisah (contoh: 1223444)
-        const delimiters = /[\s,;]+/;
-        const hasDelimiter = delimiters.test(raw);
-        
-        if (!hasDelimiter) {
-          // Tidak ada delimiter: pecah setiap karakter, asalkan karakter tersebut digit (0-9)
-          // Dukungan untuk angka negatif? Jika tidak ada delimiter, tanda minus tidak mungkin karena tanpa spasi.
-          // Jadi hanya digit angka positif per digit.
-          let digits = [];
-          for (let ch of raw) {
-            if (/[0-9]/.test(ch)) {
-              digits.push(parseInt(ch, 10));
-            }
-          }
-          return digits;
-        } else {
-          // Ada delimiter: gunakan regex untuk menangkap angka utuh (termasuk negatif jika diperlukan)
-          let matches = raw.match(/-?\d+/g);
-          if (!matches) return [];
-          return matches.map(Number);
-        }
-      }
+    <!-- kolom unik -->
+    <div class="col">
+      <div class="card" style="height: 100%;">
+        <div class="card-header">
+          <span>✨ <strong>Angka Unik</strong> (muncul hanya 1x)</span>
+          <button id="copyUniqueBtn" class="btn btn-sm">📋 Copy</button>
+        </div>
+        <div class="card-body">
+          <div id="uniqueOutput" class="output-box">—</div>
+          <div style="margin-top: 0.9rem; text-align: right;">
+            <span class="badge-stats" id="uniqueCountBadge">Jumlah: 0</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 
-      // Proses utama: hitung frekuensi, hasilkan array duplikat & unik (tanpa delimiter output = dipisah spasi)
-      function processAndUpdate() {
-        let rawValue = $('#angkaInput').val();
-        
-        let numbers = extractNumbersSmart(rawValue);
-        
-        if (numbers.length === 0) {
-          $('#duplicateOutput').html('<span class="text-secondary">⚠️ Tidak ada angka valid.</span>');
-          $('#uniqueOutput').html('<span class="text-secondary">⚠️ Tidak ada angka valid.</span>');
-          $('#duplicateCountBadge').text('Jumlah: 0');
-          $('#uniqueCountBadge').text('Jumlah: 0');
-          return;
-        }
-        
-        // Hitung frekuensi
-        let freq = new Map();
-        numbers.forEach(n => freq.set(n, (freq.get(n) || 0) + 1));
-        
-        // angka duplikat (muncul > 1)
-        let duplicates = [];
-        let uniques = [];
-        for (let [num, count] of freq.entries()) {
-          if (count > 1) duplicates.push(num);
-          else if (count === 1) uniques.push(num);
-        }
-        
-        // Urutkan secara numerik
-        duplicates.sort((a,b) => a - b);
-        uniques.sort((a,b) => a - b);
-        
-        // --- Tampilkan output tanpa delimiter (hanya spasi antar angka) ---
-        let duplicateText = duplicates.length === 0 ? '<span class="text-info-emphasis">✨ Tidak ada angka duplikat</span>' : duplicates.join(' ');
-        let uniqueText = uniques.length === 0 ? '<span class="text-info-emphasis">🔹 Tidak ada angka unik</span>' : uniques.join(' ');
-        
-        $('#duplicateOutput').html(duplicateText);
-        $('#uniqueOutput').html(uniqueText);
-        
-        // Update badge jumlah
-        $('#duplicateCountBadge').text(`Jumlah: ${duplicates.length}`);
-        $('#uniqueCountBadge').text(`Jumlah: ${uniques.length}`);
-        
-        // Simpan data teks murni untuk keperluan copy (spasi sebagai pemisah, tanpa delimiter koma)
-        $('#duplicateOutput').data('plain-text', duplicates.join(' '));
-        $('#uniqueOutput').data('plain-text', uniques.join(' '));
-      }
-      
-      // Event Generate
-      $('#generateBtn').on('click', function() {
-        processAndUpdate();
-        showFeedback('🔄 Data diperbarui');
-      });
-      
-      // Event Paste (tempel dari clipboard)
-      $('#pasteBtn').on('click', function() {
-        if (!navigator.clipboard) {
-          showFeedback('❌ Clipboard tidak didukung, silakan tempel manual (Ctrl+V)');
-          return;
-        }
-        navigator.clipboard.readText()
-          .then(text => {
-            if (text) {
-              $('#angkaInput').val(text.trim());
-              showFeedback('📋 Teks clipboard ditempel! Klik Generate untuk proses.');
-              // Tidak auto generate, biar user klik generate
-            } else {
-              showFeedback('⚠️ Clipboard kosong');
-            }
-          })
-          .catch(() => {
-            showFeedback('❌ Izin clipboard ditolak. Tempel manual (Ctrl+V) lalu Generate.');
-          });
-      });
-      
-      // Fungsi copy teks dari output (mengambil teks mentah tanpa HTML, dengan spasi)
-      function copyOutput(outputSelector, successMsg) {
-        let $outputDiv = $(outputSelector);
-        // Ambil teks murni (innerText) yang sudah mencerminkan angka dengan spasi
-        let rawText = $outputDiv.text().trim();
-        
-        // Jika output berisi placeholder "—" atau pesan error, beri informasi
-        if (rawText === '—' || rawText.includes('Tidak ada angka valid') || rawText.includes('Tidak ada angka duplikat') || rawText.includes('Tidak ada angka unik')) {
-          let emptyMsg = (rawText === '—') ? '(kosong)' : rawText;
-          if (navigator.clipboard) {
-            navigator.clipboard.writeText(emptyMsg).then(() => showFeedback(`ℹ️ ${emptyMsg.substring(0, 40)}`));
-          } else {
-            showFeedback('ℹ️ Tidak ada data untuk disalin');
-          }
-          return;
-        }
-        
-        // Copy menggunakan clipboard API
-        if (navigator.clipboard && navigator.clipboard.writeText) {
-          navigator.clipboard.writeText(rawText).then(() => {
-            showFeedback(successMsg || `📑 Tersalin: ${rawText.substring(0, 50)}${rawText.length > 50 ? '…' : ''}`);
-          }).catch(() => fallbackCopy(rawText, successMsg));
-        } else {
-          fallbackCopy(rawText, successMsg);
-        }
-      }
-      
-      function fallbackCopy(text, msg) {
-        let textarea = document.createElement('textarea');
-        textarea.value = text;
-        document.body.appendChild(textarea);
-        textarea.select();
-        document.execCommand('copy');
-        document.body.removeChild(textarea);
-        showFeedback(msg || '✅ Tersalin (fallback)');
-      }
-      
-      // Tombol copy untuk duplikat
-      $('#copyDuplicateBtn').on('click', function() {
-        let $dup = $('#duplicateOutput');
-        let txt = $dup.text().trim();
-        if (txt === '—' || txt.includes('Tidak ada angka valid')) {
-          copyOutput('#duplicateOutput', 'ℹ️ Tidak ada data duplikat');
-        } else {
-          copyOutput('#duplicateOutput', '🔁 Duplikat disalin!');
-        }
-      });
-      
-      // Tombol copy untuk unik
-      $('#copyUniqueBtn').on('click', function() {
-        let $uniq = $('#uniqueOutput');
-        let txt = $uniq.text().trim();
-        if (txt === '—' || txt.includes('Tidak ada angka valid')) {
-          copyOutput('#uniqueOutput', 'ℹ️ Tidak ada data unik');
-        } else {
-          copyOutput('#uniqueOutput', '🌟 Unik disalin!');
-        }
-      });
-      
-      // Enter pada input memicu generate
-      $('#angkaInput').on('keypress', function(e) {
-        if (e.which === 13) {
-          e.preventDefault();
-          $('#generateBtn').click();
-        }
-      });
-      
-      // Generate pertama kali dengan contoh "1223444" (tanpa delimiter -> per digit 1,2,2,3,4,4,4)
-      processAndUpdate();
-    });
-  </script>
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+  <footer>
+    <p>✨ Output dipisah dengan <strong>spasi tunggal</strong> (tanpa spasi tambahan di awal/akhir/kosong berlebih)</p>
+  </footer>
+</div>
+
+<div id="copyFeedback" class="feedback-toast">✅ Tersalin!</div>
+
+<script>
+!function(){const t=document.getElementById("angkaInput"),e=document.getElementById("generateBtn"),a=document.getElementById("pasteBtn"),n=document.getElementById("duplicateOutput"),i=document.getElementById("uniqueOutput"),d=document.getElementById("duplicateCountBadge"),l=document.getElementById("uniqueCountBadge"),u=document.getElementById("copyDuplicateBtn"),r=document.getElementById("copyUniqueBtn"),c=document.getElementById("copyFeedback");function o(t,e=1600){c&&(c.textContent=t||"✅ Tersalin!",c.style.opacity="1",setTimeout(()=>{c.style.opacity="0"},e))}function s(t){return t&&""!==t?t.trim().replace(/\s+/g," "):""}function p(t){return t&&0!==t.length?t.join(" "):""}function m(){const e=function(t){let e=t.trim();if(""===e)return[];if(/[\s,;]+/.test(e)){const t=e.match(/-?\d+/g);return t?t.map(Number):[]}{const t=[];for(let a=0;a<e.length;a++){const n=e[a];/[0-9]/.test(n)&&t.push(parseInt(n,10))}return t}}(t.value);if(0===e.length)return n.innerHTML='<span class="text-muted">⚠️ Tidak ada angka valid.</span>',i.innerHTML='<span class="text-muted">⚠️ Tidak ada angka valid.</span>',d.textContent="Jumlah: 0",l.textContent="Jumlah: 0",n.setAttribute("data-plain",""),void i.setAttribute("data-plain","");const a=new Map;for(let t of e)a.set(t,(a.get(t)||0)+1);const u=[],r=[];for(let[t,e]of a.entries())e>=2?u.push(t):1===e&&r.push(t);u.sort((t,e)=>t-e),r.sort((t,e)=>t-e);const c=p(u),o=p(r);let s,m;s=0===u.length?'<span class="text-muted">✨ Tidak ada angka duplikat</span>':c,m=0===r.length?'<span class="text-muted">🔹 Tidak ada angka unik</span>':o,n.innerHTML=s,i.innerHTML=m,d.textContent=`Jumlah: ${u.length}`,l.textContent=`Jumlah: ${r.length}`,n.setAttribute("data-plain",c),i.setAttribute("data-plain",o)}function k(t,e="✅ Disalin!"){let a=t.getAttribute("data-plain"),n="";if(null!=a&&""!==a)n=a;else{const e=document.createElement("div");e.innerHTML=t.innerHTML;let a=e.textContent||e.innerText||"";n="—"===a||a.includes("Tidak ada angka valid")||a.includes("Tidak ada angka duplikat")||a.includes("Tidak ada angka unik")||""===a.trim()?"":s(a)}n&&""!==n.trim()?(n=s(n),navigator.clipboard&&navigator.clipboard.writeText?navigator.clipboard.writeText(n).then(()=>{o(e)}).catch(()=>{g(n,e)}):g(n,e)):o("ℹ️ Tidak ada data untuk disalin",1300)}function g(t,e){const a=document.createElement("textarea");a.value=t,document.body.appendChild(a),a.select();try{document.execCommand("copy"),o(e||"✅ Tersalin (fallback)")}catch(t){o("❌ Gagal menyalin",1200)}document.body.removeChild(a)}e.addEventListener("click",()=>{m(),o("🔄 Data diperbarui",1e3)}),a.addEventListener("click",async()=>{if(navigator.clipboard&&navigator.clipboard.readText)try{const e=await navigator.clipboard.readText();e&&""!==e.trim()?(t.value=e.trim(),o("📋 Teks clipboard ditempel! Klik Generate untuk proses.",1800)):o("⚠️ Clipboard kosong",1200)}catch(t){o("❌ Izin clipboard ditolak. Tempel manual (Ctrl+V) lalu Generate.",2e3)}else o("❌ Clipboard tidak didukung. Tempel manual (Ctrl+V) lalu Generate.",2e3)}),u.addEventListener("click",()=>{const t=n,e=t.getAttribute("data-plain");if(!e||""===e){const e=t.innerText;if(e.includes("Tidak ada angka duplikat")||"—"===e||e.includes("Tidak ada angka valid"))return void o("ℹ️ Tidak ada data duplikat",1200)}k(t,"🔁 Duplikat disalin!")}),r.addEventListener("click",()=>{const t=i,e=t.getAttribute("data-plain");if(!e||""===e){const e=t.innerText;if(e.includes("Tidak ada angka unik")||"—"===e||e.includes("Tidak ada angka valid"))return void o("ℹ️ Tidak ada data unik",1200)}k(t,"🌟 Unik disalin!")}),t.addEventListener("keypress",t=>{"Enter"===t.key&&(t.preventDefault(),e.click())}),m()}();
+</script>
 </body>
 </html>
