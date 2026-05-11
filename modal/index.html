@@ -1,0 +1,484 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+    <title>BB Campuran Togel | Per Baris Pilih FULL/DISKON + Format Bet</title>
+    <!-- Bootstrap 5 + Icons -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="http://192.168.1.1/app/assets/font/bootstrap-icons.css">
+    <!-- DataTables CSS -->
+    <link rel="stylesheet" href="https://cdn.datatables.net/2.3.8/css/dataTables.dataTables.min.css">
+    <style>
+        body {
+            background: linear-gradient(145deg, #0a2f2f 0%, #0a3b3b 100%);
+            min-height: 100vh;
+            padding: 1.5rem 0;
+        }
+        .card-custom {
+            border-radius: 1.25rem;
+            overflow: hidden;
+            border: none;
+            box-shadow: 0 20px 35px -10px rgba(0,0,0,0.35);
+        }
+        .stat-card {
+            background: #f8f9fa;
+            border-left: 4px solid #0d6efd;
+        }
+        .dataTables_wrapper .dataTables_length, 
+        .dataTables_wrapper .dataTables_filter {
+            margin-bottom: 1rem;
+        }
+        .table-permutasi {
+            font-size: 0.85rem;
+        }
+        .btn-generate {
+            padding: 10px 28px;
+            font-weight: 700;
+        }
+        .bet-input {
+            text-align: right;
+            font-family: monospace;
+            background-color: #fff;
+        }
+        .tipe-select {
+            min-width: 110px;
+        }
+        .form-control:focus {
+            box-shadow: none;
+            border-color: #86b7fe;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <div class="card card-custom shadow bg-white">
+        <div class="card-header bg-dark text-white py-3 border-0">
+            <div class="d-flex flex-wrap justify-content-between align-items-center">
+                <h3 class="h5 mb-0 fw-bold"><i class="bi bi-shuffle me-2"></i>BB Campuran (Bolak-Balik) Togel</h3>
+                <span class="badge bg-info text-dark"><i class="bi bi-calculator"></i> Permutasi Unik</span>
+            </div>
+        </div>
+        
+        <div class="card-body p-4">
+            <div class="alert alert-light border small py-2 mb-3">
+                <i class="bi bi-info-circle"></i> <strong>Aturan:</strong> Nomor minimal 2 digit, maksimal 8 digit. Bet harus kelipatan Rp 1.000 (otomatis diformat titik). 
+                Setiap baris bisa pilih mode <strong>FULL</strong> (tanpa diskon) atau <strong>DISKON</strong> (4D=65%, 3D=59%, 2D=29%).
+            </div>
+
+            <!-- FORM INPUT dengan kolom TIPE per baris -->
+            <div class="mb-4">
+                <div class="d-flex justify-content-between align-items-center mb-2">
+                    <label class="fw-semibold"><i class="bi bi-pencil-square"></i> Daftar nomor & taruhan (bisa multiple)</label>
+                    <button id="tambahBaris" class="btn btn-sm btn-outline-primary"><i class="bi bi-plus-circle"></i> Tambah Baris</button>
+                </div>
+                <div class="table-responsive border rounded-3">
+                    <table class="table table-bordered align-middle mb-0" id="inputTable" style="min-width: 780px;">
+                        <thead class="table-light">
+                            <tr>
+                                <th style="width:40px">#</th>
+                                <th>Nomor <br><span class="small text-muted">(min 2, max 8 digit)</span></th>
+                                <th style="min-width:120px">Tipe</th>
+                                <th>Bet 4D (Rp)</th>
+                                <th>Bet 3D (Rp)</th>
+                                <th>Bet 2D (Rp)</th>
+                                <th style="width:50px">Aksi</th>
+                            </tr>
+                        </thead>
+                        <tbody id="inputBody"></tbody>
+                    </table>
+                </div>
+                <div class="form-text mt-2">
+                    <i class="bi bi-shuffle"></i> Setiap nomor akan di-generate semua permutasi unik (2D/3D/4D). Contoh: 1234 → 2D:12 line, 3D:24 line, 4D:24 line.
+                </div>
+            </div>
+
+            <!-- Tombol Generate -->
+            <div class="d-grid gap-2 d-md-flex justify-content-md-end mb-5">
+                <button id="generateBtn" class="btn btn-primary btn-generate shadow-sm"><i class="bi bi-calculator-fill"></i> GENERATE PERHITUNGAN</button>
+            </div>
+
+            <!-- Area Hasil -->
+            <div id="hasilKeseluruhan" style="display: none;"></div>
+        </div>
+    </div>
+</div>
+
+<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+<script src="https://cdn.datatables.net/2.3.8/js/dataTables.min.js"></script>
+
+<script>
+    // ======================= KONFIGURASI DISKON =======================
+    const DISCOUNTS = { '4D': 65, '3D': 59, '2D': 29 };
+    
+    function formatRupiah(angka) {
+        if (isNaN(angka)) angka = 0;
+        return new Intl.NumberFormat('id-ID', { style: 'currency', currency: 'IDR', minimumFractionDigits: 0 }).format(angka);
+    }
+    
+    // Format angka dengan titik (tanpa huruf)
+    function formatThousand(value) {
+        if (value === null || value === undefined || value === '') return '';
+        let num = parseInt(value.toString().replace(/\./g, ''), 10);
+        if (isNaN(num)) return '';
+        return num.toLocaleString('id-ID');
+    }
+    
+    // Parse dari string format ke integer
+    function parseBetValue(formattedValue) {
+        if (!formattedValue) return 0;
+        let cleaned = formattedValue.toString().replace(/\./g, '');
+        let num = parseInt(cleaned, 10);
+        return isNaN(num) ? 0 : num;
+    }
+    
+    function isValidKelipatan100(nilai) {
+        return nilai % 100 === 0;
+    }
+    
+    function hitungTransaksi(game, nominalBet, isFullMode) {
+        if (!nominalBet || nominalBet <= 0) return { diskonPersen: 0, diskonRp: 0, bayar: 0 };
+        let persenDiskon = 0;
+        if (!isFullMode) {
+            if (game === '4D') persenDiskon = DISCOUNTS['4D'];
+            else if (game === '3D') persenDiskon = DISCOUNTS['3D'];
+            else if (game === '2D') persenDiskon = DISCOUNTS['2D'];
+        }
+        const diskonRp = Math.floor(nominalBet * persenDiskon / 100);
+        const bayar = nominalBet - diskonRp;
+        return { diskonPersen: persenDiskon, diskonRp, bayar };
+    }
+    
+    function escapeHtml(str) { 
+        if(!str) return '';
+        return String(str).replace(/[&<>]/g, function(m){ if(m==='&') return '&amp;'; if(m==='<') return '&lt;'; if(m==='>') return '&gt;'; return m;}); 
+    }
+    
+    // ======================= PERMUTASI =======================
+    function getPermutations(digits, k) {
+        if (k > digits.length) return [];
+        const results = new Set();
+        function backtrack(path, used) {
+            if (path.length === k) { results.add(path.join('')); return; }
+            for (let i = 0; i < digits.length; i++) {
+                if (used[i]) continue;
+                used[i] = true;
+                path.push(digits[i]);
+                backtrack(path, used);
+                path.pop();
+                used[i] = false;
+            }
+        }
+        backtrack([], Array(digits.length).fill(false));
+        return Array.from(results);
+    }
+    
+    function processNomor(nomorStr, bet4d, bet3d, bet2d, isFullModeBaris) {
+        const digits = nomorStr.split('');
+        if (digits.length === 0) return { lines: [], stat: null };
+        const lines = [];
+        if (bet4d > 0 && digits.length >= 4) {
+            getPermutations(digits, 4).forEach(tebak => lines.push({ tebak, game: '4D', taruhan: bet4d, asal: nomorStr }));
+        }
+        if (bet3d > 0 && digits.length >= 3) {
+            getPermutations(digits, 3).forEach(tebak => lines.push({ tebak, game: '3D', taruhan: bet3d, asal: nomorStr }));
+        }
+        if (bet2d > 0 && digits.length >= 2) {
+            getPermutations(digits, 2).forEach(tebak => lines.push({ tebak, game: '2D', taruhan: bet2d, asal: nomorStr }));
+        }
+        let totalBiaya = 0;
+        for (let ln of lines) {
+            const { bayar } = hitungTransaksi(ln.game, ln.taruhan, isFullModeBaris);
+            totalBiaya += bayar;
+        }
+        const stat = { nomor: nomorStr, totalLine: lines.length, totalBiaya, bet4d, bet3d, bet2d, mode: isFullModeBaris ? 'FULL' : 'DISKON' };
+        return { lines, stat };
+    }
+    
+    // ======================= MANAJEMEN INPUT =======================
+    const tbodyInput = document.getElementById('inputBody');
+    
+    function createRowHTML(index, data = null) {
+        const nomorVal = data?.nomor || '';
+        const tipeVal = data?.tipe || 'DISKON';
+        const bet4dRaw = (data?.bet4d !== undefined && data.bet4d !== '') ? data.bet4d : 0;
+        const bet3dRaw = (data?.bet3d !== undefined && data.bet3d !== '') ? data.bet3d : 0;
+        const bet2dRaw = (data?.bet2d !== undefined && data.bet2d !== '') ? data.bet2d : 0;
+        
+        const displayBet4d = bet4dRaw ? formatThousand(bet4dRaw) : '';
+        const displayBet3d = bet3dRaw ? formatThousand(bet3dRaw) : '';
+        const displayBet2d = bet2dRaw ? formatThousand(bet2dRaw) : '';
+        
+        return `<tr data-rowidx="${index}">
+            <td class="text-center row-number">${index+1}</td>
+            <td><input type="text" class="form-control form-control-sm input-nomor" placeholder="1234" value="${escapeHtml(nomorVal)}" maxlength="8"></td>
+            <td>
+                <select class="form-select form-select-sm tipe-select">
+                    <option value="DISKON" ${tipeVal === 'DISKON' ? 'selected' : ''}>DISKON (65%|59%|29%)</option>
+                    <option value="FULL" ${tipeVal === 'FULL' ? 'selected' : ''}>FULL (Tanpa Diskon)</option>
+                </select>
+            </td>
+            <td><input type="text" class="form-control form-control-sm bet-input bet-4d" value="${displayBet4d}" placeholder="0"></td>
+            <td><input type="text" class="form-control form-control-sm bet-input bet-3d" value="${displayBet3d}" placeholder="0"></td>
+            <td><input type="text" class="form-control form-control-sm bet-input bet-2d" value="${displayBet2d}" placeholder="0"></td>
+            <td class="text-center"><button class="btn btn-sm btn-outline-danger hapusRowBtn"><i class="bi bi-trash3"></i></button></td>
+        </tr>`;
+    }
+    
+    // Fungsi format untuk satu input (agar tidak konflik)
+    function setupBetInputFormatting(inputElement) {
+        if (!inputElement) return;
+        // Simpan posisi kursor
+        inputElement.addEventListener('input', function(e) {
+            let raw = this.value.replace(/\./g, '');
+            // Hapus semua non-digit
+            raw = raw.replace(/[^\d]/g, '');
+            let num = parseInt(raw, 10);
+            if (isNaN(num)) num = 0;
+            // Batasi maksimal (opsional: 1M per bet)
+            if (num > 999999999) num = 999999999;
+            // Format dengan titik
+            let formatted = num === 0 ? '' : num.toLocaleString('id-ID');
+            this.value = formatted;
+        });
+        
+        // Blur: pastikan kelipatan 100
+        inputElement.addEventListener('blur', function(e) {
+            let raw = this.value.replace(/\./g, '');
+            let num = parseInt(raw, 10);
+            if (isNaN(num)) num = 0;
+            if (num > 0 && num % 100 !== 0) {
+                num = Math.floor(num / 100) * 100;
+                if (num > 0) {
+                    alert('Bet harus kelipatan Rp 1.000, telah dibulatkan ke bawah.');
+                }
+                this.value = num === 0 ? '' : num.toLocaleString('id-ID');
+            } else {
+                // tetap tampilkan format
+                this.value = num === 0 ? '' : num.toLocaleString('id-ID');
+            }
+        });
+    }
+    
+    // Event binding untuk semua input bet yang ada (dan nanti saat tambah baris)
+    function bindAllBetFormatting() {
+        document.querySelectorAll('.bet-input').forEach(input => {
+            // Hindari double binding
+            if (input.hasAttribute('data-format-bound')) return;
+            setupBetInputFormatting(input);
+            input.setAttribute('data-format-bound', 'true');
+        });
+    }
+    
+    function updateRowNumbers() { 
+        document.querySelectorAll('#inputBody tr').forEach((r,i)=>{ 
+            let firstTd = r.querySelector('.row-number');
+            if(firstTd) firstTd.innerText = i+1; 
+            r.setAttribute('data-rowidx',i);
+        }); 
+    }
+    
+    function addNewRow(prefill=null) { 
+        const newIndex = tbodyInput.children.length;
+        const html = createRowHTML(newIndex, prefill);
+        tbodyInput.insertAdjacentHTML('beforeend', html); 
+        updateRowNumbers(); 
+        // Binding format untuk input bet di baris baru
+        const newRow = tbodyInput.lastElementChild;
+        newRow.querySelectorAll('.bet-input').forEach(inp => setupBetInputFormatting(inp));
+    }
+    
+    // Hapus baris
+    document.getElementById('inputBody').addEventListener('click', (e) => {
+        const btn = e.target.closest('.hapusRowBtn');
+        if (btn && tbodyInput.children.length > 1) { 
+            btn.closest('tr').remove(); 
+            updateRowNumbers(); 
+        }
+        else if(btn) alert('Minimal 1 baris');
+    });
+    
+    document.getElementById('tambahBaris').addEventListener('click', () => addNewRow());
+    
+    function getInputData() {
+        const rows = tbodyInput.querySelectorAll('tr');
+        const data = [];
+        for(let row of rows){
+            let nomor = row.querySelector('.input-nomor')?.value.trim();
+            if(!nomor) { alert('Nomor tidak boleh kosong'); return null; }
+            if(!/^\d+$/.test(nomor)) { alert(`Nomor "${nomor}" hanya boleh angka`); return null; }
+            if(nomor.length < 2) { alert(`Nomor "${nomor}" minimal 2 digit`); return null; }
+            if(nomor.length > 8) { alert(`Nomor "${nomor}" maksimal 8 digit`); return null; }
+            
+            const tipeSelect = row.querySelector('.tipe-select');
+            const isFullModeBaris = tipeSelect.value === 'FULL';
+            
+            const bet4dRaw = row.querySelector('.bet-4d')?.value || '0';
+            const bet3dRaw = row.querySelector('.bet-3d')?.value || '0';
+            const bet2dRaw = row.querySelector('.bet-2d')?.value || '0';
+            
+            let bet4d = parseBetValue(bet4dRaw);
+            let bet3d = parseBetValue(bet3dRaw);
+            let bet2d = parseBetValue(bet2dRaw);
+            
+            // Final check kelipatan
+            if((bet4d > 0 && bet4d % 100 !== 0) || (bet3d > 0 && bet3d % 100 !== 0) || (bet2d > 0 && bet2d % 100 !== 0)){
+                alert(`Bet harus kelipatan 100 untuk nomor ${nomor}. Silakan periksa kembali.`);
+                return null;
+            }
+            if(bet4d===0 && bet3d===0 && bet2d===0) { alert(`Nomor ${nomor} minimal satu bet >0`); return null; }
+            
+            data.push({ nomor, bet4d, bet3d, bet2d, isFullMode: isFullModeBaris });
+        }
+        return data;
+    }
+    
+    // ======================= GENERATE & DATATABLES =======================
+    let activeDataTables = [];
+    
+    function destroyAllTables() {
+        if(activeDataTables.length){
+            activeDataTables.forEach(dt => { if(dt) dt.destroy(); });
+            activeDataTables = [];
+        }
+    }
+    
+    async function generateAll() {
+        const inputData = getInputData();
+        if(!inputData) return;
+        destroyAllTables();
+        
+        const hasilContainer = document.getElementById('hasilKeseluruhan');
+        hasilContainer.innerHTML = '';
+        let allStats = [];
+        let grandTotalLine = 0;
+        let grandTotalBiaya = 0;
+        
+        for(let idx=0; idx<inputData.length; idx++){
+            const item = inputData[idx];
+            const { lines, stat } = processNomor(item.nomor, item.bet4d, item.bet3d, item.bet2d, item.isFullMode);
+            if(!lines.length) {
+                hasilContainer.innerHTML += `<div class="alert alert-warning mt-3">⚠️ Nomor ${item.nomor} tidak menghasilkan line (digit kurang untuk bet yang dipilih)</div>`;
+                continue;
+            }
+            allStats.push(stat);
+            grandTotalLine += stat.totalLine;
+            grandTotalBiaya += stat.totalBiaya;
+            
+            const tableId = `tableNomor_${idx}_${Date.now()}`;
+            let rowsData = [];
+            for(let ln of lines){
+                const { diskonPersen, diskonRp, bayar } = hitungTransaksi(ln.game, ln.taruhan, item.isFullMode);
+                rowsData.push({
+                    tebak: ln.tebak,
+                    game: ln.game,
+                    disc: item.isFullMode ? '0%' : `${diskonPersen}%`,
+                    taruhan: ln.taruhan,
+                    diskonRp: diskonRp,
+                    bayar: bayar
+                });
+            }
+            
+            const modeLabel = item.isFullMode ? 'FULL (Tanpa Diskon)' : 'DISKON (65%|59%|29%)';
+            const cardHtml = `
+                <div class="card mt-4 shadow-sm border" id="card_${tableId}">
+                    <div class="card-header bg-primary text-white fw-bold d-flex justify-content-between flex-wrap">
+                        <span><i class="bi bi-tag"></i> Untuk Nomor: ${escapeHtml(item.nomor)}</span>
+                        <span><span class="badge bg-warning text-dark">${modeLabel}</span></span>
+                        <span class="badge bg-light text-dark ms-2">Total Line: ${lines.length} line | Biaya: ${formatRupiah(stat.totalBiaya)}</span>
+                    </div>
+                    <div class="card-body p-0">
+                        <div class="table-responsive">
+                            <table id="${tableId}" class="table table-bordered table-striped table-permutasi" style="width:100%">
+                                <thead class="table-dark">
+                                    <tr><th>Tebak (Kombinasi)</th><th>Game</th><th>Disc %</th><th>Taruhan (Bruto)</th><th>Diskon (Rp)</th><th>Bayar</th></tr>
+                                </thead>
+                                <tbody>
+                                    ${rowsData.map(r => `<tr><td>${escapeHtml(r.tebak)}</td><td>${r.game}</td><td>${r.disc}</td><td>${formatRupiah(r.taruhan)}</td><td>${formatRupiah(r.diskonRp)}</td><td class="fw-bold">${formatRupiah(r.bayar)}</td></tr>`).join('')}
+                                </tbody>
+                                <tfoot class="table-secondary">
+                                    <tr><th colspan="5" class="text-end">Total Biaya untuk Nomor ${escapeHtml(item.nomor)} :</th><th class="text-primary">${formatRupiah(stat.totalBiaya)}</th></tr>
+                                </tfoot>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            `;
+            hasilContainer.insertAdjacentHTML('beforeend', cardHtml);
+            
+            const tableEl = document.getElementById(tableId);
+            if(tableEl){
+                const dt = new DataTable(tableEl, {
+                    pageLength: 10,
+                    lengthMenu: [[5,10,25,50,-1], [5,10,25,50,"Semua"]],
+                    language: { search: "Cari:", lengthMenu: "Tampilkan _MENU_ baris", info: "Menampilkan _START_ hingga _END_ dari _TOTAL_ line" },
+                    order: [[0,'asc']],
+                });
+                activeDataTables.push(dt);
+            }
+        }
+        
+        if(allStats.length === 0){
+            hasilContainer.innerHTML = `<div class="alert alert-danger mt-3">Tidak ada data valid.</div>`;
+            hasilContainer.style.display = 'block';
+            const existingStat = document.getElementById('statistikBawah');
+            if(existingStat) existingStat.remove();
+            return;
+        }
+        
+        // Statistik di bawah
+        let statHtml = `
+            <div class="mt-5 pt-3 border-top" id="statistikBawah">
+                <h5 class="fw-bold mb-3"><i class="bi bi-graph-up"></i> STATISTIK TOTAL LINE & BIAYA PER NOMOR</h5>
+                <div class="row g-3 mb-4">
+        `;
+        for(let s of allStats){
+            const betInfo = [];
+            if(s.bet4d>0) betInfo.push(`4D: ${formatRupiah(s.bet4d)}/line`);
+            if(s.bet3d>0) betInfo.push(`3D: ${formatRupiah(s.bet3d)}/line`);
+            if(s.bet2d>0) betInfo.push(`2D: ${formatRupiah(s.bet2d)}/line`);
+            statHtml += `
+                <div class="col-md-6 col-lg-4">
+                    <div class="stat-card p-3 h-100 rounded-3 shadow-sm">
+                        <div class="d-flex justify-content-between">
+                            <strong><i class="bi bi-tag"></i> ${escapeHtml(s.nomor)} <span class="badge ${s.mode === 'FULL' ? 'bg-danger' : 'bg-info'} ms-1">${s.mode}</span></strong>
+                            <span class="badge bg-secondary">${s.totalLine} line</span>
+                        </div>
+                        <div class="small text-muted">${betInfo.join(' | ')}</div>
+                        <hr class="my-2">
+                        <div>Total Biaya: <span class="fw-bold text-primary">${formatRupiah(s.totalBiaya)}</span></div>
+                        <small>Rata-rata/line: ${formatRupiah(s.totalLine>0 ? s.totalBiaya/s.totalLine : 0)}</small>
+                    </div>
+                </div>
+            `;
+        }
+        statHtml += `</div><div class="alert alert-dark fw-bold">🏆 TOTAL GLOBAL: ${grandTotalLine} line | Total Biaya: ${formatRupiah(grandTotalBiaya)}</div></div>`;
+        
+        const existingStat = document.getElementById('statistikBawah');
+        if(existingStat) existingStat.remove();
+        hasilContainer.insertAdjacentHTML('beforeend', statHtml);
+        hasilContainer.style.display = 'block';
+    }
+    
+    document.getElementById('generateBtn').addEventListener('click', () => { generateAll(); });
+    
+    // ======================= INIT DEFAULT =======================
+    function initDefaultRows() {
+        tbodyInput.innerHTML = '';
+        // Contoh: nomor 1234 mode DISKON dengan bet (1000, 5000, 2000) -> kelipatan 100
+        addNewRow({ nomor: "1234", tipe: "DISKON", bet4d: 10000, bet3d: 5000, bet2d: 2000 });
+        // Baris tambahan contoh FULL (optional)
+        // addNewRow({ nomor: "5678", tipe: "FULL", bet4d: 20000, bet3d: 0, bet2d: 5000 });
+        updateRowNumbers();
+    }
+    initDefaultRows();
+    // Format binding awal
+    setTimeout(() => {
+        bindAllBetFormatting();
+        generateAll();
+    }, 100);
+</script>
+</body>
+</html>
