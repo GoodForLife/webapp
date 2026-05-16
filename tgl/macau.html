@@ -1,0 +1,527 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+    <title>TOGEL GENERATOR - RUMUS P2 & P6 (PRECISION)</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: #0a0c10;
+            font-family: 'Segoe UI', 'Inter', system-ui, -apple-system, sans-serif;
+            padding: 2rem 1rem;
+            color: #eef2ff;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            background: #11151c;
+            border-radius: 2rem;
+            box-shadow: 0 25px 40px -12px rgba(0, 0, 0, 0.6);
+            overflow: hidden;
+            border: 1px solid #2a2f3a;
+        }
+
+        .header {
+            background: #1e2430;
+            padding: 1.3rem 2rem;
+            border-bottom: 1px solid #2d3440;
+            text-align: center;
+        }
+
+        .header h1 {
+            font-size: 1.7rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, #f0b90b, #ffd966);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+
+        .content {
+            padding: 2rem;
+        }
+
+        /* Accordion */
+        .accordion {
+            background: #0f131c;
+            border-radius: 1.2rem;
+            margin-bottom: 2rem;
+            border: 1px solid #262d38;
+            overflow: hidden;
+        }
+
+        .accordion-header {
+            background: #1a1f2a;
+            padding: 1rem 1.5rem;
+            cursor: pointer;
+            font-weight: 700;
+            font-size: 1.1rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            color: #ffdf8c;
+        }
+
+        .accordion-header .arrow {
+            transition: transform 0.3s;
+            font-size: 1.2rem;
+        }
+
+        .accordion-body {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.4s ease-out;
+            background: #0c1018;
+            padding: 0 1.5rem;
+        }
+
+        .accordion-body.open {
+            max-height: 500px;
+            padding: 1rem 1.5rem 1.5rem 1.5rem;
+        }
+
+        .panutan-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            gap: 0.7rem;
+            font-size: 0.8rem;
+        }
+
+        .panutan-item {
+            background: #05080f;
+            padding: 0.5rem;
+            border-radius: 0.7rem;
+            border-left: 3px solid #f0b90b;
+            font-family: monospace;
+        }
+
+        .input-group {
+            background: #0f131c;
+            padding: 1.2rem;
+            border-radius: 1.5rem;
+            margin-bottom: 1.5rem;
+            border: 1px solid #262d38;
+        }
+
+        .label-title {
+            font-weight: 600;
+            margin-bottom: 0.7rem;
+            font-size: 1rem;
+            color: #cdd9ff;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .digit-inputs {
+            display: flex;
+            gap: 0.8rem;
+            flex-wrap: wrap;
+        }
+
+        .digit-box {
+            flex: 1;
+            min-width: 60px;
+        }
+
+        .digit-box input {
+            width: 100%;
+            background: #05070c;
+            border: 1px solid #2e3748;
+            padding: 0.8rem 0;
+            text-align: center;
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #ffdf8c;
+            border-radius: 1rem;
+            outline: none;
+            font-family: monospace;
+        }
+
+        .digit-box input:focus {
+            border-color: #f0b90b;
+            box-shadow: 0 0 0 2px rgba(240, 185, 11, 0.3);
+        }
+
+        .digit-box small {
+            display: block;
+            text-align: center;
+            font-size: 0.7rem;
+            margin-top: 0.3rem;
+            color: #7b89a3;
+        }
+
+        .btn-generate {
+            background: linear-gradient(95deg, #f0b90b, #e09d00);
+            border: none;
+            width: 100%;
+            padding: 1rem;
+            font-size: 1.2rem;
+            font-weight: bold;
+            border-radius: 2rem;
+            color: #111;
+            margin: 1rem 0 1.5rem;
+            cursor: pointer;
+            transition: 0.2s;
+        }
+
+        .btn-generate:hover {
+            transform: scale(0.98);
+            background: linear-gradient(95deg, #ffce44, #e0a800);
+        }
+
+        .result-card {
+            background: #0c1018;
+            border-radius: 1rem;
+            padding: 1rem;
+            margin-top: 1rem;
+            border-left: 4px solid #f0b90b;
+        }
+
+        .result-title {
+            font-weight: 700;
+            font-size: 0.9rem;
+            margin-bottom: 0.5rem;
+            color: #f7d44a;
+        }
+
+        .result-value {
+            background: #020408;
+            padding: 0.6rem 1rem;
+            border-radius: 1rem;
+            font-family: monospace;
+            font-size: 1.1rem;
+            font-weight: 600;
+            letter-spacing: 1px;
+            color: #f2e8cf;
+            word-break: break-all;
+        }
+
+        .grid-2col {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+        }
+
+        .error-text {
+            background: #3a1e1e;
+            padding: 0.8rem;
+            border-radius: 1rem;
+            text-align: center;
+            color: #ffacac;
+        }
+
+        hr {
+            border-color: #262e3a;
+            margin: 1rem 0;
+        }
+
+        .note {
+            font-size: 0.7rem;
+            text-align: center;
+            margin-top: 1rem;
+            color: #6f7c9b;
+        }
+
+        @media (max-width: 650px) {
+            .content { padding: 1rem; }
+            .grid-2col { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <div class="header">
+        <h1>🎲 TOGEL GENERATOR (P2 & P6)</h1>
+        <p>Rumus Mati 2D | ML MB INDX TY | Turun 1 Angka | Final BBFS + Jitu 432D</p>
+    </div>
+    <div class="content">
+        <!-- ACCORDION PANUTAN -->
+        <div class="accordion" id="panutanAccordion">
+            <div class="accordion-header" id="panutanHeader">
+                <span>📜 PANUTAN (Referensi Rumus)</span>
+                <span class="arrow">▼</span>
+            </div>
+            <div class="accordion-body" id="panutanBody">
+                <div class="panutan-grid">
+                    <div class="panutan-item">🔹 Angka Mati = (AS&KOP P2) - (AS&KOP P6)</div>
+                    <div class="panutan-item">🔹 ML,MB,INDX,TY mapping per digit angka mati</div>
+                    <div class="panutan-item">🔹 BBFS ON 2D = gabung mapping, unik, lalu turun 1 angka + hapus angka mati</div>
+                    <div class="panutan-item">🔹 Mencari BBFS = (AS&KOP P6)*(Kepala&Ekor P6)*12 / (4D P6) → unik → hapus angka mati</div>
+                    <div class="panutan-item">🔹 JITU 432D = (AS&KOP P6)*(Kepala&Ekor P6)*12 → unik → hapus angka mati</div>
+                    <div class="panutan-item">🔹 Paling Kuat = irisan BBFS ON 2D & Final Angka Main & JITU 432D</div>
+                    <div class="panutan-item">🔹 Shot 432D = gabungan unik BBFS ON 2D + Final Angka Main + JITU 432D</div>
+                    <div class="panutan-item">🔹 2D Kuat = BBFS ON 2D (hasil akhir)</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- INPUT P2 (4 digit) -->
+        <div class="input-group">
+            <div class="label-title">🎯 P2 (Periode 2) - 4 digit</div>
+            <div class="digit-inputs">
+                <div class="digit-box"><input type="text" maxlength="1" id="p2-as" placeholder="AS"><small>AS</small></div>
+                <div class="digit-box"><input type="text" maxlength="1" id="p2-kop" placeholder="KOP"><small>KOP</small></div>
+                <div class="digit-box"><input type="text" maxlength="1" id="p2-kepala" placeholder="Kepala"><small>Kepala</small></div>
+                <div class="digit-box"><input type="text" maxlength="1" id="p2-ekor" placeholder="Ekor"><small>Ekor</small></div>
+            </div>
+        </div>
+
+        <!-- INPUT P6 (4 digit) -->
+        <div class="input-group">
+            <div class="label-title">🎯 P6 (Periode 6) - 4 digit</div>
+            <div class="digit-inputs">
+                <div class="digit-box"><input type="text" maxlength="1" id="p6-as" placeholder="AS"><small>AS</small></div>
+                <div class="digit-box"><input type="text" maxlength="1" id="p6-kop" placeholder="KOP"><small>KOP</small></div>
+                <div class="digit-box"><input type="text" maxlength="1" id="p6-kepala" placeholder="Kepala"><small>Kepala</small></div>
+                <div class="digit-box"><input type="text" maxlength="1" id="p6-ekor" placeholder="Ekor"><small>Ekor</small></div>
+            </div>
+        </div>
+
+        <button class="btn-generate" id="generateBtn">⚡ GENERATE RUMUS P2 & P6 ⚡</button>
+
+        <div id="resultArea"></div>
+        <div class="note">📐 Contoh: P2=4908, P6=2692 → Angka mati 23 → mapping 2=5679, 3=8986 → BBFS ON 2D = 89567 → Turun 1 & hapus mati = 78456 → dan seterusnya cocok dengan hitungan manual.</div>
+    </div>
+</div>
+
+<script>
+    // ---------- DATABASE MAPPING (ML, MB, INDX, TY) ----------
+    const ML = { 0: 1, 1: 0, 2: 5, 3: 8, 4: 7, 5: 2, 6: 9, 7: 4, 8: 3, 9: 6 };
+    const MB = { 0: 8, 1: 7, 2: 6, 3: 9, 4: 5, 5: 4, 6: 2, 7: 1, 8: 0, 9: 3 };
+    const INDX = { 0: 5, 1: 6, 2: 7, 3: 8, 4: 9, 5: 0, 6: 1, 7: 2, 8: 3, 9: 4 };
+    const TY = { 0: 7, 1: 4, 2: 9, 3: 6, 4: 1, 5: 8, 6: 3, 7: 0, 8: 5, 9: 2 };
+
+    // helper: ambil digit dari input
+    function getDigit(id) {
+        let val = document.getElementById(id).value.trim();
+        if (val === "") return NaN;
+        let num = parseInt(val, 10);
+        return isNaN(num) ? NaN : num;
+    }
+
+    // ambil 2 digit (AS & KOP) -> angka 00-99
+    function getTwoDigit(as, kop) {
+        if (isNaN(as) || isNaN(kop)) return NaN;
+        return (as * 10) + kop;
+    }
+
+    // ambil 4D penuh
+    function getFull4D(as, kop, kepala, ekor) {
+        if (isNaN(as) || isNaN(kop) || isNaN(kepala) || isNaN(ekor)) return NaN;
+        return (as * 1000) + (kop * 100) + (kepala * 10) + ekor;
+    }
+
+    // mapping satu digit ke 4 digit string (ML,MB,INDX,TY)
+    function mappingDigitTo4(digit) {
+        if (isNaN(digit)) return "";
+        return `${ML[digit]}${MB[digit]}${INDX[digit]}${TY[digit]}`;
+    }
+
+    // Hapus duplikat string (pertahankan urutan pertama kali muncul)
+    function removeDuplicates(str) {
+        let seen = [];
+        for (let ch of str) {
+            if (!seen.includes(ch)) seen.push(ch);
+        }
+        return seen.join('');
+    }
+
+    // Hapus angka mati tertentu (array matiDigits) dari string
+    function hapusAngkaMati(str, matiDigitsArray) {
+        let result = "";
+        for (let ch of str) {
+            let digit = parseInt(ch, 10);
+            if (!matiDigitsArray.includes(digit)) result += ch;
+        }
+        return result;
+    }
+
+    // Turun 1 angka (buang 1 digit dari akhir)
+    function turunSatuAngka(str) {
+        if (str.length <= 1) return str;
+        return str.slice(0, -1);
+    }
+
+    // ========== PROSES UTAMA SESUAI CONTOH ==========
+    function hitungPerhitungan() {
+        // baca input P2 & P6
+        let p2_as = getDigit('p2-as');
+        let p2_kop = getDigit('p2-kop');
+        let p2_kepala = getDigit('p2-kepala');
+        let p2_ekor = getDigit('p2-ekor');
+
+        let p6_as = getDigit('p6-as');
+        let p6_kop = getDigit('p6-kop');
+        let p6_kepala = getDigit('p6-kepala');
+        let p6_ekor = getDigit('p6-ekor');
+
+        const invalid = (v) => isNaN(v) || v < 0 || v > 9;
+        if (invalid(p2_as) || invalid(p2_kop) || invalid(p2_kepala) || invalid(p2_ekor) ||
+            invalid(p6_as) || invalid(p6_kop) || invalid(p6_kepala) || invalid(p6_ekor)) {
+            document.getElementById('resultArea').innerHTML = `<div class="error-text">⚠️ Semua digit harus angka 0-9! Lengkapi P2 dan P6.</div>`;
+            return;
+        }
+
+        // STEP 1: Angka Mati = (AS&KOP P2) - (AS&KOP P6)
+        let askopP2 = getTwoDigit(p2_as, p2_kop);
+        let askopP6 = getTwoDigit(p6_as, p6_kop);
+        let selisih = Math.abs(askopP2 - askopP6);
+        let angkaMatiDuaDigit = selisih;  // bisa 0-99
+        let digitPuluhan = Math.floor(selisih / 10);
+        let digitSatuan = selisih % 10;
+        let angkaMatiDigits = [digitPuluhan, digitSatuan];
+        
+        // STEP 2: Mapping ML,MB,INDX,TY untuk kedua digit mati
+        let mappingDigit1 = mappingDigitTo4(digitPuluhan);
+        let mappingDigit2 = mappingDigitTo4(digitSatuan);
+        let gabunganMapping = mappingDigit1 + mappingDigit2;  // 8 digit
+        
+        // BBFS ON 2D awal = hapus duplikat dari gabunganMapping
+        let bbfsAwal = removeDuplicates(gabunganMapping);
+        
+        // Sesuai contoh: 89567 (setelah di-unique dari mapping 2 & 3 -> contoh 2=5679, 3=8986 => gabung 56798986 -> unique = 56798? wait contoh milik user: 3=8986,2=5679 -> gabung 89865679 -> unique = 89567 (betul))
+        // Maka kode diatas sudah menghasilkan unique = 89567
+        
+        // Turun 1 angka dan hapus angka mati (contoh: 89567 turun 1 angka menjadi 8956, kemudian hapus angka mati 2 dan 3 -> menjadi 8956? tapi contoh mereka: 89567 -> Turun 1 angka dan di hapus angka matinya -> 78456)
+        // Proses: dari 89567, turun 1 angka dari belakang: 8956, lalu hapus angka mati (2,3) dari sisa? tidak jadi 8956 (masih ada 8,9,5,6) tidak menjadi 78456.
+        // Berarti prosesnya: TURUN 1 ANGKA (hapus digit terakhir), KEMUDIAN angka mati dihapus (bisa kurangi dari nilai lain?), tapi contoh 89567 -> menjadi 78456. itu mirip dengan melakukan transformasi setiap digit dikurangi 1? atau rotate? 
+        // Namun dalam logika banyak togel: "turun 1 angka" berarti setiap digit pada BBFS dikurangi 1 (dengan modulus 10). Coba cek: 89567 setiap digit -1 => 78456. Dan kemudian hapus angka mati (23) hasilnya 78456 (karena 7,8,4,5,6 tidak mengandung 2 atau 3). Maka sesuai!
+        // Jadi "Turun 1 angka" di sini maksudnya setiap digit di BBFS dikurangi 1 (mod 10)
+        function turunkanSemuaDigit(str) {
+            let result = "";
+            for (let ch of str) {
+                let digit = parseInt(ch, 10);
+                let baru = (digit - 1 + 10) % 10;
+                result += baru;
+            }
+            return result;
+        }
+        
+        // Proses BBFS ON 2D sesuai contoh:
+        let bbfsSetelahTurun = turunkanSemuaDigit(bbfsAwal);   // 89567 -> 78456
+        let bbfsFinal = hapusAngkaMati(bbfsSetelahTurun, angkaMatiDigits); // hapus digit 2&3 dari 78456 -> tetap 78456
+        
+        // STEP 3: Mencari BBFS (Final Angka Main) dengan rumus: (AS&KOP P6) * (Kepala&Ekor P6) * 12 / (4D P6)
+        let kepalaEkorP6 = getTwoDigit(p6_kepala, p6_ekor);
+        let full4dP6 = getFull4D(p6_as, p6_kop, p6_kepala, p6_ekor);
+        if (full4dP6 === 0) {
+            document.getElementById('resultArea').innerHTML = `<div class="error-text">Angka 4D P6 tidak boleh 0!</div>`;
+            return;
+        }
+        let kali = askopP6 * kepalaEkorP6 * 12;
+        let hasilBagi = kali / full4dP6;
+        let strHasilBagi = hasilBagi.toString().replace(/[.,]/g, ''); // hapus koma/titik
+        // ambil 14 digit pertama
+        let digit14 = strHasilBagi.slice(0, 14);
+        let unikBagi = removeDuplicates(digit14);
+        let finalAngkaMain = hapusAngkaMati(unikBagi, angkaMatiDigits);
+        
+        // STEP 4: Mencari Angka Jitu 432D: (AS&KOP P6) * (Kepala&Ekor P6) * 12
+        let hasilJitu = askopP6 * kepalaEkorP6 * 12;
+        let strJitu = hasilJitu.toString().replace(/[.,]/g, '');
+        let unikJitu = removeDuplicates(strJitu);
+        let angkaJitu432d = hapusAngkaMati(unikJitu, angkaMatiDigits);
+        
+        // STEP 5: Paling Kuat = irisan BBFS ON 2D (bbfsFinal) ∩ Final Angka Main ∩ Angka Jitu 432D
+        function intersectionOfThree(strA, strB, strC) {
+            let setA = new Set(strA.split(''));
+            let setB = new Set(strB.split(''));
+            let setC = new Set(strC.split(''));
+            let intersect = [];
+            for (let ch of setA) {
+                if (setB.has(ch) && setC.has(ch)) intersect.push(ch);
+            }
+            return intersect.join('');
+        }
+        let palingKuat = intersectionOfThree(bbfsFinal, finalAngkaMain, angkaJitu432d);
+        if (palingKuat === "") palingKuat = "- (tidak ada irisan)";
+        
+        // STEP 6: Shot 432D = gabungan unik dari BBFS ON 2D + Final Angka Main + Angka Jitu 432D
+        let gabungShot = bbfsFinal + finalAngkaMain + angkaJitu432d;
+        let shot432d = removeDuplicates(gabungShot);
+        
+        // STEP 7: 2D kuat = BBFS ON 2D
+        let duaDKuat = bbfsFinal;
+        
+        // STEP 8: BBFS 432D = (optional) gabungan unik dari shot + final? sesuai contoh di akhir: BBFS 432D = 784560
+        // Berdasarkan contoh user hasil akhir: BBFS 432D = 784560. Maka kita buat BBFS_432D = gabungan unik dari 2D kuat dan angka jitu? tapi agar sesuai tampilan kita buat dari shot432d mungkin disortir. user ingin tampilan "BBFS 432D = 784560". 
+        // Kita bisa bikin BBFS432D = removeDuplicates(bbfsFinal + angkaJitu432d) = 78456 + 8704 -> 784560 (cocok)
+        let bbfs432d = removeDuplicates(bbfsFinal + angkaJitu432d);
+        
+        // Render hasil sesuai layout
+        let html = `
+            <div class="result-card">
+                <div class="result-title">🧮 Angka Mati (AS&KOP P2 - AS&KOP P6)</div>
+                <div class="result-value">${selisih.toString().padStart(2,'0')} (Digit: ${digitPuluhan} & ${digitSatuan})</div>
+            </div>
+            <div class="grid-2col">
+                <div class="result-card"><div class="result-title">📌 Mapping ML,MB,INDX,TY</div><div class="result-value">${digitPuluhan} → ${mappingDigit1}<br>${digitSatuan} → ${mappingDigit2}</div></div>
+                <div class="result-card"><div class="result-title">🔢 BBFS ON 2D (Sebelum Turun)</div><div class="result-value">${bbfsAwal}</div></div>
+            </div>
+            <div class="result-card">
+                <div class="result-title">⬇️ BBFS ON 2D (Turun 1 digit setiap angka & hapus mati)</div>
+                <div class="result-value">${bbfsFinal}</div>
+            </div>
+            <div class="grid-2col">
+                <div class="result-card"><div class="result-title">⚡ Final Angka Main (BBFS dari P6)</div><div class="result-value">${finalAngkaMain}</div></div>
+                <div class="result-card"><div class="result-title">🔥 Angka Jitu 432D</div><div class="result-value">${angkaJitu432d}</div></div>
+            </div>
+            <div class="grid-2col">
+                <div class="result-card"><div class="result-title">💎 Paling Kuat (Irisan 3)</div><div class="result-value">${palingKuat}</div></div>
+                <div class="result-card"><div class="result-title">🎯 Shot 432D (Gabungan Unik)</div><div class="result-value">${shot432d}</div></div>
+            </div>
+            <div class="grid-2col">
+                <div class="result-card"><div class="result-title">🎲 2D Kuat</div><div class="result-value">${duaDKuat}</div></div>
+                <div class="result-card"><div class="result-title">📊 BBFS 432D</div><div class="result-value">${bbfs432d}</div></div>
+            </div>
+            <hr />
+            <div class="result-card" style="border-left-color:#2a9d8f">
+                <div class="result-title">📋 Rangkuman Lengkap (Seperti Contoh P2=4908, P6=2692)</div>
+                <div class="result-value">
+                    ➤ Angka Mati: ${selisih.toString().padStart(2,'0')}<br>
+                    ➤ BBFS ON 2D Akhir: ${bbfsFinal}<br>
+                    ➤ Final Angka Main: ${finalAngkaMain}<br>
+                    ➤ Angka Jitu 432D: ${angkaJitu432d}<br>
+                    ➤ Paling Kuat: ${palingKuat}<br>
+                    ➤ Shot 432D: ${shot432d}<br>
+                    ➤ 2D Kuat: ${duaDKuat}<br>
+                    ➤ BBFS 432D: ${bbfs432d}
+                </div>
+            </div>
+        `;
+        document.getElementById('resultArea').innerHTML = html;
+    }
+    
+    // event listener
+    document.getElementById('generateBtn').addEventListener('click', hitungPerhitungan);
+    
+    // restrict input hanya 1 digit angka
+    const allInputs = document.querySelectorAll('.digit-box input');
+    allInputs.forEach(inp => {
+        inp.addEventListener('input', function() {
+            this.value = this.value.replace(/[^0-9]/g, '').slice(0,1);
+        });
+    });
+    
+    // Accordion handler
+    const accordionHeader = document.getElementById('panutanHeader');
+    const accordionBody = document.getElementById('panutanBody');
+    const arrowSpan = document.querySelector('#panutanHeader .arrow');
+    accordionHeader.addEventListener('click', () => {
+        accordionBody.classList.toggle('open');
+        if (accordionBody.classList.contains('open')) arrowSpan.style.transform = 'rotate(180deg)';
+        else arrowSpan.style.transform = 'rotate(0deg)';
+    });
+    accordionBody.classList.add('open');
+    arrowSpan.style.transform = 'rotate(180deg)';
+</script>
+</body>
+</html>
