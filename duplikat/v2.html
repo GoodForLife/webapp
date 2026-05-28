@@ -1,0 +1,374 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+  <title>Detektor Angka | Statistik Frekuensi 0-9</title>
+<style>*{margin:0;padding:0;box-sizing:border-box}body{background:linear-gradient(135deg,#0a0e1a 0%,#0f1322 100%);color:#eef2ff;font-family:system-ui,-apple-system,'Segoe UI',Roboto,'Helvetica Neue',sans-serif;min-height:100vh;padding:1.5rem}.container{max-width:1000px;margin:0 auto}.header{text-align:center;margin-bottom:2rem}.header h1{font-size:2rem;font-weight:700;background:linear-gradient(120deg,#c0e0ff,#8aafff);background-clip:text;-webkit-background-clip:text;color:#fff0}.header .sub{color:#8b95b5;margin-top:.5rem;font-size:.9rem}.card{background:#121624;border-radius:1.5rem;border:1px solid #232836;overflow:hidden;margin-bottom:1.5rem}.card-header{background:rgb(0 0 0 / .35);padding:1rem 1.5rem;border-bottom:1px solid #232836;font-weight:600;font-size:1.1rem;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:.5rem}.card-body{padding:1.5rem}.input-group{display:flex;flex-wrap:wrap;gap:.75rem}.input-field{flex:1;background:#0c0f17;border:1px solid #2a2f3c;color:#fff;padding:.85rem 1rem;border-radius:1rem;font-size:1rem;font-family:'SF Mono','Fira Code',monospace;transition:all 0.2s}.input-field:focus{outline:none;border-color:#5d7eff;box-shadow:0 0 0 3px rgb(93 126 255 / .2)}.btn{border:none;padding:.75rem 1.5rem;border-radius:2rem;font-weight:600;font-size:.9rem;cursor:pointer;transition:all 0.2s ease;background:#252b38;color:#e2e8ff}.btn-primary{background:linear-gradient(100deg,#2c3e7a,#1e2b55);color:#fff}.btn-primary:hover{background:linear-gradient(100deg,#3e5a9c,#2a3c6e);transform:translateY(-1px)}.btn-outline{background:#1e222e;border:1px solid #353d4e}.btn-outline:hover{background:#2a2f40;border-color:#5d7eff}.btn-copy-small{background:#1a1f2a;border:1px solid #3a4058;padding:.2rem .7rem;border-radius:1.5rem;font-size:.65rem;cursor:pointer;transition:all 0.2s;color:#9cb2ff;margin-left:.5rem}.btn-copy-small:hover{background:#2d3348;border-color:#5d7eff;color:#fff}.result-section{margin-bottom:1.8rem}.result-title{font-size:1.1rem;font-weight:600;margin-bottom:.75rem;color:#9cb2ff;display:flex;align-items:center;gap:.5rem}.badge-container{display:flex;flex-wrap:wrap;gap:.75rem;align-items:center;justify-content:center}.badge{background:#1a1f2e;border-radius:2rem;padding:.5rem 1rem;font-family:'SF Mono',monospace;font-size:.9rem;font-weight:500;border:1px solid #2d3348;transition:all 0.2s;display:inline-flex;align-items:center;gap:.5rem}.badge-duplicate{background:linear-gradient(135deg,#3a1f2a,#2a1520);border-color:#c42e5a;color:#f9b}.badge-unique{background:linear-gradient(135deg,#1a2a3a,#0f1e2c);border-color:#2e7d64;color:#7dffc4}.badge-missing{background:linear-gradient(135deg,#2a1f2a,#1a1520);border-color:#c4652e;color:#ffb87d}.badge-stat{background:#0f1420;border-color:#3a4058;color:#c4d0ff}.badge-stat span{color:#ffd966;font-weight:700;margin:0 .2rem}.output-box{background:#090c12;border-radius:1rem;padding:1rem 1.25rem;min-height:80px;border:1px solid #262c38}.output-box .badge-container{justify-content:center}.text-muted{color:#6f78a0}.info-note{font-size:.75rem;color:#6f78a0;margin-top:.75rem;text-align:center}.feedback-toast{position:fixed;bottom:24px;left:50%;transform:translateX(-50%);background:#1e2a3a;color:#fff;padding:.65rem 1.5rem;border-radius:3rem;font-size:.85rem;z-index:1100;opacity:0;transition:opacity 0.2s ease;pointer-events:none;border:1px solid #3a4258;white-space:nowrap}@media (max-width:640px){body{padding:1rem}.badge{font-size:.75rem;padding:.35rem .8rem}.feedback-toast{white-space:normal;max-width:90%;text-align:center}}</style>
+</head>
+<body>
+<div class="container">
+  <div class="header">
+    <h1>📊 Detektor <span style="color:#7c9eff;">Frekuensi Angka</span></h1>
+    <div class="sub">Menampilkan statistik lengkap setiap angka 0-9 yang muncul</div>
+  </div>
+
+  <div class="card">
+    <div class="card-body">
+      <label style="font-weight: 600; margin-bottom: 0.5rem; display: block;">🔢 Masukkan deretan angka</label>
+      <div class="input-group">
+        <input type="text" class="input-field" id="angkaInput" placeholder="Contoh: 780250668590" value="780250668590">
+        <button class="btn btn-outline" id="pasteBtn" type="button">📋 Tempel</button>
+        <button class="btn btn-primary" id="generateBtn" type="button">✨ Analisis</button>
+      </div>
+      <div class="info-note" style="margin-top: 0.75rem; text-align: left;">
+        ✅ Setiap digit diproses secara individu. Menampilkan badge untuk setiap angka 0-9 yang muncul.
+      </div>
+    </div>
+  </div>
+
+  <!-- Angka Duplikat (muncul > 1x) -->
+  <div class="result-section">
+    <div class="result-title">
+      <span>⚠️</span> Angka yang muncul Lebih dari 1x (Duplikat)
+    </div>
+    <div class="output-box" id="duplicateContainer">
+      <div class="badge-container" id="duplicateBadges">
+        <span class="text-muted">—</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Angka Unik (muncul hanya 1x) -->
+  <div class="result-section">
+    <div class="result-title">
+      <span>✨</span> Angka yang hanya muncul 1x (Unik)
+    </div>
+    <div class="output-box" id="uniqueContainer">
+      <div class="badge-container" id="uniqueBadges">
+        <span class="text-muted">—</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Angka Tidak Ada (missing 0-9) -->
+  <div class="result-section">
+    <div class="result-title">
+      <span>❌</span> Angka Yang tidak ada di daftar (0-9)
+    </div>
+    <div class="output-box" id="missingContainer">
+      <div class="badge-container" id="missingBadges">
+        <span class="text-muted">—</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Statistik Lengkap per Angka (badge format: angka = jumlah x) -->
+  <div class="card">
+    <div class="card-header">
+      <span style="font-weight: 600;">📈 Statistik Lengkap Frekuensi</span>
+      <button id="copyStatsBtn" class="btn" style="background:#252b38; padding:0.3rem 1rem;">📋 Copy Semua</button>
+    </div>
+    <div class="card-body">
+      <div id="statsContainer" class="badge-container" style="gap: 0.6rem;">
+        <span class="text-muted">—</span>
+      </div>
+      <div class="info-note" style="margin-top: 1rem;">
+        💡 Format: <strong>{angka} = {jumlah}x</strong> — hanya angka yang muncul ditampilkan
+      </div>
+    </div>
+  </div>
+
+  <footer style="text-align: center; margin-top: 1.5rem; font-size: 0.7rem; color: #5a6380;">
+    Analisis berdasarkan digit 0-9 | Input bebas spasi/koma
+  </footer>
+</div>
+
+<div id="copyFeedback" class="feedback-toast">✅ Tersalin!</div>
+
+<script>
+  (function() {
+    const angkaInput = document.getElementById('angkaInput');
+    const generateBtn = document.getElementById('generateBtn');
+    const pasteBtn = document.getElementById('pasteBtn');
+    const duplicateBadgesDiv = document.getElementById('duplicateBadges');
+    const uniqueBadgesDiv = document.getElementById('uniqueBadges');
+    const missingBadgesDiv = document.getElementById('missingBadges');
+    const statsContainer = document.getElementById('statsContainer');
+    const copyStatsBtn = document.getElementById('copyStatsBtn');
+    const feedbackToast = document.getElementById('copyFeedback');
+
+    function showToast(message, duration = 1500) {
+      if (!feedbackToast) return;
+      feedbackToast.textContent = message;
+      feedbackToast.style.opacity = '1';
+      setTimeout(() => {
+        feedbackToast.style.opacity = '0';
+      }, duration);
+    }
+
+    // Ekstrak digit dari input (hanya angka 0-9)
+    function extractDigits(inputStr) {
+      const str = inputStr.trim();
+      if (str === "") return [];
+      const digits = [];
+      for (let i = 0; i < str.length; i++) {
+        const ch = str[i];
+        if (/[0-9]/.test(ch)) {
+          digits.push(parseInt(ch, 10));
+        }
+      }
+      return digits;
+    }
+
+    // Fungsi copy teks ke clipboard
+    function copyToClipboard(text, successMessage) {
+      if (!text || text === '') {
+        showToast('ℹ️ Tidak ada data untuk disalin', 1200);
+        return;
+      }
+      
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(text).then(() => {
+          showToast(successMessage || '✅ Tersalin!', 1200);
+        }).catch(() => {
+          fallbackCopy(text, successMessage);
+        });
+      } else {
+        fallbackCopy(text, successMessage);
+      }
+    }
+
+    function fallbackCopy(text, message) {
+      const textarea = document.createElement('textarea');
+      textarea.value = text;
+      document.body.appendChild(textarea);
+      textarea.select();
+      try {
+        document.execCommand('copy');
+        showToast(message || '✅ Tersalin', 1200);
+      } catch (err) {
+        showToast('❌ Gagal menyalin', 1200);
+      }
+      document.body.removeChild(textarea);
+    }
+
+    // Membuat badge statistik dengan tombol copy di dalamnya
+    function createStatBadgeWithCopy(angka, jumlah, isDuplicate = false, isUnique = false) {
+      let badgeClass = 'badge badge-stat';
+      if (isDuplicate) badgeClass = 'badge badge-duplicate';
+      else if (isUnique) badgeClass = 'badge badge-unique';
+      
+      const textToCopy = `${angka} = ${jumlah}x`;
+      
+      return `
+        <div class="${badgeClass}" style="display: inline-flex; align-items: center; gap: 0.5rem;">
+          <strong style="font-size:1.1rem;">${angka}</strong> = <span>${jumlah}x</span>
+          <button class="btn-copy-small" data-copy-text="${textToCopy}">📋 Copy</button>
+        </div>
+      `;
+    }
+
+    // Badge untuk daftar angka (tanpa "= Nx") dengan tombol copy
+    function createNumberBadgeWithCopy(angka, type) {
+      let className = '';
+      let textToCopy = `${angka}`;
+      
+      if (type === 'duplicate') {
+        className = 'badge badge-duplicate';
+      } else if (type === 'unique') {
+        className = 'badge badge-unique';
+      } else if (type === 'missing') {
+        className = 'badge badge-missing';
+      }
+      
+      return `
+        <div class="${className}" style="display: inline-flex; align-items: center; gap: 0.5rem;">
+          <strong style="font-size:1.1rem;">${angka}</strong>
+          <button class="btn-copy-small" data-copy-text="${textToCopy}">📋 Copy</button>
+        </div>
+      `;
+    }
+
+    // Proses utama analisis
+    function analyzeAndDisplay() {
+      const rawInput = angkaInput.value;
+      const digits = extractDigits(rawInput);
+      
+      if (digits.length === 0) {
+        duplicateBadgesDiv.innerHTML = '<span class="text-muted">— Tidak ada data —</span>';
+        uniqueBadgesDiv.innerHTML = '<span class="text-muted">— Tidak ada data —</span>';
+        missingBadgesDiv.innerHTML = '<span class="text-muted">— Tidak ada data —</span>';
+        statsContainer.innerHTML = '<span class="text-muted">⚠️ Tidak ada angka valid</span>';
+        return;
+      }
+
+      // Hitung frekuensi untuk angka 0-9
+      const freq = new Array(10).fill(0);
+      for (let d of digits) {
+        freq[d]++;
+      }
+
+      // Klasifikasi angka duplikat (frekuensi >= 2), unik (frekuensi == 1), dan missing (frekuensi == 0)
+      const duplicateNumbers = [];
+      const uniqueNumbers = [];
+      const missingNumbers = [];
+      const statsBadges = [];
+
+      for (let angka = 0; angka <= 9; angka++) {
+        const count = freq[angka];
+        
+        if (count === 0) {
+          missingNumbers.push(angka);
+          continue;
+        }
+        
+        let isDup = (count >= 2);
+        let isUniq = (count === 1);
+        statsBadges.push(createStatBadgeWithCopy(angka, count, isDup, isUniq));
+        
+        if (count >= 2) {
+          duplicateNumbers.push(angka);
+        } else if (count === 1) {
+          uniqueNumbers.push(angka);
+        }
+      }
+
+      // Tampilkan badge angka duplikat dengan tombol copy
+      if (duplicateNumbers.length === 0) {
+        duplicateBadgesDiv.innerHTML = '<span class="text-muted">✨ Tidak ada angka yang muncul lebih dari 1x</span>';
+      } else {
+        let badgesHtml = '';
+        for (let num of duplicateNumbers) {
+          badgesHtml += createNumberBadgeWithCopy(num, 'duplicate');
+        }
+        duplicateBadgesDiv.innerHTML = badgesHtml;
+      }
+
+      // Tampilkan badge angka unik dengan tombol copy
+      if (uniqueNumbers.length === 0) {
+        uniqueBadgesDiv.innerHTML = '<span class="text-muted">🔹 Tidak ada angka yang hanya muncul 1x</span>';
+      } else {
+        let badgesHtml = '';
+        for (let num of uniqueNumbers) {
+          badgesHtml += createNumberBadgeWithCopy(num, 'unique');
+        }
+        uniqueBadgesDiv.innerHTML = badgesHtml;
+      }
+
+      // Tampilkan badge angka yang tidak ada (missing) dengan tombol copy
+      if (missingNumbers.length === 0) {
+        missingBadgesDiv.innerHTML = '<span class="text-muted">✅ Semua angka 0-9 muncul dalam daftar!</span>';
+      } else {
+        let badgesHtml = '';
+        for (let num of missingNumbers) {
+          badgesHtml += createNumberBadgeWithCopy(num, 'missing');
+        }
+        missingBadgesDiv.innerHTML = badgesHtml;
+      }
+
+      // Tampilkan statistik lengkap
+      if (statsBadges.length === 0) {
+        statsContainer.innerHTML = '<span class="text-muted">—</span>';
+      } else {
+        statsContainer.innerHTML = statsBadges.join('');
+      }
+
+      // Simpan data statistik untuk keperluan copy semua
+      let statsText = '';
+      for (let angka = 0; angka <= 9; angka++) {
+        const count = freq[angka];
+        if (count > 0) {
+          statsText += `${angka} = ${count}x\n`;
+        }
+      }
+      statsContainer.setAttribute('data-stats-text', statsText.trim());
+
+      // Event listener untuk semua tombol copy yang baru dibuat
+      attachCopyEvents();
+    }
+
+    // Menambahkan event listener ke semua tombol copy
+    function attachCopyEvents() {
+      // Tombol copy di statistik lengkap
+      document.querySelectorAll('#statsContainer .btn-copy-small').forEach(btn => {
+        btn.removeEventListener('click', handleCopyClick);
+        btn.addEventListener('click', handleCopyClick);
+      });
+      
+      // Tombol copy di duplikat
+      document.querySelectorAll('#duplicateBadges .btn-copy-small').forEach(btn => {
+        btn.removeEventListener('click', handleCopyClick);
+        btn.addEventListener('click', handleCopyClick);
+      });
+      
+      // Tombol copy di unik
+      document.querySelectorAll('#uniqueBadges .btn-copy-small').forEach(btn => {
+        btn.removeEventListener('click', handleCopyClick);
+        btn.addEventListener('click', handleCopyClick);
+      });
+      
+      // Tombol copy di missing
+      document.querySelectorAll('#missingBadges .btn-copy-small').forEach(btn => {
+        btn.removeEventListener('click', handleCopyClick);
+        btn.addEventListener('click', handleCopyClick);
+      });
+    }
+
+    function handleCopyClick(e) {
+      e.stopPropagation();
+      const textToCopy = e.currentTarget.getAttribute('data-copy-text');
+      if (textToCopy) {
+        copyToClipboard(textToCopy, `📋 "${textToCopy}" disalin!`);
+      }
+    }
+
+    // Copy semua statistik
+    function copyFullStats() {
+      const statsText = statsContainer.getAttribute('data-stats-text');
+      if (!statsText || statsText === '') {
+        showToast('ℹ️ Tidak ada data statistik', 1200);
+        return;
+      }
+      copyToClipboard(statsText, '📊 Semua statistik disalin!');
+    }
+
+    // Event listeners
+    generateBtn.addEventListener('click', () => {
+      analyzeAndDisplay();
+      showToast('🔄 Analisis diperbarui', 1000);
+    });
+
+    pasteBtn.addEventListener('click', async () => {
+      if (!navigator.clipboard || !navigator.clipboard.readText) {
+        showToast('❌ Clipboard tidak didukung. Tempel manual (Ctrl+V)', 2000);
+        return;
+      }
+      try {
+        const text = await navigator.clipboard.readText();
+        if (text && text.trim() !== '') {
+          angkaInput.value = text.trim();
+          showToast('📋 Clipboard ditempel! Klik Analisis', 1500);
+        } else {
+          showToast('⚠️ Clipboard kosong', 1200);
+        }
+      } catch (err) {
+        showToast('❌ Izin clipboard ditolak', 1800);
+      }
+    });
+
+    copyStatsBtn.addEventListener('click', copyFullStats);
+
+    angkaInput.addEventListener('keypress', (e) => {
+      if (e.key === 'Enter') {
+        e.preventDefault();
+        generateBtn.click();
+      }
+    });
+
+    // Inisialisasi awal
+    analyzeAndDisplay();
+  })();
+</script>
+</body>
+</html>
