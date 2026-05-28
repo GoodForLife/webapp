@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+    <title>Mistik & Index Transformer | Responsive + Ringkasan Terpadu</title>
+<style>*{margin:0;padding:0;box-sizing:border-box}body{background:#0a0c10;font-family:'Segoe UI','Inter',system-ui,-apple-system,'Roboto',monospace;display:flex;justify-content:center;align-items:center;min-height:100vh;padding:1.5rem}.card{max-width:1400px;width:100%;background:#12161c;border-radius:2rem;box-shadow:0 20px 35px -12px rgb(0 0 0 / .6),inset 0 1px 0 rgb(255 255 255 / .05);overflow:hidden}.header{padding:1.5rem 1.8rem;background:rgb(0 0 0 / .3);border-bottom:1px solid #2a2f38}.header h1{font-size:1.6rem;font-weight:600;background:linear-gradient(135deg,#e0eaff,#b9c7d9);background-clip:text;-webkit-background-clip:text;color:#fff0}.header p{color:#8e9aaf;margin-top:.4rem;font-size:.85rem}.input-area{padding:1.5rem 1.8rem 1rem 1.8rem;display:flex;flex-wrap:wrap;gap:1rem;align-items:flex-end;background:#0f131a}.input-group{flex:2;min-width:180px}.input-group label{display:block;color:#b9c7dd;font-size:.7rem;font-weight:500;text-transform:uppercase;letter-spacing:1px;margin-bottom:.4rem}.input-group input{width:100%;background:#1e232c;border:1px solid #2d3440;padding:.8rem 1rem;border-radius:1.2rem;font-size:1.1rem;font-weight:500;font-family:'JetBrains Mono',monospace;color:#f0f3fa;outline:none;transition:all 0.2s}.input-group input:focus{border-color:#6c8eff;box-shadow:0 0 0 2px rgb(108 142 255 / .2);background:#1b212b}.btn-generate{background:#2c3e66;border:none;padding:.8rem 1.8rem;border-radius:2rem;font-weight:600;font-size:.95rem;color:#fff;cursor:pointer;transition:0.15s;box-shadow:0 2px 6px rgb(0 0 0 / .3);font-family:inherit}.btn-generate:hover{background:#3e5a8c;transform:scale(.97)}.result-section{padding:.2rem 1.8rem 1.8rem 1.8rem}.table-wrapper{overflow-x:auto;margin:1.2rem 0 1rem 0;border-radius:1.2rem;background:#0c1017;border:1px solid #262c36}.conversion-table{width:100%;border-collapse:collapse;font-family:'SF Mono','JetBrains Mono',monospace;font-size:.85rem;min-width:580px}.conversion-table th{background:#191e27;color:#cbd5ff;font-weight:600;padding:.8rem .5rem;font-size:.75rem;text-transform:uppercase;border-bottom:1px solid #2f3743}.conversion-table td{padding:.7rem .4rem;text-align:center;background-color:#0f131b;color:#eef3ff;border-bottom:1px solid #222832}.digit-badge{font-weight:700;background:#1f2a3a;display:inline-block;width:32px;height:32px;line-height:32px;border-radius:40px;font-size:1.1rem}.summary-unified{background:#0c1018;border-radius:1.2rem;border:1px solid #262e3a;padding:1.2rem 1.5rem;margin:1rem 0 .5rem 0}.unified-title{font-size:.8rem;text-transform:uppercase;letter-spacing:1.5px;font-weight:600;color:#9aabcf;margin-bottom:1rem;border-left:3px solid #6c8eff;padding-left:12px}.per-digit-grid{display:flex;flex-direction:column;gap:1rem;margin-bottom:1.8rem}.digit-card{background:#0f141d;border-radius:1rem;padding:.8rem 1rem;transition:0.1s;border:1px solid #212834}.digit-row{display:flex;flex-wrap:wrap;align-items:baseline;justify-content:space-between;gap:.5rem;margin-bottom:.5rem}.digit-label{font-family:monospace;font-weight:700;background:#222b38;display:inline-flex;align-items:center;justify-content:center;width:38px;height:38px;border-radius:40px;font-size:1.2rem;color:#ffdfb3}.transform-list{font-family:'JetBrains Mono',monospace;font-size:.85rem;color:#b9d0ff;background:#0a0f16;padding:.4rem .8rem;border-radius:2rem;flex:1;word-break:break-all}.hasil-per-digit{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:.8rem;background:#070b11;padding:.5rem .9rem;border-radius:1rem;margin-top:.3rem}.hasil-text{font-family:'JetBrains Mono',monospace;font-size:1rem;font-weight:500;color:#b7f0ff;word-break:break-all}.copy-sm{background:#2a3342;border:none;color:#d6e3ff;padding:.35rem .9rem;border-radius:2rem;font-size:.7rem;font-weight:600;cursor:pointer;transition:0.1s;font-family:inherit}.copy-sm:hover{background:#3e4b62}.global-results{display:flex;flex-direction:row;flex-wrap:wrap;gap:1rem;margin-top:.6rem;border-top:1px solid #242c38;padding-top:1.2rem}.global-item{flex:1;min-width:200px;background:#0b1017;border-radius:1rem;padding:.7rem 1rem;display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:.6rem}.global-label{font-weight:600;color:#cbd5ff;background:#1a212c;padding:.2rem .8rem;border-radius:2rem;font-size:.7rem;letter-spacing:.5px}.global-value{font-family:'JetBrains Mono',monospace;font-size:1rem;font-weight:500;background:#030609;padding:.3rem .7rem;border-radius:1rem;color:#b9f3ff;word-break:break-all;flex:1}.copy-btn{background:#2a3342;border:none;color:#d6e3ff;padding:.4rem 1rem;border-radius:2rem;font-size:.7rem;font-weight:600;cursor:pointer}.error-msg{background:#2c1a1f;border-left:4px solid #ff7b72;color:#ffb4a2;padding:.8rem 1rem;border-radius:1rem;margin:1rem 0}footer{font-size:.7rem;text-align:center;padding:.8rem 1.5rem;color:#4a5568;border-top:1px solid #1e242e;background:#0a0e13}@media (max-width:680px){body{padding:.8rem}.header h1{font-size:1.3rem}.input-area{padding:1rem}.result-section{padding:.2rem 1rem 1rem 1rem}.digit-card{padding:.6rem}.hasil-text{font-size:.85rem}.global-value{font-size:.85rem}}@media (max-width:480px){.digit-row{flex-direction:column;align-items:flex-start}.hasil-per-digit{flex-direction:column;align-items:flex-start}.global-results{flex-direction:column}}</style>
+</head>
+<body>
+<div class="card" style="text-align: center;">
+    <div class="header">
+        <h1>🌀 Mistik & Index Transformer</h1>
+        <p>Mistik Lama | Baru | Index | Taysen | Mistik 0 | Mistik 9</p>
+    </div>
+    <div class="input-area">
+        <div class="input-group">
+            <label>🔢 MASUKKAN ANGKA (digit 0-9)</label>
+            <input type="text" id="angkaInput" placeholder="Contoh: 12, 345, 890" value="12">
+        </div>
+        <button class="btn-generate" id="generateBtn">✨ GENERATE</button>
+    </div>
+
+    <div class="result-section" id="resultContainer">
+        <div style="text-align: center; color: #5f6c84; padding: 2rem 0;">📌 Masukkan angka dan klik Generate untuk melihat konversi</div>
+    </div>
+    <footer>
+        ⚡ Setiap digit → 6 varian. Ringkasan terpadu (hasil per angka + semua hasil + unik)
+    </footer>
+</div>
+
+<script>
+const mistikLamaMap={0:1,1:0,2:5,5:2,3:8,8:3,4:7,7:4,6:9,9:6};const mistikBaruMap={0:8,8:0,2:6,6:2,3:9,9:3,4:5,5:4,7:1,1:7};const indexMap={0:5,5:0,2:7,7:2,3:8,8:3,4:9,9:4,1:6,6:1};const taysenMap={0:7,7:0,2:9,9:2,3:6,6:3,4:1,1:4,5:8,8:5};const mistik0Map={0:6,6:0,1:5,5:1,2:8,8:2,3:7,7:3,4:9,9:4};const mistik9Map={0:9,9:0,1:8,8:1,2:7,7:2,3:6,6:3,4:5,5:4};const transformKeys=[{name:"Mistik Lama",map:mistikLamaMap},{name:"Mistik Baru",map:mistikBaruMap},{name:"Index",map:indexMap},{name:"Taysen",map:taysenMap},{name:"Mistik 0",map:mistik0Map},{name:"Mistik 9",map:mistik9Map}];function getTransformationsForDigit(digit){return transformKeys.map(t=>t.map[digit])}
+function uniqueInOrder(str){const seen=new Set();let result='';for(let ch of str){if(!seen.has(ch)){seen.add(ch);result+=ch}}
+return result}
+function copyToClipboard(text,btnElement){if(!text)return;navigator.clipboard.writeText(text).then(()=>{const original=btnElement.innerHTML;btnElement.innerHTML='✅ Tersalin!';setTimeout(()=>{btnElement.innerHTML=original},1300)}).catch(()=>{btnElement.innerHTML='❌ Gagal';setTimeout(()=>{btnElement.innerHTML=btnElement.classList.contains('copy-sm')?'📋 Salin':'📋 Salin'},1200)})}
+function renderConversion(inputDigits){const container=document.getElementById('resultContainer');if(!inputDigits.length){container.innerHTML=`<div class="error-msg">⚠️ Tidak ada digit valid. Masukkan angka (0-9) saja.</div>`;return}
+let tableRows='';let allResultsConcat='';const digitsInfo=[];for(let i=0;i<inputDigits.length;i++){const digitChar=inputDigits[i];const digitNum=parseInt(digitChar,10);const transforms=getTransformationsForDigit(digitNum);const concatPart=transforms.join('');const commaPart=transforms.join(',');allResultsConcat+=concatPart;digitsInfo.push({digit:digitChar,transforms:transforms,concatString:concatPart,commaString:commaPart});tableRows+=`
+                <tr>
+                    <td style="font-weight:800;"><span class="digit-badge">${digitChar}</span></td>
+                    <td>${transforms[0]}</td>
+                    <td>${transforms[1]}</td>
+                    <td>${transforms[2]}</td>
+                    <td>${transforms[3]}</td>
+                    <td>${transforms[4]}</td>
+                    <td>${transforms[5]}</td>
+                 </tr>
+            `}
+const uniqueGlobal=uniqueInOrder(allResultsConcat);const tableHtml=`
+            <div class="table-wrapper">
+                <table class="conversion-table">
+                    <thead><tr><th>Digit</th><th>Mistik Lama</th><th>Mistik Baru</th><th>Index</th><th>Taysen</th><th>Mistik 0</th><th>Mistik 9</th></tr></thead>
+                    <tbody>${tableRows}</tbody>
+                </table>
+            </div>
+        `;let perDigitHtml='';for(let item of digitsInfo){perDigitHtml+=`
+                <div class="digit-card">
+                    <div class="digit-row">
+                        <span class="digit-label">${item.digit}</span>
+                        <span class="transform-list">${item.commaString}</span>
+                    </div>
+                    <div class="hasil-per-digit">
+                        <span class="hasil-text">📌 Hasil ${item.digit} = ${item.concatString}</span>
+                        <button class="copy-sm copy-digit-item" data-copy-val="${item.concatString}">📋 Salin</button>
+                    </div>
+                </div>
+            `}
+const unifiedSummary=`
+            <div class="summary-unified">
+                <div class="unified-title">📋 RINGKASAN HASIL (per angka & global)</div>
+                <div class="per-digit-grid">
+                    ${perDigitHtml}
+                </div>
+                <div class="global-results">
+                    <div class="global-item">
+                        <span class="global-label">🔗 SEMUA HASIL</span>
+                        <span class="global-value" id="globalAllVal">${allResultsConcat}</span>
+                        <button class="copy-btn" id="copyGlobalAllBtn">📋 Salin</button>
+                    </div>
+                    <div class="global-item">
+                        <span class="global-label">✨ TANPA DUPLIKAT</span>
+                        <span class="global-value" id="globalUniqueVal">${uniqueGlobal}</span>
+                        <button class="copy-btn" id="copyGlobalUniqueBtn">📋 Salin</button>
+                    </div>
+                </div>
+            </div>
+        `;container.innerHTML=tableHtml+unifiedSummary;document.querySelectorAll('.copy-digit-item').forEach(btn=>{btn.addEventListener('click',(e)=>{const val=btn.getAttribute('data-copy-val');if(val)copyToClipboard(val,btn);})});const allBtn=document.getElementById('copyGlobalAllBtn');if(allBtn){allBtn.addEventListener('click',()=>{const txt=document.getElementById('globalAllVal')?.innerText||'';copyToClipboard(txt,allBtn)})}
+const uniqueBtn=document.getElementById('copyGlobalUniqueBtn');if(uniqueBtn){uniqueBtn.addEventListener('click',()=>{const txt=document.getElementById('globalUniqueVal')?.innerText||'';copyToClipboard(txt,uniqueBtn)})}}
+function processInput(){const inputElem=document.getElementById('angkaInput');let rawValue=inputElem.value.trim();if(rawValue===""){document.getElementById('resultContainer').innerHTML=`<div class="error-msg">❌ Input kosong, masukkan angka.</div>`;return}
+const digits=rawValue.match(/\d/g);if(!digits||digits.length===0){document.getElementById('resultContainer').innerHTML=`<div class="error-msg">❌ Tidak ada digit valid. Contoh: 12 atau 789</div>`;return}
+renderConversion(digits)}
+document.addEventListener('DOMContentLoaded',()=>{const generateBtn=document.getElementById('generateBtn');const inputField=document.getElementById('angkaInput');generateBtn.addEventListener('click',processInput);inputField.addEventListener('keypress',(e)=>{if(e.key==='Enter'){e.preventDefault();processInput()}});setTimeout(()=>processInput(),40)})
+</script>
+</body>
+</html>
