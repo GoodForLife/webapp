@@ -1,0 +1,525 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+    <title>Generator Nomor Acak | Unik / Twin</title>
+    <!-- Bootstrap 5 + Icons -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        * { font-family: 'Inter', system-ui, sans-serif; }
+        body {
+            background: #0a0f1e;
+            background-image: radial-gradient(circle at 10% 20%, rgba(30,40,60,0.4) 0%, #0a0f1e 90%);
+            min-height: 100vh;
+        }
+        .card-glass {
+            background: rgba(18, 25, 45, 0.85);
+            backdrop-filter: blur(2px);
+            border: 1px solid rgba(72, 187, 255, 0.2);
+            border-radius: 1.5rem;
+            box-shadow: 0 20px 35px -12px rgba(0,0,0,0.5);
+        }
+        .card-header-custom {
+            background: linear-gradient(135deg, #1a2a3f 0%, #0f1a2c 100%);
+            border-bottom: 1px solid #2d3e5a;
+            border-radius: 1.5rem 1.5rem 0 0 !important;
+            padding: 1.2rem 1.5rem;
+        }
+        .form-label, .form-check-label { font-weight: 500; color: #eef2ff; }
+        .form-control, .form-select {
+            background-color: #0f172ad9;
+            border: 1px solid #2d3e5a;
+            color: #f1f5f9;
+            font-weight: 500;
+        }
+        .form-control:focus, .form-select:focus {
+            background-color: #0b1120;
+            border-color: #3b82f6;
+            box-shadow: 0 0 0 3px rgba(59,130,246,0.3);
+            color: white;
+        }
+        .btn-generate {
+            background: linear-gradient(95deg, #2563eb, #1e40af);
+            border: none;
+            font-weight: 600;
+            padding: 0.7rem 1.2rem;
+            box-shadow: 0 5px 12px rgba(37,99,235,0.3);
+            transition: 0.1s;
+        }
+        .btn-generate:hover { transform: translateY(-2px); background: linear-gradient(95deg, #3b82f6, #1e3a8a); }
+        .btn-copy {
+            background: #2d3e5a;
+            border: none;
+            font-weight: 500;
+            transition: 0.1s;
+        }
+        .btn-copy:hover { background: #3b5a7e; transform: scale(0.98); }
+        .filter-card {
+            background: #0f172a;
+            border-radius: 1.2rem;
+            padding: 0.9rem 1.2rem;
+            border: 1px solid #2a3a55;
+        }
+        .number-badge {
+            background: #111c2f;
+            border: 1px solid #2c3f5e;
+            border-radius: 1rem;
+            padding: 0.5rem 1rem;
+            font-size: 1.3rem;
+            font-weight: 700;
+            text-align: center;
+            color: #facc15;
+            font-family: 'Courier New', monospace;
+        }
+        .results-container { max-height: 480px; overflow-y: auto; padding-right: 5px; }
+        .results-container::-webkit-scrollbar { width: 6px; }
+        .results-container::-webkit-scrollbar-track { background: #1a2538; border-radius: 10px; }
+        .results-container::-webkit-scrollbar-thumb { background: #3b82f6; border-radius: 10px; }
+        .twin-selector {
+            background: #0b1120b3;
+            border-radius: 1rem;
+            padding: 0.75rem;
+            margin-top: 0.5rem;
+            border-left: 3px solid #f97316;
+        }
+        .info-text { color: #94a3b8; font-size: 0.8rem; }
+        @media (max-width: 768px) {
+            .number-badge { font-size: 1rem; padding: 0.4rem 0.6rem; }
+        }
+        /* Toast custom */
+        .toast-notif {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            z-index: 1090;
+            background: #1e293b;
+            color: #bbf0ff;
+            border-left: 4px solid #3b82f6;
+        }
+        .toast-notif.toast-error {
+            border-left-color: #ef4444;
+            background: #2a1a1f;
+            color: #ffb3b3;
+        }
+        .toast-notif.toast-success {
+            border-left-color: #10b981;
+            background: #1a2a24;
+            color: #bbf7d0;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container-lg">
+    <h1 class="display-6 fw-bold text-white text-center"><i class="bi bi-shuffle"></i> Random Generator</h1>
+
+    <div class="row g-4">
+        <!-- Panel Kiri -->
+        <div class="col-lg-5">
+            <div class="card card-glass border-0">
+                <div class="card-header-custom">
+                    <h5 class="mb-0 text-white fw-semibold"><i class="bi bi-sliders2 me-2"></i> Parameter</h5>
+                </div>
+                <div class="card-body p-4">
+                    <div class="mb-2">
+                        <label class="form-label fw-semibold"><i class="bi bi-pencil-square"></i> Nomor Sumber (Digit Pool)</label>
+                        <input type="text" id="sourceNumber" class="form-control" placeholder="Contoh: 69581" value="69581">
+                        <div class="form-text text-secondary-emphasis">Digit unik dari nomor ini akan digunakan</div>
+                    </div>
+                    <div class="mb-2">
+                        <label class="form-label fw-semibold"><i class="bi bi-list-ol"></i> Jumlah Target</label>
+                        <input type="number" id="targetCount" class="form-control" value="8" min="1" max="50" step="1">
+                        <div class="form-text text-white">Maksimal 50 nomor</div>
+                    </div>
+                    <div class="mb-2">
+                        <label class="form-label fw-semibold"><i class="bi bi-123"></i> Panjang Digit Output</label>
+                        <select id="digitLength" class="form-select">
+                            <option value="5">5 Digit</option>
+                            <option value="4" selected>4 Digit</option>
+                            <option value="3">3 Digit</option>
+                            <option value="2">2 Digit</option>
+                        </select>
+                        <div class="form-text text-white">Maksimal Digit Nomor</div>
+                    </div>
+                    <div class="mb-2">
+                        <div class="form-check form-switch">
+                            <input class="form-check-input me-3" type="checkbox" id="twinCheckbox" style="width: 2.5rem; height: 1.5rem;">
+                            <label class="form-check-label fw-semibold text-warning" style="margin-top: 0.2rem;" for="twinCheckbox">
+                                <i class="bi bi-arrow-repeat"></i> Twin / Kembar
+                            </label>
+                        </div>
+                        <div id="twinOptionsContainer" style="display: none;" class="mt-2 twin-selector">
+                            <label class="form-label small mb-1">Maksimum frekuensi kemunculan digit yang sama</label>
+                            <select id="maxKembarSelect" class="form-select form-select-sm">
+                                <option value="4">Maks 4 kali (4444)</option>
+                                <option value="3">Maks 3 kali (2223)</option>
+                                <option value="2" selected>Maks 2 kali (1123)</option>
+                            </select>
+                            <div class="info-text mt-1">🔁 Twin ON → minimal 1 digit muncul ≥2x & frekuensi ≤ batas</div>
+                        </div>
+                    </div>
+                    <div class="d-grid gap-2 mt-3">
+                        <button id="generateBtn" class="btn btn-generate text-white py-2"><i class="bi bi-lightning-charge-fill me-2"></i> GENERATE NOMOR</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Panel Kanan -->
+        <div class="col-lg-7">
+            <div class="card card-glass border-0 h-100">
+                <div class="card-header-custom d-flex justify-content-between align-items-center flex-wrap gap-2">
+                    <h5 class="mb-0 text-white fw-semibold"><i class="bi bi-grid-3x3-gap-fill me-2"></i> Hasil Generate</h5>
+                    <div class="d-flex gap-2">
+                        <button id="copyResultBtn" class="btn btn-sm btn-copy text-white"><i class="bi bi-clipboard-check"></i> Copy Hasil</button>
+                        <span class="badge bg-dark text-info" id="resultCount">0 nomor</span>
+                    </div>
+                </div>
+                <div class="card-body p-3">
+                    <div class="filter-card mb-4">
+                        <div class="d-flex flex-wrap align-items-center gap-3">
+                            <span class="filter-label text-white"><i class="bi bi-funnel-fill text-white"></i> Filter Live :</span>
+                            <div class="form-check form-switch">
+                                <input class="form-check-input filter-option" type="checkbox" id="filterGanjil" checked>
+                                <label class="form-check-label text-light" for="filterGanjil">GANJIL</label>
+                            </div>
+                            <div class="form-check form-switch">
+                                <input class="form-check-input filter-option" type="checkbox" id="filterGenap" checked>
+                                <label class="form-check-label text-light" for="filterGenap">GENAP</label>
+                            </div>
+                            <div class="form-check form-switch">
+                                <input class="form-check-input filter-option" type="checkbox" id="filterBesar" checked>
+                                <label class="form-check-label text-light" for="filterBesar">BESAR</label>
+                            </div>
+                            <div class="form-check form-switch">
+                                <input class="form-check-input filter-option" type="checkbox" id="filterKecil" checked>
+                                <label class="form-check-label text-light" for="filterKecil">KECIL</label>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="numbersList" class="results-container">
+                        <div class="text-center text-secondary-emphasis py-5">
+                            <i class="bi bi-dice-5 fs-1"></i>
+                            <p class="mt-2">Masukkan nomor sumber & tekan GENERATE</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Toast notifikasi -->
+<div class="toast-notif toast align-items-center text-white border-0" role="alert" aria-live="assertive" aria-atomic="true" data-bs-autohide="true" data-bs-delay="2500" style="position: fixed; bottom: 20px; right: 20px; z-index: 1100; display: none;">
+    <div class="d-flex">
+        <div class="toast-body" id="toastMessage">✔️ Berhasil disalin</div>
+        <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast"></button>
+    </div>
+</div>
+
+<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+
+<script>
+    $(document).ready(function() {
+        // DOM elements
+        const $sourceNumber = $('#sourceNumber');
+        const $targetCount = $('#targetCount');
+        const $digitLength = $('#digitLength');
+        const $twinCheckbox = $('#twinCheckbox');
+        const $twinOptionsDiv = $('#twinOptionsContainer');
+        const $maxKembarSelect = $('#maxKembarSelect');
+        const $generateBtn = $('#generateBtn');
+        const $numbersContainer = $('#numbersList');
+        const $resultCountSpan = $('#resultCount');
+        const $copyBtn = $('#copyResultBtn');
+        
+        const $filterGanjil = $('#filterGanjil');
+        const $filterGenap = $('#filterGenap');
+        const $filterBesar = $('#filterBesar');
+        const $filterKecil = $('#filterKecil');
+        
+        let lastGeneratedNumbers = [];      // array of integers (seluruh hasil)
+        let lastDigitLength = 4;
+        
+        // Toast bootstrap dengan dynamic styling
+        let toastElement = $('.toast-notif')[0];
+        let toastEl = new bootstrap.Toast(toastElement, { delay: 2500 });
+        
+        function showToast(message, isError = false, isSuccess = false) {
+            const $toast = $('.toast-notif');
+            // Reset kelas tambahan
+            $toast.removeClass('toast-error toast-success');
+            if (isError) $toast.addClass('toast-error');
+            else if (isSuccess) $toast.addClass('toast-success');
+            $('#toastMessage').text(message);
+            toastEl.show();
+        }
+        
+        // Toggle opsi max kembar
+        function toggleTwinOptions() {
+            $twinCheckbox.is(':checked') ? $twinOptionsDiv.slideDown(180) : $twinOptionsDiv.slideUp(150);
+        }
+        $twinCheckbox.on('change', toggleTwinOptions);
+        toggleTwinOptions();
+        
+        // Ambil digit unik dari nomor sumber
+        function getUniqueDigitPool(sourceStr) {
+            let digits = sourceStr.replace(/\D/g, '').split('');
+            if (digits.length === 0) return ['0','1','2','3','4','5','6','7','8','9'];
+            return [...new Set(digits)];
+        }
+        
+        // Cek apakah angka memiliki digit unik (tidak ada pengulangan)
+        function isUniqueDigits(num, digitLen) {
+            let str = num.toString().padStart(digitLen, '0');
+            return new Set(str.split('')).size === str.length;
+        }
+        
+        // Cek Twin: minimal satu digit berulang & max frekuensi <= batas
+        function isTwinNumber(num, digitLen, maxDuplicate) {
+            let str = num.toString().padStart(digitLen, '0');
+            let freq = {};
+            for (let ch of str) freq[ch] = (freq[ch] || 0) + 1;
+            let maxFreq = Math.max(...Object.values(freq));
+            let hasDuplicate = Object.values(freq).some(v => v >= 2);
+            return (hasDuplicate && maxFreq <= maxDuplicate);
+        }
+        
+        // Generate angka acak dari pool (boleh repeat) untuk mode twin
+        function generateFromPool(pool, digitLen) {
+            let res = '';
+            for (let i = 0; i < digitLen; i++) {
+                let rand = Math.floor(Math.random() * pool.length);
+                res += pool[rand];
+            }
+            return parseInt(res, 10);
+        }
+        
+        // Generate angka UNIK (semua digit berbeda) dari pool yang unik
+        function generateUniqueNumberFromPool(pool, digitLen) {
+            if (pool.length < digitLen) return null;
+            let shuffled = [...pool];
+            for (let i = shuffled.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
+            }
+            let selected = shuffled.slice(0, digitLen);
+            return parseInt(selected.join(''), 10);
+        }
+        
+        // Generate dengan constraint Twin (loop hingga memenuhi)
+        function generateWithTwin(pool, digitLen, maxDupe, maxAttempts = 300) {
+            for (let i = 0; i < maxAttempts; i++) {
+                let cand = generateFromPool(pool, digitLen);
+                if (isTwinNumber(cand, digitLen, maxDupe)) return cand;
+            }
+            return generateFromPool(pool, digitLen); // fallback
+        }
+        
+        // Generate kumpulan angka
+        function generateNumberSet() {
+            let sourceRaw = $sourceNumber.val().trim();
+            if (sourceRaw === "") {
+                showToast("❌ Nomor sumber tidak boleh kosong!", true);
+                return null;
+            }
+            let poolUnique = getUniqueDigitPool(sourceRaw);
+            if (poolUnique.length === 0) {
+                showToast("❌ Tidak ada digit valid, gunakan angka 0-9", true);
+                poolUnique = ['0','1','2','3','4','5','6','7','8','9'];
+            }
+            
+            let targetQty = parseInt($targetCount.val(), 10);
+            if (isNaN(targetQty) || targetQty < 1) targetQty = 5;
+            if (targetQty > 50) targetQty = 50;
+            
+            let digitLen = parseInt($digitLength.val(), 10);
+            let useTwin = $twinCheckbox.is(':checked');
+            let maxDupe = 2;
+            if (useTwin) {
+                maxDupe = parseInt($maxKembarSelect.val(), 10);
+                if (isNaN(maxDupe) || maxDupe < 2) maxDupe = 2;
+                if (maxDupe > 4) maxDupe = 4;
+            }
+            
+            // Validasi untuk non-twin (digit unik)
+            if (!useTwin && poolUnique.length < digitLen) {
+                showToast(`⚠️ Tidak cukup digit unik (butuh ${digitLen} digit berbeda, hanya punya ${poolUnique.length}).\nGunakan nomor sumber lebih panjang atau kurangi digit output.`, true);
+                return null;
+            }
+            
+            let results = [];
+            let attempts = 0;
+            const maxAttemptsTotal = targetQty * 60;
+            
+            while (results.length < targetQty && attempts < maxAttemptsTotal) {
+                let num = null;
+                if (useTwin) {
+                    num = generateWithTwin(poolUnique, digitLen, maxDupe, 150);
+                } else {
+                    num = generateUniqueNumberFromPool(poolUnique, digitLen);
+                    if (num === null) {
+                        num = generateUniqueNumberFromPool(poolUnique, digitLen);
+                        if (num === null) break;
+                    }
+                }
+                if (num !== null) {
+                    results.push(num);
+                }
+                attempts++;
+            }
+            
+            if (!useTwin && results.length < targetQty) {
+                showToast(`⚠️ Hanya berhasil generate ${results.length} angka unik, coba nomor sumber dengan lebih banyak digit berbeda.`, true);
+            }
+            return { numbers: results.slice(0, targetQty), digitLen: digitLen };
+        }
+        
+        // Kategori Besar/Kecil
+        function getSizeCategory(num, digitLen) {
+            let minVal = Math.pow(10, digitLen - 1);
+            let maxVal = Math.pow(10, digitLen) - 1;
+            let median = Math.floor((minVal + maxVal) / 2);
+            return (num >= median) ? 'BESAR' : 'KECIL';
+        }
+        
+        // Render hasil
+        function renderNumbers(numbers, digitLen) {
+            if (!numbers || numbers.length === 0) {
+                $numbersContainer.html(`<div class="text-center text-warning py-5"><i class="bi bi-exclamation-triangle fs-1"></i><p>Tidak ada nomor dihasilkan.</p></div>`);
+                $resultCountSpan.text('0 nomor');
+                lastGeneratedNumbers = [];
+                return;
+            }
+            lastGeneratedNumbers = [...numbers];
+            lastDigitLength = digitLen;
+            let html = '<div class="row g-2">';
+            numbers.forEach(num => {
+                let display = num.toString().padStart(digitLen, '0');
+                let parity = (num % 2 === 0) ? 'GENAP' : 'GANJIL';
+                let sizeCat = getSizeCategory(num, digitLen);
+                html += `
+                    <div class="col-sm-6 col-md-4 col-lg-4 col-xl-3 number-item" 
+                         data-number="${num}" 
+                         data-display="${display}"
+                         data-parity="${parity}"
+                         data-size="${sizeCat}">
+                        <div class="number-badge w-100">${display}</div>
+                    </div>
+                `;
+            });
+            html += '</div>';
+            $numbersContainer.html(html);
+            $resultCountSpan.text(`${numbers.length} nomor`);
+            applyFilterLive();
+        }
+        
+        // Filter Live
+        function applyFilterLive() {
+            const ganjilChecked = $filterGanjil.is(':checked');
+            const genapChecked = $filterGenap.is(':checked');
+            const besarChecked = $filterBesar.is(':checked');
+            const kecilChecked = $filterKecil.is(':checked');
+            $('.number-item').each(function() {
+                let $item = $(this);
+                let parity = $item.data('parity');
+                let size = $item.data('size');
+                let showParity = true;
+                if (!ganjilChecked && parity === 'GANJIL') showParity = false;
+                if (!genapChecked && parity === 'GENAP') showParity = false;
+                let showSize = true;
+                if (!besarChecked && size === 'BESAR') showSize = false;
+                if (!kecilChecked && size === 'KECIL') showSize = false;
+                $item.toggle(showParity && showSize);
+            });
+            let visible = $('.number-item:visible').length;
+            let total = $('.number-item').length;
+            if (total > 0) $resultCountSpan.html(`${visible} / ${total} nomor`);
+            else $resultCountSpan.text('0 nomor');
+        }
+        
+        // COPY berdasarkan hasil FILTER (yang tampil) dengan penanganan error
+        async function copyFilteredResults() {
+            const visibleItems = $('.number-item:visible');
+            if (visibleItems.length === 0) {
+                showToast("⚠️ Tidak ada nomor yang tampil (semua terfilter)", true);
+                return;
+            }
+            let numbersToCopy = [];
+            visibleItems.each(function() {
+                let displayVal = $(this).data('display');
+                if (displayVal) numbersToCopy.push(displayVal);
+            });
+            if (numbersToCopy.length === 0) {
+                showToast("⚠️ Tidak ada nomor untuk disalin", true);
+                return;
+            }
+            let textToCopy = numbersToCopy.join('\n');
+            
+            // Metode clipboard modern
+            if (navigator.clipboard && navigator.clipboard.writeText) {
+                try {
+                    await navigator.clipboard.writeText(textToCopy);
+                    showToast(`✅ ${numbersToCopy.length} nomor (terfilter) berhasil disalin!`, false, true);
+                } catch (err) {
+                    console.error('Clipboard API gagal:', err);
+                    fallbackCopy(textToCopy, numbersToCopy.length);
+                }
+            } else {
+                fallbackCopy(textToCopy, numbersToCopy.length);
+            }
+        }
+        
+        function fallbackCopy(text, count) {
+            let textarea = document.createElement('textarea');
+            textarea.value = text;
+            document.body.appendChild(textarea);
+            textarea.select();
+            let success = false;
+            try {
+                success = document.execCommand('copy');
+            } catch (err) {
+                console.error('Fallback copy error:', err);
+            }
+            document.body.removeChild(textarea);
+            if (success) {
+                showToast(`📋 ${count} nomor (terfilter) disalin (fallback)`, false, true);
+            } else {
+                showToast(`❌ Gagal menyalin! Silakan salin manual.`, true);
+            }
+        }
+        
+        // Event Generate
+        function onGenerate() {
+            let target = parseInt($targetCount.val(), 10);
+            if (isNaN(target) || target < 1) $targetCount.val(5);
+            if (target > 50) $targetCount.val(50);
+            
+            $numbersContainer.html(`<div class="text-center py-5"><div class="spinner-border text-info"></div><p>Memproses...</p></div>`);
+            setTimeout(() => {
+                let result = generateNumberSet();
+                if (!result || !result.numbers.length) {
+                    $numbersContainer.html(`<div class="alert alert-danger m-3">Gagal generate, cek nomor sumber dan panjang digit.</div>`);
+                    $resultCountSpan.text('0 nomor');
+                    lastGeneratedNumbers = [];
+                    return;
+                }
+                renderNumbers(result.numbers, result.digitLen);
+            }, 30);
+        }
+        
+        $generateBtn.on('click', onGenerate);
+        $copyBtn.on('click', copyFilteredResults);
+        $filterGanjil.add($filterGenap).add($filterBesar).add($filterKecil).on('change', function() {
+            if (lastGeneratedNumbers.length) applyFilterLive();
+        });
+        
+        console.log("Generator ready | Non-Twin = digit unik | Twin = wajib kembar | Copy = sesuai filter dengan toast sukses/gagal");
+    });
+</script>
+</body>
+</html>
