@@ -3,80 +3,346 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
-  <title>Pola Tarung Generator | LIST & WAP + Bet</title>
+  <title>Pola Tarung Generator | 5D/4D/3D/2D</title>
   <!-- Bootstrap 5 + Icons -->
+  <link rel="icon" type="image/x-icon" href="https://raw.githubusercontent.com/GoodForLife/webapp/refs/heads/main/asset/logos.ico">
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
   <style>
-body{background:#0a0f1a;font-family:Segoe UI,Roboto,system-ui,sans-serif}.card-custom{background:#141c2c;border:1px solid #2a3649;border-radius:1.8rem;box-shadow:0 20px 35px -12px rgba(0,0,0,.5)}.card-header-custom{background:#0f1622;color:#eef4ff;border-radius:1.8rem 1.8rem 1rem 1rem!important;border-bottom:1px solid #2a3a50;padding:1rem 1.5rem;font-weight:700;text-align:center}.form-label{font-weight:600;color:#cbdff2;margin-bottom:.3rem;font-size:.9rem}.form-control,.form-control:focus{background-color:#0f1825;border:1px solid #2e405b;color:#f0f3fa;border-radius:1.2rem;font-weight:500;font-family:monospace;font-size:1rem;text-align:center}.form-control:focus{border-color:#5b8cbb;box-shadow:0 0 0 3px rgba(91,140,187,.25);background-color:#111c2c}.filter-card{background:#0f1725;border-radius:1.5rem;padding:.6rem 1.2rem;border:1px solid #28344a;display:inline-flex;gap:1.5rem;flex-wrap:wrap;justify-content:center}.filter-label{font-weight:600;color:#cddef5;cursor:pointer;margin-left:.5rem}.form-check-input{background-color:#1e2a3e;border-color:#4b6e8f;cursor:pointer}.form-check-input:checked{background-color:#2c5a8c;border-color:#3c7bb0}.result-header{background:#0f1825;border-radius:1.2rem;padding:.5rem 1.2rem;display:flex;justify-content:space-between;align-items:center;border:1px solid #2a3a4a}.badge-mini{background:#1f324b;border-radius:2rem;padding:.25rem .9rem;font-size:.8rem;font-weight:600;color:#cde2ff}.output-textarea{background:#03060c;border:1px solid #2e4a6a;border-radius:1.2rem;color:#eaf4ff;font-family:JetBrains Mono,Fira Code,monospace;font-size:.9rem;line-height:1.5;resize:vertical}.output-textarea:focus{background:#07111f;border-color:#5f8ec0;box-shadow:0 0 0 2px rgba(44,90,140,.3333333333333333)}.btn-generate{background:#2a4468;border-radius:2rem;padding:.6rem 2rem;font-weight:600;color:#fff;border:none;transition:.2s;min-width:160px}.btn-generate:hover{background:#1d3452;transform:scale(.97);box-shadow:0 5px 12px rgba(0,0,0,.3)}.btn-copy-result{background:#1f3b4f;border-radius:2rem;padding:.4rem 1.2rem;font-weight:500;color:#eaf6ff;border:1px solid #3a6280;font-size:.85rem}.btn-copy-result:hover{background:#2a4d6e;color:#fff}.info-note{background:#0e1624;border-radius:1rem;padding:.6rem 1rem;color:#aec3e0;font-size:.75rem;border:1px solid #26334a;text-align:center}footer{font-size:.7rem;color:#6b85a4;text-align:center}.filter-wrapper{text-align:center;margin-bottom:1rem}.generate-wrapper{text-align:center;margin:1.2rem 0 1rem}.mode-selector{background:#0f1725;border-radius:1.5rem;padding:.6rem 1.2rem;border:1px solid #28344a;display:flex;align-items:center;justify-content:center;gap:1rem;flex-wrap:wrap;margin-bottom:1.2rem}.mode-label{color:#cddef5;font-weight:500;margin-right:.5rem}.custom-select,.custom-select:focus{background-color:#0f1825;border:1px solid #2e405b;color:#eef4ff;border-radius:1.2rem;padding:.4rem 1rem;font-weight:500;cursor:pointer}.delimiter-group{display:inline-flex;align-items:center;gap:.5rem}.bet-input{width:80px;display:inline-block;background-color:#0f1825;border:1px solid #2e405b;color:#fff;border-radius:1.2rem;text-align:center;padding:.3rem .5rem}.bet-input:focus{border-color:#5b8cbb;box-shadow:0 0 0 2px rgba(44,90,140,.3333333333333333)}hr{opacity:.3}
+    body {
+      background: #0a0f1a;
+      font-family: 'Segoe UI', Roboto, system-ui, sans-serif;
+    }
+    .card-custom {
+      background: #141c2c;
+      border: 1px solid #2a3649;
+      border-radius: 1.8rem;
+      box-shadow: 0 20px 35px -12px rgba(0, 0, 0, 0.5);
+    }
+    .card-header-custom {
+      background: #0f1622;
+      color: #eef4ff;
+      border-radius: 1.8rem 1.8rem 1rem 1rem !important;
+      border-bottom: 1px solid #2a3a50;
+      padding: 1rem 1.5rem;
+      font-weight: 700;
+      text-align: center;
+    }
+    .form-label {
+      font-weight: 600;
+      color: #cbdff2;
+      margin-bottom: 0.3rem;
+      font-size: 0.85rem;
+    }
+    .form-control, .form-control:focus {
+      background-color: #0f1825;
+      border: 1px solid #2e405b;
+      color: #f0f3fa;
+      border-radius: 1.2rem;
+      font-weight: 500;
+      font-family: monospace;
+      font-size: 1rem;
+      text-align: center;
+    }
+    .form-control:focus {
+      border-color: #5b8cbb;
+      box-shadow: 0 0 0 3px rgba(91, 140, 187, 0.25);
+      background-color: #111c2c;
+    }
+    .filter-card {
+      background: #0f1725;
+      border-radius: 1.5rem;
+      padding: 0.6rem 1.2rem;
+      border: 1px solid #28344a;
+      display: inline-flex;
+      gap: 1.5rem;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+    .filter-label {
+      font-weight: 600;
+      color: #cddef5;
+      cursor: pointer;
+      margin-left: 0.5rem;
+    }
+    .form-check-input {
+      background-color: #1e2a3e;
+      border-color: #4b6e8f;
+      cursor: pointer;
+    }
+    .form-check-input:checked {
+      background-color: #2c5a8c;
+      border-color: #3c7bb0;
+    }
+    .result-header {
+      background: #0f1825;
+      border-radius: 1.2rem;
+      padding: 0.5rem 1.2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border: 1px solid #2a3a4a;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+    }
+    .badge-mini {
+      background: #1f324b;
+      border-radius: 2rem;
+      padding: 0.25rem 0.9rem;
+      font-size: 0.8rem;
+      font-weight: 600;
+      color: #cde2ff;
+    }
+    .output-textarea {
+      background: #03060c;
+      border: 1px solid #2e4a6a;
+      border-radius: 1.2rem;
+      color: #eaf4ff;
+      font-family: 'JetBrains Mono', 'Fira Code', monospace;
+      font-size: 0.9rem;
+      line-height: 1.5;
+      resize: vertical;
+    }
+    .output-textarea:focus {
+      background: #07111f;
+      border-color: #5f8ec0;
+      box-shadow: 0 0 0 2px #2c5a8c55;
+    }
+    .btn-generate {
+      background: #2a4468;
+      border-radius: 2rem;
+      padding: 0.6rem 2rem;
+      font-weight: 600;
+      color: white;
+      border: none;
+      transition: 0.2s;
+      min-width: 160px;
+    }
+    .btn-generate:hover {
+      background: #1d3452;
+      transform: scale(0.97);
+      box-shadow: 0 5px 12px rgba(0,0,0,0.3);
+    }
+    .btn-copy-result {
+      background: #1f3b4f;
+      border-radius: 2rem;
+      padding: 0.4rem 1.2rem;
+      font-weight: 500;
+      color: #eaf6ff;
+      border: 1px solid #3a6280;
+      font-size: 0.85rem;
+      white-space: nowrap;
+    }
+    .btn-copy-result:hover {
+      background: #2a4d6e;
+      color: white;
+    }
+    .btn-copy-part {
+      background: #1f3b4f;
+      border-radius: 2rem;
+      padding: 0.2rem 0.8rem;
+      font-weight: 500;
+      color: #eaf6ff;
+      border: 1px solid #3a6280;
+      font-size: 0.75rem;
+    }
+    .btn-copy-part:hover {
+      background: #2a4d6e;
+    }
+    .info-note {
+      background: #0e1624;
+      border-radius: 1rem;
+      padding: 0.6rem 1rem;
+      color: #aec3e0;
+      font-size: 0.75rem;
+      border: 1px solid #26334a;
+      text-align: center;
+    }
+    footer {
+      font-size: 0.7rem;
+      color: #6b85a4;
+      text-align: center;
+    }
+    .filter-wrapper {
+      text-align: center;
+      margin-bottom: 1rem;
+    }
+    .generate-wrapper {
+      text-align: center;
+      margin: 1.2rem 0 1rem 0;
+    }
+    .mode-selector {
+      background: #0f1725;
+      border-radius: 1.5rem;
+      padding: 0.6rem 1.2rem;
+      border: 1px solid #28344a;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 1rem;
+      flex-wrap: wrap;
+      margin-bottom: 1.2rem;
+    }
+    .mode-label {
+      color: #cddef5;
+      font-weight: 500;
+      margin-right: 0.5rem;
+    }
+    .custom-select, .custom-select:focus {
+      background-color: #0f1825;
+      border: 1px solid #2e405b;
+      color: #eef4ff;
+      border-radius: 1.2rem;
+      padding: 0.4rem 1rem;
+      font-weight: 500;
+      cursor: pointer;
+    }
+    .delimiter-group {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+    .bet-input {
+      width: 80px;
+      display: inline-block;
+      background-color: #0f1825;
+      border: 1px solid #2e405b;
+      color: white;
+      border-radius: 1.2rem;
+      text-align: center;
+      padding: 0.3rem 0.5rem;
+    }
+    .bet-input:focus {
+      border-color: #5b8cbb;
+      box-shadow: 0 0 0 2px #2c5a8c55;
+    }
+    .limit-input {
+      width: 80px;
+      display: inline-block;
+      background-color: #0f1825;
+      border: 1px solid #2e405b;
+      color: white;
+      border-radius: 1.2rem;
+      text-align: center;
+      padding: 0.3rem 0.5rem;
+    }
+    .limit-input:focus {
+      border-color: #5b8cbb;
+      box-shadow: 0 0 0 2px #2c5a8c55;
+    }
+    hr {
+      opacity: 0.3;
+    }
+    .multi-output-container {
+      margin-top: 1rem;
+    }
+    .part-box {
+      background: #0c1422;
+      border: 1px solid #26344a;
+      border-radius: 1.2rem;
+      padding: 0.8rem;
+      margin-bottom: 1rem;
+    }
+    .part-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 0.5rem;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+    }
+    /* DIGIT SELECTOR - DI-CENTER SEPERTI INPUT FIELDS */
+    .digit-selector {
+      background: #0f1725;
+      border-radius: 1.5rem;
+      padding: 0.6rem 1.2rem;
+      border: 1px solid #28344a;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 1rem;
+      flex-wrap: wrap;
+      margin-bottom: 1.2rem;
+    }
+    .input-group-custom {
+      display: flex;
+      gap: 0.8rem;
+      flex-wrap: wrap;
+      justify-content: center;
+      align-items: center;
+    }
+    .input-group-custom .input-item {
+      flex: 1;
+      min-width: 60px;
+      max-width: 200px;
+    }
+    .input-group-custom .input-item .form-control {
+      font-size: 0.95rem;
+      padding: 0.4rem 0.3rem;
+    }
   </style>
 </head>
 <body class="bg-dark bg-opacity-95">
-<div class="container ">
+<div class="container">
   <div class="row justify-content-center">
     <div class="col-lg-10 col-xl-9">
       <div class="card card-custom">
         <div class="card-header-custom">
           <h3 class="mb-0 fs-4"><i class="fas fa-dice-d6 me-2"></i> POLA TARUNG GENERATOR</h3>
-          <small class="text-secondary-emphasis">AS · KOP · KEPALA · EKOR</small>
+          <small class="text-secondary-emphasis">5D · 4D · 3D · 2D</small>
         </div>
         
-        <div class="card-body p-4 p-md-1">
-          <!-- Input area -->
-          <div class="row g-3 mb-4">
-            <div class="col-md-3 col-sm-6">
-              <label class="form-label text-center w-100">AS</label>
-              <input type="text" id="inputAs" class="form-control text-center" placeholder="Input AS" value="1">
-            </div>
-            <div class="col-md-3 col-sm-6">
-              <label class="form-label text-center w-100">KOP</label>
-              <input type="text" id="inputKop" class="form-control text-center" placeholder="Input KOP" value="2">
-            </div>
-            <div class="col-md-3 col-sm-6">
-              <label class="form-label text-center w-100">KEPALA</label>
-              <input type="text" id="inputKepala" class="form-control text-center" placeholder="Input Kepala" value="3">
-            </div>
-            <div class="col-md-3 col-sm-6">
-              <label class="form-label text-center w-100">EKOR</label>
-              <input type="text" id="inputEkor" class="form-control text-center" placeholder="Input Ekor" value="4">
-            </div>
+        <div class="card-body">
+          <!-- ===== DROPDOWN PANJANG DIGIT (DI-CENTER) ===== -->
+          <div class="digit-selector">
+            <span class="mode-label">GAME</span>
+            <select id="digitLength" class="custom-select">
+              <option value="5">5D</option>
+              <option value="4" selected>4D</option>
+              <option value="3">3D</option>
+              <option value="2">2D</option>
+            </select>
+          </div>
+
+          <!-- ===== INPUT FIELDS DINAMIS (CENTER ALIGN) ===== -->
+          <div id="inputContainer" class="input-group-custom mb-4">
+            <!-- Akan diisi oleh JavaScript -->
           </div>
           
-          <!-- Filter switches (3 filter) -->
+          <!-- ===== FILTER SWITCHES (3 filter) ===== -->
           <div class="filter-wrapper">
             <div class="filter-card">
               <div class="form-check form-switch">
                 <input class="form-check-input" type="checkbox" id="filterTriplet" checked>
                 <label class="form-check-label filter-label" for="filterTriplet">
-                 Triple (1112)
+                  Hapus duplikat 3 angka
                 </label>
               </div>
               <div class="form-check form-switch">
                 <input class="form-check-input" type="checkbox" id="filterDuplet">
                 <label class="form-check-label filter-label" for="filterDuplet">
-                 Double (1123)
+                  Hapus duplikat 2 angka
                 </label>
               </div>
               <div class="form-check form-switch">
                 <input class="form-check-input" type="checkbox" id="filterDouble">
                 <label class="form-check-label filter-label" for="filterDouble">
-                  Doubled (1122)
+                  Hapus Double (1122)
                 </label>
               </div>
             </div>
           </div>
 
-          <!-- Mode Output: LIST / WAP + delimiter + Bet (hanya WAP) -->
+          <!-- ===== MODE OUTPUT: LIST / WAP + delimiter + Bet ===== -->
           <div class="mode-selector">
             <div class="d-flex align-items-center gap-2">
-              <span class="mode-label"><i class="fas fa-chart-simple me-1"></i>Output:</span>
+              <span class="mode-label"><i class="fas fa-chart-simple me-1"></i> Mode Output:</span>
               <select id="outputMode" class="custom-select">
                 <option value="LIST" selected>LIST</option>
                 <option value="WAP">WAP</option>
               </select>
             </div>
             <div id="delimiterContainer" class="delimiter-group" style="display: none;">
-              <span class="mode-label">, Delimiter:</span>
               <select id="delimiterSelect" class="custom-select">
                 <option value="*">*</option>
                 <option value="+">+</option>
@@ -84,28 +350,42 @@ body{background:#0a0f1a;font-family:Segoe UI,Roboto,system-ui,sans-serif}.card-c
                 <option value="#">#</option>
                 <option value=",">,</option>
               </select>
-              <span class="mode-label ms-2">, Bet:</span>
+              <span class="mode-label ms-2"> Bet:</span>
               <input type="number" id="betInput" class="bet-input" value="100" min="0" step="1">
+            </div>
+            <div class="d-flex align-items-center gap-2">
+              <span class="mode-label"> Max per bagian:</span>
+              <input type="number" id="limitPerPart" class="limit-input" value="5000" min="1" step="100">
             </div>
           </div>
           
-          <!-- Tombol Generate -->
+          <!-- ===== TOMBOL GENERATE ===== -->
           <div class="generate-wrapper">
             <button id="btnGenerate" class="btn-generate"><i class="fas fa-sync-alt me-2"></i> Generate</button>
           </div>
           
-          <!-- Result header: badge + copy -->
-          <div class="result-header mb-2">
+          <!-- ===== RESULT HEADER: total global + copy all ===== -->
+          <div class="result-header mb-3">
             <div class="badge-mini" id="totalCountDisplay">0 angka</div>
-            <button id="btnCopyResult" class="btn-copy-result"><i class="fas fa-clipboard me-1"></i> Salin Hasil</button>
+            <button id="btnCopyAll" class="btn-copy-result"><i class="fas fa-clipboard me-1"></i> Salin Semua</button>
           </div>
           
-          <!-- Text area output -->
-          <textarea id="outputTextArea" class="output-textarea form-control w-100 p-2" rows="12" readonly placeholder="Hasil kombinasi akan muncul di sini...&#10;Mode LIST = setiap angka baris baru.&#10;Mode WAP = semua angka digabung delimiter + #bet di akhir." style="font-family: monospace;"></textarea>
+          <!-- ===== TEXT AREA UTAMA ===== -->
+          <textarea id="outputTextArea" class="output-textarea form-control w-100 p-3" rows="12" readonly placeholder="Hasil kombinasi akan muncul di sini...&#10;Mode LIST = setiap angka baris baru.&#10;Mode WAP = semua angka digabung delimiter + #bet di setiap bagian." style="font-family: monospace;"></textarea>
+
+          <!-- ===== CONTAINER UNTUK MULTIPLE TEXT AREAS (jika split) ===== -->
+          <div id="multiOutputContainer" class="multi-output-container"></div>
           
+          <hr class="my-4 border-secondary">
+          <div class="info-note">
+            <i class="fas fa-info-circle me-2 text-info"></i> 
+            <strong>5D</strong> = D1×D2×D3×D4×D5 &nbsp;|&nbsp; <strong>4D</strong> = AS×KOP×KEPALA×EKOR &nbsp;|&nbsp; <strong>3D</strong> = D1×D2×D3 &nbsp;|&nbsp; <strong>2D</strong> = D1×D2.<br>
+            <strong>Filter 1</strong> = hapus 3 yang digit sama (1112) &nbsp;|&nbsp; <strong>Filter 2</strong> = hapus pasangan (1223) &nbsp;|&nbsp; <strong>Filter 3</strong> = hapus double (1122, 1212).<br>
+            Mode <strong>LIST</strong> = satu baris satu angka &nbsp;|&nbsp; <strong>WAP</strong> = delimiter + <strong>#bet</strong> di setiap bagian. Split otomatis jika melebihi batas per bagian.
+          </div>
         </div>
         <div class="card-footer bg-transparent border-0 text-center pb-4">
-          <footer><i class="fas fa-moon me-1"></i> Dark Mode · 3 Filter · LIST/WAP + Bet · Copy</footer>
+          <footer><i class="fas fa-moon me-1"></i> Dark Mode · 5D/4D/3D/2D · 3 Filter · LIST/WAP + Bet · Multi Text Area · Copy</footer>
         </div>
       </div>
     </div>
@@ -113,7 +393,426 @@ body{background:#0a0f1a;font-family:Segoe UI,Roboto,system-ui,sans-serif}.card-c
 </div>
 
 <script>
-function parseDigits(e){if(!e)return[];const t=String(e).trim(),n=[];for(let e of t)/[0-9]/.test(e)&&n.push(e);return n}function generateCartesian(e,t,n,i){const l=[];for(let o of e)for(let e of t)for(let t of n)for(let n of i)l.push(`${o}${e}${t}${n}`);return l}function hasTripletOrMore(e){const t={};for(let n of e)if(t[n]=(t[n]||0)+1,t[n]>=3)return!0;return!1}function hasAnyDuplicate(e){const t={};for(let n of e)if(t[n]=(t[n]||0)+1,t[n]>=2)return!0;return!1}function hasDoublePattern(e){const t={};for(let n of e)t[n]=(t[n]||0)+1;const n=Object.values(t);return 2===n.length&&n.every(e=>2===e)}function sortResultsNumerically(e){return e.slice().sort((e,t)=>parseInt(e,10)-parseInt(t,10))}function formatFourDigit(e){return 4===e.length?e:e.padStart(4,"0")}function toggleDelimiterVisibility(){const e=document.getElementById("outputMode").value;document.getElementById("delimiterContainer").style.display="WAP"===e?"inline-flex":"none"}function generateAndUpdate(){const e=document.getElementById("inputAs").value,t=document.getElementById("inputKop").value,n=document.getElementById("inputKepala").value,i=document.getElementById("inputEkor").value,l=parseDigits(e),o=parseDigits(t),r=parseDigits(n),a=parseDigits(i),u=document.getElementById("totalCountDisplay"),d=document.getElementById("outputTextArea");if(0===l.length||0===o.length||0===r.length||0===a.length)return d.value="⚠️ Error: Setiap posisi (AS, KOP, KEPALA, EKOR) harus memiliki minimal 1 digit angka (0-9).",void(u.innerText="0 angka");let c=generateCartesian(l,o,r,a);if(0===c.length)return d.value="Tidak ada kombinasi yang dihasilkan.",void(u.innerText="0 angka");const s=document.getElementById("filterTriplet").checked,m=document.getElementById("filterDuplet").checked,g=document.getElementById("filterDouble").checked;const f=sortResultsNumerically(c.filter(e=>{let t=!0;return s&&hasTripletOrMore(e)&&(t=!1),t&&m&&hasAnyDuplicate(e)&&(t=!1),t&&g&&hasDoublePattern(e)&&(t=!1),t}));if(0===f.length)return d.value="🔍 Tidak ada hasil setelah filter. Coba ubah input atau nonaktifkan filter.",void(u.innerText="0 angka");const p=f.map(e=>formatFourDigit(e));let y="";if("LIST"===document.getElementById("outputMode").value)y=p.join("\n");else{const e=document.getElementById("delimiterSelect").value,t=document.getElementById("betInput").value.trim(),n=""===t||isNaN(t)?0:parseInt(t,10);y=p.join(e)+"#"+n}d.value=y,u.innerText=`${f.length} angka`}async function copyResults(){const e=document.getElementById("outputTextArea").value,t=document.getElementById("btnCopyResult");if(!e||""===e.trim()||e.includes("Error")||e.includes("Tidak ada hasil")||e.includes("🔍")){const e=t.innerHTML;return t.innerHTML='<i class="fas fa-exclamation-triangle me-1"></i> Kosong',t.style.background="#8b5a2b",void setTimeout(()=>{t.innerHTML=e,t.style.background="#1f3b4f"},1200)}try{await navigator.clipboard.writeText(e);const n=t.innerHTML;t.innerHTML='<i class="fas fa-check-circle me-1"></i> Tersalin!',t.style.background="#2a6b4e",setTimeout(()=>{t.innerHTML=n,t.style.background="#1f3b4f"},1500)}catch(e){alert("Gagal menyalin: "+e)}}function init(){const e=document.getElementById("btnGenerate"),t=document.getElementById("btnCopyResult"),n=document.getElementById("outputMode"),i=document.getElementById("delimiterSelect"),l=document.getElementById("betInput"),o=()=>generateAndUpdate();["inputAs","inputKop","inputKepala","inputEkor"].forEach(e=>{const t=document.getElementById(e);t&&t.addEventListener("input",o)}),["filterTriplet","filterDuplet","filterDouble"].forEach(e=>{const t=document.getElementById(e);t&&t.addEventListener("change",o)}),e&&e.addEventListener("click",o),t&&t.addEventListener("click",copyResults),n&&n.addEventListener("change",()=>{toggleDelimiterVisibility(),o()}),i&&i.addEventListener("change",o),l&&l.addEventListener("input",o);const r=document.getElementById("filterTriplet"),a=document.getElementById("filterDuplet"),u=document.getElementById("filterDouble");r&&(r.checked=!1),a&&(a.checked=!1),u&&(u.checked=!1);const d=document.getElementById("outputMode");d&&(d.value="LIST"),toggleDelimiterVisibility(),o()}window.addEventListener("DOMContentLoaded",init);
+  // ======================================================================
+  //  KONFIGURASI INPUT DINAMIS
+  // ======================================================================
+  const digitConfig = {
+    5: {
+      label: '5D',
+      fields: [
+        { id: 'd1', label: 'D1', placeholder: '12', default: '12' },
+        { id: 'd2', label: 'D2', placeholder: '34', default: '34' },
+        { id: 'd3', label: 'D3', placeholder: '56', default: '56' },
+        { id: 'd4', label: 'D4', placeholder: '78', default: '78' },
+        { id: 'd5', label: 'D5', placeholder: '90', default: '90' }
+      ]
+    },
+    4: {
+      label: '4D',
+      fields: [
+        { id: 'as', label: 'AS', placeholder: '12', default: '12' },
+        { id: 'kop', label: 'KOP', placeholder: '0', default: '0' },
+        { id: 'kepala', label: 'KEPALA', placeholder: '245', default: '245' },
+        { id: 'ekor', label: 'EKOR', placeholder: '278', default: '278' }
+      ]
+    },
+    3: {
+      label: '3D',
+      fields: [
+        { id: 'd1', label: 'D1', placeholder: '12', default: '12' },
+        { id: 'd2', label: 'D2', placeholder: '34', default: '34' },
+        { id: 'd3', label: 'D3', placeholder: '56', default: '56' }
+      ]
+    },
+    2: {
+      label: '2D',
+      fields: [
+        { id: 'd1', label: 'D1', placeholder: '12', default: '12' },
+        { id: 'd2', label: 'D2', placeholder: '34', default: '34' }
+      ]
+    }
+  };
+
+  // ======================================================================
+  //  UTILITY
+  // ======================================================================
+  function parseDigits(inputStr) {
+    if (!inputStr) return [];
+    const str = String(inputStr).trim();
+    const digits = [];
+    for (let ch of str) {
+      if (/[0-9]/.test(ch)) digits.push(ch);
+    }
+    return digits;
+  }
+
+  function cartesianProduct(arrays) {
+    if (arrays.length === 0) return [];
+    return arrays.reduce((acc, curr) => {
+      if (acc.length === 0) return curr.map(v => [v]);
+      const result = [];
+      for (let a of acc) {
+        for (let b of curr) {
+          result.push([...a, b]);
+        }
+      }
+      return result;
+    }, []);
+  }
+
+  function hasTripletOrMore(numStr) {
+    const freq = {};
+    for (let ch of numStr) {
+      freq[ch] = (freq[ch] || 0) + 1;
+      if (freq[ch] >= 3) return true;
+    }
+    return false;
+  }
+
+  function hasAnyDuplicate(numStr) {
+    const freq = {};
+    for (let ch of numStr) {
+      freq[ch] = (freq[ch] || 0) + 1;
+      if (freq[ch] >= 2) return true;
+    }
+    return false;
+  }
+
+  function hasDoublePattern(numStr) {
+    const freq = {};
+    for (let ch of numStr) {
+      freq[ch] = (freq[ch] || 0) + 1;
+    }
+    const frequencies = Object.values(freq);
+    if (frequencies.length !== 2) return false;
+    return frequencies.every(f => f === 2);
+  }
+
+  function sortResultsNumerically(arr) {
+    return arr.slice().sort((a, b) => parseInt(a, 10) - parseInt(b, 10));
+  }
+
+  // ======================================================================
+  //  RENDER INPUT DINAMIS
+  // ======================================================================
+  let fullResults = [];
+
+  function renderInputs(digitLength) {
+    const container = document.getElementById('inputContainer');
+    const config = digitConfig[digitLength];
+    if (!config) return;
+
+    let html = '';
+    config.fields.forEach(field => {
+      html += `
+        <div class="input-item">
+          <label class="form-label text-center w-100">${field.label}</label>
+          <input type="text" id="input_${field.id}" class="form-control text-center" 
+                 placeholder="${field.placeholder}" value="${field.default}">
+        </div>
+      `;
+    });
+    container.innerHTML = html;
+  }
+
+  function getInputValues(digitLength) {
+    const config = digitConfig[digitLength];
+    if (!config) return [];
+    const values = [];
+    config.fields.forEach(field => {
+      const el = document.getElementById(`input_${field.id}`);
+      if (el) {
+        const parsed = parseDigits(el.value);
+        values.push(parsed);
+      } else {
+        values.push([]);
+      }
+    });
+    return values;
+  }
+
+  // ======================================================================
+  //  GENERATE & RENDER OUTPUT
+  // ======================================================================
+  function generateAndUpdate() {
+    const digitLength = parseInt(document.getElementById('digitLength').value);
+    const limit = parseInt(document.getElementById('limitPerPart').value) || 5000;
+
+    // Ambil nilai input
+    const inputArrays = getInputValues(digitLength);
+    
+    // Validasi: setiap posisi minimal 1 digit
+    let hasEmpty = false;
+    for (let arr of inputArrays) {
+      if (arr.length === 0) {
+        hasEmpty = true;
+        break;
+      }
+    }
+
+    const textArea = document.getElementById('outputTextArea');
+    const container = document.getElementById('multiOutputContainer');
+    const totalSpan = document.getElementById('totalCountDisplay');
+    container.innerHTML = '';
+
+    if (hasEmpty) {
+      textArea.style.display = 'block';
+      textArea.value = "⚠️ Error: Setiap posisi harus memiliki minimal 1 digit angka (0-9).";
+      totalSpan.innerText = "0 angka";
+      fullResults = [];
+      return;
+    }
+
+    // Generate semua kombinasi (kartesian product)
+    const combos = cartesianProduct(inputArrays);
+    const comboStrings = combos.map(arr => arr.join(''));
+
+    if (comboStrings.length === 0) {
+      textArea.style.display = 'block';
+      textArea.value = "Tidak ada kombinasi yang dihasilkan.";
+      totalSpan.innerText = "0 angka";
+      fullResults = [];
+      return;
+    }
+
+    // Filter
+    const filterTriplet = document.getElementById('filterTriplet').checked;
+    const filterDuplet = document.getElementById('filterDuplet').checked;
+    const filterDouble = document.getElementById('filterDouble').checked;
+
+    let filtered = comboStrings.filter(combo => {
+      let keep = true;
+      if (filterTriplet && hasTripletOrMore(combo)) keep = false;
+      if (keep && filterDuplet && hasAnyDuplicate(combo)) keep = false;
+      if (keep && filterDouble && hasDoublePattern(combo)) keep = false;
+      return keep;
+    });
+
+    const sorted = sortResultsNumerically(filtered);
+    fullResults = sorted;
+
+    // Update total
+    totalSpan.innerText = `${fullResults.length} angka`;
+
+    if (fullResults.length === 0) {
+      textArea.style.display = 'block';
+      textArea.value = "🔍 Tidak ada hasil setelah filter. Coba ubah input atau nonaktifkan filter.";
+      return;
+    }
+
+    // Mode & delimiter & bet
+    const mode = document.getElementById('outputMode').value;
+    const delimiter = document.getElementById('delimiterSelect').value;
+    const bet = document.getElementById('betInput').value.trim();
+    const betNumber = (bet === '' || isNaN(bet)) ? 0 : parseInt(bet, 10);
+
+    // Jika total <= limit, tampilkan dalam satu text area
+    if (fullResults.length <= limit) {
+      textArea.style.display = 'block';
+      let output = '';
+      if (mode === 'LIST') {
+        output = fullResults.join('\n');
+      } else { // WAP
+        output = fullResults.join(delimiter) + '#' + betNumber;
+      }
+      textArea.value = output;
+      return;
+    }
+
+    // Jika total > limit, split menjadi beberapa bagian
+    textArea.style.display = 'none';
+    const totalParts = Math.ceil(fullResults.length / limit);
+
+    for (let i = 0; i < totalParts; i++) {
+      const start = i * limit;
+      const end = Math.min(start + limit, fullResults.length);
+      const partData = fullResults.slice(start, end);
+
+      let partOutput = '';
+      if (mode === 'LIST') {
+        partOutput = partData.join('\n');
+      } else { // WAP
+        // TAMBAHKAN #bet di SETIAP bagian
+        partOutput = partData.join(delimiter) + '#' + betNumber;
+      }
+
+      const partDiv = document.createElement('div');
+      partDiv.className = 'part-box';
+
+      const header = document.createElement('div');
+      header.className = 'part-header';
+      header.innerHTML = `
+        <span class="badge-mini">Bagian ${i+1} dari ${totalParts} (${partData.length} angka)</span>
+        <button class="btn-copy-part" data-partindex="${i}"><i class="fas fa-copy me-1"></i> Salin Bagian</button>
+      `;
+      partDiv.appendChild(header);
+
+      const textareaPart = document.createElement('textarea');
+      textareaPart.className = 'output-textarea form-control w-100 p-2';
+      textareaPart.rows = 8;
+      textareaPart.readOnly = true;
+      textareaPart.value = partOutput;
+      textareaPart.style.fontFamily = 'monospace';
+      textareaPart.style.fontSize = '0.85rem';
+      partDiv.appendChild(textareaPart);
+
+      container.appendChild(partDiv);
+    }
+
+    // Event listener untuk tombol copy per bagian
+    document.querySelectorAll('.btn-copy-part').forEach(btn => {
+      btn.addEventListener('click', function() {
+        const partDiv = this.closest('.part-box');
+        const textarea = partDiv.querySelector('textarea');
+        copySpecificText(textarea, this);
+      });
+    });
+  }
+
+  // ======================================================================
+  //  COPY FUNCTIONS
+  // ======================================================================
+  async function copySpecificText(textarea, btn) {
+    const text = textarea.value;
+    if (!text || text.trim() === '') {
+      const orig = btn.innerHTML;
+      btn.innerHTML = '<i class="fas fa-exclamation-triangle me-1"></i> Kosong';
+      btn.style.background = '#8b5a2b';
+      setTimeout(() => {
+        btn.innerHTML = orig;
+        btn.style.background = '#1f3b4f';
+      }, 1200);
+      return;
+    }
+    try {
+      await navigator.clipboard.writeText(text);
+      const orig = btn.innerHTML;
+      btn.innerHTML = '<i class="fas fa-check-circle me-1"></i> Tersalin!';
+      btn.style.background = '#2a6b4e';
+      setTimeout(() => {
+        btn.innerHTML = orig;
+        btn.style.background = '#1f3b4f';
+      }, 1500);
+    } catch (err) {
+      alert('Gagal menyalin: ' + err);
+    }
+  }
+
+  async function copyAllResults() {
+    const mainTextArea = document.getElementById('outputTextArea');
+    const container = document.getElementById('multiOutputContainer');
+    let allText = '';
+
+    if (mainTextArea.style.display !== 'none' && mainTextArea.value) {
+      allText = mainTextArea.value;
+    } else {
+      const textareas = container.querySelectorAll('.part-box textarea');
+      const parts = [];
+      textareas.forEach(ta => parts.push(ta.value));
+      allText = parts.join('\n\n');
+    }
+
+    if (!allText || allText.trim() === '') {
+      const btn = document.getElementById('btnCopyAll');
+      const orig = btn.innerHTML;
+      btn.innerHTML = '<i class="fas fa-exclamation-triangle me-1"></i> Kosong';
+      btn.style.background = '#8b5a2b';
+      setTimeout(() => {
+        btn.innerHTML = orig;
+        btn.style.background = '#1f3b4f';
+      }, 1200);
+      return;
+    }
+
+    try {
+      await navigator.clipboard.writeText(allText);
+      const btn = document.getElementById('btnCopyAll');
+      const orig = btn.innerHTML;
+      btn.innerHTML = '<i class="fas fa-check-circle me-1"></i> Tersalin!';
+      btn.style.background = '#2a6b4e';
+      setTimeout(() => {
+        btn.innerHTML = orig;
+        btn.style.background = '#1f3b4f';
+      }, 1500);
+    } catch (err) {
+      alert('Gagal menyalin semua: ' + err);
+    }
+  }
+
+  // ======================================================================
+  //  TOGGLE DELIMITER / BET
+  // ======================================================================
+  function toggleDelimiterVisibility() {
+    const mode = document.getElementById('outputMode').value;
+    const container = document.getElementById('delimiterContainer');
+    container.style.display = (mode === 'WAP') ? 'inline-flex' : 'none';
+  }
+
+  // ======================================================================
+  //  INIT
+  // ======================================================================
+  function init() {
+    const digitSelect = document.getElementById('digitLength');
+    const generateBtn = document.getElementById('btnGenerate');
+    const copyAllBtn = document.getElementById('btnCopyAll');
+    const modeSelect = document.getElementById('outputMode');
+    const delimiterSelect = document.getElementById('delimiterSelect');
+    const betInput = document.getElementById('betInput');
+    const limitInput = document.getElementById('limitPerPart');
+    const checkboxes = ['filterTriplet', 'filterDuplet', 'filterDouble'];
+
+    // Render input awal (default 4D)
+    renderInputs(4);
+
+    const refresh = () => {
+      generateAndUpdate();
+    };
+
+    // Event: perubahan digit length -> render ulang input
+    digitSelect.addEventListener('change', function() {
+      const val = parseInt(this.value);
+      renderInputs(val);
+      refresh();
+    });
+
+    // Event: semua input
+    document.addEventListener('input', function(e) {
+      if (e.target.id && e.target.id.startsWith('input_')) {
+        refresh();
+      }
+    });
+
+    checkboxes.forEach(id => {
+      const el = document.getElementById(id);
+      if (el) el.addEventListener('change', refresh);
+    });
+
+    if (generateBtn) generateBtn.addEventListener('click', refresh);
+    if (copyAllBtn) copyAllBtn.addEventListener('click', copyAllResults);
+
+    if (modeSelect) {
+      modeSelect.addEventListener('change', () => {
+        toggleDelimiterVisibility();
+        refresh();
+      });
+    }
+    if (delimiterSelect) delimiterSelect.addEventListener('change', refresh);
+    if (betInput) betInput.addEventListener('input', refresh);
+    if (limitInput) limitInput.addEventListener('change', refresh);
+
+    // Default: filter 1 aktif, filter 2 & 3 non-aktif
+    document.getElementById('filterTriplet').checked = true;
+    document.getElementById('filterDuplet').checked = false;
+    document.getElementById('filterDouble').checked = false;
+
+    document.getElementById('outputMode').value = 'LIST';
+    toggleDelimiterVisibility();
+    document.getElementById('limitPerPart').value = 5000;
+
+    refresh();
+  }
+
+  window.addEventListener('DOMContentLoaded', init);
 </script>
 </body>
 </html>
