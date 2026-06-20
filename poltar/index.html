@@ -93,6 +93,15 @@
       font-weight: 600;
       color: #cde2ff;
     }
+    .badge-total-bet {
+      background: #2a4b3a;
+      border-radius: 2rem;
+      padding: 0.25rem 0.9rem;
+      font-size: 0.8rem;
+      font-weight: 700;
+      color: #a8f0c0;
+      border: 1px solid #3a7a5a;
+    }
     .output-textarea {
       background: #03060c;
       border: 1px solid #2e4a6a;
@@ -367,6 +376,7 @@
           <!-- ===== RESULT HEADER: total global + copy all ===== -->
           <div class="result-header mb-3">
             <div class="badge-mini" id="totalCountDisplay">0 angka</div>
+            <div class="badge-total-bet" id="totalBetDisplay" style="display:none;">Total Bet: 0</div>
             <button id="btnCopyAll" class="btn-copy-result"><i class="fas fa-clipboard me-1"></i> Salin Semua</button>
           </div>
           
@@ -553,12 +563,14 @@
     const textArea = document.getElementById('outputTextArea');
     const container = document.getElementById('multiOutputContainer');
     const totalSpan = document.getElementById('totalCountDisplay');
+    const totalBetSpan = document.getElementById('totalBetDisplay');
     container.innerHTML = '';
 
     if (hasEmpty) {
       textArea.style.display = 'block';
       textArea.value = "⚠️ Error: Setiap posisi harus memiliki minimal 1 digit angka (0-9).";
       totalSpan.innerText = "0 angka";
+      totalBetSpan.style.display = 'none';
       fullResults = [];
       return;
     }
@@ -571,6 +583,7 @@
       textArea.style.display = 'block';
       textArea.value = "Tidak ada kombinasi yang dihasilkan.";
       totalSpan.innerText = "0 angka";
+      totalBetSpan.style.display = 'none';
       fullResults = [];
       return;
     }
@@ -592,11 +605,13 @@
     fullResults = sorted;
 
     // Update total
-    totalSpan.innerText = `${fullResults.length} angka`;
+    const totalCount = fullResults.length;
+    totalSpan.innerText = `${totalCount} angka`;
 
     if (fullResults.length === 0) {
       textArea.style.display = 'block';
       textArea.value = "🔍 Tidak ada hasil setelah filter. Coba ubah input atau nonaktifkan filter.";
+      totalBetSpan.style.display = 'none';
       return;
     }
 
@@ -605,6 +620,15 @@
     const delimiter = document.getElementById('delimiterSelect').value;
     const bet = document.getElementById('betInput').value.trim();
     const betNumber = (bet === '' || isNaN(bet)) ? 0 : parseInt(bet, 10);
+
+    // Update total bet (hanya untuk WAP)
+    if (mode === 'WAP') {
+      const totalBet = totalCount * betNumber;
+      totalBetSpan.textContent = `Total Bet: ${totalBet.toLocaleString()}`;
+      totalBetSpan.style.display = 'inline-block';
+    } else {
+      totalBetSpan.style.display = 'none';
+    }
 
     // Jika total <= limit, tampilkan dalam satu text area
     if (fullResults.length <= limit) {
@@ -632,7 +656,6 @@
       if (mode === 'LIST') {
         partOutput = partData.join('\n');
       } else { // WAP
-        // TAMBAHKAN #bet di SETIAP bagian
         partOutput = partData.join(delimiter) + '#' + betNumber;
       }
 
@@ -740,12 +763,20 @@
   }
 
   // ======================================================================
-  //  TOGGLE DELIMITER / BET
+  //  TOGGLE DELIMITER / BET & TOTAL BET
   // ======================================================================
   function toggleDelimiterVisibility() {
     const mode = document.getElementById('outputMode').value;
     const container = document.getElementById('delimiterContainer');
-    container.style.display = (mode === 'WAP') ? 'inline-flex' : 'none';
+    const totalBetSpan = document.getElementById('totalBetDisplay');
+    
+    if (mode === 'WAP') {
+      container.style.display = 'inline-flex';
+      // total bet akan diupdate di generateAndUpdate, tapi kita tampilkan jika ada hasil
+    } else {
+      container.style.display = 'none';
+      totalBetSpan.style.display = 'none';
+    }
   }
 
   // ======================================================================
