@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+  <title>Kalkulator - Copy Hasil & Dukungan Keyboard</title>
+  <style>
+*{margin:0;padding:0;box-sizing:border-box}body{min-height:100vh;background:radial-gradient(circle at 30% 10%,#0a0f1e,#020617);display:flex;justify-content:center;align-items:center;font-family:Segoe UI,Poppins,Inter,system-ui,monospace;padding:1rem}.calculator{max-width:580px;width:100%;background:rgba(12,18,34,.85);backdrop-filter:blur(14px);border-radius:3rem;padding:1.5rem;box-shadow:0 25px 45px -12px rgba(0,0,0,.8),inset 0 1px 0 hsla(0,0%,100%,.05);border:1px solid rgba(56,189,248,.2)}.display-area{margin-bottom:1rem}.display-container{background:#01010e;border-radius:2rem;padding:.3rem 1.2rem;box-shadow:inset 0 5px 10px rgba(0,0,0,.6),0 1px 0 hsla(0,0%,100%,.05);display:flex;align-items:center;justify-content:space-between;gap:.5rem;flex-wrap:wrap}#display{flex:1;background:transparent;border:none;color:#c0fdf4;font-size:2.4rem;font-weight:500;font-family:Courier New,Fira Code,monospace;text-align:right;padding:.9rem .2rem;word-wrap:break-word;word-break:break-all;white-space:pre-wrap;line-height:1.3;letter-spacing:.5px;user-select:text;cursor:text}#display:focus{outline:none}.copy-btn{background:#1e293b;border:none;color:#7dd3fc;font-size:1.3rem;padding:.4rem .8rem;border-radius:2rem;cursor:pointer;transition:all .2s;display:flex;align-items:center;gap:.3rem;font-weight:500;box-shadow:0 2px 5px rgba(0,0,0,.3)}.copy-btn:active{transform:scale(.96);background:#0f172a}.copy-toast{position:fixed;bottom:20px;left:50%;transform:translateX(-50%);background:rgba(30,41,59,.8666666666666667);backdrop-filter:blur(8px);color:#a5f3fc;padding:.5rem 1.2rem;border-radius:2rem;font-size:.9rem;z-index:1000;pointer-events:none;opacity:0;transition:opacity .2s;font-family:monospace}.digit-setting{background:rgba(0,0,0,.45);border-radius:2rem;padding:.6rem 1rem;margin-bottom:1.5rem;flex-wrap:wrap;justify-content:space-between;gap:.8rem;border:1px solid #2d3a5e}.digit-setting,.setting-label{display:flex;align-items:center}.setting-label{gap:.5rem;color:#cbd5f0;font-weight:500;font-size:.85rem;background:rgba(15,23,42,.5019607843137255);padding:.3rem 1rem;border-radius:2rem}.setting-label span{font-size:1.2rem}input[type=range]{flex:2;min-width:140px;height:4px;-webkit-appearance:none;background:linear-gradient(90deg,#3b82f6,#c084fc);border-radius:8px}input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:18px;height:18px;background:#fff;border-radius:50%;cursor:pointer;box-shadow:0 0 8px #3b82f6}.digit-badge{background:#0a0f1f;padding:.2rem .9rem;border-radius:2rem;font-weight:700;font-size:1.2rem;font-family:monospace;color:#7dd3fc;min-width:48px;text-align:center}.info-note{font-size:.7rem;color:#94a3b8;text-align:center;margin-top:.3rem}.button-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:.8rem}button{background:rgba(17,24,39,.8666666666666667);border:none;padding:1rem 0;font-size:1.5rem;font-weight:600;border-radius:2rem;color:#eef2ff;cursor:pointer;transition:all .1s ease;box-shadow:0 4px 8px -2px rgba(0,0,0,.5),inset 0 1px 0 hsla(0,0%,100%,.1);border:1px solid rgba(56,189,248,.2)}button:active{transform:translateY(2px);background:#1f2a4e}.operator-btn{background:rgba(30,41,59,.788235294117647);color:#94e0ff;font-size:1.8rem}.equal-btn{background:linear-gradient(135deg,#2563eb,#1e40af);color:#fff}.clear-btn{background:rgba(45,27,46,.788235294117647);color:#fda4af}.del-btn{background:rgba(31,42,68,.788235294117647);color:#facc15}@media (max-width:500px){.calculator{padding:1rem}#display{font-size:1.9rem}button{padding:.7rem 0;font-size:1.3rem}.operator-btn{font-size:1.6rem}.button-grid{gap:.6rem}.copy-btn{font-size:1rem;padding:.3rem .7rem}}@media (max-width:380px){#display{font-size:1.6rem}button{font-size:1.1rem}}.shake-animation{animation:shakeBox .2s ease-in-out 0s 2}@keyframes shakeBox{0%{transform:translateX(0)}25%{transform:translateX(-4px)}75%{transform:translateX(4px)}to{transform:translateX(0)}}.error-color{color:#ffb7bd!important;text-shadow:0 0 3px #ff4d4d}
+  </style>
+</head>
+<body>
+<div class="calculator">
+  <div class="display-area">
+    <div class="display-container">
+      <div id="display" contenteditable="false">0</div>
+      <button class="copy-btn" id="copyResultBtn" title="Salin hasil ke clipboard">📋 Copy</button>
+    </div>
+  </div>
+
+  <div class="digit-setting">
+    <div class="setting-label">
+      <span>🔢</span> Batas digit angka (0-9)
+    </div>
+    <input type="range" id="maxDigitSlider" min="1" max="15" value="14" step="1">
+    <div class="digit-badge" id="digitBadge">14</div>
+  </div>
+
+  <div class="button-grid">
+    <button class="clear-btn" data-action="clear">AC</button>
+    <button class="del-btn" data-action="backspace">⌫</button>
+    <button class="operator-btn" data-op="%">%</button>
+    <button class="operator-btn" data-op="/">÷</button>
+
+    <button data-num="7">7</button>
+    <button data-num="8">8</button>
+    <button data-num="9">9</button>
+    <button class="operator-btn" data-op="*">×</button>
+
+    <button data-num="4">4</button>
+    <button data-num="5">5</button>
+    <button data-num="6">6</button>
+    <button class="operator-btn" data-op="-">−</button>
+
+    <button data-num="1">1</button>
+    <button data-num="2">2</button>
+    <button data-num="3">3</button>
+    <button class="operator-btn" data-op="+">+</button>
+
+    <button data-num="0">0</button>
+    <button data-num=".">.</button>
+    <button class="equal-btn" data-action="equal">=</button>
+    <button data-num="00" style="font-size:1.2rem;">00</button>
+  </div>
+</div>
+
+<div id="copyToast" class="copy-toast">📋 Tersalin ke clipboard!</div>
+
+<script>
+!function(){const e=document.getElementById("display"),t=document.getElementById("maxDigitSlider"),n=document.getElementById("digitBadge"),l=document.getElementById("copyResultBtn"),i=document.getElementById("copyToast");let c="0",a=null,r=!1,o=14;function s(e,t){if(t<1&&(t=1),!isFinite(e))return null;if(0===e)return"0";const n=e<0?"-":"",l=Math.abs(e);let i=l.toFixed(20).replace(/\.?0+$/,"");i.includes("e")&&(i=l.toLocaleString("en-US",{useGrouping:!1,maximumFractionDigits:20}),i.includes("e")&&(i=l.toString()));let[c,a]=i.split(".");void 0===c&&(c="0"),void 0===a&&(a="");let r=c.replace(/,/g,"")+a;0===r.length&&(r="0");let o=r.slice(0,t);0===o.length&&(o="0");let s,u=c.length;if(u>o.length){s=n+Number(o).toLocaleString("id-ID").replace(/,/g,".")}else{let e=o.slice(0,u),t=o.slice(u),l=Number(e).toLocaleString("id-ID").replace(/,/g,".");s=t.length>0?n+l+","+t:n+l}return s.endsWith(",")&&(s=s.slice(0,-1)),s}function u(e){if(!e)return NaN;let t=e.replace(/\./g,"").replace(",",".");return t=t.replace(/[^0-9.-]/g,""),parseFloat(t)}function d(){e.innerText=c,r?e.classList.add("error-color"):e.classList.remove("error-color")}function p(e){i.innerText=e||"📋 Tersalin ke clipboard!",i.style.opacity="1",setTimeout(()=>{i.style.opacity="0"},1500)}function g(){let e=c;!e||"ERROR"===e||e.includes("Sintaks")||e.includes("Tak terhingga")||e.includes("Kesalahan")?p("⚠️ Tidak dapat menyalin pesan error"):navigator.clipboard&&navigator.clipboard.writeText?navigator.clipboard.writeText(e).then(()=>{p("✅ Hasil disalin: "+e)}).catch(()=>{m(e)}):m(e)}function m(e){const t=document.createElement("textarea");t.value=e,t.style.position="fixed",t.style.top="-9999px",t.style.left="-9999px",document.body.appendChild(t),t.select(),t.setSelectionRange(0,e.length);let n=!1;try{n=document.execCommand("copy")}catch(e){console.error("Fallback copy error:",e)}document.body.removeChild(t),p(n?"📋 Tersalin: "+e:"❌ Gagal menyalin, silakan salin manual (Ctrl+C)")}function f(){e.classList.add("shake-animation"),setTimeout(()=>e.classList.remove("shake-animation"),300)}function y(){r&&(c.includes("ERROR")||c.includes("∞"))&&E();let e=c;e.trim()||(e="0");let t=e.replace(/÷/g,"/").replace(/×/g,"*").replace(/%/g,"/100");const n=t.trim().slice(-1);if(["+","-","*","/"].includes(n)&&(t=t.trim().slice(0,-1),""===t&&(t="0"),c=t.replace(/\*/g,"×").replace(/\//g,"÷"),d()),!/^[\d\s\+\-\*\/\.\(\)]*$/.test(t)&&!t.includes("e"))return void h("Sintaks error");let l;try{if(l=new Function("return ("+t+")")(),"number"!=typeof l||isNaN(l))throw new Error;if(!isFinite(l))throw new Error}catch(e){return void h("Kesalahan hitung")}let i=s(l,o);null!==i?(c=i,a=l,r=!1,d()):h("Overflow")}function h(e){c=e,r=!0,a=null,d(),f()}function E(){c="0",r=!1,a=null,d()}function v(){if(r)return void E();let e=c;if("0"===e||1===e.length)c="0";else{let t=e.slice(0,-1);""!==t&&"-"!==t||(t="0"),c=t}a=null,d()}function k(e){r&&E();let t=c;if("0"===t&&"."!==e)t=e;else if("."===e){let n=t.split(/([+\-×÷])/);if(n[n.length-1].includes("."))return;t+=e}else t+=e;t.length>50?f():(c=t,a=null,r=!1,d())}function L(e){r&&E();let t=c,n="*"===e?"×":"/"===e?"÷":e;const l=t.slice(-1);["+","-","×","÷"].includes(l)?(t=t.slice(0,-1)+n,c=t):c=t+n,a=null,r=!1,d()}function S(){r&&E();if(""===c||"0"===c)return;let e=c.split(/([+\-×÷])/),t=u(e[e.length-1]);if(!isNaN(t)&&isFinite(t)){let n=s(t/100,o);n&&(e[e.length-1]=n,c=e.join(""))}a=null,r=!1,d()}function b(e){const t=e.key;(["Enter","Escape","Backspace","Delete","+","-","*","/","%",".","0","1","2","3","4","5","6","7","8","9"].includes(t)||t>="0"&&t<="9"||"."===t||"+"===t||"-"===t||"*"===t||"/"===t||"%"===t)&&e.preventDefault(),/^[0-9]$/.test(t)?k(t):"."===t?k("."):"+"===t?L("+"):"-"===t?L("-"):"*"===t?L("*"):"/"===t?L("/"):"%"===t?S():"Enter"===t?y():"Backspace"===t?v():("Escape"===t||"Delete"===t)&&E()}function x(){document.querySelectorAll("[data-num]").forEach(e=>{e.addEventListener("click",()=>k(e.getAttribute("data-num")))}),document.querySelectorAll("[data-op]").forEach(e=>{e.addEventListener("click",()=>{let t=e.getAttribute("data-op");"%"===t?S():L(t)})}),document.querySelector('[data-action="equal"]').addEventListener("click",y),document.querySelector('[data-action="clear"]').addEventListener("click",E),document.querySelector('[data-action="backspace"]').addEventListener("click",v),t.addEventListener("input",()=>{o=parseInt(t.value,10),n.innerText=o,function(){if(r)return;let e=u(c);if(!isNaN(e)&&isFinite(e)){let t=s(e,o);null!==t&&(c=t,a=e,d())}else if(null!==a){let e=s(a,o);null!==e&&(c=e,d())}}()}),l.addEventListener("click",g),window.addEventListener("keydown",b)}E(),x(),e.style.userSelect="text"}();
+</script>
+</body>
+</html>
