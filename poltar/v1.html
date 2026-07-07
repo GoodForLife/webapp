@@ -1,0 +1,764 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+    <title>Pola Tarung Generator | 5D/4D/3D/2D</title>
+    <!-- Bootstrap 5 + Icons -->
+    <link rel="icon" type="image/x-icon" href="https://raw.githubusercontent.com/GoodForLife/webapp/refs/heads/main/asset/logos.ico">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        body {
+            background: #0a0f1a;
+            font-family: Segoe UI, Roboto, system-ui, sans-serif
+        }
+        .card-custom {
+            background: #141c2c;
+            border: 1px solid #2a3649;
+            border-radius: 1.8rem;
+            box-shadow: 0 20px 35px -12px rgba(0, 0, 0, .5)
+        }
+        .card-header-custom {
+            background: #0f1622;
+            color: #eef4ff;
+            border-radius: 1.8rem 1.8rem 1rem 1rem !important;
+            border-bottom: 1px solid #2a3a50;
+            padding: 1rem 1.5rem;
+            font-weight: 700;
+            text-align: center
+        }
+        .form-label {
+            font-weight: 600;
+            color: #cbdff2;
+            margin-bottom: .3rem;
+            font-size: .85rem
+        }
+        .form-control,
+        .form-control:focus {
+            background-color: #0f1825;
+            border: 1px solid #2e405b;
+            color: #f0f3fa;
+            border-radius: 1.2rem;
+            font-weight: 500;
+            font-family: monospace;
+            font-size: 1rem;
+            text-align: center
+        }
+        .form-control:focus {
+            border-color: #5b8cbb;
+            box-shadow: 0 0 0 3px rgba(91, 140, 187, .25);
+            background-color: #111c2c
+        }
+        .filter-card {
+            background: #0f1725;
+            border-radius: 1.5rem;
+            padding: .6rem 1.2rem;
+            border: 1px solid #28344a;
+            display: inline-flex;
+            gap: 1.5rem;
+            flex-wrap: wrap;
+            justify-content: center
+        }
+        .filter-label {
+            font-weight: 600;
+            color: #cddef5;
+            cursor: pointer;
+            margin-left: .5rem
+        }
+        .form-check-input {
+            background-color: #1e2a3e;
+            border-color: #4b6e8f;
+            cursor: pointer
+        }
+        .form-check-input:checked {
+            background-color: #2c5a8c;
+            border-color: #3c7bb0
+        }
+        .result-header {
+            background: #0f1825;
+            border-radius: 1.2rem;
+            padding: .5rem 1.2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border: 1px solid #2a3a4a;
+            flex-wrap: wrap;
+            gap: .5rem
+        }
+        .badge-mini {
+            background: #1f324b;
+            border-radius: 2rem;
+            font-weight: 600;
+            color: #cde2ff;
+            padding: .25rem .9rem;
+            font-size: .8rem
+        }
+        .badge-total-bet {
+            background: #2a4b3a;
+            border-radius: 2rem;
+            font-weight: 700;
+            color: #a8f0c0;
+            border: 1px solid #3a7a5a;
+            padding: .25rem .9rem;
+            font-size: .8rem
+        }
+        .output-textarea {
+            background: #03060c;
+            border: 1px solid #2e4a6a;
+            border-radius: 1.2rem;
+            color: #eaf4ff;
+            font-family: JetBrains Mono, Fira Code, monospace;
+            font-size: .9rem;
+            line-height: 1.5;
+            resize: vertical
+        }
+        .output-textarea:focus {
+            background: #07111f;
+            border-color: #5f8ec0;
+            box-shadow: 0 0 0 2px rgba(44, 90, 140, .3333333333333333)
+        }
+        .btn-generate {
+            background: #2a4468;
+            border-radius: 2rem;
+            padding: .6rem 2rem;
+            font-weight: 600;
+            color: #fff;
+            border: none;
+            transition: .2s;
+            min-width: 160px
+        }
+        .btn-generate:hover {
+            background: #1d3452;
+            transform: scale(.97);
+            box-shadow: 0 5px 12px rgba(0, 0, 0, .3)
+        }
+        .btn-copy-result {
+            background: #1f3b4f;
+            border-radius: 2rem;
+            padding: .4rem 1.2rem;
+            font-weight: 500;
+            color: #eaf6ff;
+            border: 1px solid #3a6280;
+            font-size: .85rem;
+            white-space: nowrap
+        }
+        .btn-copy-result:hover {
+            background: #2a4d6e;
+            color: #fff
+        }
+        .btn-copy-part {
+            background: #1f3b4f;
+            border-radius: 2rem;
+            padding: .2rem .8rem;
+            font-weight: 500;
+            color: #eaf6ff;
+            border: 1px solid #3a6280;
+            font-size: .75rem
+        }
+        .btn-copy-part:hover {
+            background: #2a4d6e
+        }
+        .info-note {
+            background: #0e1624;
+            border-radius: 1rem;
+            padding: .6rem 1rem;
+            color: #aec3e0;
+            font-size: .75rem;
+            border: 1px solid #26334a;
+            text-align: center
+        }
+        footer {
+            font-size: .7rem;
+            color: #6b85a4;
+            text-align: center
+        }
+        .filter-wrapper {
+            text-align: center;
+            margin-bottom: 1rem
+        }
+        .generate-wrapper {
+            text-align: center;
+            margin: 1.2rem 0 1rem
+        }
+        .mode-selector {
+            background: #0f1725;
+            border-radius: 1.5rem;
+            padding: .6rem 1.2rem;
+            border: 1px solid #28344a;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 1rem;
+            flex-wrap: wrap;
+            margin-bottom: 1.2rem
+        }
+        .mode-label {
+            color: #cddef5;
+            font-weight: 500;
+            margin-right: .5rem
+        }
+        .custom-select,
+        .custom-select:focus {
+            background-color: #0f1825;
+            border: 1px solid #2e405b;
+            color: #eef4ff;
+            border-radius: 1.2rem;
+            padding: .4rem 1rem;
+            font-weight: 500;
+            cursor: pointer
+        }
+        .delimiter-group {
+            display: inline-flex;
+            align-items: center;
+            gap: .5rem
+        }
+        .bet-input {
+            width: 80px;
+            display: inline-block;
+            background-color: #0f1825;
+            border: 1px solid #2e405b;
+            color: #fff;
+            border-radius: 1.2rem;
+            text-align: center;
+            padding: .3rem .5rem
+        }
+        .bet-input:focus {
+            border-color: #5b8cbb;
+            box-shadow: 0 0 0 2px rgba(44, 90, 140, .3333333333333333)
+        }
+        .limit-input {
+            width: 80px;
+            display: inline-block;
+            background-color: #0f1825;
+            border: 1px solid #2e405b;
+            color: #fff;
+            border-radius: 1.2rem;
+            text-align: center;
+            padding: .3rem .5rem
+        }
+        .limit-input:focus {
+            border-color: #5b8cbb;
+            box-shadow: 0 0 0 2px rgba(44, 90, 140, .3333333333333333)
+        }
+        hr {
+            opacity: .3
+        }
+        .multi-output-container {
+            margin-top: 1rem
+        }
+        .part-box {
+            background: #0c1422;
+            border: 1px solid #26344a;
+            border-radius: 1.2rem;
+            padding: .8rem;
+            margin-bottom: 1rem
+        }
+        .part-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: .5rem;
+            flex-wrap: wrap;
+            gap: .5rem
+        }
+        .digit-selector {
+            background: #0f1725;
+            border-radius: 1.5rem;
+            padding: .6rem 1.2rem;
+            border: 1px solid #28344a;
+            gap: 1rem;
+            margin-bottom: 1.2rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-wrap: wrap
+        }
+        .input-group-custom {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: .8rem
+        }
+        .input-group-custom .input-item {
+            flex: 1;
+            min-width: 60px;
+            max-width: 200px
+        }
+        .input-group-custom .input-item .form-control {
+            font-size: .95rem;
+            padding: .4rem .3rem
+        }
+        /* filter non-duplikat diberi warna pembeda */
+        .filter-nondup .form-check-label {
+            color: #ffd966 !important;
+        }
+        .filter-nondup .form-check-input:checked {
+            background-color: #b8860b;
+            border-color: #daa520;
+        }
+    </style>
+</head>
+<body class="bg-dark bg-opacity-95">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-lg-10 col-xl-9">
+                <div class="card card-custom">
+                    <div class="card-header-custom">
+                        <h3 class="mb-0 fs-4"><i class="fas fa-dice-d6 me-2"></i> POLA TARUNG GENERATOR</h3>
+                        <small class="text-secondary-emphasis">5D · 4D · 3D · 2D</small>
+                    </div>
+
+                    <div class="card-body">
+                        <!-- ===== DROPDOWN PANJANG DIGIT (DI-CENTER) ===== -->
+                        <div class="digit-selector">
+                            <span class="mode-label">GAME</span>
+                            <select id="digitLength" class="custom-select">
+                                <option value="5">5D</option>
+                                <option value="4" selected>4D</option>
+                                <option value="3">3D</option>
+                                <option value="2">2D</option>
+                            </select>
+                        </div>
+
+                        <!-- ===== INPUT FIELDS DINAMIS (CENTER ALIGN) ===== -->
+                        <div id="inputContainer" class="input-group-custom mb-4">
+                            <!-- Akan diisi oleh JavaScript -->
+                        </div>
+
+                        <!-- ===== FILTER SWITCHES (4 filter) ===== -->
+                        <div class="filter-wrapper">
+                            <div class="filter-card">
+                                <div class="form-check form-switch">
+                                    <input class="form-check-input" type="checkbox" id="filterTriplet" checked>
+                                    <label class="form-check-label filter-label" for="filterTriplet">
+                                        Hapus duplikat 3 angka
+                                    </label>
+                                </div>
+                                <div class="form-check form-switch">
+                                    <input class="form-check-input" type="checkbox" id="filterDuplet">
+                                    <label class="form-check-label filter-label" for="filterDuplet">
+                                        Hapus duplikat 2 angka
+                                    </label>
+                                </div>
+                                <div class="form-check form-switch">
+                                    <input class="form-check-input" type="checkbox" id="filterDouble">
+                                    <label class="form-check-label filter-label" for="filterDouble">
+                                        Hapus Double (1122)
+                                    </label>
+                                </div>
+                                <!-- ===== FILTER BARU: Hapus Non Duplikat ===== -->
+                                <div class="form-check form-switch filter-nondup">
+                                    <input class="form-check-input" type="checkbox" id="filterNonDuplicate">
+                                    <label class="form-check-label filter-label" for="filterNonDuplicate">
+                                        Hapus Non Duplikat
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- ===== MODE OUTPUT: LIST / WAP + delimiter + Bet ===== -->
+                        <div class="mode-selector">
+                            <div class="d-flex align-items-center gap-2">
+                                <span class="mode-label"><i class="fas fa-chart-simple me-1"></i> Mode Output:</span>
+                                <select id="outputMode" class="custom-select">
+                                    <option value="LIST" selected>LIST</option>
+                                    <option value="WAP">WAP</option>
+                                </select>
+                            </div>
+                            <div id="delimiterContainer" class="delimiter-group" style="display: none;">
+                                <select id="delimiterSelect" class="custom-select">
+                                    <option value="*">*</option>
+                                    <option value="+">+</option>
+                                    <option value="-">-</option>
+                                    <option value="#">#</option>
+                                    <option value=",">,</option>
+                                </select>
+                                <span class="mode-label ms-2"> Bet:</span>
+                                <input type="number" id="betInput" class="bet-input" value="100" min="0" step="1">
+                            </div>
+                            <div class="d-flex align-items-center gap-2">
+                                <span class="mode-label"> Max per bagian:</span>
+                                <input type="number" id="limitPerPart" class="limit-input" value="5000" min="1" step="100">
+                            </div>
+                        </div>
+
+                        <!-- ===== TOMBOL GENERATE ===== -->
+                        <div class="generate-wrapper">
+                            <button id="btnGenerate" class="btn-generate"><i class="fas fa-sync-alt me-2"></i> Generate</button>
+                        </div>
+
+                        <!-- ===== RESULT HEADER: total global + copy all ===== -->
+                        <div class="result-header mb-3">
+                            <div class="badge-mini" id="totalCountDisplay">0 angka</div>
+                            <div class="badge-total-bet" id="totalBetDisplay" style="display:none;">Total Bet: 0</div>
+                            <button id="btnCopyAll" class="btn-copy-result"><i class="fas fa-clipboard me-1"></i> Salin Semua</button>
+                        </div>
+
+                        <!-- ===== TEXT AREA UTAMA ===== -->
+                        <textarea id="outputTextArea" class="output-textarea form-control w-100 p-3" rows="12" readonly placeholder="Hasil kombinasi akan muncul di sini...&#10;Mode LIST = setiap angka baris baru.&#10;Mode WAP = semua angka digabung delimiter + #bet di setiap bagian." style="font-family: monospace;"></textarea>
+
+                        <!-- ===== CONTAINER UNTUK MULTIPLE TEXT AREAS (jika split) ===== -->
+                        <div id="multiOutputContainer" class="multi-output-container"></div>
+
+                        <hr class="my-4 border-secondary">
+                        <div class="info-note">
+                            <i class="fas fa-info-circle me-2 text-info"></i>
+                            <strong>5D</strong> = D1×D2×D3×D4×D5 &nbsp;|&nbsp; <strong>4D</strong> = AS×KOP×KEPALA×EKOR &nbsp;|&nbsp; <strong>3D</strong> = D1×D2×D3 &nbsp;|&nbsp; <strong>2D</strong> = D1×D2.<br>
+                            <strong>Filter 1</strong> = hapus 3 digit yang sama (1112) &nbsp;|&nbsp; <strong>Filter 2</strong> = hapus pasangan (1223) &nbsp;|&nbsp; <strong>Filter 3</strong> = hapus double (1122, 1212).<br>
+                            <strong style="color:#ffd966;">Filter 4</strong> <strong style="color:#ffd966;">Hapus Non Duplikat</strong> = hapus nomor yang semua digitnya unik (tidak ada angka berulang), sehingga hanya menyisakan nomor yang memiliki duplikat.<br>
+                            Mode <strong>LIST</strong> = satu baris satu angka &nbsp;|&nbsp; <strong>WAP</strong> = delimiter + <strong>#bet</strong> di setiap bagian. Split otomatis jika melebihi batas per bagian.
+                        </div>
+                    </div>
+                    <div class="card-footer bg-transparent border-0 text-center pb-4">
+                        <footer><i class="fas fa-moon me-1"></i> Dark Mode · 5D/4D/3D/2D · 4 Filter · LIST/WAP + Bet · Multi Text Area · Copy</footer>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // ======================================================================
+        //  KONFIGURASI INPUT DINAMIS
+        // ======================================================================
+        const digitConfig = {
+            5: { label: "5D", fields: [{ id: "d1", label: "D1", placeholder: "12", default: "12" }, { id: "d2",
+                        label: "D2", placeholder: "34", default: "34" }, { id: "d3", label: "D3",
+                        placeholder: "56", default: "56" }, { id: "d4", label: "D4", placeholder: "78",
+                        default: "78" }, { id: "d5", label: "D5", placeholder: "90", default: "90" }] },
+            4: { label: "4D", fields: [{ id: "as", label: "AS", placeholder: "80", default: "80" }, { id: "kop",
+                        label: "KOP", placeholder: "80", default: "80" }, { id: "kepala", label: "KEPALA",
+                        placeholder: "265", default: "265" }, { id: "ekor", label: "EKOR", placeholder: "265",
+                        default: "265" }] },
+            3: { label: "3D", fields: [{ id: "d1", label: "D1", placeholder: "12", default: "12" }, { id: "d2",
+                        label: "D2", placeholder: "34", default: "34" }, { id: "d3", label: "D3",
+                        placeholder: "56", default: "56" }] },
+            2: { label: "2D", fields: [{ id: "d1", label: "D1", placeholder: "12", default: "12" }, { id: "d2",
+                        label: "D2", placeholder: "34", default: "34" }] }
+        };
+
+        function parseDigits(e) {
+            if (!e) return [];
+            const t = String(e).trim(),
+                n = [];
+            for (let e of t)
+                if (/[0-9]/.test(e)) n.push(e);
+            return n
+        }
+
+        function cartesianProduct(e) {
+            if (0 === e.length) return [];
+            return e.reduce((e, t) => {
+                if (0 === e.length) return t.map(e => [e]);
+                const n = [];
+                for (let l of e)
+                    for (let e of t) n.push([...l, e]);
+                return n
+            }, [])
+        }
+
+        function hasTripletOrMore(e) {
+            const t = {};
+            for (let n of e) {
+                if (t[n] = (t[n] || 0) + 1, t[n] >= 3) return !0
+            }
+            return !1
+        }
+
+        function hasAnyDuplicate(e) {
+            const t = {};
+            for (let n of e) {
+                if (t[n] = (t[n] || 0) + 1, t[n] >= 2) return !0
+            }
+            return !1
+        }
+
+        function hasDoublePattern(e) {
+            const t = {};
+            for (let n of e) t[n] = (t[n] || 0) + 1;
+            const n = Object.values(t);
+            return 2 === n.length && n.every(e => 2 === e)
+        }
+
+        // ===== FUNGSI BARU: cek apakah semua digit unik (tidak ada duplikat) =====
+        function isAllUniqueDigits(e) {
+            const seen = {};
+            for (let ch of e) {
+                if (seen[ch]) return false; // ada duplikat → bukan unik semua
+                seen[ch] = true;
+            }
+            return true; // semua digit unik
+        }
+
+        function sortResultsNumerically(e) {
+            return e.slice().sort((e, t) => parseInt(e, 10) - parseInt(t, 10))
+        }
+
+        let fullResults = [];
+
+        function renderInputs(e) {
+            const t = document.getElementById("inputContainer"),
+                n = digitConfig[e];
+            if (!n) return;
+            let l = "";
+            n.fields.forEach(e => {
+                l += `
+                    <div class="input-item">
+                        <label class="form-label text-center w-100">${e.label}</label>
+                        <input type="text" id="input_${e.id}" class="form-control text-center" 
+                               placeholder="${e.placeholder}" value="${e.default}">
+                    </div>
+                `
+            });
+            t.innerHTML = l
+        }
+
+        function getInputValues(e) {
+            const t = digitConfig[e];
+            if (!t) return [];
+            const n = [];
+            t.fields.forEach(e => {
+                const t = document.getElementById(`input_${e.id}`);
+                if (t) {
+                    const e = parseDigits(t.value);
+                    n.push(e)
+                } else n.push([])
+            });
+            return n
+        }
+
+        function generateAndUpdate() {
+            const e = parseInt(document.getElementById("digitLength").value),
+                t = parseInt(document.getElementById("limitPerPart").value) || 5000,
+                n = getInputValues(e);
+            let l = !1;
+            for (let e of n)
+                if (0 === e.length) { l = !0; break }
+            const a = document.getElementById("outputTextArea"),
+                i = document.getElementById("multiOutputContainer"),
+                o = document.getElementById("totalCountDisplay"),
+                d = document.getElementById("totalBetDisplay");
+            if (i.innerHTML = "", l) {
+                a.style.display = "block";
+                a.value = "⚠️ Error: Setiap posisi harus memiliki minimal 1 digit angka (0-9).";
+                o.innerText = "0 angka";
+                d.style.display = "none";
+                fullResults = [];
+                return
+            }
+            const r = cartesianProduct(n).map(e => e.join(""));
+            if (0 === r.length) {
+                a.style.display = "block";
+                a.value = "Tidak ada kombinasi yang dihasilkan.";
+                o.innerText = "0 angka";
+                d.style.display = "none";
+                fullResults = [];
+                return
+            }
+
+            // Ambil status filter
+            const s = document.getElementById("filterTriplet").checked,
+                u = document.getElementById("filterDuplet").checked,
+                c = document.getElementById("filterDouble").checked,
+                nd = document.getElementById("filterNonDuplicate").checked; // filter baru
+
+            // Filter dengan 4 kondisi
+            const f = sortResultsNumerically(r.filter(e => {
+                let t = !0;
+                // 1. Hapus duplikat 3 angka
+                if (s && hasTripletOrMore(e)) t = !1;
+                // 2. Hapus duplikat 2 angka
+                if (t && u && hasAnyDuplicate(e)) t = !1;
+                // 3. Hapus Double (1122)
+                if (t && c && hasDoublePattern(e)) t = !1;
+                // 4. Hapus Non Duplikat → hapus jika semua digit unik (tidak ada duplikat)
+                if (t && nd && isAllUniqueDigits(e)) t = !1;
+                return t;
+            }));
+
+            fullResults = f;
+            const m = fullResults.length;
+            o.innerText = `${m} angka`;
+
+            if (0 === fullResults.length) {
+                a.style.display = "block";
+                a.value = "🔍 Tidak ada hasil setelah filter. Coba ubah input atau nonaktifkan filter.";
+                d.style.display = "none";
+                return;
+            }
+
+            const p = document.getElementById("outputMode").value,
+                y = document.getElementById("delimiterSelect").value,
+                g = document.getElementById("betInput").value.trim(),
+                h = "" === g || isNaN(g) ? 0 : parseInt(g, 10);
+
+            if ("WAP" === p) {
+                const e = m * h;
+                d.textContent = `Total Bet: ${e.toLocaleString()}`;
+                d.style.display = "inline-block";
+            } else {
+                d.style.display = "none";
+            }
+
+            // Tampilkan output (single atau multi part)
+            if (fullResults.length <= t) {
+                a.style.display = "block";
+                let e = "";
+                e = "LIST" === p ? fullResults.join("\n") : fullResults.join(y) + "#" + h;
+                a.value = e;
+                i.innerHTML = "";
+                return;
+            }
+
+            // Multi part
+            a.style.display = "none";
+            const b = Math.ceil(fullResults.length / t);
+            for (let e = 0; e < b; e++) {
+                const n = e * t,
+                    l = Math.min(n + t, fullResults.length),
+                    a = fullResults.slice(n, l);
+                let o = "";
+                o = "LIST" === p ? a.join("\n") : a.join(y) + "#" + h;
+                const d = document.createElement("div");
+                d.className = "part-box";
+                const r = document.createElement("div");
+                r.className = "part-header";
+                r.innerHTML = `
+                        <span class="badge-mini">Bagian ${e+1} dari ${b} (${a.length} angka)</span>
+                        <button class="btn-copy-part" data-partindex="${e}"><i class="fas fa-copy me-1"></i> Salin Bagian</button>
+                    `;
+                d.appendChild(r);
+                const s = document.createElement("textarea");
+                s.className = "output-textarea form-control w-100 p-2";
+                s.rows = 8;
+                s.readOnly = !0;
+                s.value = o;
+                s.style.fontFamily = "monospace";
+                s.style.fontSize = "0.85rem";
+                d.appendChild(s);
+                i.appendChild(d);
+            }
+
+            document.querySelectorAll(".btn-copy-part").forEach(e => {
+                e.addEventListener("click", function() {
+                    copySpecificText(this.closest(".part-box").querySelector("textarea"), this)
+                })
+            });
+        }
+
+        async function copySpecificText(e, t) {
+            const n = e.value;
+            if (!n || "" === n.trim()) {
+                const e = t.innerHTML;
+                t.innerHTML = '<i class="fas fa-exclamation-triangle me-1"></i> Kosong';
+                t.style.background = "#8b5a2b";
+                setTimeout(() => { t.innerHTML = e;
+                    t.style.background = "#1f3b4f" }, 1200);
+                return
+            }
+            try {
+                await navigator.clipboard.writeText(n);
+                const e = t.innerHTML;
+                t.innerHTML = '<i class="fas fa-check-circle me-1"></i> Tersalin!';
+                t.style.background = "#2a6b4e";
+                setTimeout(() => { t.innerHTML = e;
+                    t.style.background = "#1f3b4f" }, 1500)
+            } catch (e) { alert("Gagal menyalin: " + e) }
+        }
+
+        async function copyAllResults() {
+            const e = document.getElementById("outputTextArea"),
+                t = document.getElementById("multiOutputContainer");
+            let n = "";
+            if ("none" !== e.style.display && e.value) n = e.value;
+            else {
+                const e = t.querySelectorAll(".part-box textarea"),
+                    l = [];
+                e.forEach(e => l.push(e.value));
+                n = l.join("\n\n")
+            }
+            if (!n || "" === n.trim()) {
+                const e = document.getElementById("btnCopyAll"),
+                    t = e.innerHTML;
+                e.innerHTML = '<i class="fas fa-exclamation-triangle me-1"></i> Kosong';
+                e.style.background = "#8b5a2b";
+                setTimeout(() => { e.innerHTML = t;
+                    e.style.background = "#1f3b4f" }, 1200);
+                return
+            }
+            try {
+                await navigator.clipboard.writeText(n);
+                const e = document.getElementById("btnCopyAll"),
+                    t = e.innerHTML;
+                e.innerHTML = '<i class="fas fa-check-circle me-1"></i> Tersalin!';
+                e.style.background = "#2a6b4e";
+                setTimeout(() => { e.innerHTML = t;
+                    e.style.background = "#1f3b4f" }, 1500)
+            } catch (e) { alert("Gagal menyalin semua: " + e) }
+        }
+
+        function toggleDelimiterVisibility() {
+            const e = document.getElementById("outputMode").value,
+                t = document.getElementById("delimiterContainer"),
+                n = document.getElementById("totalBetDisplay");
+            if ("WAP" === e) {
+                t.style.display = "inline-flex";
+            } else {
+                t.style.display = "none";
+                n.style.display = "none";
+            }
+        }
+
+        function init() {
+            const e = document.getElementById("digitLength"),
+                t = document.getElementById("btnGenerate"),
+                n = document.getElementById("btnCopyAll"),
+                l = document.getElementById("outputMode"),
+                a = document.getElementById("delimiterSelect"),
+                i = document.getElementById("betInput"),
+                o = document.getElementById("limitPerPart");
+
+            renderInputs(4);
+
+            const d = () => { generateAndUpdate() };
+
+            e.addEventListener("change", function() {
+                renderInputs(parseInt(this.value));
+                d()
+            });
+
+            document.addEventListener("input", function(e) {
+                if (e.target.id && e.target.id.startsWith("input_")) d()
+            });
+
+            // Daftar semua filter termasuk yang baru
+            ["filterTriplet", "filterDuplet", "filterDouble", "filterNonDuplicate"].forEach(e => {
+                const t = document.getElementById(e);
+                if (t) t.addEventListener("change", d)
+            });
+
+            t && t.addEventListener("click", d);
+            n && n.addEventListener("click", copyAllResults);
+            l && l.addEventListener("change", () => { toggleDelimiterVisibility();
+                d() });
+            a && a.addEventListener("change", d);
+            i && i.addEventListener("input", d);
+            o && o.addEventListener("change", d);
+
+            // Default state
+            document.getElementById("filterTriplet").checked = !0;
+            document.getElementById("filterDuplet").checked = !1;
+            document.getElementById("filterDouble").checked = !1;
+            document.getElementById("filterNonDuplicate").checked = !1; // default mati
+            document.getElementById("outputMode").value = "LIST";
+            toggleDelimiterVisibility();
+            document.getElementById("limitPerPart").value = 5000;
+            d();
+        }
+
+        window.addEventListener("DOMContentLoaded", init);
+    </script>
+</body>
+</html>
