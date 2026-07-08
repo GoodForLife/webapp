@@ -1,0 +1,525 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Rumus 6 Digit Jitu · Bootstrap</title>
+
+    <!-- Bootstrap 5 + Icons -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+
+    <!-- jQuery -->
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"
+    integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo="
+    crossorigin="anonymous">
+</script>
+
+<style>
+    /* ----- dark background & custom tweaks ----- */
+    body {
+        background: #0d0d1a;
+        min-height: 100vh;
+        padding: 2rem 0.5rem;
+    }
+
+    .card-dark {
+        background: #16162b;
+        border: 1px solid #2a2a48;
+        border-radius: 1.25rem;
+        box-shadow: 0 20px 50px rgba(0, 0, 0, 0.7);
+    }
+
+    .bg-input-dark {
+        background: #0e0e1e !important;
+        border: 1px solid #2d2d4a !important;
+        color: #e8e8f0 !important;
+    }
+    .bg-input-dark:focus {
+        border-color: #7c3aed !important;
+        box-shadow: 0 0 0 0.25rem rgba(124, 58, 237, 0.25) !important;
+    }
+
+    .text-gradient {
+        background: linear-gradient(135deg, #a78bfa, #7c3aed);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+    }
+
+    .badge-cocok {
+        background: rgba(16, 185, 129, 0.2);
+        color: #34d399;
+    }
+    .badge-tidak {
+        background: rgba(239, 68, 68, 0.2);
+        color: #f87171;
+    }
+    .badge-pending {
+        background: rgba(251, 191, 36, 0.15);
+        color: #fbbf24;
+    }
+
+    .result-card {
+        background: #121221;
+        border-radius: 1rem;
+        border-left: 5px solid #2d2d4a;
+        transition: border-color 0.2s, background 0.2s;
+        padding: 1rem 1.25rem;
+    }
+    .result-card.match {
+        border-left-color: #10b981;
+        background: #0f1f1a;
+    }
+    .result-card.no-match {
+        border-left-color: #ef4444;
+        background: #1f1212;
+    }
+    .result-card.pending {
+        border-left-color: #fbbf24;
+        background: #1f1a0e;
+    }
+
+    .digit-box {
+        display: inline-block;
+        background: #1a1a32;
+        padding: 0 12px;
+        border-radius: 6px;
+        line-height: 30px;
+        font-weight: 700;
+        font-family: 'Courier New', monospace;
+        color: #e0e0f0;
+    }
+    .digit-box.match-digit {
+        background: rgba(16, 185, 129, 0.25);
+        color: #34d399;
+        box-shadow: 0 0 0 1px rgba(16, 185, 129, 0.3);
+    }
+
+    .rumus-chip {
+        display: inline-block;
+        background: #1a1a32;
+        padding: 0 12px;
+        border-radius: 6px;
+        line-height: 28px;
+        font-family: 'Courier New', monospace;
+        font-weight: 600;
+        color: #e0e0f0;
+    }
+    .rumus-chip.match-chip {
+        color: #34d399;
+        box-shadow: 0 0 0 1px rgba(16, 185, 129, 0.3);
+    }
+
+    .stat-label {
+        color: #8888aa;
+        font-size: 0.9rem;
+    }
+    .stat-value {
+        font-size: 1.25rem;
+        font-weight: 700;
+        color: #f0f0ff;
+    }
+
+    .next-info {
+        color: #7a7a9a;
+        font-size: 0.9rem;
+    }
+
+    /* responsif tambahan */
+    @media (max-width: 576px) {
+        body { padding: 1rem 0.25rem; }
+        .result-card { padding: 0.75rem 0.9rem; }
+        .digit-box { padding: 0 8px; line-height: 26px; font-size: 0.9rem; }
+        .rumus-chip { padding: 0 8px; line-height: 24px; font-size: 0.85rem; }
+    }
+</style>
+</head>
+<body>
+
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-xl-10 col-lg-11 col-12">
+
+                <!-- MAIN CARD -->
+                <div class="card card-dark p-3 p-md-4 p-lg-5">
+
+                    <!-- Header -->
+                    <div class="d-flex align-items-center gap-3 mb-2">
+                        <h1 class="h2 fw-bold text-gradient mb-0">
+                            <i class="bi bi-crystal"></i> Rumus 6 Digit
+                        </h1>
+                        <span class="badge bg-dark text-light-emphasis border border-secondary px-3 py-2">Jitu</span>
+                    </div>
+                    <p class="text-secondary-emphasis small border-start border-primary ps-3 mb-4">
+                        Masukkan angka 4 digit per baris · verifikasi cocok dengan line berikutnya
+                    </p>
+
+                    <!-- Input -->
+                    <div class="mb-4">
+                        <label for="inputData" class="form-label text-light-emphasis fw-semibold">
+                            <i class="bi bi-pencil-square"></i> Data Input
+                            <span class="text-secondary-emphasis fw-normal small">— satu baris = 4 digit</span>
+                        </label>
+                        <textarea id="inputData" class="form-control bg-input-dark" rows="6"
+                        placeholder="1234&#10;5678&#10;9012&#10;3456&#10;7890"
+                    style="font-family:'Courier New',monospace;resize:vertical;"></textarea>
+                </div>
+
+                <!-- Buttons -->
+                <div class="d-flex flex-wrap gap-2 mb-4">
+                    <button class="btn btn-primary" id="processBtn">
+                        <i class="bi bi-play-fill"></i> Proses
+                    </button>
+                    <button class="btn btn-outline-secondary" id="clearBtn">
+                        <i class="bi bi-eraser"></i> Kosongkan
+                    </button>
+                    <button class="btn btn-success" id="sampleBtn">
+                        <i class="bi bi-file-earmark-text"></i> Contoh Data
+                    </button>
+                </div>
+
+                <!-- Stats -->
+                <div class="row g-2 mb-4 p-3 bg-dark bg-opacity-25 rounded-4 border border-secondary border-opacity-10">
+                    <div class="col-6 col-md-3">
+                        <div class="stat-label">Total Baris</div>
+                        <div class="stat-value" id="totalRows">0</div>
+                    </div>
+                    <div class="col-6 col-md-3">
+                        <div class="stat-label text-success">✅ Cocok</div>
+                        <div class="stat-value text-success" id="matchCount">0</div>
+                    </div>
+                    <div class="col-6 col-md-3">
+                        <div class="stat-label text-danger">❌ Tidak</div>
+                        <div class="stat-value text-danger" id="noMatchCount">0</div>
+                    </div>
+                    <div class="col-6 col-md-3">
+                        <div class="stat-label text-warning">⏳ Pending</div>
+                        <div class="stat-value text-warning" id="pendingCount">0</div>
+                    </div>
+                </div>
+
+                <!-- Results -->
+                <div id="results">
+                    <div class="text-center text-secondary-emphasis py-5">
+                        <i class="bi bi-bar-chart-line fs-1 d-block mb-2 opacity-50"></i>
+                        <p>Belum ada data. Masukkan angka dan tekan <strong>Proses</strong>.</p>
+                    </div>
+                </div>
+
+            </div> <!-- end card -->
+        </div> <!-- end col -->
+    </div> <!-- end row -->
+</div> <!-- end container -->
+
+<script>
+    $(function() {
+
+        // --------------------------------------------------------------
+        //  TABEL MISTIK LAMA & INDEX
+        // --------------------------------------------------------------
+        const MISTIK_LAMA = { 0:1,1:0,2:5,3:8,4:7,5:2,6:9,7:4,8:3,9:6 };
+        const INDEX_TABLE = { 0:5,1:6,2:7,3:8,4:9,5:0,6:1,7:2,8:3,9:4 };
+
+        // --------------------------------------------------------------
+        //  FUNGSI UTAMA
+        // --------------------------------------------------------------
+        function digitSum(n) {
+            while (n >= 10) {
+                let s = 0;
+                const str = String(n);
+                for (let i = 0; i < str.length; i++) s += parseInt(str[i], 10);
+                n = s;
+            }
+            return n;
+        }
+
+        function parseDigits(line) {
+            const s = line.trim();
+            if (s.length < 4) return null;
+            const parts = s.slice(0, 4).split('');
+            return parts.map(ch => parseInt(ch, 10));
+        }
+
+        function computeRumus(asVal, cop, kepala, ekor) {
+            const r1 = digitSum(cop + kepala);
+            const r2 = digitSum(r1 + 1);
+            const r3 = digitSum(kepala + ekor);
+            const r4 = digitSum(r3 + 1);
+            const r5 = MISTIK_LAMA[r4];
+            const selisih = Math.abs(asVal - cop);
+            const r6 = INDEX_TABLE[selisih];
+            return [r1, r2, r3, r4, r5, r6];
+        }
+
+        // --------------------------------------------------------------
+        //  PROSES DATA
+        // --------------------------------------------------------------
+        function processData(lines) {
+            const validLines = [];
+            for (let i = 0; i < lines.length; i++) {
+                const trimmed = lines[i].trim();
+                if (trimmed.length === 0) continue;
+                const digits = parseDigits(trimmed);
+                if (digits && digits.length === 4) {
+                    validLines.push({
+                        raw: trimmed,
+                        digits: digits,
+                        str: digits.join('')
+                    });
+                }
+            }
+
+            if (validLines.length === 0) {
+                return { results: [], total: 0, match: 0, noMatch: 0, pending: 0 };
+            }
+
+            const results = [];
+
+            for (let i = 0; i < validLines.length; i++) {
+                const current = validLines[i];
+                const [asVal, cop, kepala, ekor] = current.digits;
+                const rArr = computeRumus(asVal, cop, kepala, ekor);
+                const sixDigits = rArr.slice();
+
+                let status = 'pending';
+                let nextInfo = null;
+                let matchedDigits = [];
+
+                if (i + 1 < validLines.length) {
+                    const next = validLines[i + 1];
+                    const nextDigits = next.digits;
+                    const nextSet = new Set(nextDigits);
+
+                    const matchFound = sixDigits.some(d => nextSet.has(d));
+                    status = matchFound ? 'cocok' : 'tidak';
+
+                    if (matchFound) {
+                        matchedDigits = sixDigits.filter(d => nextSet.has(d));
+                    }
+
+                    nextInfo = {
+                        str: next.str,
+                        digits: nextDigits,
+                        matched: matchFound,
+                        matchedDigits: matchedDigits
+                    };
+                }
+
+                results.push({
+                    index: i,
+                    raw: current.raw,
+                    str: current.str,
+                    digits: current.digits,
+                    as: asVal,
+                    cop: cop,
+                    kepala: kepala,
+                    ekor: ekor,
+                    r: rArr,
+                    sixDigits: sixDigits,
+                    status: status,
+                    nextInfo: nextInfo
+                });
+            }
+
+            let matchCount = 0, noMatchCount = 0, pendingCount = 0;
+            for (const r of results) {
+                if (r.status === 'cocok') matchCount++;
+                else if (r.status === 'tidak') noMatchCount++;
+                else pendingCount++;
+            }
+
+            return { results, total: results.length, match: matchCount, noMatch: noMatchCount, pending: pendingCount };
+        }
+
+        // --------------------------------------------------------------
+        //  RENDER
+        // --------------------------------------------------------------
+        function renderResults(data) {
+            const $results = $('#results');
+            const $total = $('#totalRows');
+            const $match = $('#matchCount');
+            const $noMatch = $('#noMatchCount');
+            const $pending = $('#pendingCount');
+
+            if (!data || data.total === 0) {
+                $results.html(`
+                        <div class="text-center text-secondary-emphasis py-5">
+                            <i class="bi bi-bar-chart-line fs-1 d-block mb-2 opacity-50"></i>
+                            <p>Tidak ada data valid. Masukkan minimal 1 baris dengan 4 digit angka.</p>
+                        </div>
+                    `);
+                $total.text('0'); $match.text('0'); $noMatch.text('0'); $pending.text('0');
+                return;
+            }
+
+            $total.text(data.total);
+            $match.text(data.match);
+            $noMatch.text(data.noMatch);
+            $pending.text(data.pending);
+
+            let html = '';
+            for (const r of data.results) {
+                const statusClass = r.status === 'cocok' ? 'match' :
+                    r.status === 'tidak' ? 'no-match' : 'pending';
+
+                const statusLabel = r.status === 'cocok' ? '✅ COCOK' :
+                    r.status === 'tidak' ? '❌ TIDAK COCOK' : '⏳ PENDING';
+
+                const badgeClass = r.status === 'cocok' ? 'badge-cocok' :
+                    r.status === 'tidak' ? 'badge-tidak' : 'badge-pending';
+
+                const matchedSet = new Set(r.nextInfo ? r.nextInfo.matchedDigits : []);
+
+                // six digits
+                let sixDigitsHtml = '';
+                for (let d of r.sixDigits) {
+                    const isMatch = matchedSet.has(d);
+                    sixDigitsHtml += `<span class="digit-box ${isMatch ? 'match-digit' : ''}">${d}</span>`;
+                }
+
+                // R1-R6 chips
+                const rLabels = ['R1','R2','R3','R4','R5','R6'];
+                let rumusHtml = '';
+                for (let i = 0; i < r.r.length; i++) {
+                    const val = r.r[i];
+                    const isMatch = matchedSet.has(val);
+                    rumusHtml += `<span class="rumus-chip ${isMatch ? 'match-chip' : ''}">${rLabels[i]}=${val}</span>`;
+                }
+
+                // next line info
+                let nextHtml = '';
+                if (r.nextInfo) {
+                    const nextDigitsStr = r.nextInfo.digits.join(', ');
+                    const matchText = r.nextInfo.matched ?
+                        `<span class="text-success">✓ ada yang cocok</span>` :
+                        `<span class="text-danger">✗ tidak ada yang cocok</span>`;
+                    nextHtml = `
+                            <div class="d-flex flex-wrap align-items-center gap-2 mt-2">
+                                <span class="text-secondary-emphasis">Line berikutnya:</span>
+                                <span class="fw-semibold font-monospace">${r.nextInfo.str}</span>
+                                <span class="next-info">(digit: ${nextDigitsStr})</span>
+                                <span class="next-info">${matchText}</span>
+                            </div>
+                        `;
+                } else {
+                    nextHtml = `
+                            <div class="d-flex flex-wrap align-items-center gap-2 mt-2">
+                                <span class="text-secondary-emphasis">Line berikutnya:</span>
+                                <span class="text-secondary-emphasis">—</span>
+                                <span class="next-info">(belum ada data untuk verifikasi)</span>
+                            </div>
+                        `;
+                }
+
+                html += `
+                        <div class="result-card ${statusClass} mb-3">
+                            <div class="d-flex flex-wrap align-items-center justify-content-between gap-2 mb-2">
+                                <span class="fw-bold fs-5 font-monospace">${r.str}</span>
+                                <span class="badge ${badgeClass} fs-6 px-3 py-2">${statusLabel}</span>
+                            </div>
+
+                            <div class="row g-2">
+                                <div class="col-12 col-md-6">
+                                    <div class="d-flex flex-wrap align-items-center gap-2">
+                                        <span class="text-secondary-emphasis">Digit:</span>
+                                        <span class="fw-semibold">AS=${r.as}, COP=${r.cop}, KEPALA=${r.kepala}, EKOR=${r.ekor}</span>
+                                    </div>
+                                </div>
+                                <div class="col-12 col-md-6">
+                                    <div class="d-flex flex-wrap align-items-center gap-2">
+                                        <span class="text-secondary-emphasis">6 Digit Jitu:</span>
+                                        <span class="d-flex flex-wrap gap-1">${sixDigitsHtml}</span>
+                                    </div>
+                                </div>
+                                <div class="col-12">
+                                    <div class="d-flex flex-wrap align-items-center gap-2">
+                                        <span class="text-secondary-emphasis">Rumus:</span>
+                                        <span class="d-flex flex-wrap gap-1">${rumusHtml}</span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            ${nextHtml}
+
+                            <div class="mt-2 pt-2 border-top border-secondary border-opacity-10 d-flex flex-wrap gap-3 text-secondary-emphasis small">
+                                <span>Baris ke-${r.index + 1}</span>
+                                <span>•</span>
+                                <span>Input: "${r.raw}"</span>
+                            </div>
+                        </div>
+                    `;
+            }
+
+            $results.html(html);
+        }
+
+        // --------------------------------------------------------------
+        //  EVENT HANDLER
+        // --------------------------------------------------------------
+        function doProcess() {
+            const text = $('#inputData').val();
+            const lines = text.split('\n');
+            const data = processData(lines);
+            renderResults(data);
+        }
+
+        $('#processBtn').on('click', doProcess);
+
+        $('#clearBtn').on('click', function() {
+            $('#inputData').val('');
+            $('#results').html(`
+                    <div class="text-center text-secondary-emphasis py-5">
+                        <i class="bi bi-bar-chart-line fs-1 d-block mb-2 opacity-50"></i>
+                        <p>Data telah dikosongkan. Masukkan angka dan tekan <strong>Proses</strong>.</p>
+                    </div>
+                `);
+            $('#totalRows').text('0');
+            $('#matchCount').text('0');
+            $('#noMatchCount').text('0');
+            $('#pendingCount').text('0');
+        });
+
+        $('#sampleBtn').on('click', function() {
+            const sample = `1234
+                5678
+                9012
+                3456
+                7890
+                2345
+                6789
+                0123
+                4567
+                8901`;
+            $('#inputData').val(sample);
+            doProcess();
+        });
+
+        // auto-run contoh
+        const defaultData = `1234
+            5678
+            9012
+            3456
+            7890
+            2345
+            6789`;
+        $('#inputData').val(defaultData);
+        doProcess();
+
+        // Ctrl+Enter
+        $('#inputData').on('keydown', function(e) {
+            if (e.ctrlKey && e.key === 'Enter') {
+                e.preventDefault();
+                doProcess();
+            }
+        });
+
+    });
+</script>
+
+<!-- Bootstrap JS (optional, but for proper toggles etc) -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js">
+</script>
+
+</body>
+</html>
