@@ -1,525 +1,1187 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
-    <title>Generator Nomor Acak | Unik / Twin</title>
-    <!-- Bootstrap 5 + Icons -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;500;600;700&display=swap" rel="stylesheet">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.5" />
+    <title>GENERATOR</title>
     <style>
-        * { font-family: 'Inter', system-ui, sans-serif; }
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
         body {
-            background: #0a0f1e;
-            background-image: radial-gradient(circle at 10% 20%, rgba(30,40,60,0.4) 0%, #0a0f1e 90%);
+            font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+            background: #0b0e14;
+            color: #e2e8f0;
+            padding: 16px;
             min-height: 100vh;
         }
-        .card-glass {
-            background: rgba(18, 25, 45, 0.85);
-            backdrop-filter: blur(2px);
-            border: 1px solid rgba(72, 187, 255, 0.2);
-            border-radius: 1.5rem;
-            box-shadow: 0 20px 35px -12px rgba(0,0,0,0.5);
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
         }
-        .card-header-custom {
-            background: linear-gradient(135deg, #1a2a3f 0%, #0f1a2c 100%);
-            border-bottom: 1px solid #2d3e5a;
-            border-radius: 1.5rem 1.5rem 0 0 !important;
-            padding: 1.2rem 1.5rem;
-        }
-        .form-label, .form-check-label { font-weight: 500; color: #eef2ff; }
-        .form-control, .form-select {
-            background-color: #0f172ad9;
-            border: 1px solid #2d3e5a;
-            color: #f1f5f9;
-            font-weight: 500;
-        }
-        .form-control:focus, .form-select:focus {
-            background-color: #0b1120;
-            border-color: #3b82f6;
-            box-shadow: 0 0 0 3px rgba(59,130,246,0.3);
-            color: white;
-        }
-        .btn-generate {
-            background: linear-gradient(95deg, #2563eb, #1e40af);
-            border: none;
-            font-weight: 600;
-            padding: 0.7rem 1.2rem;
-            box-shadow: 0 5px 12px rgba(37,99,235,0.3);
-            transition: 0.1s;
-        }
-        .btn-generate:hover { transform: translateY(-2px); background: linear-gradient(95deg, #3b82f6, #1e3a8a); }
-        .btn-copy {
-            background: #2d3e5a;
-            border: none;
-            font-weight: 500;
-            transition: 0.1s;
-        }
-        .btn-copy:hover { background: #3b5a7e; transform: scale(0.98); }
-        .filter-card {
-            background: #0f172a;
-            border-radius: 1.2rem;
-            padding: 0.9rem 1.2rem;
-            border: 1px solid #2a3a55;
-        }
-        .number-badge {
-            background: #111c2f;
-            border: 1px solid #2c3f5e;
-            border-radius: 1rem;
-            padding: 0.5rem 1rem;
-            font-size: 1.3rem;
+        h1 {
+            font-size: 26px;
             font-weight: 700;
+            margin-bottom: 4px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            color: #f1f5f9;
+        }
+        .subtitle {
+            color: #94a3b8;
+            font-size: 14px;
+            margin-bottom: 20px;
+            border-left: 3px solid #6366f1;
+            padding-left: 14px;
+        }
+
+        /* ----- FORM CARD ----- */
+        .form-card {
+            background: #1a1f2b;
+            border-radius: 12px;
+            padding: 12px 16px;
+            margin-bottom: 10px;
+            border: 1px solid #2d3548;
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            gap: 8px 14px;
+            transition: border-color 0.2s;
+        }
+        .form-card:hover {
+            border-color: #4a5568;
+        }
+
+        .form-index {
+            font-weight: 600;
+            color: #94a3b8;
+            font-size: 14px;
+            min-width: 32px;
+        }
+
+        .form-card select,
+        .form-card input[type="text"],
+        .form-card input[type="number"] {
+            background: #0f141f;
+            border: 1px solid #2d3548;
+            border-radius: 6px;
+            padding: 4px 10px;
+            font-size: 13px;
+            color: #e2e8f0;
+            height: 34px;
+            outline: none;
+            transition: border 0.2s;
+        }
+        .form-card select:focus,
+        .form-card input:focus {
+            border-color: #6366f1;
+            box-shadow: 0 0 0 2px rgba(99, 102, 241, 0.25);
+        }
+        .form-card select option {
+            background: #1a1f2b;
+        }
+        .form-card .tipe-select {
+            min-width: 60px;
+        }
+        .form-card .bet-input {
+            width: 90px;
+        }
+        .form-card .single-input {
+            width: 45%;
+            font-weight: 500;
+            letter-spacing: 1px;
+        }
+        .form-card .poltar-input {
+            /*width: 50px;*/
             text-align: center;
-            color: #facc15;
-            font-family: 'Courier New', monospace;
+            font-weight: 500;
         }
-        .results-container { max-height: 480px; overflow-y: auto; padding-right: 5px; }
-        .results-container::-webkit-scrollbar { width: 6px; }
-        .results-container::-webkit-scrollbar-track { background: #1a2538; border-radius: 10px; }
-        .results-container::-webkit-scrollbar-thumb { background: #3b82f6; border-radius: 10px; }
-        .twin-selector {
-            background: #0b1120b3;
-            border-radius: 1rem;
-            padding: 0.75rem;
-            margin-top: 0.5rem;
-            border-left: 3px solid #f97316;
+
+        /* Checkbox fungsi (BB, BBFS, POLTAR) */
+        .check-group {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 4px 12px;
+            align-items: center;
         }
-        .info-text { color: #94a3b8; font-size: 0.8rem; }
-        @media (max-width: 768px) {
-            .number-badge { font-size: 1rem; padding: 0.4rem 0.6rem; }
+        .check-group label {
+            font-size: 13px;
+            font-weight: 400;
+            display: flex;
+            align-items: center;
+            gap: 4px;
+            cursor: pointer;
+            color: #cbd5e1;
+            white-space: nowrap;
         }
-        /* Toast custom */
-        .toast-notif {
-            position: fixed;
-            bottom: 20px;
-            right: 20px;
-            z-index: 1090;
+        .check-group input[type="checkbox"] {
+            accent-color: #6366f1;
+            width: 15px;
+            height: 15px;
+            cursor: pointer;
+        }
+
+        /* Twin group */
+        .twin-group {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 4px 10px;
+            align-items: center;
             background: #1e293b;
-            color: #bbf0ff;
-            border-left: 4px solid #3b82f6;
+            padding: 2px 12px 2px 8px;
+            border-radius: 20px;
+            border: 1px solid #2d3548;
+            min-height: 34px;
         }
-        .toast-notif.toast-error {
-            border-left-color: #ef4444;
-            background: #2a1a1f;
-            color: #ffb3b3;
+        .twin-group .twin-label {
+            font-size: 12px;
+            color: #94a3b8;
+            margin-right: 2px;
         }
-        .toast-notif.toast-success {
-            border-left-color: #10b981;
-            background: #1a2a24;
-            color: #bbf7d0;
+        .twin-group label {
+            font-size: 12px;
+            display: flex;
+            align-items: center;
+            gap: 3px;
+            cursor: pointer;
+            color: #cbd5e1;
+            white-space: nowrap;
+        }
+        .twin-group input[type="checkbox"] {
+            accent-color: #6366f1;
+            width: 14px;
+            height: 14px;
+        }
+        .twin-group .twin-badge {
+            font-size: 10px;
+            background: #2d3748;
+            color: #93c5fd;
+            padding: 0 8px;
+            border-radius: 12px;
+            font-weight: 600;
+        }
+
+        .input-group {
+            display: flex;
+            gap: 4px;
+            flex-wrap: wrap;
+            align-items: center;
+        }
+
+        .preview-text {
+            font-size: 12px;
+            color: #94a3b8;
+            margin-left: auto;
+            white-space: nowrap;
+        }
+        .btn-remove {
+            background: none;
+            border: none;
+            color: #64748b;
+            font-size: 18px;
+            cursor: pointer;
+            line-height: 1;
+            padding: 0 4px;
+            transition: color 0.2s;
+        }
+        .btn-remove:hover {
+            color: #f87171;
+        }
+
+        /* ----- ACTION BAR ----- */
+        .action-bar {
+            background: #1a1f2b;
+            border-radius: 12px;
+            padding: 12px 20px;
+            margin-top: 12px;
+            border: 1px solid #2d3548;
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            gap: 10px 18px;
+        }
+        .action-bar .btn {
+            background: #6366f1;
+            color: #fff;
+            border: none;
+            padding: 8px 20px;
+            border-radius: 8px;
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+        .action-bar .btn:hover {
+            background: #4f46e5;
+        }
+        .action-bar .btn-outline {
+            background: transparent;
+            color: #e2e8f0;
+            border: 1px solid #3b4252;
+        }
+        .action-bar .btn-outline:hover {
+            background: #2d3548;
+            border-color: #6366f1;
+        }
+        .action-bar label {
+            font-size: 13px;
+            font-weight: 500;
+            color: #94a3b8;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            white-space: nowrap;
+        }
+        .action-bar select {
+            background: #0f141f;
+            border: 1px solid #2d3548;
+            border-radius: 6px;
+            padding: 4px 8px;
+            font-size: 13px;
+            color: #e2e8f0;
+            height: 32px;
+            outline: none;
+        }
+        .action-bar select:focus {
+            border-color: #6366f1;
+        }
+        .action-bar .form-count {
+            font-size: 12px;
+            color: #64748b;
+            margin-left: auto;
+        }
+
+        /* ----- OUTPUT SECTION ----- */
+        .output-section {
+            background: #1a1f2b;
+            border-radius: 12px;
+            padding: 16px 20px;
+            margin-top: 16px;
+            border: 1px solid #2d3548;
+            display: none;
+        }
+        .output-section.visible {
+            display: block;
+        }
+        .output-section .label {
+            font-weight: 600;
+            color: #94a3b8;
+            font-size: 14px;
+            margin-bottom: 8px;
+        }
+        .output-box {
+            background: #0f141f;
+            border-radius: 8px;
+            padding: 12px 16px;
+            font-family: 'Courier New', monospace;
+            font-size: 13px;
+            word-break: break-all;
+            max-height: 200px;
+            overflow-y: auto;
+            border: 1px solid #2d3548;
+            color: #e2e8f0;
+            line-height: 1.7;
+            white-space: pre-wrap;
+        }
+        .output-box.empty {
+            color: #64748b;
+            font-style: italic;
+            font-family: 'Segoe UI', sans-serif;
+        }
+        .badge-row {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 24px 40px;
+            margin-top: 14px;
+            padding-top: 14px;
+            border-top: 1px solid #2d3548;
+        }
+        .badge-item {
+            display: flex;
+            align-items: baseline;
+            gap: 8px;
+        }
+        .badge-item .num {
+            font-weight: 700;
+            font-size: 22px;
+            color: #f1f5f9;
+        }
+        .badge-item .lbl {
+            font-size: 13px;
+            color: #94a3b8;
+        }
+
+        .hidden {
+            display: none !important;
+        }
+
+        /* ============================================================
+           RESPONSIVE — DIPERBAIKI UNTUK MOBILE
+           ============================================================ */
+        @media (max-width: 820px) {
+            .form-card {
+                padding: 12px 14px;
+                gap: 6px 10px;
+                flex-direction: column;
+                align-items: stretch;
+            }
+
+            /* Baris pertama: nomor + tipe + tombol hapus */
+            .form-card .top-row {
+                display: flex;
+                align-items: center;
+                gap: 8px 12px;
+                width: 100%;
+            }
+            .form-card .top-row .form-index {
+                flex: 0 0 auto;
+            }
+            .form-card .top-row .tipe-select {
+                flex: 0 0 auto;
+            }
+            .form-card .top-row .btn-remove {
+                margin-left: auto;
+                flex: 0 0 auto;
+            }
+
+            /* Checkbox fungsi — di tengah */
+            .form-card .check-group {
+                justify-content: center;
+                width: 100%;
+                gap: 6px 14px;
+            }
+
+            /* Twin group — di tengah */
+            .form-card .twin-group {
+                justify-content: center;
+                width: 100%;
+            }
+
+            /* Input (single atau poltar) — di tengah */
+            .form-card .single-input,
+            .form-card .input-group {
+                width: 100%;
+                justify-content: center;
+            }
+            .form-card .single-input {
+                max-width: 200px;
+                margin: 0 auto;
+            }
+            .form-card .input-group {
+                gap: 6px;
+            }
+            .form-card .poltar-input {
+                width: 20%;
+            }
+
+            /* Bet input — di tengah */
+            .form-card .bet-input {
+                width: 100%;
+                max-width: 180px;
+                margin: 0 auto;
+            }
+
+            /* Preview — di bawah, rata tengah */
+            .form-card .preview-text {
+                margin-left: 0;
+                width: 100%;
+                text-align: center;
+            }
+
+            /* Action bar tetap fleksibel */
+            .action-bar {
+                flex-direction: row;
+                flex-wrap: wrap;
+                justify-content: flex-start;
+                gap: 6px 12px;
+                padding: 10px 14px;
+                justify-content: center;
+            }
+            .action-bar .btn {
+                padding: 6px 16px;
+                font-size: 13px;
+            }
+            .action-bar label {
+                font-size: 12px;
+            }
+            .action-bar select {
+                font-size: 12px;
+                height: 28px;
+                padding: 2px 6px;
+            }
+            .action-bar .form-count {
+                margin-left: auto;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .form-card {
+                padding: 10px 10px;
+            }
+            .form-card .top-row {
+                gap: 4px 8px;
+            }
+            .form-card .single-input {
+                max-width: 100%;
+                font-size: 12px;
+            }
+            .form-card .bet-input {
+                max-width: 150px;
+                font-size: 12px;
+            }
+            .form-card .poltar-input {
+                width: 20%;
+                font-size: 12px;
+            }
+            .form-card .tipe-select {
+                min-width: 50px;
+                font-size: 12px;
+            }
+            .check-group label {
+                font-size: 12px;
+            }
+            .twin-group label {
+                font-size: 11px;
+            }
+            .action-bar .btn {
+                padding: 5px 12px;
+                font-size: 12px;
+            }
+            .action-bar label {
+                font-size: 11px;
+            }
+            h1 {
+                font-size: 22px;
+            }
         }
     </style>
 </head>
 <body>
+<div class="container" id="app">
+    <h1>🧩 Form Generator</h1>
+    <div class="subtitle">BB / BBFS / POLTAR</div>
+    <div id="formsContainer"></div>
+    <div class="action-bar">
+        <button class="btn btn-outline" id="btnAddForm">＋ Tambah Form</button>
+        <button class="btn" id="btnGenerateAll">⚡ Generate Semua</button>
+        <label>
+            Delimiter form
+            <select id="delimForm">
+                <option value="*">*</option>
+                <option value="-">-</option>
+                <option value="+">+</option>
+                <option value=".">.</option>
+                <option value=",">,</option>
+                <option value="#">#</option>
+                <option value="^">^</option>
+            </select>
+        </label>
+        <label>
+            Delimiter antar
+            <select id="delimAntar">
+                <option value="+">+</option>
+                <option value="*">*</option>
+                <option value="-">-</option>
+                <option value=".">.</option>
+                <option value=",">,</option>
+                <option value="#">#</option>
+                <option value="^">^</option>
+            </select>
+        </label>
+        <span class="form-count" id="formCountInfo">0 form</span>
+    </div>
 
-<div class="container-lg">
-    <h1 class="display-6 fw-bold text-white text-center"><i class="bi bi-shuffle"></i> Random Generator</h1>
-
-    <div class="row g-4">
-        <!-- Panel Kiri -->
-        <div class="col-lg-5">
-            <div class="card card-glass border-0">
-                <div class="card-header-custom">
-                    <h5 class="mb-0 text-white fw-semibold"><i class="bi bi-sliders2 me-2"></i> Parameter</h5>
-                </div>
-                <div class="card-body p-4">
-                    <div class="mb-2">
-                        <label class="form-label fw-semibold"><i class="bi bi-pencil-square"></i> Nomor Sumber (Digit Pool)</label>
-                        <input type="text" id="sourceNumber" class="form-control" placeholder="Contoh: 69581" value="69581">
-                        <div class="form-text text-secondary-emphasis">Digit unik dari nomor ini akan digunakan</div>
-                    </div>
-                    <div class="mb-2">
-                        <label class="form-label fw-semibold"><i class="bi bi-list-ol"></i> Jumlah Target</label>
-                        <input type="number" id="targetCount" class="form-control" value="8" min="1" max="50" step="1">
-                        <div class="form-text text-white">Maksimal 50 nomor</div>
-                    </div>
-                    <div class="mb-2">
-                        <label class="form-label fw-semibold"><i class="bi bi-123"></i> Panjang Digit Output</label>
-                        <select id="digitLength" class="form-select">
-                            <option value="5">5 Digit</option>
-                            <option value="4" selected>4 Digit</option>
-                            <option value="3">3 Digit</option>
-                            <option value="2">2 Digit</option>
-                        </select>
-                        <div class="form-text text-white">Maksimal Digit Nomor</div>
-                    </div>
-                    <div class="mb-2">
-                        <div class="form-check form-switch">
-                            <input class="form-check-input me-3" type="checkbox" id="twinCheckbox" style="width: 2.5rem; height: 1.5rem;">
-                            <label class="form-check-label fw-semibold text-warning" style="margin-top: 0.2rem;" for="twinCheckbox">
-                                <i class="bi bi-arrow-repeat"></i> Twin / Kembar
-                            </label>
-                        </div>
-                        <div id="twinOptionsContainer" style="display: none;" class="mt-2 twin-selector">
-                            <label class="form-label small mb-1">Maksimum frekuensi kemunculan digit yang sama</label>
-                            <select id="maxKembarSelect" class="form-select form-select-sm">
-                                <option value="4">Maks 4 kali (4444)</option>
-                                <option value="3">Maks 3 kali (2223)</option>
-                                <option value="2" selected>Maks 2 kali (1123)</option>
-                            </select>
-                            <div class="info-text mt-1">🔁 Twin ON → minimal 1 digit muncul ≥2x & frekuensi ≤ batas</div>
-                        </div>
-                    </div>
-                    <div class="d-grid gap-2 mt-3">
-                        <button id="generateBtn" class="btn btn-generate text-white py-2"><i class="bi bi-lightning-charge-fill me-2"></i> GENERATE NOMOR</button>
-                    </div>
-                </div>
+    <!-- Output Section -->
+    <div class="output-section" id="outputSection">
+        <div class="label">📄 Hasil Output</div>
+        <div class="output-box empty" id="outputBox">Klik "Generate Semua" untuk melihat hasil</div>
+        <div class="badge-row">
+            <div class="badge-item">
+                <span class="lbl">Total Line</span>
+                <span class="num" id="totalLines">0</span>
             </div>
-        </div>
-
-        <!-- Panel Kanan -->
-        <div class="col-lg-7">
-            <div class="card card-glass border-0 h-100">
-                <div class="card-header-custom d-flex justify-content-between align-items-center flex-wrap gap-2">
-                    <h5 class="mb-0 text-white fw-semibold"><i class="bi bi-grid-3x3-gap-fill me-2"></i> Hasil Generate</h5>
-                    <div class="d-flex gap-2">
-                        <button id="copyResultBtn" class="btn btn-sm btn-copy text-white"><i class="bi bi-clipboard-check"></i> Copy Hasil</button>
-                        <span class="badge bg-dark text-info" id="resultCount">0 nomor</span>
-                    </div>
-                </div>
-                <div class="card-body p-3">
-                    <div class="filter-card mb-4">
-                        <div class="d-flex flex-wrap align-items-center gap-3">
-                            <span class="filter-label text-white"><i class="bi bi-funnel-fill text-white"></i> Filter Live :</span>
-                            <div class="form-check form-switch">
-                                <input class="form-check-input filter-option" type="checkbox" id="filterGanjil" checked>
-                                <label class="form-check-label text-light" for="filterGanjil">GANJIL</label>
-                            </div>
-                            <div class="form-check form-switch">
-                                <input class="form-check-input filter-option" type="checkbox" id="filterGenap" checked>
-                                <label class="form-check-label text-light" for="filterGenap">GENAP</label>
-                            </div>
-                            <div class="form-check form-switch">
-                                <input class="form-check-input filter-option" type="checkbox" id="filterBesar" checked>
-                                <label class="form-check-label text-light" for="filterBesar">BESAR</label>
-                            </div>
-                            <div class="form-check form-switch">
-                                <input class="form-check-input filter-option" type="checkbox" id="filterKecil" checked>
-                                <label class="form-check-label text-light" for="filterKecil">KECIL</label>
-                            </div>
-                        </div>
-                    </div>
-                    <div id="numbersList" class="results-container">
-                        <div class="text-center text-secondary-emphasis py-5">
-                            <i class="bi bi-dice-5 fs-1"></i>
-                            <p class="mt-2">Masukkan nomor sumber & tekan GENERATE</p>
-                        </div>
-                    </div>
-                </div>
+            <div class="badge-item">
+                <span class="lbl">Total Bet</span>
+                <span class="num" id="totalBet">Rp 0</span>
             </div>
         </div>
     </div>
 </div>
-
-<!-- Toast notifikasi -->
-<div class="toast-notif toast align-items-center text-white border-0" role="alert" aria-live="assertive" aria-atomic="true" data-bs-autohide="true" data-bs-delay="2500" style="position: fixed; bottom: 20px; right: 20px; z-index: 1100; display: none;">
-    <div class="d-flex">
-        <div class="toast-body" id="toastMessage">✔️ Berhasil disalin</div>
-        <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast"></button>
-    </div>
-</div>
-
-<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
 
 <script>
-    $(document).ready(function() {
-        // DOM elements
-        const $sourceNumber = $('#sourceNumber');
-        const $targetCount = $('#targetCount');
-        const $digitLength = $('#digitLength');
-        const $twinCheckbox = $('#twinCheckbox');
-        const $twinOptionsDiv = $('#twinOptionsContainer');
-        const $maxKembarSelect = $('#maxKembarSelect');
-        const $generateBtn = $('#generateBtn');
-        const $numbersContainer = $('#numbersList');
-        const $resultCountSpan = $('#resultCount');
-        const $copyBtn = $('#copyResultBtn');
-        
-        const $filterGanjil = $('#filterGanjil');
-        const $filterGenap = $('#filterGenap');
-        const $filterBesar = $('#filterBesar');
-        const $filterKecil = $('#filterKecil');
-        
-        let lastGeneratedNumbers = [];      // array of integers (seluruh hasil)
-        let lastDigitLength = 4;
-        
-        // Toast bootstrap dengan dynamic styling
-        let toastElement = $('.toast-notif')[0];
-        let toastEl = new bootstrap.Toast(toastElement, { delay: 2500 });
-        
-        function showToast(message, isError = false, isSuccess = false) {
-            const $toast = $('.toast-notif');
-            // Reset kelas tambahan
-            $toast.removeClass('toast-error toast-success');
-            if (isError) $toast.addClass('toast-error');
-            else if (isSuccess) $toast.addClass('toast-success');
-            $('#toastMessage').text(message);
-            toastEl.show();
+    // ============================================================
+    //  STATE
+    // ============================================================
+    let formCounter = 0;
+    const forms = [];
+
+    const container = document.getElementById('formsContainer');
+    const outputSection = document.getElementById('outputSection');
+    const outputBox = document.getElementById('outputBox');
+    const totalLinesEl = document.getElementById('totalLines');
+    const totalBetEl = document.getElementById('totalBet');
+    const formCountInfo = document.getElementById('formCountInfo');
+    const delimForm = document.getElementById('delimForm');
+    const delimAntar = document.getElementById('delimAntar');
+
+    // ============================================================
+    //  HELPERS
+    // ============================================================
+    function getDigitCount(tipe) {
+        return parseInt(tipe, 10);
+    }
+
+    function generatePermutationsFromMultiset(digits, len) {
+        const freq = {};
+        for (const d of digits) {
+            freq[d] = (freq[d] || 0) + 1;
         }
-        
-        // Toggle opsi max kembar
-        function toggleTwinOptions() {
-            $twinCheckbox.is(':checked') ? $twinOptionsDiv.slideDown(180) : $twinOptionsDiv.slideUp(150);
-        }
-        $twinCheckbox.on('change', toggleTwinOptions);
-        toggleTwinOptions();
-        
-        // Ambil digit unik dari nomor sumber
-        function getUniqueDigitPool(sourceStr) {
-            let digits = sourceStr.replace(/\D/g, '').split('');
-            if (digits.length === 0) return ['0','1','2','3','4','5','6','7','8','9'];
-            return [...new Set(digits)];
-        }
-        
-        // Cek apakah angka memiliki digit unik (tidak ada pengulangan)
-        function isUniqueDigits(num, digitLen) {
-            let str = num.toString().padStart(digitLen, '0');
-            return new Set(str.split('')).size === str.length;
-        }
-        
-        // Cek Twin: minimal satu digit berulang & max frekuensi <= batas
-        function isTwinNumber(num, digitLen, maxDuplicate) {
-            let str = num.toString().padStart(digitLen, '0');
-            let freq = {};
-            for (let ch of str) freq[ch] = (freq[ch] || 0) + 1;
-            let maxFreq = Math.max(...Object.values(freq));
-            let hasDuplicate = Object.values(freq).some(v => v >= 2);
-            return (hasDuplicate && maxFreq <= maxDuplicate);
-        }
-        
-        // Generate angka acak dari pool (boleh repeat) untuk mode twin
-        function generateFromPool(pool, digitLen) {
-            let res = '';
-            for (let i = 0; i < digitLen; i++) {
-                let rand = Math.floor(Math.random() * pool.length);
-                res += pool[rand];
+        const uniqueDigits = Object.keys(freq);
+        const result = [];
+
+        function backtrack(path, remaining) {
+            if (path.length === len) {
+                result.push(path.join(''));
+                return;
             }
-            return parseInt(res, 10);
+            for (const d of uniqueDigits) {
+                if (freq[d] > 0) {
+                    freq[d]--;
+                    path.push(d);
+                    backtrack(path, remaining - 1);
+                    path.pop();
+                    freq[d]++;
+                }
+            }
         }
-        
-        // Generate angka UNIK (semua digit berbeda) dari pool yang unik
-        function generateUniqueNumberFromPool(pool, digitLen) {
-            if (pool.length < digitLen) return null;
-            let shuffled = [...pool];
-            for (let i = shuffled.length - 1; i > 0; i--) {
-                const j = Math.floor(Math.random() * (i + 1));
-                [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
+        backtrack([], len);
+        return result;
+    }
+
+    function cartesianProduct(arrays) {
+        if (arrays.length === 0) return [];
+        if (arrays.length === 1) return arrays[0].split('').map(d => d);
+        let result = arrays[0].split('').map(d => d);
+        for (let i = 1; i < arrays.length; i++) {
+            const next = arrays[i].split('');
+            const newResult = [];
+            for (const prefix of result) {
+                for (const digit of next) {
+                    newResult.push(prefix + digit);
+                }
             }
-            let selected = shuffled.slice(0, digitLen);
-            return parseInt(selected.join(''), 10);
+            result = newResult;
         }
-        
-        // Generate dengan constraint Twin (loop hingga memenuhi)
-        function generateWithTwin(pool, digitLen, maxDupe, maxAttempts = 300) {
-            for (let i = 0; i < maxAttempts; i++) {
-                let cand = generateFromPool(pool, digitLen);
-                if (isTwinNumber(cand, digitLen, maxDupe)) return cand;
-            }
-            return generateFromPool(pool, digitLen); // fallback
+        return result;
+    }
+
+    function generateBB(inputStr) {
+        if (!inputStr || inputStr.length === 0) return [];
+        const rev = inputStr.split('').reverse().join('');
+        if (rev === inputStr) return [inputStr];
+        return [inputStr, rev];
+    }
+
+    function generateBBFS(inputStr, tipe) {
+        const digits = inputStr.split('');
+        if (digits.length === tipe) {
+            return generatePermutationsFromMultiset(digits, tipe);
         }
-        
-        // Generate kumpulan angka
-        function generateNumberSet() {
-            let sourceRaw = $sourceNumber.val().trim();
-            if (sourceRaw === "") {
-                showToast("❌ Nomor sumber tidak boleh kosong!", true);
-                return null;
+        const freq = {};
+        for (const d of digits) {
+            freq[d] = (freq[d] || 0) + 1;
+        }
+        const unique = Object.keys(freq);
+        const resultSet = new Set();
+
+        function combine(start, selected, remaining) {
+            if (selected.length === tipe) {
+                const perms = generatePermutationsFromMultiset(selected, tipe);
+                for (const p of perms) {
+                    resultSet.add(p);
+                }
+                return;
             }
-            let poolUnique = getUniqueDigitPool(sourceRaw);
-            if (poolUnique.length === 0) {
-                showToast("❌ Tidak ada digit valid, gunakan angka 0-9", true);
-                poolUnique = ['0','1','2','3','4','5','6','7','8','9'];
+            if (start >= unique.length) return;
+            const d = unique[start];
+            const maxTake = Math.min(freq[d], tipe - selected.length);
+            for (let k = 0; k <= maxTake; k++) {
+                const newSelected = selected.concat(Array(k).fill(d));
+                combine(start + 1, newSelected, remaining - k);
             }
-            
-            let targetQty = parseInt($targetCount.val(), 10);
-            if (isNaN(targetQty) || targetQty < 1) targetQty = 5;
-            if (targetQty > 50) targetQty = 50;
-            
-            let digitLen = parseInt($digitLength.val(), 10);
-            let useTwin = $twinCheckbox.is(':checked');
-            let maxDupe = 2;
-            if (useTwin) {
-                maxDupe = parseInt($maxKembarSelect.val(), 10);
-                if (isNaN(maxDupe) || maxDupe < 2) maxDupe = 2;
-                if (maxDupe > 4) maxDupe = 4;
+        }
+        combine(0, [], tipe);
+        return Array.from(resultSet);
+    }
+
+    function generatePoltar(inputs) {
+        if (inputs.some(s => s.length === 0)) return [];
+        return cartesianProduct(inputs);
+    }
+
+    // ============================================================
+    //  TWIN FILTER
+    // ============================================================
+    function getCategory(str) {
+        const freq = {};
+        for (const ch of str) {
+            freq[ch] = (freq[ch] || 0) + 1;
+        }
+        const values = Object.values(freq);
+        if (values.some(v => v === 4)) return 'fourplet';
+        if (values.some(v => v === 3)) return 'triplet';
+        const twos = values.filter(v => v === 2).length;
+        if (twos === 2) return 'twintwin';
+        if (twos === 1) return 'twin';
+        return 'none';
+    }
+
+    function filterByTwinModes(results, twinModes) {
+        const hasActive = Object.values(twinModes).some(v => v === true);
+        if (!hasActive) {
+            return results.filter(r => getCategory(r) === 'none');
+        }
+        return results.filter(r => {
+            const cat = getCategory(r);
+            if (cat === 'none') return true;
+            if (cat === 'twin') return twinModes.twin;
+            if (cat === 'twintwin') return twinModes.twintwin;
+            if (cat === 'triplet') return twinModes.tripletwin;
+            if (cat === 'fourplet') return twinModes.fourpletwin;
+            return false;
+        });
+    }
+
+    // ============================================================
+    //  PROCESS A SINGLE FORM
+    // ============================================================
+    function processForm(formData) {
+        const { tipe, fungsi, twinModes, inputs, bet } = formData;
+        const digitCount = getDigitCount(tipe);
+        let results = [];
+
+        const isBB = fungsi.bb || false;
+        const isBBFS = fungsi.bbfs || false;
+        const isPoltar = fungsi.poltar || false;
+
+        // ========== Jika semua fungsi mati ==========
+        if (!isBB && !isBBFS && !isPoltar) {
+            const inputStr = (inputs[0] || '').replace(/\D/g, '');
+            if (inputStr.length === 0) {
+                return { lines: [], count: 0, bet: bet || 0 };
             }
-            
-            // Validasi untuk non-twin (digit unik)
-            if (!useTwin && poolUnique.length < digitLen) {
-                showToast(`⚠️ Tidak cukup digit unik (butuh ${digitLen} digit berbeda, hanya punya ${poolUnique.length}).\nGunakan nomor sumber lebih panjang atau kurangi digit output.`, true);
-                return null;
+            return { lines: [inputStr], count: 1, bet: bet || 0 };
+        }
+
+        // ========== Fungsi aktif ==========
+        if (isPoltar) {
+            const cleanInputs = inputs.slice(0, digitCount).map(s => s.replace(/\D/g, ''));
+            if (cleanInputs.some(s => s.length === 0)) {
+                return { lines: [], count: 0, bet: bet || 0 };
             }
-            
-            let results = [];
-            let attempts = 0;
-            const maxAttemptsTotal = targetQty * 60;
-            
-            while (results.length < targetQty && attempts < maxAttemptsTotal) {
-                let num = null;
-                if (useTwin) {
-                    num = generateWithTwin(poolUnique, digitLen, maxDupe, 150);
+            let rawResults = generatePoltar(cleanInputs);
+            rawResults = filterByTwinModes(rawResults, twinModes);
+            results = rawResults;
+        } else {
+            const inputStr = (inputs[0] || '').replace(/\D/g, '');
+            if (inputStr.length === 0) {
+                return { lines: [], count: 0, bet: bet || 0 };
+            }
+            if (isBB) {
+                if (inputStr.length !== digitCount) {
+                    return { lines: [], count: 0, bet: bet || 0 };
+                }
+                results = generateBB(inputStr);
+            } else if (isBBFS) {
+                if (inputStr.length < digitCount) {
+                    return { lines: [], count: 0, bet: bet || 0 };
+                }
+                results = generateBBFS(inputStr, digitCount);
+            } else {
+                if (inputStr.length < digitCount) {
+                    return { lines: [], count: 0, bet: bet || 0 };
+                }
+                results = generateBBFS(inputStr, digitCount);
+            }
+        }
+
+        const set = new Set();
+        const uniq = [];
+        for (const r of results) {
+            if (!set.has(r)) {
+                set.add(r);
+                uniq.push(r);
+            }
+        }
+        results = uniq;
+
+        return {
+            lines: results,
+            count: results.length,
+            bet: bet || 0
+        };
+    }
+
+    // ============================================================
+    //  RENDER
+    // ============================================================
+    function renderForms() {
+        if (forms.length === 0) {
+            container.innerHTML = `
+                <div style="text-align:center;padding:30px 0;color:#64748b;font-size:15px;">
+                    Belum ada form. Klik "Tambah Form" untuk mulai.
+                </div>
+            `;
+            formCountInfo.textContent = '0 form';
+            return;
+        }
+
+        let html = '';
+        for (let i = 0; i < forms.length; i++) {
+            const f = forms[i];
+            const idx = i + 1;
+            const isPoltar = f.fungsi.poltar || false;
+            const digitCount = getDigitCount(f.tipe);
+
+            // ---- Input fields ----
+            let inputHtml = '';
+            if (isPoltar) {
+                inputHtml = `<div class="input-group">`;
+                for (let d = 0; d < digitCount; d++) {
+                    const val = f.inputs[d] || '';
+                    inputHtml += `
+                        <input type="text" class="poltar-input" 
+                               data-formidx="${i}" data-didx="${d}" 
+                               value="${val}" placeholder="${d+1}" 
+                               inputmode="numeric" pattern="[0-9]*" />
+                    `;
+                }
+                inputHtml += `</div>`;
+            } else {
+                const val = f.inputs[0] || '';
+                inputHtml = `
+                    <input type="text" class="single-input" 
+                           data-formidx="${i}" 
+                           value="${val}" 
+                           placeholder="contoh: 12345" 
+                           inputmode="numeric" pattern="[0-9]*" />
+                `;
+            }
+
+            // ---- Checkbox status ----
+            const chkBB = f.fungsi.bb ? 'checked' : '';
+            const chkBBFS = f.fungsi.bbfs ? 'checked' : '';
+            const chkPoltar = f.fungsi.poltar ? 'checked' : '';
+
+            // ---- Twin visibility ----
+            const showTwin = isPoltar && digitCount >= 2;
+            const showTwinTwin = isPoltar && digitCount >= 4;
+            const showTriplet = isPoltar && digitCount >= 3;
+            const showFourplet = isPoltar && digitCount >= 5;
+
+            const chkTwin = f.twinModes.twin ? 'checked' : '';
+            const chkTwinTwin = f.twinModes.twintwin ? 'checked' : '';
+            const chkTriplet = f.twinModes.tripletwin ? 'checked' : '';
+            const chkFourplet = f.twinModes.fourpletwin ? 'checked' : '';
+
+            // ---- Preview ----
+            const previewResult = processForm(f);
+            let previewText = '';
+            if (previewResult.count > 0) {
+                previewText = `${previewResult.count} line${previewResult.count>1?'s':''} · ${formatRupiah(previewResult.bet)}`;
+            } else {
+                if (isPoltar) {
+                    const filled = f.inputs.slice(0, digitCount).filter(s => s.replace(/\D/g, '').length > 0).length;
+                    previewText = `⏳ ${filled}/${digitCount} input diisi`;
                 } else {
-                    num = generateUniqueNumberFromPool(poolUnique, digitLen);
-                    if (num === null) {
-                        num = generateUniqueNumberFromPool(poolUnique, digitLen);
-                        if (num === null) break;
+                    const inputVal = (f.inputs[0] || '').replace(/\D/g, '');
+                    if (inputVal.length === 0) {
+                        previewText = '⏳ isi input';
+                    } else if (f.fungsi.bb && inputVal.length !== digitCount) {
+                        previewText = `⚠️ BB butuh ${digitCount} digit`;
+                    } else if ((f.fungsi.bbfs || !f.fungsi.bb) && inputVal.length < digitCount) {
+                        previewText = `⚠️ minimal ${digitCount} digit`;
+                    } else {
+                        previewText = '⏳ tidak ada kombinasi';
                     }
                 }
-                if (num !== null) {
-                    results.push(num);
-                }
-                attempts++;
             }
-            
-            if (!useTwin && results.length < targetQty) {
-                showToast(`⚠️ Hanya berhasil generate ${results.length} angka unik, coba nomor sumber dengan lebih banyak digit berbeda.`, true);
-            }
-            return { numbers: results.slice(0, targetQty), digitLen: digitLen };
-        }
-        
-        // Kategori Besar/Kecil
-        function getSizeCategory(num, digitLen) {
-            let minVal = Math.pow(10, digitLen - 1);
-            let maxVal = Math.pow(10, digitLen) - 1;
-            let median = Math.floor((minVal + maxVal) / 2);
-            return (num >= median) ? 'BESAR' : 'KECIL';
-        }
-        
-        // Render hasil
-        function renderNumbers(numbers, digitLen) {
-            if (!numbers || numbers.length === 0) {
-                $numbersContainer.html(`<div class="text-center text-warning py-5"><i class="bi bi-exclamation-triangle fs-1"></i><p>Tidak ada nomor dihasilkan.</p></div>`);
-                $resultCountSpan.text('0 nomor');
-                lastGeneratedNumbers = [];
-                return;
-            }
-            lastGeneratedNumbers = [...numbers];
-            lastDigitLength = digitLen;
-            let html = '<div class="row g-2">';
-            numbers.forEach(num => {
-                let display = num.toString().padStart(digitLen, '0');
-                let parity = (num % 2 === 0) ? 'GENAP' : 'GANJIL';
-                let sizeCat = getSizeCategory(num, digitLen);
-                html += `
-                    <div class="col-sm-6 col-md-4 col-lg-4 col-xl-3 number-item" 
-                         data-number="${num}" 
-                         data-display="${display}"
-                         data-parity="${parity}"
-                         data-size="${sizeCat}">
-                        <div class="number-badge w-100">${display}</div>
+
+            // ---- Susun HTML dengan top-row untuk mobile ----
+            html += `
+                <div class="form-card" data-formidx="${i}">
+                    <div class="top-row">
+                        <span class="form-index">#${idx}</span>
+                        <select class="tipe-select" data-formidx="${i}">
+                            <option value="5d" ${f.tipe==='5d'?'selected':''}>5D</option>
+                            <option value="4d" ${f.tipe==='4d'?'selected':''}>4D</option>
+                            <option value="3d" ${f.tipe==='3d'?'selected':''}>3D</option>
+                            <option value="2d" ${f.tipe==='2d'?'selected':''}>2D</option>
+                        </select>
+                        <button class="btn-remove" data-formidx="${i}" title="Hapus form">✕</button>
                     </div>
-                `;
-            });
-            html += '</div>';
-            $numbersContainer.html(html);
-            $resultCountSpan.text(`${numbers.length} nomor`);
-            applyFilterLive();
+
+                    <div class="check-group">
+                        <label><input type="checkbox" class="fungsi-chk" data-formidx="${i}" data-fn="bb" ${chkBB} /> BB</label>
+                        <label><input type="checkbox" class="fungsi-chk" data-formidx="${i}" data-fn="bbfs" ${chkBBFS} /> BBFS</label>
+                        <label><input type="checkbox" class="fungsi-chk" data-formidx="${i}" data-fn="poltar" ${chkPoltar} /> POLTAR</label>
+                    </div>
+
+                    <div class="twin-group ${isPoltar ? '' : 'hidden'}">
+                        <span class="twin-label">Twin:</span>
+                        <label class="${showTwin ? '' : 'hidden'}">
+                            <input type="checkbox" class="twin-chk" data-formidx="${i}" data-mode="twin" ${chkTwin} />
+                            Twin
+                        </label>
+                        <label class="${showTwinTwin ? '' : 'hidden'}">
+                            <input type="checkbox" class="twin-chk" data-formidx="${i}" data-mode="twintwin" ${chkTwinTwin} />
+                            TwinTwin
+                        </label>
+                        <label class="${showTriplet ? '' : 'hidden'}">
+                            <input type="checkbox" class="twin-chk" data-formidx="${i}" data-mode="tripletwin" ${chkTriplet} />
+                            Triplet
+                        </label>
+                        <label class="${showFourplet ? '' : 'hidden'}">
+                            <input type="checkbox" class="twin-chk" data-formidx="${i}" data-mode="fourpletwin" ${chkFourplet} />
+                            Fourplet
+                        </label>
+                        <span class="twin-badge">${isPoltar ? 'filter' : '–'}</span>
+                    </div>
+
+                    ${inputHtml}
+
+                    <input type="number" class="bet-input" data-formidx="${i}" 
+                           value="${f.bet}" min="0" step="100" />
+
+                    <span class="preview-text" id="preview_${i}">${previewText}</span>
+                </div>
+            `;
         }
-        
-        // Filter Live
-        function applyFilterLive() {
-            const ganjilChecked = $filterGanjil.is(':checked');
-            const genapChecked = $filterGenap.is(':checked');
-            const besarChecked = $filterBesar.is(':checked');
-            const kecilChecked = $filterKecil.is(':checked');
-            $('.number-item').each(function() {
-                let $item = $(this);
-                let parity = $item.data('parity');
-                let size = $item.data('size');
-                let showParity = true;
-                if (!ganjilChecked && parity === 'GANJIL') showParity = false;
-                if (!genapChecked && parity === 'GENAP') showParity = false;
-                let showSize = true;
-                if (!besarChecked && size === 'BESAR') showSize = false;
-                if (!kecilChecked && size === 'KECIL') showSize = false;
-                $item.toggle(showParity && showSize);
-            });
-            let visible = $('.number-item:visible').length;
-            let total = $('.number-item').length;
-            if (total > 0) $resultCountSpan.html(`${visible} / ${total} nomor`);
-            else $resultCountSpan.text('0 nomor');
-        }
-        
-        // COPY berdasarkan hasil FILTER (yang tampil) dengan penanganan error
-        async function copyFilteredResults() {
-            const visibleItems = $('.number-item:visible');
-            if (visibleItems.length === 0) {
-                showToast("⚠️ Tidak ada nomor yang tampil (semua terfilter)", true);
-                return;
-            }
-            let numbersToCopy = [];
-            visibleItems.each(function() {
-                let displayVal = $(this).data('display');
-                if (displayVal) numbersToCopy.push(displayVal);
-            });
-            if (numbersToCopy.length === 0) {
-                showToast("⚠️ Tidak ada nomor untuk disalin", true);
-                return;
-            }
-            let textToCopy = numbersToCopy.join('\n');
-            
-            // Metode clipboard modern
-            if (navigator.clipboard && navigator.clipboard.writeText) {
-                try {
-                    await navigator.clipboard.writeText(textToCopy);
-                    showToast(`✅ ${numbersToCopy.length} nomor (terfilter) berhasil disalin!`, false, true);
-                } catch (err) {
-                    console.error('Clipboard API gagal:', err);
-                    fallbackCopy(textToCopy, numbersToCopy.length);
-                }
-            } else {
-                fallbackCopy(textToCopy, numbersToCopy.length);
-            }
-        }
-        
-        function fallbackCopy(text, count) {
-            let textarea = document.createElement('textarea');
-            textarea.value = text;
-            document.body.appendChild(textarea);
-            textarea.select();
-            let success = false;
-            try {
-                success = document.execCommand('copy');
-            } catch (err) {
-                console.error('Fallback copy error:', err);
-            }
-            document.body.removeChild(textarea);
-            if (success) {
-                showToast(`📋 ${count} nomor (terfilter) disalin (fallback)`, false, true);
-            } else {
-                showToast(`❌ Gagal menyalin! Silakan salin manual.`, true);
-            }
-        }
-        
-        // Event Generate
-        function onGenerate() {
-            let target = parseInt($targetCount.val(), 10);
-            if (isNaN(target) || target < 1) $targetCount.val(5);
-            if (target > 50) $targetCount.val(50);
-            
-            $numbersContainer.html(`<div class="text-center py-5"><div class="spinner-border text-info"></div><p>Memproses...</p></div>`);
-            setTimeout(() => {
-                let result = generateNumberSet();
-                if (!result || !result.numbers.length) {
-                    $numbersContainer.html(`<div class="alert alert-danger m-3">Gagal generate, cek nomor sumber dan panjang digit.</div>`);
-                    $resultCountSpan.text('0 nomor');
-                    lastGeneratedNumbers = [];
-                    return;
-                }
-                renderNumbers(result.numbers, result.digitLen);
-            }, 30);
-        }
-        
-        $generateBtn.on('click', onGenerate);
-        $copyBtn.on('click', copyFilteredResults);
-        $filterGanjil.add($filterGenap).add($filterBesar).add($filterKecil).on('change', function() {
-            if (lastGeneratedNumbers.length) applyFilterLive();
+        container.innerHTML = html;
+        formCountInfo.textContent = `${forms.length} form`;
+        attachEvents();
+    }
+
+    // ============================================================
+    //  EVENTS
+    // ============================================================
+    function attachEvents() {
+        document.querySelectorAll('.btn-remove').forEach(btn => {
+            btn.onclick = function(e) {
+                const idx = parseInt(this.dataset.formidx, 10);
+                removeForm(idx);
+            };
         });
-        
-        console.log("Generator ready | Non-Twin = digit unik | Twin = wajib kembar | Copy = sesuai filter dengan toast sukses/gagal");
+
+        document.querySelectorAll('.tipe-select').forEach(sel => {
+            sel.onchange = function() {
+                const idx = parseInt(this.dataset.formidx, 10);
+                const newTipe = this.value;
+                const newDigitCount = getDigitCount(newTipe);
+                forms[idx].tipe = newTipe;
+                if (forms[idx].fungsi.poltar) {
+                    while (forms[idx].inputs.length < newDigitCount) {
+                        forms[idx].inputs.push('');
+                    }
+                    while (forms[idx].inputs.length > newDigitCount) {
+                        forms[idx].inputs.pop();
+                    }
+                }
+                renderForms();
+            };
+        });
+
+        // --- Fungsi checkbox (mutual exclusive tapi boleh semua mati) ---
+        document.querySelectorAll('.fungsi-chk').forEach(chk => {
+            chk.onchange = function() {
+                const idx = parseInt(this.dataset.formidx, 10);
+                const fn = this.dataset.fn;
+
+                if (this.checked) {
+                    const others = ['bb', 'bbfs', 'poltar'].filter(f => f !== fn);
+                    for (const other of others) {
+                        forms[idx].fungsi[other] = false;
+                    }
+                    forms[idx].fungsi[fn] = true;
+                } else {
+                    forms[idx].fungsi[fn] = false;
+                }
+
+                if (fn === 'poltar' && forms[idx].fungsi.poltar) {
+                    const digitCount = getDigitCount(forms[idx].tipe);
+                    const newInputs = [];
+                    for (let i = 0; i < digitCount; i++) {
+                        newInputs.push(forms[idx].inputs[i] || '');
+                    }
+                    forms[idx].inputs = newInputs;
+                } else if (fn === 'poltar' && !forms[idx].fungsi.poltar) {
+                    const combined = forms[idx].inputs.join('');
+                    forms[idx].inputs = [combined];
+                    forms[idx].twinModes = { twin: false, twintwin: false, tripletwin: false, fourpletwin: false };
+                }
+
+                renderForms();
+            };
+        });
+
+        document.querySelectorAll('.twin-chk').forEach(chk => {
+            chk.onchange = function() {
+                const idx = parseInt(this.dataset.formidx, 10);
+                const mode = this.dataset.mode;
+                forms[idx].twinModes[mode] = this.checked;
+                renderForms();
+            };
+        });
+
+        document.querySelectorAll('.poltar-input').forEach(inp => {
+            inp.oninput = function() {
+                const idx = parseInt(this.dataset.formidx, 10);
+                const didx = parseInt(this.dataset.didx, 10);
+                let val = this.value.replace(/\D/g, '');
+                this.value = val;
+                forms[idx].inputs[didx] = val;
+                updatePreview(idx);
+            };
+            inp.onblur = function() {
+                const idx = parseInt(this.dataset.formidx, 10);
+                updatePreview(idx);
+            };
+        });
+
+        document.querySelectorAll('.single-input').forEach(inp => {
+            inp.oninput = function() {
+                const idx = parseInt(this.dataset.formidx, 10);
+                let val = this.value.replace(/\D/g, '');
+                this.value = val;
+                forms[idx].inputs[0] = val;
+                updatePreview(idx);
+            };
+            inp.onblur = function() {
+                const idx = parseInt(this.dataset.formidx, 10);
+                updatePreview(idx);
+            };
+        });
+
+        document.querySelectorAll('.bet-input').forEach(inp => {
+            inp.oninput = function() {
+                const idx = parseInt(this.dataset.formidx, 10);
+                const val = parseInt(this.value, 10) || 0;
+                forms[idx].bet = val;
+                updatePreview(idx);
+            };
+            inp.onblur = function() {
+                const idx = parseInt(this.dataset.formidx, 10);
+                updatePreview(idx);
+            };
+        });
+
+        for (let i = 0; i < forms.length; i++) {
+            updatePreview(i);
+        }
+    }
+
+    // ============================================================
+    //  UPDATE PREVIEW
+    // ============================================================
+    function updatePreview(idx) {
+        const f = forms[idx];
+        const result = processForm(f);
+        const previewEl = document.getElementById(`preview_${idx}`);
+        if (previewEl) {
+            if (result.count > 0) {
+                previewEl.textContent = `${result.count} line${result.count>1?'s':''} · ${formatRupiah(result.bet)}`;
+            } else {
+                const isPoltar = f.fungsi.poltar || false;
+                const digitCount = getDigitCount(f.tipe);
+                if (isPoltar) {
+                    const filled = f.inputs.slice(0, digitCount).filter(s => s.replace(/\D/g, '').length > 0).length;
+                    previewEl.textContent = `⏳ ${filled}/${digitCount} input diisi`;
+                } else {
+                    const inputVal = (f.inputs[0] || '').replace(/\D/g, '');
+                    if (inputVal.length === 0) {
+                        previewEl.textContent = '⏳ isi input';
+                    } else if (f.fungsi.bb && inputVal.length !== digitCount) {
+                        previewEl.textContent = `⚠️ BB butuh ${digitCount} digit`;
+                    } else if ((f.fungsi.bbfs || !f.fungsi.bb) && inputVal.length < digitCount) {
+                        previewEl.textContent = `⚠️ minimal ${digitCount} digit`;
+                    } else {
+                        previewEl.textContent = '⏳ tidak ada kombinasi';
+                    }
+                }
+            }
+        }
+        updateTotalBadge();
+    }
+
+    // ============================================================
+    //  GENERATE ALL
+    // ============================================================
+    function generateAll() {
+        const delim = delimForm.value;
+        const antar = delimAntar.value;
+
+        const allResults = [];
+        let totalLines = 0;
+        let totalBet = 0;
+        let hasError = false;
+
+        for (let i = 0; i < forms.length; i++) {
+            const f = forms[i];
+            const result = processForm(f);
+            if (result.count === 0) {
+                const isPoltar = f.fungsi.poltar || false;
+                const digitCount = getDigitCount(f.tipe);
+                if (isPoltar) {
+                    const filled = f.inputs.slice(0, digitCount).filter(s => s.replace(/\D/g, '').length > 0).length;
+                    if (filled !== digitCount) {
+                        hasError = true;
+                        continue;
+                    }
+                } else {
+                    const inputVal = (f.inputs[0] || '').replace(/\D/g, '');
+                    if (f.fungsi.bb && inputVal.length !== digitCount) {
+                        hasError = true;
+                        continue;
+                    }
+                    if ((f.fungsi.bbfs || !f.fungsi.bb) && inputVal.length < digitCount && inputVal.length > 0) {
+                        hasError = true;
+                        continue;
+                    }
+                    if (inputVal.length === 0) {
+                        hasError = true;
+                        continue;
+                    }
+                }
+            }
+            if (result.count === 0) continue;
+            const output = result.lines.join(delim);
+            const betStr = result.bet;
+            const finalStr = output + '#' + betStr;
+            allResults.push(finalStr);
+            totalLines += result.count;
+            totalBet += result.bet * result.count;
+        }
+
+        // Tampilkan output
+        outputSection.classList.add('visible');
+
+        if (allResults.length === 0) {
+            if (hasError) {
+                outputBox.textContent = '⚠️ Ada form dengan input tidak sesuai aturan. Perbaiki input.';
+            } else {
+                outputBox.textContent = '⚠️ Tidak ada hasil. Isi input dengan benar.';
+            }
+            outputBox.classList.remove('empty');
+            totalLinesEl.textContent = '0';
+            totalBetEl.textContent = 'Rp 0';
+        } else {
+            const combined = allResults.join(antar);
+            outputBox.textContent = combined;
+            outputBox.classList.remove('empty');
+
+            totalLinesEl.textContent = totalLines;
+            totalBetEl.textContent = formatRupiah(totalBet);
+        }
+
+        // Scroll ke output
+        outputSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+
+        for (let i = 0; i < forms.length; i++) {
+            updatePreview(i);
+        }
+    }
+
+    // ============================================================
+    //  UPDATE TOTAL BADGE
+    // ============================================================
+    function updateTotalBadge() {
+        let totalLines = 0;
+        let totalBet = 0;
+        for (let i = 0; i < forms.length; i++) {
+            const f = forms[i];
+            const result = processForm(f);
+            totalLines += result.count;
+            totalBet += result.bet * result.count;
+        }
+        totalLinesEl.textContent = totalLines;
+        totalBetEl.textContent = formatRupiah(totalBet);
+    }
+
+    // ============================================================
+    //  ADD / REMOVE FORM
+    // ============================================================
+    function addForm() {
+        formCounter++;
+        const tipe = '4d';
+        const newForm = {
+            id: formCounter,
+            tipe: tipe,
+            fungsi: { bb: false, bbfs: false, poltar: false },
+            twinModes: { twin: false, twintwin: false, tripletwin: false, fourpletwin: false },
+            inputs: [''],
+            bet: 100,
+        };
+        forms.push(newForm);
+        renderForms();
+        setTimeout(() => {
+            const firstInput = document.querySelector('.single-input, .poltar-input');
+            if (firstInput) firstInput.focus();
+        }, 50);
+        updateTotalBadge();
+    }
+
+    function removeForm(idx) {
+        if (forms.length <= 1) {
+            if (!confirm('Hapus form terakhir?')) return;
+        }
+        forms.splice(idx, 1);
+        renderForms();
+        updateTotalBadge();
+        if (forms.length === 0) {
+            outputBox.textContent = 'Belum ada form. Tambahkan form untuk mulai.';
+            outputBox.classList.add('empty');
+            totalLinesEl.textContent = '0';
+            totalBetEl.textContent = 'Rp 0';
+            outputSection.classList.remove('visible');
+        }
+    }
+
+    // ============================================================
+    //  UTILITY
+    // ============================================================
+    function formatRupiah(num) {
+        if (num === 0) return 'Rp 0';
+        return 'Rp ' + num.toLocaleString('id-ID');
+    }
+
+    // ============================================================
+    //  INIT
+    // ============================================================
+    document.getElementById('btnAddForm').addEventListener('click', addForm);
+    document.getElementById('btnGenerateAll').addEventListener('click', generateAll);
+
+    delimForm.addEventListener('change', () => {
+        if (outputSection.classList.contains('visible')) {
+            generateAll();
+        }
     });
+    delimAntar.addEventListener('change', () => {
+        if (outputSection.classList.contains('visible')) {
+            generateAll();
+        }
+    });
+
+    document.addEventListener('keydown', (e) => {
+        if ((e.ctrlKey || e.metaKey) && e.key === 'Enter') {
+            e.preventDefault();
+            generateAll();
+        }
+    });
+
+    addForm();
 </script>
 </body>
 </html>
