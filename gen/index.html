@@ -1,67 +1,791 @@
-<!doctypehtml><html lang=id><meta charset=UTF-8><meta content="width=device-width,initial-scale=1,maximum-scale=1.5"name=viewport><title>Form Generator</title><link href=https://raw.githubusercontent.com/GoodForLife/webapp/refs/heads/main/asset/logos.ico rel=icon type=image/x-icon><style>*{box-sizing:border-box;margin:0;padding:0}body{font-family:'Segoe UI',system-ui,-apple-system,sans-serif;background:#0b0e14;color:#e2e8f0;padding:16px;min-height:100vh}.container{max-width:1200px;margin:0 auto}.header-row{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:8px 16px;margin-bottom:4px}h1{font-size:26px;font-weight:700;display:flex;align-items:center;gap:10px;color:#f1f5f9;margin:0}.btn-tutorial{background:0 0;border:1px solid #2d3548;color:#e2e8f0;padding:4px 14px;border-radius:6px;cursor:pointer;font-size:14px;transition:background .2s,border-color .2s;display:flex;align-items:center;gap:4px;height:34px}.btn-tutorial:hover{background:#2d3548;border-color:#6366f1}.subtitle{color:#94a3b8;font-size:14px;margin-bottom:20px;border-left:3px solid #6366f1;padding-left:14px}.form-card{background:#1a1f2b;border-radius:12px;padding:12px 16px;margin-bottom:10px;border:1px solid #2d3548;display:flex;flex-direction:column;gap:6px 0;transition:border-color .2s}.form-card:hover{border-color:#4a5568}.form-row-top{display:flex;flex-wrap:wrap;align-items:center;gap:6px 14px;width:100%}.form-row-top .btn-remove{margin-left:auto;flex-shrink:0}.form-row-bottom{display:flex;flex-wrap:wrap;align-items:center;gap:6px 14px;width:100%;padding-top:2px}.form-row-bottom .input-group{display:flex;flex-wrap:wrap;align-items:center;gap:4px 6px}.form-index{font-weight:600;color:#94a3b8;font-size:14px;flex-shrink:0}.form-card input[type=number],.form-card input[type=text],.form-card select{background:#0f141f;border:1px solid #2d3548;border-radius:6px;padding:4px 10px;font-size:13px;color:#e2e8f0;height:34px;outline:0;transition:border .2s}.form-card input:focus,.form-card select:focus{border-color:#6366f1;box-shadow:0 0 0 2px rgba(99,102,241,.25)}.form-card select option{background:#1a1f2b}.form-card .tipe-select{min-width:60px;flex-shrink:0}.form-card .bet-input{width:90px;flex-shrink:0}.form-card .single-input{width:150px;font-weight:500;letter-spacing:1px}.form-card .poltar-input{width:48px;text-align:center;font-weight:500}.check-group{display:flex;flex-wrap:wrap;gap:4px 12px;align-items:center}.check-group label{font-size:13px;font-weight:400;display:flex;align-items:center;gap:4px;cursor:pointer;color:#cbd5e1;white-space:nowrap}.check-group input[type=checkbox]{accent-color:#6366f1;width:15px;height:15px;cursor:pointer}.twin-group{display:flex;flex-wrap:wrap;gap:4px 10px;align-items:center;background:#1e293b;padding:2px 12px 2px 8px;border-radius:20px;border:1px solid #2d3548;min-height:34px}.twin-group .twin-label{font-size:12px;color:#94a3b8;margin-right:2px}.twin-group label{font-size:12px;display:flex;align-items:center;gap:3px;cursor:pointer;color:#cbd5e1;white-space:nowrap}.twin-group input[type=checkbox]{accent-color:#6366f1;width:14px;height:14px}.twin-group .twin-badge{font-size:10px;background:#2d3748;color:#93c5fd;padding:0 8px;border-radius:12px;font-weight:600}.preview-text{font-size:12px;color:#94a3b8;white-space:nowrap;flex-shrink:0}.btn-remove{background:0 0;border:none;color:#64748b;font-size:18px;cursor:pointer;line-height:1;padding:0 4px;transition:color .2s}.btn-remove:hover{color:#f87171}.action-bar{background:#1a1f2b;border-radius:12px;padding:12px 20px;margin-top:12px;border:1px solid #2d3548;display:flex;flex-wrap:wrap;align-items:center;gap:10px 18px}.action-bar .btn{background:#6366f1;color:#fff;border:none;padding:8px 20px;border-radius:8px;font-size:14px;font-weight:600;cursor:pointer;transition:background .2s}.action-bar .btn:hover{background:#4f46e5}.action-bar .btn-outline{background:0 0;color:#e2e8f0;border:1px solid #3b4252}.action-bar .btn-outline:hover{background:#2d3548;border-color:#6366f1}.action-bar label{font-size:13px;font-weight:500;color:#94a3b8;display:flex;align-items:center;gap:6px;white-space:nowrap}.action-bar select{background:#0f141f;border:1px solid #2d3548;border-radius:6px;padding:4px 8px;font-size:13px;color:#e2e8f0;height:32px;outline:0}.action-bar select:focus{border-color:#6366f1}.action-bar .form-count{font-size:12px;color:#64748b;margin-left:auto}.output-section{background:#1a1f2b;border-radius:12px;padding:16px 20px;margin-top:16px;border:1px solid #2d3548;display:none}.output-section.visible{display:block}.output-header{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:6px 10px;margin-bottom:8px}.output-header .label{font-weight:600;color:#94a3b8;font-size:14px}.output-header .actions{display:flex;gap:6px;align-items:center;flex-wrap:wrap}.btn-copy{background:#2d3748;border:1px solid #4a5568;color:#e2e8f0;padding:4px 14px;border-radius:6px;font-size:13px;cursor:pointer;transition:background .2s,border-color .2s;display:flex;align-items:center;gap:4px;height:32px}.btn-copy:hover{background:#3b4252;border-color:#6366f1}.btn-copy.copied{background:#2b6b4c;border-color:#48bb78;color:#c6f6d5}.btn-filter{background:#2d3748;border:1px solid #4a5568;color:#e2e8f0;padding:4px 14px;border-radius:6px;font-size:13px;cursor:pointer;transition:background .2s,border-color .2s;display:flex;align-items:center;gap:4px;height:32px}.btn-filter:hover{background:#3b4252;border-color:#f59e0b}.btn-filter.active{border-color:#f59e0b;color:#fbbf24}.output-box{background:#0f141f;border-radius:8px;padding:12px 16px;font-family:'Courier New',monospace;word-break:break-all;max-height:200px;overflow-y:auto;border:1px solid #2d3548;color:#e2e8f0;line-height:1.7;white-space:pre-wrap}.output-box.empty{color:#64748b;font-style:italic;font-family:'Segoe UI',sans-serif}.badge-row{display:flex;flex-wrap:wrap;gap:24px 40px;margin-top:14px;padding-top:14px;border-top:1px solid #2d3548}.badge-item{display:flex;align-items:baseline;gap:8px}.badge-item .num{font-weight:700;font-size:22px;color:#f1f5f9}.badge-item .lbl{font-size:13px;color:#94a3b8}.hidden{display:none!important}.modal-overlay{display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,.7);z-index:1000;justify-content:center;align-items:center;padding:20px}.modal-overlay.active{display:flex}.modal-box{background:#1a1f2b;border-radius:12px;padding:24px;max-width:600px;width:100%;max-height:80vh;overflow-y:auto;border:1px solid #2d3548;position:relative}.modal-box h2{color:#f1f5f9;margin-bottom:16px;display:flex;align-items:center;gap:8px}.modal-box .close-modal{position:absolute;top:12px;right:16px;background:0 0;border:none;color:#94a3b8;font-size:28px;cursor:pointer;line-height:1}.modal-box .close-modal:hover{color:#f1f5f9}.modal-box p{color:#e2e8f0;font-size:14px;line-height:1.7;margin:8px 0}.modal-box ul{color:#e2e8f0;font-size:14px;line-height:1.7;padding-left:20px;margin:8px 0 12px}.modal-box ul li{margin-bottom:4px}.modal-box strong{color:#f1f5f9}@media (max-width:820px){.form-card{padding:12px 14px;gap:8px 0}.form-row-top{gap:6px 10px}.form-row-bottom{gap:6px 10px}.form-card .single-input{width:100%;max-width:180px}.form-card .poltar-input{width:44px}.form-card .bet-input{width:100%;max-width:150px}.form-card .preview-text{width:100%;text-align:left}.form-row-top .btn-remove{margin-left:0}.action-bar{flex-direction:row;flex-wrap:wrap;justify-content:flex-start;gap:6px 12px;padding:10px 14px}.action-bar .btn{padding:6px 16px;font-size:13px}.action-bar label{font-size:12px}.action-bar select{font-size:12px;height:28px;padding:2px 6px}.action-bar .form-count{margin-left:auto}.output-header{flex-wrap:wrap;gap:6px}.btn-copy,.btn-filter{font-size:12px;padding:2px 12px;height:28px}.check-group{gap:4px 8px}}@media (max-width:480px){.form-card{padding:10px 10px}.form-row-top{gap:4px 8px}.form-row-bottom{gap:4px 8px}.form-card .single-input{max-width:150px;font-size:12px}.form-card .bet-input{max-width:130px;font-size:12px}.form-card .poltar-input{width:38px;font-size:12px}.form-card .tipe-select{min-width:50px;font-size:12px}.check-group label{font-size:12px}.twin-group label{font-size:11px}.action-bar .btn{padding:5px 12px;font-size:12px}.action-bar label{font-size:11px}h1{font-size:22px}.btn-copy,.btn-filter{font-size:11px;padding:2px 10px;height:26px}.modal-box{padding:16px}}</style><div class=container id=app><div class=header-row><h1>🧩 Form Generator</h1><button class=btn-tutorial id=btnTutorial>❓ Tutorial</button></div><div class=subtitle>BB / BBD / BBB / BBBDB / BBFS / POLTAR</div><div id=formsContainer></div><div class=action-bar><button class="btn btn-outline"id=btnAddForm>＋ Add Form</button> <button class=btn id=btnGenerateAll>⚡ Generate</button> <label>Delimiter <select id=delimForm><option value=*>*<option value=->-<option value=+>+<option value=.>.<option value=,>,<option value=#>#<option value=^>^</select></label> <label>Delimiter antar hasil <select id=delimAntar><option value=+>+<option value=*>*<option value=->-<option value=.>.<option value=,>,<option value=#>#<option value=^>^</select></label> <span class=form-count id=formCountInfo>0 form</span></div><div class=output-section id=outputSection><div class=output-header><span class=label>📄 Hasil Output</span><div class=actions><button class=btn-filter id=filterButton>🧹 Filter Duplikat</button> <button class=btn-copy id=copyButton>📋 Salin</button></div></div><div class="empty output-box"id=outputBox>Klik "Generate Semua" untuk melihat hasil</div><div class=badge-row><div class=badge-item><span class=lbl>Total Line</span> <span class=num id=totalLines>0</span></div><div class=badge-item><span class=lbl>Total Bet</span> <span class=num id=totalBet>Rp 0</span></div></div></div></div><div class=modal-overlay id=tutorialModal><div class=modal-box><button class=close-modal id=closeTutorial>×</button><h2>📖 Tutorial Penggunaan</h2><p><strong>Fungsi-fungsi:</strong><ul><li><strong>BB</strong> (Bolak-Balik): Membalik seluruh digit. Contoh: 1234 → 1234, 4321.<li><strong>BBD</strong> (Bolak-Balik Depan): Menukar 2 digit pertama. Contoh: 1234 → 1234, 2134.<li><strong>BBB</strong> (Bolak-Balik Belakang): Menukar 2 digit terakhir. Contoh: 1234 → 1234, 1243.<li><strong>BBBDB</strong> (Bolak-Balik Depan & Belakang): Menukar 2 digit pertama dan 2 digit terakhir. Contoh: 1234 → 1234, 2134, 1243, 2143.<li><strong>BBFS</strong> (Bolak-Balik Full Set): Menghasilkan semua permutasi dari digit yang diinput (tanpa pengulangan).<li><strong>POLTAR</strong>: Menggabungkan setiap digit dari beberapa input (cartesian product).</ul><p><strong>Cara Penggunaan:</strong><ul><li>Pilih tipe permainan (2D-5D).<li>Centang fungsi yang diinginkan. BB, BBD, BBB, BBBDB dapat dipilih bersamaan.<li>BBFS dan POLTAR saling eksklusif dan akan menonaktifkan opsi BB lainnya.<li>Isi input sesuai dengan fungsi yang dipilih.<li>Klik "Generate" untuk melihat hasil.<li>Gunakan delimiter untuk memisahkan angka dalam satu form dan antar form.<li>Tombol "Add Form" otomatis memfokuskan form kosong pertama.</ul></div></div><script>const EnableLog=!1;function log(t,e){EnableLog&&(void 0!==e?console.log(`[Form Generator] ${t}`,e):console.log(`[Form Generator] ${t}`))}let formCounter=0;const forms=[],container=document.getElementById("formsContainer"),outputSection=document.getElementById("outputSection"),outputBox=document.getElementById("outputBox"),totalLinesEl=document.getElementById("totalLines"),totalBetEl=document.getElementById("totalBet"),formCountInfo=document.getElementById("formCountInfo"),delimForm=document.getElementById("delimForm"),delimAntar=document.getElementById("delimAntar"),copyButton=document.getElementById("copyButton"),filterButton=document.getElementById("filterButton");let originalOutput="",isFiltered=!1;function getDigitCount(t){return parseInt(t,10)}function generatePermutationsFromMultiset(t,i){const r={};for(const e of t)r[e]=(r[e]||0)+1;const l=Object.keys(r),a=[];return function t(e,n){if(e.length!==i)for(const o of l)0<r[o]&&(r[o]--,e.push(o),t(e,n-1),e.pop(),r[o]++);else a.push(e.join(""))}([],i),a}function cartesianProduct(e){if(0===e.length)return[];if(1===e.length)return e[0].split("").map(t=>t);let n=e[0].split("").map(t=>t);for(let t=1;t<e.length;t++){var o=e[t].split("");const i=[];for(const r of n)for(const l of o)i.push(r+l);n=i}return n}function generateBBFS(t,a){log("generateBBFS called",{inputStr:t,tipe:a});t=t.split("");if(t.length===a){const e=generatePermutationsFromMultiset(t,a);return log("generateBBFS result (exact length)",{count:e.length}),e}const s={};for(const n of t)s[n]=(s[n]||0)+1;const u=Object.keys(s),c=new Set;!function e(n,o,i){if(o.length!==a){if(!(n>=u.length)){var r=u[n],l=Math.min(s[r],a-o.length);for(let t=0;t<=l;t++)e(n+1,o.concat(Array(t).fill(r)),i-t)}}else for(const t of generatePermutationsFromMultiset(o,a))c.add(t)}(0,[],a);const e=Array.from(c);return log("generateBBFS result (combination)",{count:e.length}),e}function generatePoltar(t){log("generatePoltar called",{inputs:t});t=cartesianProduct(t);return log("generatePoltar result",{count:t.length}),t}function swapFront(t){if(t.length<2)return t;const e=t.split("");return[e[0],e[1]]=[e[1],e[0]],e.join("")}function swapBack(t){if(t.length<2)return t;const e=t.split("");t=e.length;return[e[t-2],e[t-1]]=[e[t-1],e[t-2]],e.join("")}function swapFrontBack(t){return t.length<2?t:swapBack(swapFront(t))}function getCategory(t){const e={};for(const o of t)e[o]=(e[o]||0)+1;const n=Object.values(e);if(n.some(t=>4===t))return"fourplet";if(n.some(t=>3===t))return"triplet";t=n.filter(t=>2===t).length;return 2===t?"twintwin":1===t?"twin":"none"}function filterByTwinModes(t,e){return Object.values(e).some(t=>!0===t)?t.filter(t=>{t=getCategory(t);return"none"===t||("twin"===t?e.twin:"twintwin"===t?e.twintwin:"triplet"===t?e.tripletwin:"fourplet"===t&&e.fourpletwin)}):t.filter(t=>"none"===getCategory(t))}function processForm(t){const{tipe:e,fungsi:n,twinModes:o,inputs:i,bet:r}=t;var l=getDigitCount(e);let a=[];var s=n.bbfs||!1,t=n.poltar||!1;if(log("processForm started",{tipe:e,fungsi:n,bet:r,inputs:i}),s){var u=(i[0]||"").replace(/\D/g,"");if(0===u.length)return log("processForm: BBFS empty input"),{lines:[],count:0,bet:r||0};if(u.length<l)return log("processForm: BBFS input too short",{inputStr:u,digitCount:l}),{lines:[],count:0,bet:r||0};a=generateBBFS(u,l)}else if(t){const f=i.slice(0,l).map(t=>t.replace(/\D/g,""));if(f.some(t=>0===t.length))return log("processForm: POLTAR empty input"),{lines:[],count:0,bet:r||0};var c=filterByTwinModes(c=generatePoltar(f),o);a=c}else{const m=(i[0]||"").replace(/\D/g,"");if(0===m.length)return log("processForm: empty input"),{lines:[],count:0,bet:r||0};s=n.bb||!1,u=n.bbd||!1,t=n.bbb||!1,c=n.bbbdb||!1;if(!(s||u||t||c))return log("processForm: no function selected, returning original"),{lines:[m],count:1,bet:r||0};if(m.length!==l)return log("processForm: input length mismatch",{inputStr:m,digitCount:l}),{lines:[],count:0,bet:r||0};const g=new Set;g.add(m),s&&(s=m.split("").reverse().join(""),g.add(s)),u&&2<=l&&g.add(swapFront(m)),t&&2<=l&&g.add(swapBack(m)),c&&2<=l&&(g.add(swapFront(m)),g.add(swapBack(m)),g.add(swapFrontBack(m))),a=Array.from(g),log("processForm: BB variants result",{count:a.length,results:a})}const d=new Set,p=[];for(const b of a)d.has(b)||(d.add(b),p.push(b));a=p;l={lines:a,count:a.length,bet:r||0};return log("processForm result",{count:l.count,bet:l.bet}),l}function renderForms(){if(0===forms.length)return container.innerHTML=`
-                    <div style="text-align:center;padding:30px 0;color:#64748b;font-size:15px;">
-                        Belum ada form. Klik "Tambah Form" untuk mulai.
-                    </div>
-                `,void(formCountInfo.textContent="0 form");let o="";for(let n=0;n<forms.length;n++){const F=forms[n];var i=n+1,r=F.fungsi.poltar||!1,l=getDigitCount(F.tipe);let e="";if(r){e='<div class="input-group">';for(let t=0;t<l;t++){var a=F.inputs[t]||"";e+=`
-                            <input type="text" class="poltar-input" 
-                                   data-formidx="${n}" data-didx="${t}" 
-                                   value="${a}" placeholder="${t+1}" 
-                                   inputmode="numeric" pattern="[0-9]*" />
-                        `}e+="</div>"}else{var s=F.inputs[0]||"";e=`
-                        <input type="text" class="single-input" 
-                               data-formidx="${n}" 
-                               value="${s}" 
-                               placeholder="contoh: 12345" 
-                               inputmode="numeric" pattern="[0-9]*" />
-                    `}var u=F.fungsi.bb?"checked":"",c=F.fungsi.bbd?"checked":"",d=F.fungsi.bbb?"checked":"",p=F.fungsi.bbbdb?"checked":"",f=F.fungsi.bbfs?"checked":"",m=F.fungsi.poltar?"checked":"",g=r&&2<=l,b=r&&4<=l,h=r&&3<=l,v=r&&5<=l,B=F.twinModes.twin?"checked":"",x=F.twinModes.twintwin?"checked":"",y=F.twinModes.tripletwin?"checked":"",k=F.twinModes.fourpletwin?"checked":"",s=processForm(F);let t="";t=0<s.count?`${s.count} line${1<s.count?"s":""} · ${formatRupiah(s.bet)}`:r?`⏳ ${F.inputs.slice(0,l).filter(t=>0<t.replace(/\D/g,"").length).length}/${l} input diisi`:0===(s=(F.inputs[0]||"").replace(/\D/g,"")).length?"⏳ isi input":F.fungsi.bbfs&&s.length<l?`⚠️ minimal ${l} digit`:(F.fungsi.bb||F.fungsi.bbd||F.fungsi.bbb||F.fungsi.bbbdb)&&s.length!==l?`⚠️ butuh ${l} digit`:"⏳ tidak ada kombinasi",o+=`
-                    <div class="form-card" data-formidx="${n}">
-                        <div class="form-row-top">
-                            <span class="form-index">#${i}</span>
-                            <select class="tipe-select" data-formidx="${n}">
-                                <option value="5d" ${"5d"===F.tipe?"selected":""}>5D</option>
-                                <option value="4d" ${"4d"===F.tipe?"selected":""}>4D</option>
-                                <option value="3d" ${"3d"===F.tipe?"selected":""}>3D</option>
-                                <option value="2d" ${"2d"===F.tipe?"selected":""}>2D</option>
-                            </select>
+<!doctype html>
+<html lang="id" data-bs-theme="dark">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.5" />
+    <title>Form Generator</title>
+    <link rel="icon" type="image/x-icon" href="https://raw.githubusercontent.com/GoodForLife/webapp/refs/heads/main/asset/logos.ico" />
+    <!-- Bootstrap 5 + Icons -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" />
+    <style>
+        /* minified custom overrides */
+        :root{--bs-body-bg:#0b0e14;--bs-body-color:#e2e8f0}body{background:#0b0e14;color:#e2e8f0;padding:1rem;min-height:100vh}.form-card{background:#1a1f2b;border:1px solid #2d3548;border-radius:.75rem;padding:.75rem 1rem;margin-bottom:.625rem;transition:border-color .2s}.form-card:hover{border-color:#4a5568}.form-card .form-control,.form-card .form-select{background:#0f141f;border:1px solid #2d3548;color:#e2e8f0;font-size:.8125rem;height:34px;padding:.25rem .625rem;border-radius:6px}.form-card .form-control:focus,.form-card .form-select:focus{border-color:#6366f1;box-shadow:0 0 0 2px rgba(99,102,241,.25)}.form-card .form-control-sm,.form-card .form-select-sm{height:34px;font-size:.8125rem}.form-card .form-control.bet-input{max-width:100px}.form-card .form-control.single-input{font-weight:500;letter-spacing:1px}.form-card .form-control.poltar-input{width:48px;text-align:center;font-weight:500;flex-shrink:0}.twin-group{background:#1e293b;border:1px solid #2d3548;border-radius:20px;padding:2px 12px 2px 8px;min-height:34px;display:inline-flex;flex-wrap:wrap;align-items:center;gap:2px 6px}.twin-group .twin-label{font-size:.75rem;color:#94a3b8}.twin-group .form-check{font-size:.75rem;display:flex;align-items:center;gap:2px;color:#cbd5e1;white-space:nowrap;margin:0}.twin-group .form-check-input{width:14px;height:14px;accent-color:#6366f1;cursor:pointer;margin:0 2px 0 0}.twin-group .twin-badge{font-size:.625rem;background:#2d3748;color:#93c5fd;padding:0 8px;border-radius:12px;font-weight:600;line-height:20px}.check-group .form-check{font-size:.8125rem;display:flex;align-items:center;gap:4px;color:#cbd5e1;white-space:nowrap;margin:0;padding:0}.check-group .form-check-input{width:15px;height:15px;accent-color:#6366f1;cursor:pointer;margin:0 2px 0 0}.check-group .form-check-input:disabled{opacity:.4;cursor:not-allowed}.action-bar{background:#1a1f2b;border:1px solid #2d3548;border-radius:.75rem;padding:.75rem 1.25rem;margin-top:.75rem;display:flex;flex-wrap:wrap;align-items:center;gap:.5rem 1rem}.action-bar .btn{padding:.5rem 1.25rem;font-size:.875rem;font-weight:600;border-radius:8px}.action-bar .form-count{font-size:.75rem;color:#64748b;margin-left:auto}.output-section{background:#1a1f2b;border:1px solid #2d3548;border-radius:.75rem;padding:1rem 1.25rem;margin-top:1rem}.output-box{background:#0f141f;border:1px solid #2d3548;border-radius:8px;padding:.75rem 1rem;font-family:'Courier New',monospace;word-break:break-all;max-height:200px;overflow-y:auto;color:#e2e8f0;line-height:1.7;white-space:pre-wrap}.output-box.empty{color:#64748b;font-style:italic;font-family:'Segoe UI',sans-serif}.badge-row{display:flex;flex-wrap:wrap;gap:1.5rem 2.5rem;margin-top:.875rem;padding-top:.875rem;border-top:1px solid #2d3548}.badge-item .num{font-weight:700;font-size:22px;color:#f1f5f9}.badge-item .lbl{font-size:.8125rem;color:#94a3b8}.preview-text{font-size:.75rem;color:#94a3b8;white-space:nowrap}.btn-remove{background:0 0;border:0;color:#64748b;font-size:1.125rem;cursor:pointer;line-height:1;padding:0 4px;transition:color .2s}.btn-remove:hover{color:#f87171}.btn-tutorial{background:0 0;border:1px solid #2d3548;color:#e2e8f0;padding:4px 14px;border-radius:6px;cursor:pointer;font-size:.875rem;transition:background .2s,border-color .2s;height:34px;display:inline-flex;align-items:center;gap:4px}.btn-tutorial:hover{background:#2d3548;border-color:#6366f1}.btn-copy{background:#2d3748;border:1px solid #4a5568;color:#e2e8f0;padding:4px 14px;border-radius:6px;font-size:.8125rem;cursor:pointer;transition:background .2s,border-color .2s;height:32px;display:inline-flex;align-items:center;gap:4px}.btn-copy:hover{background:#3b4252;border-color:#6366f1}.btn-copy.copied{background:#2b6b4c;border-color:#48bb78;color:#c6f6d5}.btn-filter{background:#2d3748;border:1px solid #4a5568;color:#e2e8f0;padding:4px 14px;border-radius:6px;font-size:.8125rem;cursor:pointer;transition:background .2s,border-color .2s;height:32px;display:inline-flex;align-items:center;gap:4px}.btn-filter:hover{background:#3b4252;border-color:#f59e0b}.btn-filter.active{border-color:#f59e0b;color:#fbbf24}.modal-content{background:#1a1f2b;border:1px solid #2d3548;border-radius:12px}.modal-header{border-bottom-color:#2d3548}.modal-footer{border-top-color:#2d3548}.modal-body{color:#e2e8f0}.modal-body ul{color:#e2e8f0;padding-left:20px}.modal-body ul li{margin-bottom:4px}.modal-body strong{color:#f1f5f9}.form-index{font-weight:600;color:#94a3b8;font-size:.875rem;flex-shrink:0}.btn-remove{font-size:1.25rem}.subtitle{color:#94a3b8;font-size:.875rem;margin-bottom:1.25rem;border-left:3px solid #6366f1;padding-left:14px}h1{font-size:26px;font-weight:700;color:#f1f5f9;margin:0;display:flex;align-items:center;gap:10px}.header-row{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:8px 16px;margin-bottom:4px}@media(max-width:576px){.action-bar .btn{font-size:.75rem;padding:.375rem .75rem}.action-bar .form-count{font-size:.625rem}h1{font-size:22px}.form-card .form-control.poltar-input{width:38px;font-size:.75rem}.form-card .form-control.single-input{font-size:.75rem}.form-card .form-control.bet-input{font-size:.75rem}.form-card .form-control,.form-card .form-select{font-size:.75rem}.check-group .form-check{font-size:.75rem}.twin-group .form-check{font-size:.6875rem}.btn-copy,.btn-filter{font-size:.6875rem;padding:2px 10px;height:26px}.btn-tutorial{font-size:.75rem;padding:2px 10px;height:28px}.preview-text{font-size:.625rem}.badge-item .num{font-size:18px}.badge-item .lbl{font-size:.6875rem}}
+    </style>
+</head>
+<body>
+    <div class="container" id="app">
+        <!-- header -->
+        <div class="header-row">
+            <h1><i class="bi bi-grid-3x3-gap-fill"></i> Form Generator</h1>
+            <button class="btn-tutorial" id="btnTutorial"><i class="bi bi-question-circle"></i> Tutorial</button>
+        </div>
+        <div class="subtitle">BB / BBD / BBB / BBDB / BBFS / POLTAR</div>
 
-                            <div class="check-group">
-                                <label><input type="checkbox" class="fungsi-chk" data-formidx="${n}" data-fn="bb" ${u} /> BB</label>
-                                <label><input type="checkbox" class="fungsi-chk" data-formidx="${n}" data-fn="bbd" ${c} /> BBD</label>
-                                <label><input type="checkbox" class="fungsi-chk" data-formidx="${n}" data-fn="bbb" ${d} /> BBB</label>
-                                <label><input type="checkbox" class="fungsi-chk" data-formidx="${n}" data-fn="bbbdb" ${p} /> BBBDB</label>
-                                <label><input type="checkbox" class="fungsi-chk" data-formidx="${n}" data-fn="bbfs" ${f} /> BBFS</label>
-                                <label><input type="checkbox" class="fungsi-chk" data-formidx="${n}" data-fn="poltar" ${m} /> POLTAR</label>
-                            </div>
+        <!-- forms container -->
+        <div id="formsContainer"></div>
 
-                            <div class="twin-group ${r?"":"hidden"}">
-                                <span class="twin-label">Twin:</span>
-                                <label class="${g?"":"hidden"}">
-                                    <input type="checkbox" class="twin-chk" data-formidx="${n}" data-mode="twin" ${B} />
-                                    Twin
-                                </label>
-                                <label class="${b?"":"hidden"}">
-                                    <input type="checkbox" class="twin-chk" data-formidx="${n}" data-mode="twintwin" ${x} />
-                                    TwinTwin
-                                </label>
-                                <label class="${h?"":"hidden"}">
-                                    <input type="checkbox" class="twin-chk" data-formidx="${n}" data-mode="tripletwin" ${y} />
-                                    Triplet
-                                </label>
-                                <label class="${v?"":"hidden"}">
-                                    <input type="checkbox" class="twin-chk" data-formidx="${n}" data-mode="fourpletwin" ${k} />
-                                    Fourplet
-                                </label>
-                                <span class="twin-badge">filter</span>
-                            </div>
+        <!-- action bar -->
+        <div class="action-bar">
+            <button class="btn btn-outline-light" id="btnAddForm"><i class="bi bi-plus-lg"></i> Add Form</button>
+            <button class="btn btn-primary" id="btnGenerateAll"><i class="bi bi-lightning-fill"></i> Generate</button>
+            <div class="d-flex align-items-center gap-2 flex-wrap">
+                <label class="text-secondary small mb-0">Delimiter</label>
+                <select class="form-select form-select-sm w-auto" id="delimForm" style="width:auto;min-width:60px">
+                    <option value="*">*</option><option value="-">-</option><option value="+">+</option>
+                    <option value=".">.</option><option value=",">,</option><option value="#">#</option><option value="^">^</option>
+                </select>
+            </div>
+            <div class="d-flex align-items-center gap-2 flex-wrap">
+                <label class="text-secondary small mb-0">Antar Hasil</label>
+                <select class="form-select form-select-sm w-auto" id="delimAntar" style="width:auto;min-width:60px">
+                    <option value="+">+</option><option value="*">*</option><option value="-">-</option>
+                    <option value=".">.</option><option value=",">,</option><option value="#">#</option><option value="^">^</option>
+                </select>
+            </div>
+            <span class="form-count" id="formCountInfo">0 form</span>
+        </div>
 
-                            <button class="btn-remove" data-formidx="${n}" title="Hapus form">✕</button>
-                        </div>
+        <!-- output -->
+        <div class="output-section d-none" id="outputSection">
+            <div class="d-flex flex-wrap align-items-center justify-content-between gap-2 mb-2">
+                <span class="fw-semibold text-secondary"><i class="bi bi-file-text"></i> Hasil Output</span>
+                <div class="d-flex gap-2 flex-wrap">
+                    <button class="btn-filter" id="filterButton"><i class="bi bi-funnel"></i> Filter Duplikat</button>
+                    <button class="btn-copy" id="copyButton"><i class="bi bi-clipboard"></i> Salin</button>
+                </div>
+            </div>
+            <div class="output-box empty" id="outputBox">Klik "Generate Semua" untuk melihat hasil</div>
+            <div class="badge-row">
+                <div class="badge-item"><span class="lbl">Total Line</span><span class="num" id="totalLines">0</span></div>
+                <div class="badge-item"><span class="lbl">Total Bet</span><span class="num" id="totalBet">Rp 0</span></div>
+            </div>
+        </div>
+    </div>
 
-                        <div class="form-row-bottom">
-                            ${e}
-                            <input type="number" class="bet-input" data-formidx="${n}" 
-                                   value="${F.bet}" min="0" step="100" />
-                            <span class="preview-text" id="preview_${n}">${t}</span>
-                        </div>
-                    </div>
-                `}container.innerHTML=o,formCountInfo.textContent=`${forms.length} form`,attachEvents()}function attachEvents(){document.querySelectorAll(".btn-remove").forEach(t=>{t.onclick=function(t){removeForm(parseInt(this.dataset.formidx,10))}}),document.querySelectorAll(".tipe-select").forEach(t=>{t.onchange=function(){var t=parseInt(this.dataset.formidx,10),e=this.value,n=getDigitCount(e);if(forms[t].tipe=e,forms[t].fungsi.poltar){for(;forms[t].inputs.length<n;)forms[t].inputs.push("");for(;forms[t].inputs.length>n;)forms[t].inputs.pop()}renderForms()}}),document.querySelectorAll(".fungsi-chk").forEach(t=>{t.onchange=function(){var e=parseInt(this.dataset.formidx,10),t=this.dataset.fn,n=this.checked;const o=["bb","bbd","bbb","bbbdb"],i=["bbfs","poltar"];if(o.includes(t)){if(n)for(const l of i)forms[e].fungsi[l]=!1}else if(i.includes(t)&&n){for(const a of o)forms[e].fungsi[a]=!1;for(const s of i)s!==t&&(forms[e].fungsi[s]=!1)}if(forms[e].fungsi[t]=n,"poltar"===t&&n){var r=getDigitCount(forms[e].tipe);const u=[];for(let t=0;t<r;t++)u.push(forms[e].inputs[t]||"");forms[e].inputs=u}else"poltar"!==t||n||(n=forms[e].inputs.join(""),forms[e].inputs=[n],forms[e].twinModes={twin:!1,twintwin:!1,tripletwin:!1,fourpletwin:!1});renderForms()}}),document.querySelectorAll(".twin-chk").forEach(t=>{t.onchange=function(){var t=parseInt(this.dataset.formidx,10),e=this.dataset.mode;forms[t].twinModes[e]=this.checked,renderForms()}}),document.querySelectorAll(".poltar-input").forEach(t=>{t.oninput=function(){var t=parseInt(this.dataset.formidx,10),e=parseInt(this.dataset.didx,10),n=this.value.replace(/\D/g,"");this.value=n,forms[t].inputs[e]=n,updatePreview(t)},t.onblur=function(){updatePreview(parseInt(this.dataset.formidx,10))}}),document.querySelectorAll(".single-input").forEach(t=>{t.oninput=function(){var t=parseInt(this.dataset.formidx,10),e=this.value.replace(/\D/g,"");this.value=e,forms[t].inputs[0]=e,updatePreview(t)},t.onblur=function(){updatePreview(parseInt(this.dataset.formidx,10))}}),document.querySelectorAll(".bet-input").forEach(t=>{t.oninput=function(){var t=parseInt(this.dataset.formidx,10),e=parseInt(this.value,10)||0;forms[t].bet=e,updatePreview(t)},t.onblur=function(){updatePreview(parseInt(this.dataset.formidx,10))}});for(let t=0;t<forms.length;t++)updatePreview(t)}function updatePreview(t){const e=forms[t];var n,o=processForm(e);const i=document.getElementById(`preview_${t}`);i&&(0<o.count?i.textContent=`${o.count} line${1<o.count?"s":""} · ${formatRupiah(o.bet)}`:(t=e.fungsi.poltar||!1,o=getDigitCount(e.tipe),t?(n=e.inputs.slice(0,o).filter(t=>0<t.replace(/\D/g,"").length).length,i.textContent=`⏳ ${n}/${o} input diisi`):0===(n=(e.inputs[0]||"").replace(/\D/g,"")).length?i.textContent="⏳ isi input":e.fungsi.bbfs&&n.length<o?i.textContent=`⚠️ minimal ${o} digit`:(e.fungsi.bb||e.fungsi.bbd||e.fungsi.bbb||e.fungsi.bbbdb)&&n.length!==o?i.textContent=`⚠️ butuh ${o} digit`:i.textContent="⏳ tidak ada kombinasi")),updateTotalBadge()}function generateAll(){log("generateAll started");var e=delimForm.value,t=delimAntar.value;log("delimiters",{delim:e,antar:t});const n=[];let o=0,i=0,r=!1;for(let t=0;t<forms.length;t++){const u=forms[t],c=processForm(u);if(0===c.count){var l=u.fungsi.poltar||!1,a=getDigitCount(u.tipe);if(l){if(u.inputs.slice(0,a).filter(t=>0<t.replace(/\D/g,"").length).length!==a){r=!0;continue}}else{var s=(u.inputs[0]||"").replace(/\D/g,"");if(u.fungsi.bbfs&&s.length<a){r=!0;continue}if((u.fungsi.bb||u.fungsi.bbd||u.fungsi.bbb||u.fungsi.bbbdb)&&s.length!==a){r=!0;continue}if(0===s.length){r=!0;continue}}}0!==c.count&&(a=c.lines.join(e),s=c.bet,n.push(a+"#"+s),o+=c.count,i+=c.bet*c.count)}outputSection.classList.add("visible"),0===n.length?(r?(outputBox.textContent="⚠️ Ada form dengan input tidak sesuai aturan. Perbaiki input.",log("generateAll: error - invalid input")):(outputBox.textContent="⚠️ Tidak ada hasil. Isi input dengan benar.",log("generateAll: no results")),outputBox.classList.remove("empty"),totalLinesEl.textContent="0",totalBetEl.textContent="Rp 0",copyButton.textContent="📋 Salin",copyButton.classList.remove("copied"),isFiltered=!1,filterButton.textContent="🧹 Filter Duplikat",filterButton.classList.remove("active"),originalOutput=""):(t=n.join(t),originalOutput=t,isFiltered=!1,filterButton.textContent="🧹 Filter Duplikat",filterButton.classList.remove("active"),outputBox.textContent=t,outputBox.classList.remove("empty"),totalLinesEl.textContent=o,totalBetEl.textContent=formatRupiah(i),copyButton.textContent="📋 Salin",copyButton.classList.remove("copied"),log("generateAll: success",{totalLines:o,totalBet:i,combinedLength:t.length})),outputSection.scrollIntoView({behavior:"smooth",block:"start"});for(let t=0;t<forms.length;t++)updatePreview(t)}function filterDuplikat(){const t=outputBox.textContent;if(t&&!t.startsWith("⚠️")&&'Klik "Generate Semua" untuk melihat hasil'!==t&&"Belum ada form. Tambahkan form untuk mulai."!==t){if(isFiltered)return outputBox.textContent=originalOutput,isFiltered=!1,filterButton.textContent="🧹 Filter Duplikat",filterButton.classList.remove("active"),updateTotalFromOutput(originalOutput),void(EnableLog&&console.log("[Form Generator] filterDuplikat: kembali ke asli"));originalOutput=originalOutput||t;var e,n,o,i,r=delimForm.value,l=delimAntar.value,a=t.split(l);EnableLog&&(console.log("[Form Generator] filterDuplikat: mulai proses filter"),console.log("[Form Generator] - Jumlah form awal:",a.length),console.log('[Form Generator] - Delimiter dalam form: "'+r+'"'),console.log('[Form Generator] - Delimiter antar form: "'+l+'"'));const c=new Map;for(const f of a){var s=f.split("#");if(2===s.length){const m=s[0];var s=s[1],u=parseInt(s,10);if(!isNaN(u))for(const g of m.split(r).filter(t=>""!==t.trim()))c.has(g)?c.set(g,c.get(g)+u):c.set(g,u)}}EnableLog&&(console.log("[Form Generator] - Total line unik:",c.size),console.log("[Form Generator] - Detail lineBetMap:",Object.fromEntries(c)));const d=new Map;for([e,n]of c)d.has(n)||d.set(n,[]),d.get(n).push(e);EnableLog&&console.log("[Form Generator] - Kelompok bet:",Object.fromEntries(d));const p=[];for([o,i]of d)i.sort(),p.push(i.join(r)+"#"+o);p.sort((t,e)=>{return parseInt(t.split("#")[1],10)-parseInt(e.split("#")[1],10)});l=p.join(l);l!==originalOutput?(outputBox.textContent=l,isFiltered=!0,filterButton.textContent="↩️ Kembali ke Asli",filterButton.classList.add("active"),updateTotalFromOutput(l),EnableLog&&(console.log("[Form Generator] filterDuplikat: ✅ BERHASIL menggabungkan duplikat"),console.log("[Form Generator] - Jumlah form awal:",a.length),console.log("[Form Generator] - Jumlah form setelah filter:",p.length),console.log("[Form Generator] - Total line unik:",c.size),console.log("[Form Generator] - Output baru:",l))):EnableLog&&console.log("[Form Generator] filterDuplikat: tidak ditemukan duplikat, output tetap")}else EnableLog&&console.log("[Form Generator] filterDuplikat: tidak ada output yang valid")}function updateTotalFromOutput(t){if(!t||t.startsWith("⚠️"))return totalLinesEl.textContent="0",void(totalBetEl.textContent="Rp 0");var e,n,o=delimForm.value,i=delimAntar.value;let r=0,l=0;for(const a of t.split(i)){const s=a.split("#");2===s.length&&(e=s[0].split(o).filter(t=>""!==t.trim()),n=parseInt(s[1],10),isNaN(n)||(r+=e.length,l+=e.length*n))}totalLinesEl.textContent=r,totalBetEl.textContent=formatRupiah(l),log("updateTotalFromOutput",{totalLines:r,totalBet:l})}function copyOutput(){const t=outputBox.textContent;if(!t||'Klik "Generate Semua" untuk melihat hasil'===t||t.startsWith("⚠️"))return copyButton.textContent="⚠️ Kosong",void setTimeout(()=>{copyButton.textContent="📋 Salin"},1500);navigator.clipboard&&navigator.clipboard.writeText?navigator.clipboard.writeText(t).then(()=>{copyButton.textContent="✅ Tersalin!",copyButton.classList.add("copied"),setTimeout(()=>{copyButton.textContent="📋 Salin",copyButton.classList.remove("copied")},2e3),log("copyOutput: copied successfully")}).catch(()=>{fallbackCopy(t)}):fallbackCopy(t)}function fallbackCopy(t){const e=document.createElement("textarea");e.value=t,e.style.position="fixed",e.style.opacity="0",document.body.appendChild(e),e.select();try{document.execCommand("copy"),copyButton.textContent="✅ Tersalin!",copyButton.classList.add("copied"),setTimeout(()=>{copyButton.textContent="📋 Salin",copyButton.classList.remove("copied")},2e3)}catch(t){copyButton.textContent="❌ Gagal",setTimeout(()=>{copyButton.textContent="📋 Salin"},1500)}document.body.removeChild(e)}function updateTotalBadge(){let e=0,n=0;for(let t=0;t<forms.length;t++){var o=processForm(forms[t]);e+=o.count,n+=o.bet*o.count}totalLinesEl.textContent=e,totalBetEl.textContent=formatRupiah(n)}function focusFirstEmptyForm(){for(let t=0;t<forms.length;t++){const o=forms[t];let e=!1;if(o.fungsi.poltar||!1){var n=getDigitCount(o.tipe);for(let t=0;t<n;t++)if(0===(o.inputs[t]||"").replace(/\D/g,"").length){e=!0;break}}else 0===(o.inputs[0]||"").replace(/\D/g,"").length&&(e=!0);if(e){const i=document.querySelector(`.form-card[data-formidx="${t}"]`);if(i){const r=i.querySelector(".single-input, .poltar-input");if(r)return void r.focus()}}}const t=document.querySelector(".form-card:last-child");if(t){const e=t.querySelector(".single-input, .poltar-input");e&&e.focus()}}function addForm(){formCounter++;var t={id:formCounter,tipe:"4d",fungsi:{bb:!1,bbfs:!1,poltar:!1,bbd:!1,bbb:!1,bbbdb:!1},twinModes:{twin:!1,twintwin:!1,tripletwin:!1,fourpletwin:!1},inputs:[""],bet:100};forms.push(t),renderForms(),setTimeout(focusFirstEmptyForm,50),updateTotalBadge(),log("addForm: new form added",{totalForms:forms.length})}function removeForm(t){forms.length<=1&&!confirm("Hapus form terakhir?")||(forms.splice(t,1),renderForms(),updateTotalBadge(),0===forms.length?(outputBox.textContent="Belum ada form. Tambahkan form untuk mulai.",outputBox.classList.add("empty"),totalLinesEl.textContent="0",totalBetEl.textContent="Rp 0",outputSection.classList.remove("visible"),copyButton.textContent="📋 Salin",copyButton.classList.remove("copied"),isFiltered=!1,filterButton.textContent="🧹 Filter Duplikat",filterButton.classList.remove("active"),originalOutput="",log("removeForm: all forms removed")):(setTimeout(focusFirstEmptyForm,50),log("removeForm: form removed",{remaining:forms.length})))}function formatRupiah(t){return 0===t?"Rp 0":"Rp "+t.toLocaleString("id-ID")}const modal=document.getElementById("tutorialModal"),btnTutorial=document.getElementById("btnTutorial"),closeTutorial=document.getElementById("closeTutorial");btnTutorial.addEventListener("click",()=>{modal.classList.add("active")}),closeTutorial.addEventListener("click",()=>{modal.classList.remove("active")}),modal.addEventListener("click",t=>{t.target===modal&&modal.classList.remove("active")}),document.getElementById("btnAddForm").addEventListener("click",addForm),document.getElementById("btnGenerateAll").addEventListener("click",generateAll),copyButton.addEventListener("click",copyOutput),filterButton.addEventListener("click",filterDuplikat),delimForm.addEventListener("change",()=>{outputSection.classList.contains("visible")&&(log("delimForm changed, regenerating"),generateAll())}),delimAntar.addEventListener("change",()=>{outputSection.classList.contains("visible")&&(log("delimAntar changed, regenerating"),generateAll())}),document.addEventListener("keydown",t=>{(t.ctrlKey||t.metaKey)&&"Enter"===t.key&&(t.preventDefault(),generateAll())}),log("Application initialized with EnableLog = "+EnableLog),addForm()</script>
+    <!-- modal tutorial -->
+    <div class="modal fade" id="tutorialModal" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header border-secondary">
+                    <h5 class="modal-title"><i class="bi bi-book"></i> Tutorial Penggunaan</h5>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <p><strong>Fungsi-fungsi:</strong></p>
+                    <ul>
+                        <li><strong>BB</strong> (Bolak-Balik): Membalik seluruh digit. Contoh: 1234 → 1234, 4321.</li>
+                        <li><strong>BBD</strong> (Bolak-Balik Depan): Menukar 2 digit pertama. Contoh: 1234 → 1234, 2134.</li>
+                        <li><strong>BBB</strong> (Bolak-Balik Belakang): Menukar 2 digit terakhir. Contoh: 1234 → 1234, 1243.</li>
+                        <li><strong>BBDB</strong> (Bolak-Balik Depan &amp; Belakang): Menukar 2 digit pertama dan 2 digit terakhir. Contoh: 1234 → 1234, 2134, 1243, 2143.</li>
+                        <li><strong>BBFS</strong> (Bolak-Balik Full Set): Menghasilkan semua permutasi dari digit yang diinput (tanpa pengulangan).</li>
+                        <li><strong>POLTAR</strong>: Menggabungkan setiap digit dari beberapa input (cartesian product).</li>
+                    </ul>
+                    <p><strong>Cara Penggunaan:</strong></p>
+                    <ul>
+                        <li>Pilih tipe permainan (2D-5D).</li>
+                        <li>Centang fungsi yang diinginkan. BB, BBD, BBB, BBDB dapat dipilih bersamaan.</li>
+                        <li>BBFS dan POLTAR saling eksklusif dan akan menonaktifkan opsi BB lainnya.</li>
+                        <li>Isi input sesuai dengan fungsi yang dipilih.</li>
+                        <li>Klik "Generate" untuk melihat hasil.</li>
+                        <li>Gunakan delimiter untuk memisahkan angka dalam satu form dan antar form.</li>
+                        <li>Tombol "Add Form" otomatis memfokuskan form kosong pertama.</li>
+                    </ul>
+                </div>
+                <div class="modal-footer border-secondary">
+                    <button class="btn btn-secondary" data-bs-dismiss="modal">Tutup</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js">
+    </script>
+    <script>
+        /* ============================================================
+           APP LOGIC (with BBDB rename & auto-disable for BB checkboxes)
+           ============================================================ */
+        const EnableLog = false;
+
+        function log(a, b) { EnableLog && (b !== undefined ? console.log("[Form Generator] " + a, b) : console.log("[Form Generator] " + a)) }
+
+        let formCounter = 0,
+            forms = [],
+            originalOutput = "",
+            isFiltered = !1;
+        const container = document.getElementById("formsContainer"),
+            outputSection = document.getElementById("outputSection"),
+            outputBox = document.getElementById("outputBox"),
+            totalLinesEl = document.getElementById("totalLines"),
+            totalBetEl = document.getElementById("totalBet"),
+            formCountInfo = document.getElementById("formCountInfo"),
+            delimForm = document.getElementById("delimForm"),
+            delimAntar = document.getElementById("delimAntar"),
+            copyButton = document.getElementById("copyButton"),
+            filterButton = document.getElementById("filterButton");
+
+        function getDigitCount(a) { return parseInt(a, 10) }
+
+        // --- Helper functions (BB, BBDB, etc.) ---
+        function generatePermutationsFromMultiset(e, t) {
+            const n = {};
+            for (const a of e) n[a] = (n[a] || 0) + 1;
+            const r = Object.keys(n),
+                o = [];
+
+            function c(e, a) {
+                if (e.length === t) { o.push(e.join("")); return }
+                for (const t of r)
+                    if (n[t] > 0) { n[t]--, e.push(t), c(e, a - 1), e.pop(), n[t]++ }
+            }
+            return c([], t), o
+        }
+
+        function cartesianProduct(e) {
+            if (0 === e.length) return [];
+            if (1 === e.length) return e[0].split("").map(e => e);
+            let t = e[0].split("").map(e => e);
+            for (let n = 1; n < e.length; n++) { const r = e[n].split(""),
+                    o = [];
+                for (const e of t)
+                    for (const t of r) o.push(e + t);
+                t = o }
+            return t
+        }
+
+        function generateBBFS(e, t) {
+            log("generateBBFS called", { inputStr: e, tipe: t });
+            const n = e.split("");
+            if (n.length === t) { const a = generatePermutationsFromMultiset(n, t);
+                log("generateBBFS result (exact length)", { count: a.length }); return a }
+            const r = {};
+            for (const e of n) r[e] = (r[e] || 0) + 1;
+            const o = Object.keys(r),
+                c = new Set;
+
+            function i(e, a, l) {
+                if (a.length === t) { const e = generatePermutationsFromMultiset(a, t);
+                    for (const t of e) c.add(t); return }
+                if (e >= o.length) return;
+                const s = o[e],
+                    u = Math.min(r[s], t - a.length);
+                for (let e = 0; e <= u; e++) { const t = a.concat(Array(e).fill(s));
+                    i(e + 1, t, l - e) }
+            }
+            i(0, [], t);
+            const a = Array.from(c);
+            return log("generateBBFS result (combination)", { count: a.length }), a
+        }
+
+        function generatePoltar(e) { log("generatePoltar called", { inputs: e }); const t = cartesianProduct(e);
+            log("generatePoltar result", { count: t.length }); return t }
+
+        function swapFront(e) { if (e.length < 2) return e; const t = e.split("");
+            [t[0], t[1]] = [t[1], t[0]]; return t.join("") }
+
+        function swapBack(e) { if (e.length < 2) return e; const t = e.split(""),
+                n = t.length;
+            [t[n - 2], t[n - 1]] = [t[n - 1], t[n - 2]]; return t.join("") }
+
+        function swapFrontBack(e) { if (e.length < 2) return e; let t = swapFront(e);
+            t = swapBack(t); return t }
+
+        // --- Twin filter ---
+        function getCategory(e) { const t = {};
+            for (const n of e) t[n] = (t[n] || 0) + 1;
+            const n = Object.values(t);
+            return n.some(e => e === 4) ? "fourplet" : n.some(e => e === 3) ? "triplet" : (e => e.filter(e => e === 2).length)(n) === 2 ? "twintwin" : n.some(e => e === 2) ? "twin" : "none" }
+
+        function filterByTwinModes(e, t) { const n = Object.values(t).some(e => e === !0);
+            return n ? e.filter(e => { const n = getCategory(e); return "none" === n || t.twin && "twin" === n || t.twintwin && "twintwin" === n || t.tripletwin && "triplet" === n || t.fourpletwin && "fourplet" === n }) : e.filter(e => "none" === getCategory(e)) }
+
+        // --- Process a single form ---
+        function processForm(e) {
+            const { tipe: t, fungsi: n, twinModes: r, inputs: o, bet: c } = e,
+                i = getDigitCount(t);
+            let a = [];
+            const l = n.bbfs || !1,
+                s = n.poltar || !1;
+            log("processForm started", { tipe: t, fungsi: n, bet: c, inputs: o });
+
+            if (l) {
+                const e = (o[0] || "").replace(/\D/g, "");
+                if (0 === e.length) return log("processForm: BBFS empty input"), { lines: [], count: 0, bet: c || 0 };
+                if (e.length < i) return log("processForm: BBFS input too short", { inputStr: e, digitCount: i }), { lines: [],
+                        count: 0, bet: c || 0 };
+                a = generateBBFS(e, i);
+            } else if (s) {
+                const e = o.slice(0, i).map(e => e.replace(/\D/g, ""));
+                if (e.some(e => 0 === e.length)) return log("processForm: POLTAR empty input"), { lines: [], count: 0, bet: c ||
+                        0 };
+                let t = generatePoltar(e);
+                t = filterByTwinModes(t, r), a = t;
+            } else {
+                const e = (o[0] || "").replace(/\D/g, "");
+                if (0 === e.length) return log("processForm: empty input"), { lines: [], count: 0, bet: c || 0 };
+                const t = n.bb || !1,
+                    r = n.bbd || !1,
+                    o = n.bbb || !1,
+                    l = n.bbdb || !1; // changed from bbbdb
+                if (!t && !r && !o && !l) return log("processForm: no function selected, returning original"), { lines: [e],
+                        count: 1, bet: c || 0 };
+                if (e.length !== i) return log("processForm: input length mismatch", { inputStr: e, digitCount: i }), { lines: [],
+                        count: 0, bet: c || 0 };
+                const s = new Set;
+                s.add(e);
+                if (t) { const t = e.split("").reverse().join("");
+                    s.add(t) }
+                if (r && i >= 2) s.add(swapFront(e));
+                if (o && i >= 2) s.add(swapBack(e));
+                if (l && i >= 2) { s.add(swapFront(e));
+                    s.add(swapBack(e));
+                    s.add(swapFrontBack(e)) }
+                a = Array.from(s);
+                log("processForm: BB variants result", { count: a.length, results: a });
+            }
+
+            // unique
+            const u = new Set,
+                p = [];
+            for (const e of a) u.has(e) || (u.add(e), p.push(e));
+            a = p;
+            const d = { lines: a, count: a.length, bet: c || 0 };
+            log("processForm result", { count: d.count, bet: d.bet });
+            return d;
+        }
+
+        // --- Update checkbox disabled state based on input length ---
+        function updateCheckboxStates(idx) {
+            const form = forms[idx];
+            if (!form) return;
+            const tipe = form.tipe;
+            const digitCount = getDigitCount(tipe);
+            // For non-POLTAR, get input from first field
+            const inputVal = (form.inputs[0] || "").replace(/\D/g, "");
+            const isOver = inputVal.length > digitCount;
+
+            // Only disable if not POLTAR and not BBFS? Actually we disable BB/BBD/BBB/BBDB
+            // but only when those checkboxes are not mutually exclusive with BBFS/POLTAR.
+            // However, we want to disable them only if the user types too many digits.
+            // Also, if BBFS or POLTAR is active, they are already hidden/disabled via logic.
+            // So we apply disable to the DOM elements directly.
+            const formCard = document.querySelector(`.form-card[data-formidx="${idx}"]`);
+            if (!formCard) return;
+            const checkboxes = formCard.querySelectorAll('.fungsi-chk[data-fn="bb"], .fungsi-chk[data-fn="bbd"], .fungsi-chk[data-fn="bbb"], .fungsi-chk[data-fn="bbdb"]');
+            checkboxes.forEach(chk => {
+                // Only disable if the checkbox is not checked (we don't want to uncheck, just disable)
+                // But we want to prevent checking if over limit. We'll set disabled property.
+                chk.disabled = isOver;
+                // If disabled, we also uncheck it to avoid invalid state
+                if (isOver) {
+                    chk.checked = false;
+                    // update state
+                    const fn = chk.dataset.fn;
+                    forms[idx].fungsi[fn] = false;
+                }
+            });
+        }
+
+        // --- Render all forms ---
+        function renderForms() {
+            if (0 === forms.length) {
+                container.innerHTML =
+                    '<div class="text-center py-4 text-secondary" style="font-size:15px;">Belum ada form. Klik "Tambah Form" untuk mulai.</div>';
+                formCountInfo.textContent = "0 form";
+                return;
+            }
+            let e = "";
+            for (let t = 0; t < forms.length; t++) {
+                const n = forms[t],
+                    r = t + 1,
+                    o = n.fungsi.poltar || !1,
+                    c = getDigitCount(n.tipe);
+                let i = "";
+                if (o) {
+                    i = '<div class="d-flex flex-wrap gap-1">';
+                    for (let e = 0; e < c; e++) {
+                        const r = n.inputs[e] || "";
+                        i +=
+                            `<input type="text" class="form-control poltar-input form-control-sm" data-formidx="${t}" data-didx="${e}" value="${r}" placeholder="${e+1}" inputmode="numeric" pattern="[0-9]*" />`;
+                    }
+                    i += "</div>";
+                } else {
+                    const e = n.inputs[0] || "";
+                    i =
+                        `<input type="text" class="form-control single-input form-control-sm" data-formidx="${t}" value="${e}" placeholder="contoh: 12345" inputmode="numeric" pattern="[0-9]*" />`;
+                }
+
+                const a = n.fungsi.bb ? "checked" : "",
+                    l = n.fungsi.bbd ? "checked" : "",
+                    s = n.fungsi.bbb ? "checked" : "",
+                    u = n.fungsi.bbdb ? "checked" : "", // changed from bbbdb
+                    p = n.fungsi.bbfs ? "checked" : "",
+                    d = n.fungsi.poltar ? "checked" : "",
+                    m = o && c >= 2,
+                    h = o && c >= 4,
+                    g = o && c >= 3,
+                    f = o && c >= 5,
+                    v = n.twinModes.twin ? "checked" : "",
+                    b = n.twinModes.twintwin ? "checked" : "",
+                    y = n.twinModes.tripletwin ? "checked" : "",
+                    w = n.twinModes.fourpletwin ? "checked" : "",
+                    k = processForm(n);
+                let E = "";
+                if (k.count > 0) E = `${k.count} line${k.count>1?"s":""} · ${formatRupiah(k.bet)}`;
+                else if (o) {
+                    const e = n.inputs.slice(0, c).filter(e => e.replace(/\D/g, "").length > 0).length;
+                    E = `⏳ ${e}/${c} input diisi`;
+                } else {
+                    const e = (n.inputs[0] || "").replace(/\D/g, "");
+                    E = 0 === e.length ? "⏳ isi input" : n.fungsi.bbfs && e.length < c ? `⚠️ minimal ${c} digit` : n.fungsi.bb ||
+                        n.fungsi.bbd || n.fungsi.bbb || n.fungsi.bbdb ? e.length !== c ? `⚠️ butuh ${c} digit` :
+                        "⏳ tidak ada kombinasi" : "⏳ tidak ada kombinasi";
+                }
+
+                e +=
+                    `<div class="form-card" data-formidx="${t}"><div class="d-flex flex-wrap align-items-center gap-1 gap-sm-2 w-100"><span class="form-index">#${r}</span><select class="form-select tipe-select form-select-sm" data-formidx="${t}" style="width:auto;min-width:60px;flex-shrink:0"><option value="5d" ${n.tipe==="5d"?"selected":""}>5D</option><option value="4d" ${n.tipe==="4d"?"selected":""}>4D</option><option value="3d" ${n.tipe==="3d"?"selected":""}>3D</option><option value="2d" ${n.tipe==="2d"?"selected":""}>2D</option></select><div class="check-group d-flex flex-wrap gap-1 gap-sm-2 align-items-center"><div class="form-check"><input class="form-check-input fungsi-chk" type="checkbox" data-formidx="${t}" data-fn="bb" ${a} /><label class="form-check-label small">BB</label></div><div class="form-check"><input class="form-check-input fungsi-chk" type="checkbox" data-formidx="${t}" data-fn="bbd" ${l} /><label class="form-check-label small">BBD</label></div><div class="form-check"><input class="form-check-input fungsi-chk" type="checkbox" data-formidx="${t}" data-fn="bbb" ${s} /><label class="form-check-label small">BBB</label></div><div class="form-check"><input class="form-check-input fungsi-chk" type="checkbox" data-formidx="${t}" data-fn="bbdb" ${u} /><label class="form-check-label small">BBDB</label></div><div class="form-check"><input class="form-check-input fungsi-chk" type="checkbox" data-formidx="${t}" data-fn="bbfs" ${p} /><label class="form-check-label small">BBFS</label></div><div class="form-check"><input class="form-check-input fungsi-chk" type="checkbox" data-formidx="${t}" data-fn="poltar" ${d} /><label class="form-check-label small">POLTAR</label></div></div><div class="twin-group ${o?"":"d-none"}"><span class="twin-label">Twin:</span><div class="form-check ${m?"":"d-none"}"><input class="form-check-input twin-chk" type="checkbox" data-formidx="${t}" data-mode="twin" ${v} /><label class="form-check-label">Twin</label></div><div class="form-check ${h?"":"d-none"}"><input class="form-check-input twin-chk" type="checkbox" data-formidx="${t}" data-mode="twintwin" ${b} /><label class="form-check-label">TwinTwin</label></div><div class="form-check ${g?"":"d-none"}"><input class="form-check-input twin-chk" type="checkbox" data-formidx="${t}" data-mode="tripletwin" ${y} /><label class="form-check-label">Triplet</label></div><div class="form-check ${f?"":"d-none"}"><input class="form-check-input twin-chk" type="checkbox" data-formidx="${t}" data-mode="fourpletwin" ${w} /><label class="form-check-label">Fourplet</label></div><span class="twin-badge">filter</span></div><button class="btn-remove ms-auto" data-formidx="${t}" title="Hapus form">✕</button></div><div class="d-flex flex-wrap align-items-center gap-1 gap-sm-2 w-100 pt-1">${i}<input type="number" class="form-control bet-input form-control-sm" data-formidx="${t}" value="${n.bet}" min="0" step="100" style="width:100px;flex-shrink:0" /><span class="preview-text" id="preview_${t}">${E}</span></div></div>`;
+            }
+            container.innerHTML = e;
+            formCountInfo.textContent = `${forms.length} form`;
+            attachEvents();
+            // after rendering, apply disabled states
+            for (let i = 0; i < forms.length; i++) {
+                updateCheckboxStates(i);
+            }
+        }
+
+        // --- Attach events (with new logic for auto-disable) ---
+        function attachEvents() {
+            // Remove form
+            document.querySelectorAll(".btn-remove").forEach(e => {
+                e.onclick = function() {
+                    const e = parseInt(this.dataset.formidx, 10);
+                    removeForm(e);
+                };
+            });
+
+            // Tipe select change
+            document.querySelectorAll(".tipe-select").forEach(e => {
+                e.onchange = function() {
+                    const idx = parseInt(this.dataset.formidx, 10);
+                    const newTipe = this.value;
+                    const newDigitCount = getDigitCount(newTipe);
+                    forms[idx].tipe = newTipe;
+                    if (forms[idx].fungsi.poltar) {
+                        while (forms[idx].inputs.length < newDigitCount) forms[idx].inputs.push("");
+                        while (forms[idx].inputs.length > newDigitCount) forms[idx].inputs.pop();
+                    }
+                    renderForms();
+                };
+            });
+
+            // Function checkboxes
+            document.querySelectorAll(".fungsi-chk").forEach(e => {
+                e.onchange = function() {
+                    const idx = parseInt(this.dataset.formidx, 10);
+                    const fn = this.dataset.fn;
+                    const isChecked = this.checked;
+
+                    const groupA = ["bb", "bbd", "bbb", "bbdb"];
+                    const groupB = ["bbfs", "poltar"];
+
+                    if (groupA.includes(fn)) {
+                        if (isChecked) {
+                            for (const b of groupB) forms[idx].fungsi[b] = false;
+                        }
+                    } else if (groupB.includes(fn)) {
+                        if (isChecked) {
+                            for (const a of groupA) forms[idx].fungsi[a] = false;
+                            for (const b of groupB) {
+                                if (b !== fn) forms[idx].fungsi[b] = false;
+                            }
+                        }
+                    }
+
+                    forms[idx].fungsi[fn] = isChecked;
+
+                    if (fn === "poltar" && isChecked) {
+                        const digitCount = getDigitCount(forms[idx].tipe);
+                        const newInputs = [];
+                        for (let i = 0; i < digitCount; i++) {
+                            newInputs.push(forms[idx].inputs[i] || "");
+                        }
+                        forms[idx].inputs = newInputs;
+                    } else if (fn === "poltar" && !isChecked) {
+                        const combined = forms[idx].inputs.join("");
+                        forms[idx].inputs = [combined];
+                        forms[idx].twinModes = { twin: false, twintwin: false, tripletwin: false, fourpletwin: false };
+                    }
+
+                    renderForms();
+                };
+            });
+
+            // Twin checkboxes
+            document.querySelectorAll(".twin-chk").forEach(e => {
+                e.onchange = function() {
+                    const idx = parseInt(this.dataset.formidx, 10);
+                    const mode = this.dataset.mode;
+                    forms[idx].twinModes[mode] = this.checked;
+                    renderForms();
+                };
+            });
+
+            // POLTAR inputs
+            document.querySelectorAll(".poltar-input").forEach(e => {
+                e.oninput = function() {
+                    const idx = parseInt(this.dataset.formidx, 10);
+                    const didx = parseInt(this.dataset.didx, 10);
+                    let val = this.value.replace(/\D/g, "");
+                    this.value = val;
+                    forms[idx].inputs[didx] = val;
+                    updatePreview(idx);
+                };
+                e.onblur = function() {
+                    const idx = parseInt(this.dataset.formidx, 10);
+                    updatePreview(idx);
+                };
+            });
+
+            // Single input (BB, BBFS, etc.)
+            document.querySelectorAll(".single-input").forEach(e => {
+                e.oninput = function() {
+                    const idx = parseInt(this.dataset.formidx, 10);
+                    let val = this.value.replace(/\D/g, "");
+                    this.value = val;
+                    forms[idx].inputs[0] = val;
+                    // Update checkbox disabled state
+                    updateCheckboxStates(idx);
+                    updatePreview(idx);
+                };
+                e.onblur = function() {
+                    const idx = parseInt(this.dataset.formidx, 10);
+                    updatePreview(idx);
+                };
+            });
+
+            // Bet input
+            document.querySelectorAll(".bet-input").forEach(e => {
+                e.oninput = function() {
+                    const idx = parseInt(this.dataset.formidx, 10);
+                    const val = parseInt(this.value, 10) || 0;
+                    forms[idx].bet = val;
+                    updatePreview(idx);
+                };
+                e.onblur = function() {
+                    const idx = parseInt(this.dataset.formidx, 10);
+                    updatePreview(idx);
+                };
+            });
+
+            // Initial preview for all
+            for (let i = 0; i < forms.length; i++) {
+                updatePreview(i);
+            }
+        }
+
+        // --- Update preview and badges ---
+        function updatePreview(e) {
+            const t = forms[e];
+            const n = processForm(t);
+            const r = document.getElementById(`preview_${e}`);
+            if (r) {
+                if (n.count > 0) {
+                    r.textContent = `${n.count} line${n.count>1?"s":""} · ${formatRupiah(n.bet)}`;
+                } else {
+                    const e = t.fungsi.poltar || !1,
+                        o = getDigitCount(t.tipe);
+                    if (e) {
+                        const e = t.inputs.slice(0, o).filter(e => e.replace(/\D/g, "").length > 0).length;
+                        r.textContent = `⏳ ${e}/${o} input diisi`;
+                    } else {
+                        const e = (t.inputs[0] || "").replace(/\D/g, "");
+                        r.textContent = 0 === e.length ? "⏳ isi input" : t.fungsi.bbfs && e.length < o ?
+                            `⚠️ minimal ${o} digit` : t.fungsi.bb || t.fungsi.bbd || t.fungsi.bbb || t.fungsi
+                            .bbdb ? e.length !== o ? `⚠️ butuh ${o} digit` : "⏳ tidak ada kombinasi" :
+                            "⏳ tidak ada kombinasi";
+                    }
+                }
+            }
+            updateTotalBadge();
+        }
+
+        // --- Generate all ---
+        function generateAll() {
+            log("generateAll started");
+            const e = delimForm.value,
+                t = delimAntar.value;
+            log("delimiters", { delim: e, antar: t });
+
+            const n = [];
+            let r = 0,
+                o = 0,
+                c = !1;
+            for (let i = 0; i < forms.length; i++) {
+                const a = forms[i],
+                    l = processForm(a);
+                if (0 === l.count) {
+                    const e = a.fungsi.poltar || !1,
+                        t = getDigitCount(a.tipe);
+                    if (e) {
+                        const e = a.inputs.slice(0, t).filter(e => e.replace(/\D/g, "").length > 0).length;
+                        e !== t && (c = !0);
+                    } else {
+                        const e = (a.inputs[0] || "").replace(/\D/g, "");
+                        a.fungsi.bbfs && e.length < t || (a.fungsi.bb || a.fungsi.bbd || a.fungsi.bbb || a.fungsi
+                            .bbdb) && e.length !== t || 0 === e.length ? c = !0 : void 0;
+                    }
+                    continue;
+                }
+                if (0 === l.count) continue;
+                const s = l.lines.join(e) + "#" + l.bet;
+                n.push(s), r += l.count, o += l.bet * l.count;
+            }
+
+            outputSection.classList.remove("d-none");
+            outputSection.classList.add("d-block");
+
+            if (0 === n.length) {
+                outputBox.textContent = c ? "⚠️ Ada form dengan input tidak sesuai aturan. Perbaiki input." :
+                    "⚠️ Tidak ada hasil. Isi input dengan benar.";
+                outputBox.classList.remove("empty");
+                totalLinesEl.textContent = "0";
+                totalBetEl.textContent = "Rp 0";
+                copyButton.textContent = "📋 Salin";
+                copyButton.classList.remove("copied");
+                isFiltered = !1;
+                filterButton.textContent = "🧹 Filter Duplikat";
+                filterButton.classList.remove("active");
+                originalOutput = "";
+            } else {
+                const e = n.join(t);
+                originalOutput = e;
+                isFiltered = !1;
+                filterButton.textContent = "🧹 Filter Duplikat";
+                filterButton.classList.remove("active");
+                outputBox.textContent = e;
+                outputBox.classList.remove("empty");
+                totalLinesEl.textContent = r;
+                totalBetEl.textContent = formatRupiah(o);
+                copyButton.textContent = "📋 Salin";
+                copyButton.classList.remove("copied");
+                log("generateAll: success", { totalLines: r, totalBet: o, combinedLength: e.length });
+            }
+
+            outputSection.scrollIntoView({ behavior: "smooth", block: "start" });
+            for (let e = 0; e < forms.length; e++) updatePreview(e);
+        }
+
+        // --- Filter duplicate (unchanged) ---
+        function filterDuplikat() {
+            const e = outputBox.textContent;
+            if (!e || e.startsWith("⚠️") || "Klik \"Generate Semua\" untuk melihat hasil" === e || "Belum ada form. Tambahkan form untuk mulai." ===
+                e) return;
+            if (isFiltered) {
+                outputBox.textContent = originalOutput;
+                isFiltered = !1;
+                filterButton.textContent = "🧹 Filter Duplikat";
+                filterButton.classList.remove("active");
+                updateTotalFromOutput(originalOutput);
+                return;
+            }
+            originalOutput || (originalOutput = e);
+            const t = delimForm.value,
+                n = delimAntar.value,
+                r = e.split(n),
+                o = new Map;
+            for (const e of r) {
+                const t = e.split("#");
+                if (2 === t.length) {
+                    const e = t[0],
+                        n = t[1],
+                        r = parseInt(n, 10);
+                    if (!isNaN(r))
+                        for (const t of e.split(t).filter(e => "" !== e.trim())) o.has(t) ? o.set(t, o.get(t) + r) : o.set(t,
+                            r);
+                }
+            }
+            const c = new Map;
+            for (const [e, t] of o) c.has(t) || c.set(t, []), c.get(t).push(e);
+            const i = [];
+            for (const [e, t] of c) t.sort(), i.push(t.join(t) + "#" + e);
+            i.sort((e, t) => { const n = parseInt(e.split("#")[1], 10),
+                    r = parseInt(t.split("#")[1], 10); return n - r });
+            const a = i.join(n);
+            a !== originalOutput && (outputBox.textContent = a, isFiltered = !0, filterButton.textContent =
+                "↩️ Kembali ke Asli", filterButton.classList.add("active"), updateTotalFromOutput(a));
+        }
+
+        function updateTotalFromOutput(e) {
+            if (!e || e.startsWith("⚠️")) { totalLinesEl.textContent = "0";
+                totalBetEl.textContent = "Rp 0"; return }
+            const t = delimForm.value,
+                n = delimAntar.value,
+                r = e.split(n);
+            let o = 0,
+                c = 0;
+            for (const e of r) {
+                const t = e.split("#");
+                if (2 === t.length) {
+                    const e = t[0].split(t).filter(e => "" !== e.trim()),
+                        n = parseInt(t[1], 10);
+                    isNaN(n) || (o += e.length, c += e.length * n);
+                }
+            }
+            totalLinesEl.textContent = o;
+            totalBetEl.textContent = formatRupiah(c);
+            log("updateTotalFromOutput", { totalLines: o, totalBet: c });
+        }
+
+        // --- Copy ---
+        function copyOutput() {
+            const e = outputBox.textContent;
+            if (!e || "Klik \"Generate Semua\" untuk melihat hasil" === e || e.startsWith("⚠️")) {
+                copyButton.textContent = "⚠️ Kosong";
+                setTimeout(() => { copyButton.textContent = "📋 Salin"; }, 1500);
+                return;
+            }
+            if (navigator.clipboard && navigator.clipboard.writeText) {
+                navigator.clipboard.writeText(e).then(() => {
+                    copyButton.textContent = "✅ Tersalin!";
+                    copyButton.classList.add("copied");
+                    setTimeout(() => { copyButton.textContent = "📋 Salin";
+                        copyButton.classList.remove("copied"); }, 2e3);
+                    log("copyOutput: copied successfully");
+                }).catch(() => { fallbackCopy(e); });
+            } else {
+                fallbackCopy(e);
+            }
+        }
+
+        function fallbackCopy(e) {
+            const t = document.createElement("textarea");
+            t.value = e;
+            t.style.position = "fixed";
+            t.style.opacity = "0";
+            document.body.appendChild(t);
+            t.select();
+            try {
+                document.execCommand("copy");
+                copyButton.textContent = "✅ Tersalin!";
+                copyButton.classList.add("copied");
+                setTimeout(() => { copyButton.textContent = "📋 Salin";
+                    copyButton.classList.remove("copied"); }, 2e3);
+            } catch (e) {
+                copyButton.textContent = "❌ Gagal";
+                setTimeout(() => { copyButton.textContent = "📋 Salin"; }, 1500);
+            }
+            document.body.removeChild(t);
+        }
+
+        // --- Update total badge ---
+        function updateTotalBadge() {
+            let e = 0,
+                t = 0;
+            for (let n = 0; n < forms.length; n++) {
+                const r = forms[n],
+                    o = processForm(r);
+                e += o.count;
+                t += o.bet * o.count;
+            }
+            totalLinesEl.textContent = e;
+            totalBetEl.textContent = formatRupiah(t);
+        }
+
+        // --- Focus first empty ---
+        function focusFirstEmptyForm() {
+            for (let e = 0; e < forms.length; e++) {
+                const t = forms[e],
+                    n = t.fungsi.poltar || !1;
+                let r = !1;
+                if (n) {
+                    const e = getDigitCount(t.tipe);
+                    for (let n = 0; n < e; n++)
+                        if (0 === (t.inputs[n] || "").replace(/\D/g, "").length) { r = !0; break }
+                } else {
+                    const e = (t.inputs[0] || "").replace(/\D/g, "");
+                    0 === e.length && (r = !0);
+                }
+                if (r) {
+                    const t = document.querySelector(`.form-card[data-formidx="${e}"]`);
+                    if (t) {
+                        const e = t.querySelector(".single-input, .poltar-input");
+                        if (e) return void e.focus();
+                    }
+                }
+            }
+            const t = document.querySelector(".form-card:last-child");
+            if (t) {
+                const e = t.querySelector(".single-input, .poltar-input");
+                e && e.focus();
+            }
+        }
+
+        // --- Add / Remove form ---
+        function addForm() {
+            formCounter++;
+            const e = {
+                id: formCounter,
+                tipe: "4d",
+                fungsi: { bb: !1, bbd: !1, bbb: !1, bbdb: !1, bbfs: !1, poltar: !1 },
+                twinModes: { twin: !1, twintwin: !1, tripletwin: !1, fourpletwin: !1 },
+                inputs: [""],
+                bet: 100,
+            };
+            forms.push(e);
+            renderForms();
+            setTimeout(focusFirstEmptyForm, 50);
+            updateTotalBadge();
+            log("addForm: new form added", { totalForms: forms.length });
+        }
+
+        function removeForm(e) {
+            if (forms.length <= 1 && !confirm("Hapus form terakhir?")) return;
+            forms.splice(e, 1);
+            renderForms();
+            updateTotalBadge();
+            if (0 === forms.length) {
+                outputBox.textContent = "Belum ada form. Tambahkan form untuk mulai.";
+                outputBox.classList.add("empty");
+                totalLinesEl.textContent = "0";
+                totalBetEl.textContent = "Rp 0";
+                outputSection.classList.remove("d-block");
+                outputSection.classList.add("d-none");
+                copyButton.textContent = "📋 Salin";
+                copyButton.classList.remove("copied");
+                isFiltered = !1;
+                filterButton.textContent = "🧹 Filter Duplikat";
+                filterButton.classList.remove("active");
+                originalOutput = "";
+                log("removeForm: all forms removed");
+            } else {
+                setTimeout(focusFirstEmptyForm, 50);
+                log("removeForm: form removed", { remaining: forms.length });
+            }
+        }
+
+        // --- Utility ---
+        function formatRupiah(e) { return 0 === e ? "Rp 0" : "Rp " + e.toLocaleString("id-ID"); }
+
+        // --- Init event listeners ---
+        document.getElementById("btnAddForm").addEventListener("click", addForm);
+        document.getElementById("btnGenerateAll").addEventListener("click", generateAll);
+        copyButton.addEventListener("click", copyOutput);
+        filterButton.addEventListener("click", filterDuplikat);
+        delimForm.addEventListener("change", () => { outputSection.classList.contains("d-block") && generateAll(); });
+        delimAntar.addEventListener("change", () => { outputSection.classList.contains("d-block") && generateAll(); });
+        document.addEventListener("keydown", e => { (e.ctrlKey || e.metaKey) && "Enter" === e.key && (e.preventDefault(),
+                generateAll()); });
+
+        log("Application initialized with EnableLog = " + EnableLog);
+
+        // --- Modal tutorial ---
+        const modal = new bootstrap.Modal(document.getElementById("tutorialModal"));
+        document.getElementById("btnTutorial").addEventListener("click", () => modal.show());
+
+        // --- Start with one form ---
+        addForm();
+    </script>
+</body>
+</html>
