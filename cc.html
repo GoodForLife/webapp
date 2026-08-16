@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.5, user-scalable=yes" />
+    <title>Convert Case</title>
+<style>*,*:before,*:after{box-sizing:border-box}html{font-family:system-ui,'Segoe UI',Roboto,Helvetica,Arial,sans-serif;line-height:1.15;-webkit-text-size-adjust:100%;tab-size:4}body{margin:0;background:var(--color-bg,#140701);color:var(--color-text,#fef1eb);min-height:100vh;display:flex;justify-content:center;align-items:center;padding:.75rem;font-family:'Nunito Sans',system-ui,sans-serif}button,input,textarea{font-family:inherit;font-size:100%;line-height:1.15;margin:0}button{-webkit-appearance:button;cursor:pointer}:root{--container-width:1200px;--color-bg:#fff;--color-text:#06294e;--color-text-secondary:#3f5b7a;--color-container-bg:#fff;--color-container-border:#e0e3e5;--color-btn-bg:#e7eef6;--color-btn-text:#06294e;--color-btn-hover-bg:#0a315b;--color-input-bg:#fff;--color-input-text:#06294e;--color-input-border:#98adbb;--color-input-placeholder:#3f5b7a;--color-surface-bg:#f5f9f9;--color-surface-border:#e0e3e5;--color-message-bg:#fff;--color-message-text:#06294e;--color-message-border:#0000001a;--color-message-shadow:0 6px 20px #0000004d;--color-message-error-text:#3d0300;--fs-xs:0.6rem;--fs-sm:0.7rem;--fs-base:0.85rem}@media (prefers-color-scheme:dark){:root{--color-bg:#140701;--color-text:#fef1eb;--color-text-secondary:#d0bbb1;--color-container-bg:#0a0300;--color-container-border:#544945;--color-btn-bg:#1e1b1a;--color-btn-text:#fef1eb;--color-btn-hover-bg:#342f2d;--color-input-bg:#0a0300;--color-input-text:#fef1eb;--color-input-border:#342f2d;--color-input-placeholder:#d0bbb1;--color-surface-bg:#2e2924;--color-surface-border:#544945;--color-message-bg:#1e1b1a;--color-message-text:#fef1eb;--color-message-border:#ffffff1a;--color-message-shadow:0 6px 24px #0009;--color-message-error-text:#f0a8a8}}.editor{max-width:var(--container-width,880px);width:100%;background:var(--color-container-bg,#0a0300);border:1px solid var(--color-container-border,#544945);border-radius:14px;padding:1rem .8rem .8rem;box-shadow:0 20px 60px rgb(0 0 0 / .6);transition:all 0.2s}.input textarea{width:100%;min-height:150px;padding:.7rem .9rem;background:var(--color-input-bg,#0a0300);border:1px solid var(--color-input-border,#342f2d);border-radius:8px;color:var(--color-input-text,#fef1eb);font-size:var(--fs-base,.85rem);line-height:1.6;resize:vertical;transition:border-color 0.25s,box-shadow 0.25s;outline:none}.input textarea:focus{border-color:#58a6ff;box-shadow:0 0 0 2px rgb(88 166 255 / .15)}.input textarea::placeholder{color:var(--color-input-placeholder,#d0bbb1);font-style:italic}.messages{min-height:1.2rem;margin-top:.15rem;font-size:var(--fs-sm,.7rem);color:var(--color-text-secondary,#d0bbb1);padding:.1rem 0}.toolbar{display:flex;flex-wrap:wrap;gap:.4rem;justify-content:space-between;align-items:center;margin-top:.5rem;padding-top:.5rem;border-top:1px solid var(--color-container-border,#544945)}.actions{display:flex;flex-wrap:wrap;gap:.25rem}.action-btn{padding:.25rem .5rem;border:.5px solid var(--color-input-border,#342f2d);border-radius:30px;background:var(--color-btn-bg,#1e1b1a);color:var(--color-btn-text,#fef1eb);font-size:var(--fs-xs,.6rem);font-weight:500;transition:background 0.2s,border-color 0.2s,color 0.2s,transform 0.1s;display:inline-flex;align-items:center;gap:.2rem;line-height:1.2;min-height:1.6rem}.action-btn:hover{background:var(--color-btn-hover-bg,#342f2d);border-color:#58a6ff;color:var(--color-text,#fef1eb)}.action-btn:active{transform:scale(.95)}.action-btn.copy-btn:hover{border-color:#3fb950;background:#0d1f12;color:#7ee787}.action-btn.clear-btn:hover{border-color:#f85149;background:#1f0e0e;color:#ff7b72}.action-btn .icon{font-size:.8rem;line-height:1}.counts{display:flex;flex-wrap:wrap;gap:.3rem .6rem;font-size:var(--fs-xs,.6rem);color:var(--color-text-secondary,#d0bbb1);background:var(--color-surface-bg,#2e2924);padding:.15rem .6rem;border-radius:30px;border:.5px solid var(--color-surface-border,#544945)}.counts span{display:inline-flex;align-items:center;gap:.1rem;white-space:nowrap}.counts .num{color:var(--color-text,#fef1eb);font-weight:600;min-width:1.2rem;text-align:center}.case-buttons{margin-top:.7rem}.cases{display:flex;flex-wrap:nowrap;gap:.25rem;overflow-x:auto;-webkit-overflow-scrolling:touch;padding-bottom:.2rem}.btn-case{flex:1 0 auto;min-width:0;padding:.2rem .3rem;border:.5px solid var(--color-input-border,#342f2d);border-radius:14px;background:var(--color-btn-bg,#1e1b1a);color:var(--color-btn-text,#fef1eb);font-size:var(--fs-xs,.55rem);font-weight:500;transition:background 0.2s,border-color 0.2s,color 0.2s,transform 0.1s;text-align:center;line-height:1.2;min-height:1.6rem;white-space:nowrap;letter-spacing:.02em}.btn-case:hover{background:var(--color-btn-hover-bg,#342f2d);border-color:#58a6ff;color:var(--color-text,#fef1eb)}.btn-case:active{transform:scale(.95)}.toast{position:fixed;bottom:1.5rem;left:50%;transform:translateX(-50%) translateY(80px);background:var(--color-message-bg,#1e1b1a);color:var(--color-message-text,#fef1eb);padding:.4rem 1.2rem;border-radius:30px;font-size:var(--fs-sm,.7rem);border:.5px solid var(--color-message-border,#ffffff1a);box-shadow:var(--color-message-shadow,0 6px 24px #0009);opacity:0;pointer-events:none;transition:opacity 0.35s,transform 0.35s;z-index:999;font-weight:500}.toast.show{opacity:1;transform:translateX(-50%) translateY(0)}@media (max-width:480px){.btn-case{font-size:.5rem;padding:.15rem .25rem;min-height:1.4rem;border-radius:10px}.cases{gap:.15rem}.action-btn{font-size:.5rem;padding:.2rem .4rem;min-height:1.4rem}.counts{font-size:.5rem;padding:.1rem .4rem;gap:.2rem .4rem}.input textarea{min-height:120px;padding:.5rem .7rem;font-size:.8rem}.editor{padding:.6rem .5rem}}@media (max-width:360px){.btn-case{font-size:.45rem;padding:.1rem .2rem;min-height:1.2rem;border-radius:8px}.action-btn{font-size:.45rem;padding:.15rem .3rem;min-height:1.2rem}.counts{font-size:.45rem;padding:.1rem .3rem}}@media (min-width:600px){.btn-case{font-size:var(--fs-xs,.65rem);padding:.25rem .4rem;min-height:1.8rem;border-radius:16px}.cases{gap:.35rem}.action-btn{font-size:var(--fs-sm,.7rem);padding:.3rem .6rem;min-height:1.8rem}.counts{font-size:var(--fs-sm,.7rem);padding:.2rem .8rem}.input textarea{min-height:180px;padding:.9rem 1.2rem;font-size:var(--fs-base,.9rem)}.editor{padding:1.2rem 1.2rem 1rem}}@media (min-width:900px){.btn-case{font-size:var(--fs-sm,.75rem);padding:.3rem .5rem;min-height:2rem;border-radius:18px}.cases{gap:.4rem}.action-btn{font-size:var(--fs-sm,.8rem);padding:.35rem .8rem;min-height:2rem}.counts{font-size:var(--fs-sm,.8rem);padding:.25rem 1rem}.input textarea{min-height:220px;padding:1rem 1.4rem;font-size:1rem}.editor{padding:1.5rem 1.8rem 1.2rem}}</style>
+</head>
+<body>
+
+    <div class="editor">
+
+        <!-- Input -->
+        <div class="input">
+            <textarea id="content" placeholder="TYPE OR PASTE YOUR CONTENT HERE" autofocus=""></textarea>
+            <div class="messages" id="messages"></div>
+        </div>
+
+        <!-- Toolbar -->
+        <div class="toolbar">
+            <div class="actions">
+                <button class="action-btn copy-btn" id="copyBtn" title="Copy">
+                    <span class="icon">📋</span> Copy
+                </button>
+                <button class="action-btn" id="shareBtn" title="Share">
+                    <span class="icon">↗</span> Share
+                </button>
+                <button class="action-btn" id="downloadBtn" title="Download">
+                    <span class="icon">⬇</span> Download
+                </button>
+                <button class="action-btn clear-btn" id="clearBtn" title="Clear">
+                    <span class="icon">✕</span> Clear
+                </button>
+            </div>
+            <div class="counts">
+                <span>Chars <span class="num" id="char_count">0</span></span>
+                <span>Words <span class="num" id="word_count">0</span></span>
+                <span>Lines <span class="num" id="line_count">0</span></span>
+            </div>
+        </div>
+
+        <!-- Case Buttons – 1 baris, tanpa badge -->
+        <div class="case-buttons">
+            <div class="cases">
+                <button id="sentence" class="btn-case">Sentence</button>
+                <button id="lower" class="btn-case">lower</button>
+                <button id="upper" class="btn-case">UPPER</button>
+                <button id="capitalized" class="btn-case">Capitalized</button>
+                <button id="alternating" class="btn-case">aLtErNaTiNg</button>
+                <button id="title" class="btn-case">Title</button>
+                <button id="inverse" class="btn-case">InVeRsE</button>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- Toast -->
+    <div class="toast" id="toast"></div>
+
+<script>(function(){'use strict';const textarea=document.getElementById('content');const charSpan=document.getElementById('char_count');const wordSpan=document.getElementById('word_count');const lineSpan=document.getElementById('line_count');const messages=document.getElementById('messages');const toast=document.getElementById('toast');const copyBtn=document.getElementById('copyBtn');const shareBtn=document.getElementById('shareBtn');const downloadBtn=document.getElementById('downloadBtn');const clearBtn=document.getElementById('clearBtn');const sentenceBtn=document.getElementById('sentence');const lowerBtn=document.getElementById('lower');const upperBtn=document.getElementById('upper');const capitalizedBtn=document.getElementById('capitalized');const alternatingBtn=document.getElementById('alternating');const titleBtn=document.getElementById('title');const inverseBtn=document.getElementById('inverse');let toastTimer=null;let lastAction='';function getText(){return textarea.value}
+function setText(val){textarea.value=val;updateStats()}
+function updateStats(){const str=getText();charSpan.textContent=str.length;const words=str.trim()?str.trim().split(/\s+/).length:0;wordSpan.textContent=words;const lines=str?str.split(/\n/).length:0;lineSpan.textContent=lines}
+function showToast(msg,duration){duration=duration||2000;if(toastTimer){clearTimeout(toastTimer);toast.classList.remove('show')}
+void toast.offsetWidth;toast.textContent=msg;toast.classList.add('show');toastTimer=setTimeout(()=>{toast.classList.remove('show');toastTimer=null},duration)}
+function showMessage(msg,isError){messages.textContent=msg;messages.style.color=isError?'var(--color-message-error-text, #f0a8a8)':'var(--color-text-secondary, #d0bbb1)';clearTimeout(messages._timer);messages._timer=setTimeout(()=>{messages.textContent=''},3000)}
+function toSentenceCase(str){if(!str)return'';const s=str.toLowerCase();return s.replace(/^(\s*)(.)/,(_,spaces,ch)=>spaces+ch.toUpperCase())}
+function toLowerCase(str){return str.toLowerCase()}
+function toUpperCase(str){return str.toUpperCase()}
+function toCapitalizedCase(str){return str.toLowerCase().replace(/\b\w/g,c=>c.toUpperCase())}
+function toAlternatingCase(str){let result='';let idx=0;for(let i=0;i<str.length;i++){const ch=str[i];if(ch.match(/[a-zA-Z]/)){result+=(idx%2===0)?ch.toLowerCase():ch.toUpperCase();idx++}else{result+=ch}}
+return result}
+function toTitleCase(str){const minor=new Set(['and','or','but','for','nor','on','at','to','by','in','of','with','without','via','vs','over','under','from','into','through','during','including','etc','upon','onto','per']);const words=str.toLowerCase().split(/\b/);let result='';let wordIndex=0;for(let i=0;i<words.length;i++){let w=words[i];if(w.match(/^[a-z]+$/)){if(wordIndex===0||!minor.has(w)){result+=w.charAt(0).toUpperCase()+w.slice(1)}else{result+=w}
+wordIndex++}else{result+=w;if(w.match(/[.!?]\s*$/))wordIndex=0}}
+return result}
+function toInverseCase(str){let result='';for(let i=0;i<str.length;i++){const ch=str[i];if(ch.match(/[a-zA-Z]/)){result+=(ch===ch.toUpperCase())?ch.toLowerCase():ch.toUpperCase()}else{result+=ch}}
+return result}
+function applyConversion(fn,label){const input=getText();if(!input){showMessage('Please enter some text first.',!0);return}
+const output=fn(input);setText(output);lastAction=label;showMessage(`✓ Converted to ${label}`);showToast(`✅ ${label}`,1200)}
+textarea.addEventListener('input',updateStats);sentenceBtn.addEventListener('click',()=>applyConversion(toSentenceCase,'Sentence case'));lowerBtn.addEventListener('click',()=>applyConversion(toLowerCase,'lower case'));upperBtn.addEventListener('click',()=>applyConversion(toUpperCase,'UPPER CASE'));capitalizedBtn.addEventListener('click',()=>applyConversion(toCapitalizedCase,'Capitalized Case'));alternatingBtn.addEventListener('click',()=>applyConversion(toAlternatingCase,'aLtErNaTiNg cAsE'));titleBtn.addEventListener('click',()=>applyConversion(toTitleCase,'Title Case'));inverseBtn.addEventListener('click',()=>applyConversion(toInverseCase,'InVeRsE CaSe'));copyBtn.addEventListener('click',()=>{const text=getText();if(!text){showMessage('Nothing to copy.',!0);return}
+if(navigator.clipboard&&navigator.clipboard.writeText){navigator.clipboard.writeText(text).then(()=>{showToast('✅ Copied!');showMessage('Copied to clipboard')}).catch(()=>{fallbackCopy(text)})}else{fallbackCopy(text)}});function fallbackCopy(text){const ta=document.createElement('textarea');ta.value=text;ta.style.position='fixed';ta.style.opacity='0';ta.style.left='-9999px';document.body.appendChild(ta);ta.select();try{document.execCommand('copy');showToast('✅ Copied!');showMessage('Copied to clipboard')}catch(_){showMessage('Could not copy.',!0)}
+document.body.removeChild(ta)}
+shareBtn.addEventListener('click',()=>{const text=getText();if(!text){showMessage('Nothing to share.',!0);return}
+if(navigator.share){navigator.share({title:'Convert Case',text:text,}).catch(()=>{})}else{if(navigator.clipboard&&navigator.clipboard.writeText){navigator.clipboard.writeText(text).then(()=>{showToast('📤 Text copied for sharing');showMessage('Copied to clipboard')}).catch(()=>{showMessage('Share not supported.',!0)})}else{showMessage('Share not supported.',!0)}}});downloadBtn.addEventListener('click',()=>{const text=getText();if(!text){showMessage('Nothing to download.',!0);return}
+const blob=new Blob([text],{type:'text/plain;charset=utf-8'});const url=URL.createObjectURL(blob);const a=document.createElement('a');a.href=url;a.download='converted-text.txt';document.body.appendChild(a);a.click();document.body.removeChild(a);URL.revokeObjectURL(url);showToast('⬇ Downloaded!');showMessage('File downloaded')});clearBtn.addEventListener('click',()=>{setText('');textarea.focus();showToast('✕ Cleared');showMessage('Cleared');lastAction=''});textarea.addEventListener('keydown',(e)=>{if(e.key==='Enter'&&(e.ctrlKey||e.metaKey)){e.preventDefault();if(lastAction){const map={'Sentence case':toSentenceCase,'lower case':toLowerCase,'UPPER CASE':toUpperCase,'Capitalized Case':toCapitalizedCase,'aLtErNaTiNg cAsE':toAlternatingCase,'Title Case':toTitleCase,'InVeRsE CaSe':toInverseCase,};const fn=map[lastAction];if(fn){const input=getText();if(input){const output=fn(input);setText(output);showToast(`↻ Re-applied ${lastAction}`,1200);showMessage(`Re-applied ${lastAction}`)}else{showMessage('No text.',!0)}}}else{showMessage('No previous conversion.',!0)}}});updateStats();textarea.focus()})();</script>
+
+</body>
+</html>
