@@ -1,0 +1,1140 @@
+<!doctype html>
+<html lang="id" data-bs-theme="dark">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.5" />
+    <title>Form Generator</title>
+    <link rel="icon" type="image/x-icon" href="https://raw.githubusercontent.com/GoodForLife/webapp/refs/heads/main/asset/logos.ico" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" />
+    <style>
+        :root{--bs-body-bg:#0b0e14;--bs-body-color:#e2e8f0}body{background:#0b0e14;color:#e2e8f0;padding:1rem;min-height:100vh}.form-card{background:#1a1f2b;border:1px solid #2d3548;border-radius:.75rem;padding:.75rem 1rem;margin-bottom:.625rem;transition:border-color .2s}.form-card:hover{border-color:#4a5568}.form-card .form-control,.form-card .form-select{background:#0f141f;border:1px solid #2d3548;color:#e2e8f0;font-size:.8125rem;height:34px;padding:.25rem .625rem;border-radius:6px}.form-card .form-control:focus,.form-card .form-select:focus{border-color:#6366f1;box-shadow:0 0 0 2px rgba(99,102,241,.25)}.form-card .form-control-sm,.form-card .form-select-sm{height:34px;font-size:.8125rem}.form-card .form-control.bet-input{max-width:100px}.form-card .form-control.single-input{font-weight:500;letter-spacing:1px}.form-card .form-control.poltar-input{width:48px;text-align:center;font-weight:500;flex-shrink:0}.twin-group{background:#1e293b;border:1px solid #2d3548;border-radius:20px;padding:2px 12px 2px 8px;min-height:34px;display:inline-flex;flex-wrap:wrap;align-items:center;gap:2px 6px}.twin-group .twin-label{font-size:.75rem;color:#94a3b8}.twin-group .form-check{font-size:.75rem;display:flex;align-items:center;gap:2px;color:#cbd5e1;white-space:nowrap;margin:0}.twin-group .form-check-input{width:14px;height:14px;accent-color:#6366f1;cursor:pointer;margin:0 2px 0 0}.twin-group .twin-badge{font-size:.625rem;background:#2d3748;color:#93c5fd;padding:0 8px;border-radius:12px;font-weight:600;line-height:20px}.twin-group .form-check.twin-sub{border-left:2px solid #6366f1;padding-left:6px;margin-left:2px;color:#a5b4fc}.check-group .form-check{font-size:.8125rem;display:flex;align-items:center;gap:4px;color:#cbd5e1;white-space:nowrap;margin:0;padding:0}.check-group .form-check-input{width:15px;height:15px;accent-color:#6366f1;cursor:pointer;margin:0 2px 0 0}.check-group .form-check-input:disabled{opacity:.4;cursor:not-allowed}.action-bar{background:#1a1f2b;border:1px solid #2d3548;border-radius:.75rem;padding:.75rem 1.25rem;margin-top:.75rem;display:flex;flex-wrap:wrap;align-items:center;gap:.5rem 1rem}.action-bar .btn{padding:.5rem 1.25rem;font-size:.875rem;font-weight:600;border-radius:8px}.action-bar .form-count{font-size:.75rem;color:#64748b;margin-left:auto}.output-section{background:#1a1f2b;border:1px solid #2d3548;border-radius:.75rem;padding:1rem 1.25rem;margin-top:1rem}.output-box{background:#0f141f;border:1px solid #2d3548;border-radius:8px;padding:.75rem 1rem;font-family:'Courier New',monospace;word-break:break-all;max-height:200px;overflow-y:auto;color:#e2e8f0;line-height:1.7;white-space:pre-wrap}.output-box.empty{color:#64748b;font-style:italic;font-family:'Segoe UI',sans-serif}.badge-row{display:flex;flex-wrap:wrap;gap:1.5rem 2.5rem;margin-top:.875rem;padding-top:.875rem;border-top:1px solid #2d3548}.badge-item .num{font-weight:700;font-size:22px;color:#f1f5f9}.badge-item .lbl{font-size:.8125rem;color:#94a3b8}.preview-text{font-size:.75rem;color:#94a3b8;white-space:nowrap}.btn-remove{background:0 0;border:0;color:#64748b;font-size:1.125rem;cursor:pointer;line-height:1;padding:0 4px;transition:color .2s}.btn-remove:hover{color:#f87171}.btn-tutorial{background:0 0;border:1px solid #2d3548;color:#e2e8f0;padding:4px 14px;border-radius:6px;cursor:pointer;font-size:.875rem;transition:background .2s,border-color .2s;height:34px;display:inline-flex;align-items:center;gap:4px}.btn-tutorial:hover{background:#2d3548;border-color:#6366f1}.btn-copy{background:#2d3748;border:1px solid #4a5568;color:#e2e8f0;padding:4px 14px;border-radius:6px;font-size:.8125rem;cursor:pointer;transition:background .2s,border-color .2s;height:32px;display:inline-flex;align-items:center;gap:4px}.btn-copy:hover{background:#3b4252;border-color:#6366f1}.btn-copy.copied{background:#2b6b4c;border-color:#48bb78;color:#c6f6d5}.btn-filter{background:#2d3748;border:1px solid #4a5568;color:#e2e8f0;padding:4px 14px;border-radius:6px;font-size:.8125rem;cursor:pointer;transition:background .2s,border-color .2s;height:32px;display:inline-flex;align-items:center;gap:4px}.btn-filter:hover{background:#3b4252;border-color:#f59e0b}.btn-filter.active{border-color:#f59e0b;color:#fbbf24}.modal-content{background:#1a1f2b;border:1px solid #2d3548;border-radius:12px}.modal-header{border-bottom-color:#2d3548}.modal-footer{border-top-color:#2d3548}.modal-body{color:#e2e8f0}.modal-body ul{color:#e2e8f0;padding-left:20px}.modal-body ul li{margin-bottom:4px}.modal-body strong{color:#f1f5f9}.form-index{font-weight:600;color:#94a3b8;font-size:.875rem;flex-shrink:0}.btn-remove{font-size:1.25rem}.subtitle{color:#94a3b8;font-size:.875rem;margin-bottom:1.25rem;border-left:3px solid #6366f1;padding-left:14px}h1{font-size:26px;font-weight:700;color:#f1f5f9;margin:0;display:flex;align-items:center;gap:10px}.header-row{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:8px 16px;margin-bottom:4px}@media(max-width:576px){.action-bar .btn{font-size:.75rem;padding:.375rem .75rem}.action-bar .form-count{font-size:.625rem}h1{font-size:22px}.form-card .form-control.poltar-input{width:38px;font-size:.75rem}.form-card .form-control.single-input{font-size:.75rem}.form-card .form-control.bet-input{font-size:.75rem}.form-card .form-control,.form-card .form-select{font-size:.75rem}.check-group .form-check{font-size:.75rem}.twin-group .form-check{font-size:.6875rem}.btn-copy,.btn-filter{font-size:.6875rem;padding:2px 10px;height:26px}.btn-tutorial{font-size:.75rem;padding:2px 10px;height:28px}.preview-text{font-size:.625rem}.badge-item .num{font-size:18px}.badge-item .lbl{font-size:.6875rem}}
+    </style>
+</head>
+<body>
+    <div class="container" id="app">
+        <div class="header-row">
+            <h1><i class="bi bi-grid-3x3-gap-fill"></i> Form Generator</h1>
+            <button class="btn-tutorial" id="btnTutorial"><i class="bi bi-question-circle"></i> Tutorial</button>
+        </div>
+        <div class="subtitle">BB / BBD / BBB / BBDB / BBFS / POLTAR</div>
+
+        <div id="formsContainer"></div>
+
+        <div class="action-bar">
+            <button class="btn btn-outline-light" id="btnAddForm"><i class="bi bi-plus-lg"></i> Add Form</button>
+            <button class="btn btn-primary" id="btnGenerateAll"><i class="bi bi-lightning-fill"></i> Generate</button>
+            <div class="d-flex align-items-center gap-2 flex-wrap">
+                <label class="text-secondary small mb-0">Delimiter</label>
+                <select class="form-select form-select-sm w-auto" id="delimForm" style="width:auto;min-width:60px">
+                    <option value="*">*</option><option value="-">-</option><option value="+">+</option>
+                    <option value=".">.</option><option value=",">,</option><option value="#">#</option><option value="^">^</option>
+                </select>
+            </div>
+            <div class="d-flex align-items-center gap-2 flex-wrap">
+                <label class="text-secondary small mb-0">Antar Hasil</label>
+                <select class="form-select form-select-sm w-auto" id="delimAntar" style="width:auto;min-width:60px">
+                    <option value="+">+</option><option value="*">*</option><option value="-">-</option>
+                    <option value=".">.</option><option value=",">,</option><option value="#">#</option><option value="^">^</option>
+                </select>
+            </div>
+            <span class="form-count" id="formCountInfo">0 form</span>
+        </div>
+
+        <div class="output-section d-none" id="outputSection">
+            <div class="d-flex flex-wrap align-items-center justify-content-between gap-2 mb-2">
+                <span class="fw-semibold text-secondary"><i class="bi bi-file-text"></i> Hasil Output</span>
+                <div class="d-flex gap-2 flex-wrap">
+                    <button class="btn-filter" id="filterButton"><i class="bi bi-funnel"></i> Filter Duplikat</button>
+                    <button class="btn-copy" id="copyButton"><i class="bi bi-clipboard"></i> Salin</button>
+                </div>
+            </div>
+            <div class="output-box empty" id="outputBox">Klik "Generate Semua" untuk melihat hasil</div>
+            <div class="badge-row">
+                <div class="badge-item"><span class="lbl">Total Line</span><span class="num" id="totalLines">0</span></div>
+                <div class="badge-item"><span class="lbl">Total Bet</span><span class="num" id="totalBet">Rp 0</span></div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="tutorialModal" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header border-secondary">
+                    <h5 class="modal-title"><i class="bi bi-book"></i> Tutorial Penggunaan</h5>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <p><strong>Fungsi-fungsi:</strong></p>
+                    <ul>
+                        <li><strong>BB</strong> (Bolak-Balik): Membalik seluruh digit. Contoh: 1234 → 1234, 4321.</li>
+                        <li><strong>BBD</strong> (Bolak-Balik Depan): Menukar 2 digit pertama. Contoh: 1234 → 1234, 2134.</li>
+                        <li><strong>BBB</strong> (Bolak-Balik Belakang): Menukar 2 digit terakhir. Contoh: 1234 → 1234, 1243.</li>
+                        <li><strong>BBDB</strong> (Bolak-Balik Depan &amp; Belakang): Menukar 2 digit pertama dan 2 digit terakhir. Contoh: 1234 → 1234, 2134, 1243, 2143.</li>
+                        <li><strong>BBFS</strong> (Bolak-Balik Full Set): Menghasilkan semua permutasi dari digit yang diinput (tanpa pengulangan).</li>
+                        <li><strong>POLTAR</strong>: Menggabungkan setiap digit dari beberapa input (cartesian product).</li>
+                    </ul>
+                    <p><strong>Filter Twin (khusus POLTAR):</strong></p>
+                    <ul>
+                        <li><strong>Twin</strong>: Mengizinkan angka kembar di posisi mana saja.</li>
+                        <li><strong>Twin 2D Depan</strong>: Hanya mengizinkan kembar di digit 1 &amp; 2 (2 digit depan).</li>
+                        <li><strong>Twin 2D Belakang</strong>: Hanya mengizinkan kembar di 2 digit terakhir (digit 3 &amp; 4 untuk 4D).</li>
+                    </ul>
+                    <p><strong>Cara Penggunaan:</strong></p>
+                    <ul>
+                        <li>Pilih tipe permainan (2D-5D).</li>
+                        <li>Centang fungsi yang diinginkan. BB, BBD, BBB, BBDB dapat dipilih bersamaan.</li>
+                        <li>BBFS dan POLTAR saling eksklusif dan akan menonaktifkan opsi BB lainnya.</li>
+                        <li>Isi input sesuai dengan fungsi yang dipilih.</li>
+                        <li>Klik "Generate" untuk melihat hasil.</li>
+                        <li>Gunakan delimiter untuk memisahkan angka dalam satu form dan antar form.</li>
+                        <li>Tombol "Add Form" otomatis memfokuskan form kosong pertama.</li>
+                    </ul>
+                </div>
+                <div class="modal-footer border-secondary">
+                    <button class="btn btn-secondary" data-bs-dismiss="modal">Tutup</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        /* ============================================================
+           APP LOGIC - Unminified / Readable Version
+           ============================================================ */
+
+        const EnableLog = false;
+
+        function log(message, data) {
+            if (EnableLog) {
+                if (data !== undefined) {
+                    console.log("[Form Generator] " + message, data);
+                } else {
+                    console.log("[Form Generator] " + message);
+                }
+            }
+        }
+
+        let formCounter = 0;
+        let forms = [];
+        let originalOutput = "";
+        let isFiltered = false;
+
+        const container = document.getElementById("formsContainer");
+        const outputSection = document.getElementById("outputSection");
+        const outputBox = document.getElementById("outputBox");
+        const totalLinesEl = document.getElementById("totalLines");
+        const totalBetEl = document.getElementById("totalBet");
+        const formCountInfo = document.getElementById("formCountInfo");
+        const delimForm = document.getElementById("delimForm");
+        const delimAntar = document.getElementById("delimAntar");
+        const copyButton = document.getElementById("copyButton");
+        const filterButton = document.getElementById("filterButton");
+
+        function getDigitCount(tipe) {
+            return parseInt(tipe, 10);
+        }
+
+        // ---------- Core generation functions ----------
+        function generatePermutationsFromMultiset(digits, len) {
+            const freq = {};
+            for (const d of digits) {
+                freq[d] = (freq[d] || 0) + 1;
+            }
+            const uniqueDigits = Object.keys(freq);
+            const result = [];
+
+            function backtrack(path, remaining) {
+                if (path.length === len) {
+                    result.push(path.join(""));
+                    return;
+                }
+                for (const d of uniqueDigits) {
+                    if (freq[d] > 0) {
+                        freq[d]--;
+                        path.push(d);
+                        backtrack(path, remaining - 1);
+                        path.pop();
+                        freq[d]++;
+                    }
+                }
+            }
+            backtrack([], len);
+            return result;
+        }
+
+        function cartesianProduct(arrays) {
+            if (arrays.length === 0) return [];
+            if (arrays.length === 1) return arrays[0].split("").map(d => d);
+            let result = arrays[0].split("").map(d => d);
+            for (let i = 1; i < arrays.length; i++) {
+                const next = arrays[i].split("");
+                const newResult = [];
+                for (const prefix of result) {
+                    for (const digit of next) {
+                        newResult.push(prefix + digit);
+                    }
+                }
+                result = newResult;
+            }
+            return result;
+        }
+
+        function generateBBFS(inputStr, tipe) {
+            log("generateBBFS called", { inputStr, tipe });
+            const digits = inputStr.split("");
+            if (digits.length === tipe) {
+                const result = generatePermutationsFromMultiset(digits, tipe);
+                log("generateBBFS result (exact length)", { count: result.length });
+                return result;
+            }
+            const freq = {};
+            for (const d of digits) {
+                freq[d] = (freq[d] || 0) + 1;
+            }
+            const unique = Object.keys(freq);
+            const resultSet = new Set();
+
+            function combine(start, selected, remaining) {
+                if (selected.length === tipe) {
+                    const perms = generatePermutationsFromMultiset(selected, tipe);
+                    for (const p of perms) {
+                        resultSet.add(p);
+                    }
+                    return;
+                }
+                if (start >= unique.length) return;
+                const d = unique[start];
+                const maxTake = Math.min(freq[d], tipe - selected.length);
+                for (let k = 0; k <= maxTake; k++) {
+                    const newSelected = selected.concat(Array(k).fill(d));
+                    combine(start + 1, newSelected, remaining - k);
+                }
+            }
+            combine(0, [], tipe);
+            const result = Array.from(resultSet);
+            log("generateBBFS result (combination)", { count: result.length });
+            return result;
+        }
+
+        function generatePoltar(inputs) {
+            log("generatePoltar called", { inputs });
+            const result = cartesianProduct(inputs);
+            log("generatePoltar result", { count: result.length });
+            return result;
+        }
+
+        // ---------- Swap functions ----------
+        function swapFront(str) {
+            if (str.length < 2) return str;
+            const arr = str.split("");
+            [arr[0], arr[1]] = [arr[1], arr[0]];
+            return arr.join("");
+        }
+
+        function swapBack(str) {
+            if (str.length < 2) return str;
+            const arr = str.split("");
+            const len = arr.length;
+            [arr[len - 2], arr[len - 1]] = [arr[len - 1], arr[len - 2]];
+            return arr.join("");
+        }
+
+        function swapFrontBack(str) {
+            if (str.length < 2) return str;
+            let s = swapFront(str);
+            s = swapBack(s);
+            return s;
+        }
+
+        // ---------- Twin filter ----------
+        function getCategory(str) {
+            const freq = {};
+            for (const ch of str) {
+                freq[ch] = (freq[ch] || 0) + 1;
+            }
+            const values = Object.values(freq);
+            if (values.some(v => v === 4)) return "fourplet";
+            if (values.some(v => v === 3)) return "triplet";
+            const twos = values.filter(v => v === 2).length;
+            if (twos === 2) return "twintwin";
+            if (twos === 1) return "twin";
+            return "none";
+        }
+
+        // Cari posisi pasangan kembar (hanya untuk kategori "twin").
+        // Mengembalikan array pasangan posisi, mis. [[0,1]] atau [[2,3]].
+        function getTwinPairPositions(str) {
+            const positions = {};
+            for (let i = 0; i < str.length; i++) {
+                const d = str[i];
+                if (!positions[d]) positions[d] = [];
+                positions[d].push(i);
+            }
+            const pairs = [];
+            for (const d in positions) {
+                if (positions[d].length === 2) {
+                    pairs.push(positions[d]);
+                }
+            }
+            return pairs;
+        }
+
+        // Cek apakah pasangan kembar berada tepat di posisi (i, j)
+        function isTwinAtPositions(str, i, j) {
+            const pairs = getTwinPairPositions(str);
+            for (const p of pairs) {
+                if (p[0] === i && p[1] === j) return true;
+            }
+            return false;
+        }
+
+        function filterByTwinModes(results, twinModes, digitCount) {
+            const hasActive = Object.values(twinModes).some(v => v === true);
+            if (!hasActive) {
+                return results.filter(r => getCategory(r) === "none");
+            }
+            const frontA = 0;
+            const frontB = 1;
+            const backA = Math.max(digitCount - 2, 0);
+            const backB = Math.max(digitCount - 1, 0);
+
+            return results.filter(r => {
+                const cat = getCategory(r);
+                if (cat === "none") return true;
+                if (cat === "twin") {
+                    // Prioritas sub-opsi (Twin 2D Depan / Belakang)
+                    const subDepan = !!twinModes.twin2dDepan;
+                    const subBelakang = !!twinModes.twin2dBelakang;
+                    if (subDepan || subBelakang) {
+                        const depanOK = subDepan && isTwinAtPositions(r, frontA, frontB);
+                        const belakangOK = subBelakang && isTwinAtPositions(r, backA, backB);
+                        return depanOK || belakangOK;
+                    }
+                    // Twin biasa
+                    return !!twinModes.twin;
+                }
+                if (cat === "twintwin") return twinModes.twintwin;
+                if (cat === "triplet") return twinModes.tripletwin;
+                if (cat === "fourplet") return twinModes.fourpletwin;
+                return false;
+            });
+        }
+
+        // ---------- Process a single form ----------
+        function processForm(formData) {
+            const { tipe, fungsi, twinModes, inputs, bet } = formData;
+            const digitCount = getDigitCount(tipe);
+            let results = [];
+
+            const isBBFS = fungsi.bbfs || false;
+            const isPoltar = fungsi.poltar || false;
+
+            log("processForm started", { tipe, fungsi, bet, inputs });
+
+            if (isBBFS) {
+                const inputStr = (inputs[0] || "").replace(/\D/g, "");
+                if (inputStr.length === 0) {
+                    log("processForm: BBFS empty input");
+                    return { lines: [], count: 0, bet: bet || 0 };
+                }
+                if (inputStr.length < digitCount) {
+                    log("processForm: BBFS input too short", { inputStr, digitCount });
+                    return { lines: [], count: 0, bet: bet || 0 };
+                }
+                results = generateBBFS(inputStr, digitCount);
+            } else if (isPoltar) {
+                const cleanInputs = inputs.slice(0, digitCount).map(s => s.replace(/\D/g, ""));
+                if (cleanInputs.some(s => s.length === 0)) {
+                    log("processForm: POLTAR empty input");
+                    return { lines: [], count: 0, bet: bet || 0 };
+                }
+                let rawResults = generatePoltar(cleanInputs);
+                rawResults = filterByTwinModes(rawResults, twinModes, digitCount);
+                results = rawResults;
+            } else {
+                const inputStr = (inputs[0] || "").replace(/\D/g, "");
+                if (inputStr.length === 0) {
+                    log("processForm: empty input");
+                    return { lines: [], count: 0, bet: bet || 0 };
+                }
+                const isBB = fungsi.bb || false;
+                const isBBD = fungsi.bbd || false;
+                const isBBB = fungsi.bbb || false;
+                const isBBDB = fungsi.bbdb || false;
+
+                if (!isBB && !isBBD && !isBBB && !isBBDB) {
+                    log("processForm: no function selected, returning original");
+                    return { lines: [inputStr], count: 1, bet: bet || 0 };
+                }
+                if (inputStr.length !== digitCount) {
+                    log("processForm: input length mismatch", { inputStr, digitCount });
+                    return { lines: [], count: 0, bet: bet || 0 };
+                }
+
+                const resultSet = new Set();
+                resultSet.add(inputStr);
+
+                if (isBB) {
+                    const rev = inputStr.split("").reverse().join("");
+                    resultSet.add(rev);
+                }
+                if (isBBD && digitCount >= 2) {
+                    resultSet.add(swapFront(inputStr));
+                }
+                if (isBBB && digitCount >= 2) {
+                    resultSet.add(swapBack(inputStr));
+                }
+                if (isBBDB && digitCount >= 2) {
+                    resultSet.add(swapFront(inputStr));
+                    resultSet.add(swapBack(inputStr));
+                    resultSet.add(swapFrontBack(inputStr));
+                }
+
+                results = Array.from(resultSet);
+                log("processForm: BB variants result", { count: results.length, results });
+            }
+
+            const set = new Set();
+            const uniq = [];
+            for (const r of results) {
+                if (!set.has(r)) {
+                    set.add(r);
+                    uniq.push(r);
+                }
+            }
+            results = uniq;
+
+            const finalResult = {
+                lines: results,
+                count: results.length,
+                bet: bet || 0
+            };
+            log("processForm result", { count: finalResult.count, bet: finalResult.bet });
+            return finalResult;
+        }
+
+        // ---------- Update checkbox disabled state ----------
+        function updateCheckboxStates(idx) {
+            const form = forms[idx];
+            if (!form) return;
+            const tipe = form.tipe;
+            const digitCount = getDigitCount(tipe);
+            const inputVal = (form.inputs[0] || "").replace(/\D/g, "");
+            const isOver = inputVal.length > digitCount;
+
+            const formCard = document.querySelector(`.form-card[data-formidx="${idx}"]`);
+            if (!formCard) return;
+            const checkboxes = formCard.querySelectorAll(
+                '.fungsi-chk[data-fn="bb"], .fungsi-chk[data-fn="bbd"], .fungsi-chk[data-fn="bbb"], .fungsi-chk[data-fn="bbdb"]'
+                );
+            checkboxes.forEach(chk => {
+                chk.disabled = isOver;
+                if (isOver) {
+                    chk.checked = false;
+                    const fn = chk.dataset.fn;
+                    forms[idx].fungsi[fn] = false;
+                }
+            });
+        }
+
+        // ---------- Render all forms ----------
+        function renderForms() {
+            if (forms.length === 0) {
+                container.innerHTML = `
+                        <div class="text-center py-4 text-secondary" style="font-size:15px;">
+                            Belum ada form. Klik "Tambah Form" untuk mulai.
+                        </div>
+                    `;
+                formCountInfo.textContent = "0 form";
+                return;
+            }
+
+            let html = "";
+            for (let i = 0; i < forms.length; i++) {
+                const form = forms[i];
+                const idxDisplay = i + 1;
+                const isPoltar = form.fungsi.poltar || false;
+                const digitCount = getDigitCount(form.tipe);
+
+                let inputHtml = "";
+                if (isPoltar) {
+                    inputHtml = `<div class="d-flex flex-wrap gap-1">`;
+                    for (let d = 0; d < digitCount; d++) {
+                        const val = form.inputs[d] || "";
+                        inputHtml += `
+                                <input type="text" class="form-control poltar-input form-control-sm" 
+                                       data-formidx="${i}" data-didx="${d}" 
+                                       value="${val}" placeholder="${d+1}" 
+                                       inputmode="numeric" pattern="[0-9]*" />
+                            `;
+                    }
+                    inputHtml += `</div>`;
+                } else {
+                    const val = form.inputs[0] || "";
+                    inputHtml = `
+                            <input type="text" class="form-control single-input form-control-sm" 
+                                   data-formidx="${i}" value="${val}" 
+                                   placeholder="contoh: 12345" 
+                                   inputmode="numeric" pattern="[0-9]*" />
+                        `;
+                }
+
+                const chkBB = form.fungsi.bb ? "checked" : "";
+                const chkBBD = form.fungsi.bbd ? "checked" : "";
+                const chkBBB = form.fungsi.bbb ? "checked" : "";
+                const chkBBDB = form.fungsi.bbdb ? "checked" : "";
+                const chkBBFS = form.fungsi.bbfs ? "checked" : "";
+                const chkPoltar = form.fungsi.poltar ? "checked" : "";
+
+                const showTwin = isPoltar && digitCount >= 2;
+                const showTwinTwin = isPoltar && digitCount >= 4;
+                const showTriplet = isPoltar && digitCount >= 3;
+                const showFourplet = isPoltar && digitCount >= 5;
+
+                // Sub-opsi Twin 2D Depan/Belakang hanya tampil saat POLTAR + Twin aktif + 4D ke atas
+                const showTwinSub = isPoltar && form.twinModes.twin && digitCount >= 4;
+
+                const chkTwin = form.twinModes.twin ? "checked" : "";
+                const chkTwinTwin = form.twinModes.twintwin ? "checked" : "";
+                const chkTriplet = form.twinModes.tripletwin ? "checked" : "";
+                const chkFourplet = form.twinModes.fourpletwin ? "checked" : "";
+                const chkTwin2dDepan = form.twinModes.twin2dDepan ? "checked" : "";
+                const chkTwin2dBelakang = form.twinModes.twin2dBelakang ? "checked" : "";
+
+                // Preview
+                const previewResult = processForm(form);
+                let previewText = "";
+                if (previewResult.count > 0) {
+                    previewText = `${previewResult.count} line${previewResult.count>1?"s":""} · ${formatRupiah(previewResult.bet)}`;
+                } else if (isPoltar) {
+                    const filled = form.inputs.slice(0, digitCount).filter(s => s.replace(/\D/g, "").length > 0).length;
+                    previewText = `⏳ ${filled}/${digitCount} input diisi`;
+                } else {
+                    const inputVal = (form.inputs[0] || "").replace(/\D/g, "");
+                    if (inputVal.length === 0) {
+                        previewText = "⏳ isi input";
+                    } else if (form.fungsi.bbfs && inputVal.length < digitCount) {
+                        previewText = `⚠️ minimal ${digitCount} digit`;
+                    } else if (form.fungsi.bb || form.fungsi.bbd || form.fungsi.bbb || form.fungsi.bbdb) {
+                        if (inputVal.length !== digitCount) {
+                            previewText = `⚠️ butuh ${digitCount} digit`;
+                        } else {
+                            previewText = "⏳ tidak ada kombinasi";
+                        }
+                    } else {
+                        previewText = "⏳ tidak ada kombinasi";
+                    }
+                }
+
+                html += `
+                        <div class="form-card" data-formidx="${i}">
+                            <div class="d-flex flex-wrap align-items-center gap-1 gap-sm-2 w-100">
+                                <span class="form-index">#${idxDisplay}</span>
+                                <select class="form-select tipe-select form-select-sm" data-formidx="${i}" style="width:auto;min-width:60px;flex-shrink:0">
+                                    <option value="5d" ${form.tipe==="5d"?"selected":""}>5D</option>
+                                    <option value="4d" ${form.tipe==="4d"?"selected":""}>4D</option>
+                                    <option value="3d" ${form.tipe==="3d"?"selected":""}>3D</option>
+                                    <option value="2d" ${form.tipe==="2d"?"selected":""}>2D</option>
+                                </select>
+                                <div class="check-group d-flex flex-wrap gap-1 gap-sm-2 align-items-center">
+                                    <div class="form-check">
+                                        <input class="form-check-input fungsi-chk" type="checkbox" data-formidx="${i}" data-fn="bb" ${chkBB} />
+                                        <label class="form-check-label small">BB</label>
+                                    </div>
+                                    <div class="form-check">
+                                        <input class="form-check-input fungsi-chk" type="checkbox" data-formidx="${i}" data-fn="bbd" ${chkBBD} />
+                                        <label class="form-check-label small">BBD</label>
+                                    </div>
+                                    <div class="form-check">
+                                        <input class="form-check-input fungsi-chk" type="checkbox" data-formidx="${i}" data-fn="bbb" ${chkBBB} />
+                                        <label class="form-check-label small">BBB</label>
+                                    </div>
+                                    <div class="form-check">
+                                        <input class="form-check-input fungsi-chk" type="checkbox" data-formidx="${i}" data-fn="bbdb" ${chkBBDB} />
+                                        <label class="form-check-label small">BBDB</label>
+                                    </div>
+                                    <div class="form-check">
+                                        <input class="form-check-input fungsi-chk" type="checkbox" data-formidx="${i}" data-fn="bbfs" ${chkBBFS} />
+                                        <label class="form-check-label small">BBFS</label>
+                                    </div>
+                                    <div class="form-check">
+                                        <input class="form-check-input fungsi-chk" type="checkbox" data-formidx="${i}" data-fn="poltar" ${chkPoltar} />
+                                        <label class="form-check-label small">POLTAR</label>
+                                    </div>
+                                </div>
+                                <div class="twin-group ${isPoltar ? "" : "d-none"}">
+                                    <span class="twin-label">Twin:</span>
+                                    <div class="form-check ${showTwin ? "" : "d-none"}">
+                                        <input class="form-check-input twin-chk" type="checkbox" data-formidx="${i}" data-mode="twin" ${chkTwin} />
+                                        <label class="form-check-label">Twin</label>
+                                    </div>
+                                    <div class="form-check ${showTwinTwin ? "" : "d-none"}">
+                                        <input class="form-check-input twin-chk" type="checkbox" data-formidx="${i}" data-mode="twintwin" ${chkTwinTwin} />
+                                        <label class="form-check-label">TwinTwin</label>
+                                    </div>
+                                    <div class="form-check ${showTriplet ? "" : "d-none"}">
+                                        <input class="form-check-input twin-chk" type="checkbox" data-formidx="${i}" data-mode="tripletwin" ${chkTriplet} />
+                                        <label class="form-check-label">Triplet</label>
+                                    </div>
+                                    <div class="form-check ${showFourplet ? "" : "d-none"}">
+                                        <input class="form-check-input twin-chk" type="checkbox" data-formidx="${i}" data-mode="fourpletwin" ${chkFourplet} />
+                                        <label class="form-check-label">Fourplet</label>
+                                    </div>
+                                    <div class="form-check twin-sub ${showTwinSub ? "" : "d-none"}">
+                                        <input class="form-check-input twin-chk" type="checkbox" data-formidx="${i}" data-mode="twin2dDepan" ${chkTwin2dDepan} />
+                                        <label class="form-check-label">Twin 2D Depan</label>
+                                    </div>
+                                    <div class="form-check twin-sub ${showTwinSub ? "" : "d-none"}">
+                                        <input class="form-check-input twin-chk" type="checkbox" data-formidx="${i}" data-mode="twin2dBelakang" ${chkTwin2dBelakang} />
+                                        <label class="form-check-label">Twin 2D Belakang</label>
+                                    </div>
+                                    <span class="twin-badge">filter</span>
+                                </div>
+                                <button class="btn-remove ms-auto" data-formidx="${i}" title="Hapus form">✕</button>
+                            </div>
+                            <div class="d-flex flex-wrap align-items-center gap-1 gap-sm-2 w-100 pt-1">
+                                ${inputHtml}
+                                <input type="number" class="form-control bet-input form-control-sm" data-formidx="${i}" 
+                                       value="${form.bet}" min="0" step="100" style="width:100px;flex-shrink:0" />
+                                <span class="preview-text" id="preview_${i}">${previewText}</span>
+                            </div>
+                        </div>
+                    `;
+            }
+            container.innerHTML = html;
+            formCountInfo.textContent = `${forms.length} form`;
+            attachEvents();
+            for (let i = 0; i < forms.length; i++) {
+                updateCheckboxStates(i);
+            }
+        }
+
+        // ---------- Attach events ----------
+        function attachEvents() {
+            document.querySelectorAll(".btn-remove").forEach(btn => {
+                btn.onclick = function() {
+                    const idx = parseInt(this.dataset.formidx, 10);
+                    removeForm(idx);
+                };
+            });
+
+            document.querySelectorAll(".tipe-select").forEach(sel => {
+                sel.onchange = function() {
+                    const idx = parseInt(this.dataset.formidx, 10);
+                    const newTipe = this.value;
+                    const newDigitCount = getDigitCount(newTipe);
+                    forms[idx].tipe = newTipe;
+                    if (forms[idx].fungsi.poltar) {
+                        while (forms[idx].inputs.length < newDigitCount) forms[idx].inputs.push("");
+                        while (forms[idx].inputs.length > newDigitCount) forms[idx].inputs.pop();
+                    }
+                    // Reset sub-opsi jika tipe < 4D
+                    if (newDigitCount < 4) {
+                        forms[idx].twinModes.twin2dDepan = false;
+                        forms[idx].twinModes.twin2dBelakang = false;
+                    }
+                    renderForms();
+                };
+            });
+
+            document.querySelectorAll(".fungsi-chk").forEach(chk => {
+                chk.onchange = function() {
+                    const idx = parseInt(this.dataset.formidx, 10);
+                    const fn = this.dataset.fn;
+                    const isChecked = this.checked;
+
+                    const groupA = ["bb", "bbd", "bbb", "bbdb"];
+                    const groupB = ["bbfs", "poltar"];
+
+                    if (groupA.includes(fn)) {
+                        if (isChecked) {
+                            for (const b of groupB) forms[idx].fungsi[b] = false;
+                        }
+                    } else if (groupB.includes(fn)) {
+                        if (isChecked) {
+                            for (const a of groupA) forms[idx].fungsi[a] = false;
+                            for (const b of groupB) {
+                                if (b !== fn) forms[idx].fungsi[b] = false;
+                            }
+                        }
+                    }
+
+                    forms[idx].fungsi[fn] = isChecked;
+
+                    if (fn === "poltar" && isChecked) {
+                        const digitCount = getDigitCount(forms[idx].tipe);
+                        const newInputs = [];
+                        for (let i = 0; i < digitCount; i++) {
+                            newInputs.push(forms[idx].inputs[i] || "");
+                        }
+                        forms[idx].inputs = newInputs;
+                    } else if (fn === "poltar" && !isChecked) {
+                        const combined = forms[idx].inputs.join("");
+                        forms[idx].inputs = [combined];
+                        forms[idx].twinModes = {
+                            twin: false,
+                            twintwin: false,
+                            tripletwin: false,
+                            fourpletwin: false,
+                            twin2dDepan: false,
+                            twin2dBelakang: false
+                        };
+                    }
+
+                    renderForms();
+                };
+            });
+
+            document.querySelectorAll(".twin-chk").forEach(chk => {
+                chk.onchange = function() {
+                    const idx = parseInt(this.dataset.formidx, 10);
+                    const mode = this.dataset.mode;
+                    const checked = this.checked;
+                    forms[idx].twinModes[mode] = checked;
+
+                    // Jika Twin dimatikan → reset sub-opsi
+                    if (mode === "twin" && !checked) {
+                        forms[idx].twinModes.twin2dDepan = false;
+                        forms[idx].twinModes.twin2dBelakang = false;
+                    }
+
+                    renderForms();
+                };
+            });
+
+            document.querySelectorAll(".poltar-input").forEach(inp => {
+                inp.oninput = function() {
+                    const idx = parseInt(this.dataset.formidx, 10);
+                    const didx = parseInt(this.dataset.didx, 10);
+                    let val = this.value.replace(/\D/g, "");
+                    this.value = val;
+                    forms[idx].inputs[didx] = val;
+                    updatePreview(idx);
+                };
+                inp.onblur = function() {
+                    const idx = parseInt(this.dataset.formidx, 10);
+                    updatePreview(idx);
+                };
+            });
+
+            document.querySelectorAll(".single-input").forEach(inp => {
+                inp.oninput = function() {
+                    const idx = parseInt(this.dataset.formidx, 10);
+                    let val = this.value.replace(/\D/g, "");
+                    this.value = val;
+                    forms[idx].inputs[0] = val;
+                    updateCheckboxStates(idx);
+                    updatePreview(idx);
+                };
+                inp.onblur = function() {
+                    const idx = parseInt(this.dataset.formidx, 10);
+                    updatePreview(idx);
+                };
+            });
+
+            document.querySelectorAll(".bet-input").forEach(inp => {
+                inp.oninput = function() {
+                    const idx = parseInt(this.dataset.formidx, 10);
+                    const val = parseInt(this.value, 10) || 0;
+                    forms[idx].bet = val;
+                    updatePreview(idx);
+                };
+                inp.onblur = function() {
+                    const idx = parseInt(this.dataset.formidx, 10);
+                    updatePreview(idx);
+                };
+            });
+
+            for (let i = 0; i < forms.length; i++) {
+                updatePreview(i);
+            }
+        }
+
+        // ---------- Update preview ----------
+        function updatePreview(idx) {
+            const form = forms[idx];
+            const result = processForm(form);
+            const previewEl = document.getElementById(`preview_${idx}`);
+            if (previewEl) {
+                if (result.count > 0) {
+                    previewEl.textContent = `${result.count} line${result.count>1?"s":""} · ${formatRupiah(result.bet)}`;
+                } else {
+                    const isPoltar = form.fungsi.poltar || false;
+                    const digitCount = getDigitCount(form.tipe);
+                    if (isPoltar) {
+                        const filled = form.inputs.slice(0, digitCount).filter(s => s.replace(/\D/g, "").length > 0).length;
+                        previewEl.textContent = `⏳ ${filled}/${digitCount} input diisi`;
+                    } else {
+                        const inputVal = (form.inputs[0] || "").replace(/\D/g, "");
+                        if (inputVal.length === 0) {
+                            previewEl.textContent = "⏳ isi input";
+                        } else if (form.fungsi.bbfs && inputVal.length < digitCount) {
+                            previewEl.textContent = `⚠️ minimal ${digitCount} digit`;
+                        } else if (form.fungsi.bb || form.fungsi.bbd || form.fungsi.bbb || form.fungsi.bbdb) {
+                            if (inputVal.length !== digitCount) {
+                                previewEl.textContent = `⚠️ butuh ${digitCount} digit`;
+                            } else {
+                                previewEl.textContent = "⏳ tidak ada kombinasi";
+                            }
+                        } else {
+                            previewEl.textContent = "⏳ tidak ada kombinasi";
+                        }
+                    }
+                }
+            }
+            updateTotalBadge();
+        }
+
+        // ---------- Generate all ----------
+        function generateAll() {
+            log("generateAll started");
+            const delim = delimForm.value;
+            const antar = delimAntar.value;
+            log("delimiters", { delim, antar });
+
+            const allResults = [];
+            let totalLines = 0;
+            let totalBet = 0;
+            let hasError = false;
+
+            for (let i = 0; i < forms.length; i++) {
+                const form = forms[i];
+                const result = processForm(form);
+                if (result.count === 0) {
+                    const isPoltar = form.fungsi.poltar || false;
+                    const digitCount = getDigitCount(form.tipe);
+                    if (isPoltar) {
+                        const filled = form.inputs.slice(0, digitCount).filter(s => s.replace(/\D/g, "").length > 0).length;
+                        if (filled !== digitCount) hasError = true;
+                    } else {
+                        const inputVal = (form.inputs[0] || "").replace(/\D/g, "");
+                        if (form.fungsi.bbfs && inputVal.length < digitCount) hasError = true;
+                        if ((form.fungsi.bb || form.fungsi.bbd || form.fungsi.bbb || form.fungsi.bbdb) && inputVal.length !==
+                            digitCount) hasError = true;
+                        if (inputVal.length === 0) hasError = true;
+                    }
+                    continue;
+                }
+                if (result.count === 0) continue;
+                const output = result.lines.join(delim) + "#" + result.bet;
+                allResults.push(output);
+                totalLines += result.count;
+                totalBet += result.bet * result.count;
+            }
+
+            outputSection.classList.remove("d-none");
+            outputSection.classList.add("d-block");
+
+            if (allResults.length === 0) {
+                outputBox.textContent = hasError ?
+                    "⚠️ Ada form dengan input tidak sesuai aturan. Perbaiki input." :
+                    "⚠️ Tidak ada hasil. Isi input dengan benar.";
+                outputBox.classList.remove("empty");
+                totalLinesEl.textContent = "0";
+                totalBetEl.textContent = "Rp 0";
+                copyButton.textContent = "📋 Salin";
+                copyButton.classList.remove("copied");
+                isFiltered = false;
+                filterButton.textContent = "🧹 Filter Duplikat";
+                filterButton.classList.remove("active");
+                originalOutput = "";
+            } else {
+                const combined = allResults.join(antar);
+                originalOutput = combined;
+                isFiltered = false;
+                filterButton.textContent = "🧹 Filter Duplikat";
+                filterButton.classList.remove("active");
+                outputBox.textContent = combined;
+                outputBox.classList.remove("empty");
+                totalLinesEl.textContent = totalLines;
+                totalBetEl.textContent = formatRupiah(totalBet);
+                copyButton.textContent = "📋 Salin";
+                copyButton.classList.remove("copied");
+                log("generateAll: success", { totalLines, totalBet, combinedLength: combined.length });
+            }
+
+            outputSection.scrollIntoView({ behavior: "smooth", block: "start" });
+            for (let i = 0; i < forms.length; i++) updatePreview(i);
+        }
+
+        // ---------- Filter duplicate ----------
+        function filterDuplikat() {
+            const currentText = outputBox.textContent;
+            if (!currentText || currentText.startsWith("⚠️") ||
+                currentText === 'Klik "Generate Semua" untuk melihat hasil' ||
+                currentText === "Belum ada form. Tambahkan form untuk mulai.") {
+                return;
+            }
+
+            if (isFiltered) {
+                outputBox.textContent = originalOutput;
+                isFiltered = false;
+                filterButton.textContent = "🧹 Filter Duplikat";
+                filterButton.classList.remove("active");
+                updateTotalFromOutput(originalOutput);
+                return;
+            }
+
+            if (!originalOutput) originalOutput = currentText;
+
+            const delim = delimForm.value;
+            const antar = delimAntar.value;
+            const formParts = currentText.split(antar);
+            const lineBetMap = new Map();
+
+            for (const form of formParts) {
+                const parts = form.split("#");
+                if (parts.length !== 2) continue;
+                const linesStr = parts[0];
+                const betStr = parts[1];
+                const bet = parseInt(betStr, 10);
+                if (isNaN(bet)) continue;
+                const lines = linesStr.split(delim).filter(l => l.trim() !== "");
+                for (const line of lines) {
+                    if (lineBetMap.has(line)) {
+                        lineBetMap.set(line, lineBetMap.get(line) + bet);
+                    } else {
+                        lineBetMap.set(line, bet);
+                    }
+                }
+            }
+
+            const betGroups = new Map();
+            for (const [line, totalBet] of lineBetMap) {
+                if (!betGroups.has(totalBet)) betGroups.set(totalBet, []);
+                betGroups.get(totalBet).push(line);
+            }
+
+            const newForms = [];
+            for (const [totalBet, lines] of betGroups) {
+                lines.sort();
+                newForms.push(lines.join(delim) + "#" + totalBet);
+            }
+            newForms.sort((a, b) => {
+                const betA = parseInt(a.split("#")[1], 10);
+                const betB = parseInt(b.split("#")[1], 10);
+                return betA - betB;
+            });
+
+            const newOutput = newForms.join(antar);
+            if (newOutput === originalOutput) return;
+
+            outputBox.textContent = newOutput;
+            isFiltered = true;
+            filterButton.textContent = "↩️ Kembali ke Asli";
+            filterButton.classList.add("active");
+            updateTotalFromOutput(newOutput);
+        }
+
+        // ---------- Update total from output ----------
+        function updateTotalFromOutput(output) {
+            if (!output || output.startsWith("⚠️")) {
+                totalLinesEl.textContent = "0";
+                totalBetEl.textContent = "Rp 0";
+                return;
+            }
+            const delim = delimForm.value;
+            const antar = delimAntar.value;
+            const formParts = output.split(antar);
+            let totalLines = 0;
+            let totalBet = 0;
+            for (const form of formParts) {
+                const parts = form.split("#");
+                if (parts.length === 2) {
+                    const lines = parts[0].split(delim).filter(l => l.trim() !== "");
+                    const bet = parseInt(parts[1], 10);
+                    if (!isNaN(bet)) {
+                        totalLines += lines.length;
+                        totalBet += lines.length * bet;
+                    }
+                }
+            }
+            totalLinesEl.textContent = totalLines;
+            totalBetEl.textContent = formatRupiah(totalBet);
+            log("updateTotalFromOutput", { totalLines, totalBet });
+        }
+
+        // ---------- Copy to clipboard ----------
+        function copyOutput() {
+            const text = outputBox.textContent;
+            if (!text || text === 'Klik "Generate Semua" untuk melihat hasil' || text.startsWith("⚠️")) {
+                copyButton.textContent = "⚠️ Kosong";
+                setTimeout(() => { copyButton.textContent = "📋 Salin"; }, 1500);
+                return;
+            }
+
+            if (navigator.clipboard && navigator.clipboard.writeText) {
+                navigator.clipboard.writeText(text).then(() => {
+                    copyButton.textContent = "✅ Tersalin!";
+                    copyButton.classList.add("copied");
+                    setTimeout(() => {
+                        copyButton.textContent = "📋 Salin";
+                        copyButton.classList.remove("copied");
+                    }, 2000);
+                    log("copyOutput: copied successfully");
+                }).catch(() => {
+                    fallbackCopy(text);
+                });
+            } else {
+                fallbackCopy(text);
+            }
+        }
+
+        function fallbackCopy(text) {
+            const textarea = document.createElement("textarea");
+            textarea.value = text;
+            textarea.style.position = "fixed";
+            textarea.style.opacity = "0";
+            document.body.appendChild(textarea);
+            textarea.select();
+            try {
+                document.execCommand("copy");
+                copyButton.textContent = "✅ Tersalin!";
+                copyButton.classList.add("copied");
+                setTimeout(() => {
+                    copyButton.textContent = "📋 Salin";
+                    copyButton.classList.remove("copied");
+                }, 2000);
+            } catch (e) {
+                copyButton.textContent = "❌ Gagal";
+                setTimeout(() => { copyButton.textContent = "📋 Salin"; }, 1500);
+            }
+            document.body.removeChild(textarea);
+        }
+
+        // ---------- Update total badge ----------
+        function updateTotalBadge() {
+            let totalLines = 0;
+            let totalBet = 0;
+            for (let i = 0; i < forms.length; i++) {
+                const result = processForm(forms[i]);
+                totalLines += result.count;
+                totalBet += result.bet * result.count;
+            }
+            totalLinesEl.textContent = totalLines;
+            totalBetEl.textContent = formatRupiah(totalBet);
+        }
+
+        // ---------- Focus first empty form ----------
+        function focusFirstEmptyForm() {
+            for (let i = 0; i < forms.length; i++) {
+                const form = forms[i];
+                const isPoltar = form.fungsi.poltar || false;
+                let isEmpty = false;
+                if (isPoltar) {
+                    const digitCount = getDigitCount(form.tipe);
+                    for (let d = 0; d < digitCount; d++) {
+                        if ((form.inputs[d] || "").replace(/\D/g, "").length === 0) {
+                            isEmpty = true;
+                            break;
+                        }
+                    }
+                } else {
+                    const val = (form.inputs[0] || "").replace(/\D/g, "");
+                    if (val.length === 0) isEmpty = true;
+                }
+                if (isEmpty) {
+                    const formCard = document.querySelector(`.form-card[data-formidx="${i}"]`);
+                    if (formCard) {
+                        const firstInput = formCard.querySelector(".single-input, .poltar-input");
+                        if (firstInput) {
+                            firstInput.focus();
+                            return;
+                        }
+                    }
+                }
+            }
+            const lastForm = document.querySelector(".form-card:last-child");
+            if (lastForm) {
+                const input = lastForm.querySelector(".single-input, .poltar-input");
+                if (input) input.focus();
+            }
+        }
+
+        // ---------- Add / Remove form ----------
+        function addForm() {
+            formCounter++;
+            const newForm = {
+                id: formCounter,
+                tipe: "4d",
+                fungsi: { bb: false, bbfs: false, poltar: false, bbd: false, bbb: false, bbdb: false },
+                twinModes: {
+                    twin: false,
+                    twintwin: false,
+                    tripletwin: false,
+                    fourpletwin: false,
+                    twin2dDepan: false,
+                    twin2dBelakang: false
+                },
+                inputs: [""],
+                bet: 100,
+            };
+            forms.push(newForm);
+            renderForms();
+            setTimeout(focusFirstEmptyForm, 50);
+            updateTotalBadge();
+            log("addForm: new form added", { totalForms: forms.length });
+        }
+
+        function removeForm(idx) {
+            if (forms.length <= 1 && !confirm("Hapus form terakhir?")) return;
+            forms.splice(idx, 1);
+            renderForms();
+            updateTotalBadge();
+            if (forms.length === 0) {
+                outputBox.textContent = "Belum ada form. Tambahkan form untuk mulai.";
+                outputBox.classList.add("empty");
+                totalLinesEl.textContent = "0";
+                totalBetEl.textContent = "Rp 0";
+                outputSection.classList.remove("d-block");
+                outputSection.classList.add("d-none");
+                copyButton.textContent = "📋 Salin";
+                copyButton.classList.remove("copied");
+                isFiltered = false;
+                filterButton.textContent = "🧹 Filter Duplikat";
+                filterButton.classList.remove("active");
+                originalOutput = "";
+                log("removeForm: all forms removed");
+            } else {
+                setTimeout(focusFirstEmptyForm, 50);
+                log("removeForm: form removed", { remaining: forms.length });
+            }
+        }
+
+        // ---------- Format Rupiah ----------
+        function formatRupiah(num) {
+            if (num === 0) return "Rp 0";
+            return "Rp " + num.toLocaleString("id-ID");
+        }
+
+        // ---------- Init event listeners ----------
+        document.getElementById("btnAddForm").addEventListener("click", addForm);
+        document.getElementById("btnGenerateAll").addEventListener("click", generateAll);
+        copyButton.addEventListener("click", copyOutput);
+        filterButton.addEventListener("click", filterDuplikat);
+
+        delimForm.addEventListener("change", () => {
+            if (outputSection.classList.contains("d-block")) generateAll();
+        });
+        delimAntar.addEventListener("change", () => {
+            if (outputSection.classList.contains("d-block")) generateAll();
+        });
+
+        document.addEventListener("keydown", (e) => {
+            if ((e.ctrlKey || e.metaKey) && e.key === "Enter") {
+                e.preventDefault();
+                generateAll();
+            }
+        });
+
+        log("Application initialized with EnableLog = " + EnableLog);
+
+        const modal = new bootstrap.Modal(document.getElementById("tutorialModal"));
+        document.getElementById("btnTutorial").addEventListener("click", () => modal.show());
+
+        addForm();
+    </script>
+</body>
+</html>
